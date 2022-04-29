@@ -1,20 +1,20 @@
-import {combineReducers} from 'redux';
-import {persistReducer} from 'redux-persist';
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import mintReducer from './mint/reducer';
+import { MintAppState } from './../types/store';
 
-const persistConfig: any = {
-    key: 'root',
-    storage: localStorage,
-    whitelist: ['auth, report'],
-    blacklist: ['error'],
-    timeout: null
+const rootPersistConfig = {
+	key: 'root',
+	storage: storage
 };
 
 export interface RootState {
+    mintReducer: MintAppState;
 }
 
 const rootReducer = combineReducers({
+	mintReducer,
 });
 
-const pReducer = persistReducer(persistConfig, rootReducer);
-
-export default pReducer;
+export default persistReducer(rootPersistConfig, rootReducer);

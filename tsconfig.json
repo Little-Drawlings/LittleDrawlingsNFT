@@ -21,7 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "import-modules.d.ts"
   ],
   "extends": "./tsconfig.paths.json"
 }
