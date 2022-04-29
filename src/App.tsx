@@ -1,13 +1,17 @@
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import Header from './components/Header';
+
 import { persister, store } from './redux/store';
 
+import { useRoutes } from "react-router-dom";
+import { routes } from './routes';
+
 function App() {
+	let children = useRoutes(routes);
 	return (
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persister}>
-				<Header />
+				{children}
 			</PersistGate>
 		</Provider>
 	);

@@ -20,9 +20,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "baseUrl": "src",
   "include": [
     "src",
     "import-modules.d.ts"
   ],
-  "extends": "./tsconfig.paths.json"
+  
 }
