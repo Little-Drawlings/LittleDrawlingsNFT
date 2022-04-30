@@ -1,11 +1,47 @@
-.content {
+@import '../../styles/variables';
+
+.header {
 	width: 100%;
 	height: fit-content;
+	padding: 1rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: $blueBg;
+	backdrop-filter: blur(15px);
 }
 .nav_list {
 	margin: 0;
 	padding: 0;
+	display: flex;
+	align-items: center;
 }
 .nav_list_item {
-	
+	margin: 0 1rem;
+}
+.connect_wrap {
+	display: flex;
+	align-items: center;
+}
+.connect_value {
+	display: inline-block;
+	font-size: 0.95rem;
+	margin-right: 0.3rem;
+}
+.connect_circle {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: $activeLinkColor;
+	border-radius: 50%;
+	margin-right: 0.2rem;
+}
+.connect {
+	background: url('../..//assets/svg/connected-bg.svg') 100% center no-repeat;
+	min-width: 130px;
+	padding: 1rem 0.4rem;
+	display: flex;
+	font-size: 0.95rem;
+	justify-content: center;
+	align-items: center;
 }

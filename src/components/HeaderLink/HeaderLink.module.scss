@@ -1,6 +1,12 @@
 /** variables **/
-@import '../../styles/_variables';
+@import '../../styles/variables';
 
+.nav_link,
+.nav_link_active {
+	font-family: 'DM Sans';
+	font-size: 1.25rem;
+	font-weight: 700;
+}
 .nav_link {
 	color: $linkColor;
 }
