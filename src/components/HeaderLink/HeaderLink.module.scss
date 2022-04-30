@@ -1,0 +1,9 @@
+/** variables **/
+@import '../../styles/_variables';
+
+.nav_link {
+	color: $linkColor;
+}
+.nav_link_active {
+	color: $activeLinkColor;
+}

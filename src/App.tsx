@@ -5,6 +5,7 @@ import { persister, store } from './redux/store';
 
 import { useRoutes } from "react-router-dom";
 import { routes } from './routes';
+import './styles/styles.scss';
 
 function App() {
 	let children = useRoutes(routes);
