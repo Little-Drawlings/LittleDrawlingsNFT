@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
 
 import icons from '../../constants/icons';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ background }) => {
-	const [connected, setConnected] = React.useState(false);
+	const [connected, setConnected] = useState(false);
 
 	const connect = () => {
 		setConnected(!connected);

@@ -8,11 +8,18 @@
 	background-position: center;
 	border: 0;
 	padding: 10px 1rem;
-    min-width: 250px;
-    min-height: 80px;
+	min-width: 250px;
+	min-height: 80px;
 	line-height: 1;
 	font-family: 'Gloria Hallelujah';
 	font-weight: 400;
 	font-size: 30px;
 	cursor: pointer;
+}
+.mint_button {
+	min-width: 200px;
+	min-height: 60px;
+	position: absolute;
+	bottom: 0.75rem;
+	right: 5rem;
 }

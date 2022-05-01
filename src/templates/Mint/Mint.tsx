@@ -25,7 +25,7 @@ const Mint: React.FC = () => {
 						src={icons.MintGirl}
 						alt='MintGirl'
 					/>
-					<DefaultButton title='Mint' />
+					<DefaultButton title='Mint' onClick={() => null} />
 					<img className={styles.bg_image} src={icons.MintBoy} alt='MintBoy' />
 				</div>
 			</div>
