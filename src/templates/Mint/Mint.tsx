@@ -1,5 +1,6 @@
 import DefaultButton from '../../components/Buttons/DefaultButton';
 import Header from '../../components/Header';
+import { HEADER_BG } from '../../constants/data';
 import icons from '../../constants/icons';
 
 import styles from './Mint.module.scss';
@@ -7,7 +8,7 @@ import styles from './Mint.module.scss';
 const Mint: React.FC = () => {
 	return (
 		<>
-			<Header />
+			<Header background={HEADER_BG.BLUE}/>
 			<div className={styles.content}>
 				<img
 					className={styles.bg_image}

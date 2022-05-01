@@ -8,6 +8,12 @@
 	justify-content: space-around;
 	align-items: center;
 	background-color: $blueBg;
+}
+.header_blue {
+	background-color: $blueBg;
+}
+.header_white {
+	background-color: rgba(255, 252, 254, 0.3);
 	backdrop-filter: blur(15px);
 }
 .nav_list {

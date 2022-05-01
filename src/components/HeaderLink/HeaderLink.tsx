@@ -1,4 +1,5 @@
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom';
+import cn from 'classnames';
 
 import styles from './HeaderLink.module.scss';
 
@@ -12,7 +13,7 @@ const HeaderLink: React.FC<Props> = ({ children, to, ...props }: LinkProps) => {
 	let match = useMatch({ path: resolved.pathname, end: true });
 
 	return (
-		<Link className={match ? `${styles.nav_link_active} ${styles.nav_link_active}` : styles.nav_link} to={to} {...props}>
+		<Link className={match ? cn(styles.nav_link, styles.nav_link_active) : styles.nav_link} to={to} {...props}>
 			{children}
 		</Link>
 	);
