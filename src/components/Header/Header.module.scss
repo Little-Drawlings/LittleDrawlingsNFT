@@ -7,13 +7,13 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	background-color: $blueBg;
+	background-color: $pinkBg;
 }
 .header_blue {
-	background-color: $blueBg;
+	background-color: $pinkBg;
 }
 .header_white {
-	background-color: rgba(255, 252, 254, 0.3);
+	background-color: $whiteBg;
 	backdrop-filter: blur(15px);
 }
 .nav_list {
@@ -25,9 +25,13 @@
 .nav_list_item {
 	margin: 0 1rem;
 }
-.connect_wrap {
+.connect_wrap, .connect {
 	display: flex;
 	align-items: center;
+}
+.connect_wrap_image {
+	display: inline-block;
+	margin-right: 1rem;
 }
 .connect_value {
 	display: inline-block;
@@ -42,7 +46,7 @@
 	border-radius: 50%;
 	margin-right: 0.2rem;
 }
-.connect {
+.connect_eth {
 	background: url('../..//assets/svg/connected-bg.svg') 100% center no-repeat;
 	min-width: 130px;
 	padding: 1rem 0.4rem;

@@ -3,11 +3,13 @@ import CanvasDraw from 'react-canvas-draw';
 
 import Header from '../../components/Header';
 import DefaultButton from '../../components/Buttons/DefaultButton';
+import CountDown from '../../components/CountDown';
 
 import { HEADER_BG } from '../../constants/data';
 import icons from '../../constants/icons';
 
 import styles from './Studio.module.scss';
+
 
 const Studio: React.FC = () => {
 	const [drawing, setDrawing] = useState();
@@ -56,6 +58,7 @@ const Studio: React.FC = () => {
 								}}
 							/>
 						</div>
+						<CountDown hours='1' minutes='45' />
 					</div>
 					<CanvasDraw
 						className={styles.canvas}

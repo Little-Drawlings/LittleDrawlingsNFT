@@ -8,7 +8,7 @@ import styles from './Mint.module.scss';
 const Mint: React.FC = () => {
 	return (
 		<>
-			<Header background={HEADER_BG.BLUE}/>
+			<Header background={HEADER_BG.PINK}/>
 			<div className={styles.content}>
 				<img
 					className={styles.bg_image}

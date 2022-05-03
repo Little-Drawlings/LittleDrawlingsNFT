@@ -21,8 +21,8 @@ const Header: React.FC<Props> = ({ background }) => {
 	};
 
 	const headerClass = () => {
-		return background === HEADER_BG.BLUE
-			? styles.header_blue
+		return background === HEADER_BG.PINK
+			? styles.header_pink
 			: styles.header_white;
 	};
 
@@ -46,17 +46,20 @@ const Header: React.FC<Props> = ({ background }) => {
 					<HeaderLink to='/whitepaper'>Whitepaper</HeaderLink>
 				</li>
 			</ul>
-			{connected ? (
-				<div className={styles.connect_wrap}>
-					<span className={styles.connect_value}>7.00698 ETH</span>
+			<div className={styles.connect_wrap}>
+				<img className={styles.connect_wrap_image} src={icons.SunIcon} alt='sun' />
+				{connected ? (
 					<div className={styles.connect}>
-						{' '}
-						<span className={styles.connect_circle}></span> OxE786...C41c ETH
+						<span className={styles.connect_value}>7.00698 ETH</span>
+						<div className={styles.connect_eth}>
+							{' '}
+							<span className={styles.connect_circle}></span> OxE786...C41c ETH
+						</div>
 					</div>
-				</div>
-			) : (
-				<ConnectButton onClick={connect} />
-			)}
+				) : (
+					<ConnectButton onClick={connect} />
+				)}
+			</div>
 		</div>
 	);
 };
