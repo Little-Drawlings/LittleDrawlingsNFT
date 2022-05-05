@@ -9,14 +9,14 @@ interface Props {
 }
 
 const DefaultButton: React.FC<Props> = ({
-	title,
-	className,
+	title = '',
+	className = '',
 	onClick,
 	...props
 }) => {
 	return (
 		<button
-			className={cn(styles.default_btn, styles[className || ''])}
+			className={cn(styles.default_btn, styles[className])}
 			onClick={onClick}
 		>
 			{title}

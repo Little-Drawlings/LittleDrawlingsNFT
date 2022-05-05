@@ -2,10 +2,8 @@
 
 .default_btn {
 	background-color: $blueBg;
-	background: url('../../../assets/svg/default-btn-bg.svg');
-	background-repeat: no-repeat;
-	background-size: 100%;
-	background-position: center;
+	background: url('../../../assets/svg/default-btn-bg.svg') center no-repeat;
+	background-size: contain;
 	border: 0;
 	padding: 10px 1rem;
 	min-width: 250px;
@@ -22,4 +20,20 @@
 	position: absolute;
 	bottom: 0.75rem;
 	right: 5rem;
+}
+.popup_btn,
+.cancel_btn {
+	min-width: 129px;
+	min-height: 50px;
+	margin: 0.5rem;
+	font-weight: 700;
+	font-size: 1.6rem;
+	color: $activeLinkColor;
+}
+.popup_btn {
+	background: url('../../../assets/svg/popup-btn-bg.svg') 100% no-repeat;
+}
+.cancel_btn {
+	background-color: transparent;
+	background: url('../../../assets/svg/white-btn-bg.svg') 100% no-repeat;
 }

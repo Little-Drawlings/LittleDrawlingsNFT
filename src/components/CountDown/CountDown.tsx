@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setTimeMint } from '../../redux/actions/mint';
 import icons from '../../constants/icons';
 
 import styles from './CountDown.module.scss';
+import { RootState } from '../../redux/reducers';
 
 interface Props {
 	hours?: string;
@@ -14,13 +18,24 @@ const CountDown: React.FC<Props> = ({
 	minutes = '0',
 	seconds = '0',
 }) => {
-	const [paused, setPaused] = React.useState(false);
+	const dispatch = useDispatch();
+	const [paused, setPaused] = React.useState(true);
 	const [over, setOver] = React.useState(false);
 	const [time, setTime] = useState({
 		hours: parseInt(hours),
 		minutes: parseInt(minutes),
 		seconds: parseInt(seconds),
 	});
+
+	const format = useSelector(
+		(state: RootState) => state?.mintReducer.mintFormat
+	);
+
+	useEffect(() => {
+		if (format) {
+			setPaused(false);
+		}
+	}, []);
 
 	useEffect(() => {
 		let timerID = setInterval(() => tick(), 1000);
@@ -51,18 +66,22 @@ const CountDown: React.FC<Props> = ({
 			});
 	};
 
+	const goesTime = () => {
+		setPaused(!paused);
+		dispatch(setTimeMint(!paused));
+	};
+
 	return (
-		<div>
-			<p>{`${time.hours.toString().padStart(2, '0')}:${time.minutes
-				.toString()
-				.padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`}</p>
-			<div>{over ? '00:00:00' : ''}</div>
-			<img
-				src={paused ? icons.Start : icons.Pause}
-				alt=''
-				onClick={() => setPaused(!paused)}
-			/>
-		</div>
+		<>
+			{over ? (
+				<div>{'00:00:00'}</div>
+			) : (
+				<p>{`${time.hours.toString().padStart(2, '0')}:${time.minutes
+					.toString()
+					.padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`}</p>
+			)}
+			<img src={paused ? icons.Start : icons.Pause} alt='' onClick={goesTime} />
+		</>
 	);
 };
 

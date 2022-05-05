@@ -1,11 +1,12 @@
-import {AnyAction, Dispatch} from 'redux';
+import { AnyAction, Dispatch } from 'redux';
 
-import {RootState} from '../reducers';
+import { RootState } from '../reducers';
 export interface MintAppState {
-    test: string
+	goesTime: boolean;
+	mintFormat: string;
 }
 
 export interface IStore {
-    dispatch: Dispatch<AnyAction>;
-    getState: () => RootState;
+	dispatch: Dispatch<AnyAction>;
+	getState: () => RootState;
 }

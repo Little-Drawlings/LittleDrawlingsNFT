@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import CanvasDraw from 'react-canvas-draw';
+import { useSelector } from 'react-redux';
 
 import Header from '../../components/Header';
 import DefaultButton from '../../components/Buttons/DefaultButton';
 import CountDown from '../../components/CountDown';
+import DrawPopup from '../../components/Popups/DrawPopup';
 
 import { HEADER_BG } from '../../constants/data';
+import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 
 import styles from './Studio.module.scss';
-
 
 const Studio: React.FC = () => {
 	const [drawing, setDrawing] = useState();
 	const [brushColor, setBrushColor] = useState('#FCA5A5');
 	const [brushRadius, setBrushRadius] = useState(5);
+
+	const goesTime = useSelector(
+		(state: RootState) => state?.mintReducer.goesTime
+	);
+
+	const format = useSelector(
+		(state: RootState) => state?.mintReducer.mintFormat
+	);
 
 	const changeCanvasImage = (canvas: CanvasDraw | any) => {
 		const base64Image = canvas?.canvasContainer.childNodes[1].toDataURL();
@@ -29,6 +39,7 @@ const Studio: React.FC = () => {
 	return (
 		<>
 			<Header background={HEADER_BG.WHITE} />
+			<DrawPopup />
 			<div className={styles.content}>
 				<div className={styles.breadcrumbs}>
 					<img className={styles.arrow_img} src={icons.Arrow} alt='arrow' />
@@ -58,9 +69,10 @@ const Studio: React.FC = () => {
 								}}
 							/>
 						</div>
-						<CountDown hours='1' minutes='45' />
+						<CountDown minutes={format ? '20' : '0'} />
 					</div>
 					<CanvasDraw
+						disabled={goesTime}
 						className={styles.canvas}
 						style={{ width: '100%', height: '60vh' }}
 						hideGrid={true}
