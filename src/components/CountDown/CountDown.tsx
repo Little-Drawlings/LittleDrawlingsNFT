@@ -32,12 +32,6 @@ const CountDown: React.FC<Props> = ({
 	);
 
 	useEffect(() => {
-		if (format) {
-			setPaused(false);
-		}
-	}, []);
-
-	useEffect(() => {
 		let timerID = setInterval(() => tick(), 1000);
 		return () => clearInterval(timerID);
 	});
@@ -67,8 +61,12 @@ const CountDown: React.FC<Props> = ({
 	};
 
 	const goesTime = () => {
-		setPaused(!paused);
-		dispatch(setTimeMint(!paused));
+		if (over) {
+			dispatch(setTimeMint(true));
+		} else {
+			setPaused(!paused);
+			dispatch(setTimeMint(!paused));
+		}
 	};
 
 	return (
@@ -80,7 +78,11 @@ const CountDown: React.FC<Props> = ({
 					.toString()
 					.padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`}</p>
 			)}
-			<img src={paused ? icons.Start : icons.Pause} alt='' onClick={goesTime} />
+			<img
+				src={paused || over ? icons.Start : icons.Pause}
+				alt=''
+				onClick={goesTime}
+			/>
 		</>
 	);
 };

@@ -9,7 +9,6 @@ import DefaultButton from '../../Buttons/DefaultButton';
 import { setFormatMint } from '../../../redux/actions/mint';
 
 import styles from './DrawPopup.module.scss';
-import { useEffect } from 'react';
 
 const DrawPopup: React.FC = () => {
 	const [openPopup, setOpenPopup] = useState(true);
@@ -17,10 +16,6 @@ const DrawPopup: React.FC = () => {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(setFormatMint(''));
-	}, []);
 
 	const changeFormat = (activeFormat: string) => {
 		setFormat(activeFormat);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CanvasDraw from 'react-canvas-draw';
 import { useSelector } from 'react-redux';
 
@@ -7,7 +7,7 @@ import DefaultButton from '../../components/Buttons/DefaultButton';
 import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
 
-import { HEADER_BG } from '../../constants/data';
+import { FORMATS, HEADER_BG } from '../../constants/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 
@@ -17,14 +17,21 @@ const Studio: React.FC = () => {
 	const [drawing, setDrawing] = useState();
 	const [brushColor, setBrushColor] = useState('#FCA5A5');
 	const [brushRadius, setBrushRadius] = useState(5);
+	const [format, setFormat] = useState(FORMATS.RECTANGLE);
 
 	const goesTime = useSelector(
 		(state: RootState) => state?.mintReducer.goesTime
 	);
 
-	const format = useSelector(
+	const activeFormat = useSelector(
 		(state: RootState) => state?.mintReducer.mintFormat
 	);
+
+	useEffect(() => {
+		console.log(activeFormat);
+		
+		setFormat(activeFormat);
+	}, [activeFormat]);
 
 	const changeCanvasImage = (canvas: CanvasDraw | any) => {
 		const base64Image = canvas?.canvasContainer.childNodes[1].toDataURL();
@@ -74,7 +81,11 @@ const Studio: React.FC = () => {
 					<CanvasDraw
 						disabled={goesTime}
 						className={styles.canvas}
-						style={{ width: '100%', height: '60vh' }}
+						style={
+							format === FORMATS.SQUARE
+								? { width: '60%', height: '60vh' }
+								: { width: '100%', height: '60vh' }
+						}
 						hideGrid={true}
 						brushColor={brushColor}
 						lazyRadius={0}

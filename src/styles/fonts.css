@@ -22,21 +22,30 @@
 
 @font-face {
 	font-family: 'Montserrat';
-	src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
-	font-weight:400;
+	src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf')
+		format('truetype');
+	font-weight: 400;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Montserrat';
-	src: url('../assets/fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
-	font-weight:500;
+	src: url('../assets/fonts/Montserrat/Montserrat-Medium.ttf')
+		format('truetype');
+	font-weight: 500;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'LD Scribble';
 	src: url('../assets/fonts/LDScribble/scribble.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LD Scribble';
+	src: url('../assets/fonts/LDScribble/LDScribble-Bold.otf') format('opentype');
 	font-weight: 700;
 	font-style: normal;
 }
