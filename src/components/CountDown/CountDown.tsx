@@ -1,35 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setTimeMint } from '../../redux/actions/mint';
+import {
+	setOverMint,
+	setPauseMint,
+	setTimeMint,
+} from '../../redux/actions/mint';
 import icons from '../../constants/icons';
-
-import styles from './CountDown.module.scss';
 import { RootState } from '../../redux/reducers';
 
-interface Props {
-	hours?: string;
-	minutes?: string;
-	seconds?: string;
+import styles from './CountDown.module.scss';
+
+interface Time {
+	hours: number;
+	minutes: number;
+	seconds: number;
 }
 
-const CountDown: React.FC<Props> = ({
-	hours = '0',
-	minutes = '0',
-	seconds = '0',
-}) => {
+const CountDown: React.FC = () => {
 	const dispatch = useDispatch();
 	const [paused, setPaused] = React.useState(true);
 	const [over, setOver] = React.useState(false);
-	const [time, setTime] = useState({
-		hours: parseInt(hours),
-		minutes: parseInt(minutes),
-		seconds: parseInt(seconds),
+	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
+
+	const [time, setTime] = useState<Time>({
+		hours: mintTime.hours,
+		minutes: mintTime.minutes,
+		seconds: mintTime.seconds,
 	});
 
-	const format = useSelector(
-		(state: RootState) => state?.mintReducer.mintFormat
+	const mintPause = useSelector(
+		(state: RootState) => state?.mintReducer.mintPause
 	);
+
+	const mintOver = useSelector(
+		(state: RootState) => state?.mintReducer.mintOver
+	);
+
+	useEffect(() => {
+		setTime({
+			hours: mintTime.hours,
+			minutes: mintTime.minutes,
+			seconds: mintTime.seconds,
+		});
+	}, [mintTime]);
+
+	useEffect(() => {
+		console.log({
+			hours: time.hours,
+			minutes: time.minutes,
+			seconds: time.seconds,
+		});
+		dispatch(
+			setTimeMint({
+				hours: time.hours,
+				minutes: time.minutes,
+				seconds: time.seconds,
+			})
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [paused, over]);
+
+	useEffect(() => {
+		setPaused(mintPause);
+		setOver(mintOver);
+	}, [mintPause, mintOver]);
 
 	useEffect(() => {
 		let timerID = setInterval(() => tick(), 1000);
@@ -38,9 +73,9 @@ const CountDown: React.FC<Props> = ({
 
 	const tick = () => {
 		if (paused || over) return;
-		if (time.hours === 0 && time.minutes === 0 && time.seconds === 0)
-			setOver(true);
-		else if (time.minutes === 0 && time.seconds === 0)
+		if (time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
+			dispatch(setOverMint(true));
+		} else if (time.minutes === 0 && time.seconds === 0)
 			setTime({
 				hours: time.hours - 1,
 				minutes: 59,
@@ -62,10 +97,9 @@ const CountDown: React.FC<Props> = ({
 
 	const goesTime = () => {
 		if (over) {
-			dispatch(setTimeMint(true));
+			dispatch(setPauseMint(true));
 		} else {
-			setPaused(!paused);
-			dispatch(setTimeMint(!paused));
+			dispatch(setPauseMint(!paused));
 		}
 	};
 

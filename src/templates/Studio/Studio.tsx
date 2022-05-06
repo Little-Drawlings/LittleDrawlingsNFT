@@ -6,8 +6,10 @@ import Header from '../../components/Header';
 import DefaultButton from '../../components/Buttons/DefaultButton';
 import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
+import SavePopup from '../../components/Popups/SavePopup';
 
 import { FORMATS, HEADER_BG } from '../../constants/data';
+import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 
@@ -18,20 +20,37 @@ const Studio: React.FC = () => {
 	const [brushColor, setBrushColor] = useState('#FCA5A5');
 	const [brushRadius, setBrushRadius] = useState(5);
 	const [format, setFormat] = useState(FORMATS.RECTANGLE);
+	const [saveData, setSaveData] = useState<SavePopupProps>({
+		title: '',
+		desc: '',
+		drawlName: '',
+		isOpenPopup: false,
+	});
 
-	const goesTime = useSelector(
-		(state: RootState) => state?.mintReducer.goesTime
-	);
+	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
+
+	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
+
+	const openedDrawPopup = useSelector((state: RootState) => state?.mintReducer.openedDrawPopup);
 
 	const activeFormat = useSelector(
 		(state: RootState) => state?.mintReducer.mintFormat
 	);
 
 	useEffect(() => {
-		console.log(activeFormat);
-		
 		setFormat(activeFormat);
 	}, [activeFormat]);
+
+	useEffect(() => {
+		if (over) {
+			setSaveData({
+				title: 'Time is up!',
+				desc: 'Save your canvas or mint as...',
+				drawlName: 'Drawl #1020',
+				isOpenPopup: false
+			});
+		}
+	}, [over]);
 
 	const changeCanvasImage = (canvas: CanvasDraw | any) => {
 		const base64Image = canvas?.canvasContainer.childNodes[1].toDataURL();
@@ -46,7 +65,8 @@ const Studio: React.FC = () => {
 	return (
 		<>
 			<Header background={HEADER_BG.WHITE} />
-			<DrawPopup />
+			{!openedDrawPopup && <DrawPopup />}
+			<SavePopup {...saveData} />
 			<div className={styles.content}>
 				<div className={styles.breadcrumbs}>
 					<img className={styles.arrow_img} src={icons.Arrow} alt='arrow' />
@@ -76,10 +96,10 @@ const Studio: React.FC = () => {
 								}}
 							/>
 						</div>
-						<CountDown minutes={format ? '20' : '0'} />
+						<CountDown />
 					</div>
 					<CanvasDraw
-						disabled={goesTime}
+						disabled={pause || over}
 						className={styles.canvas}
 						style={
 							format === FORMATS.SQUARE

@@ -4,3 +4,9 @@ export interface IPersistConfig {
     whitelist: string[];
     blacklist: string[];
 }
+
+export interface ITimeConfig {
+	hours: number;
+	minutes: number;
+	seconds: number;
+}

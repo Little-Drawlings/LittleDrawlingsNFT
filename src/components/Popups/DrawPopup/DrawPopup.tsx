@@ -6,7 +6,13 @@ import cn from 'classnames';
 import { FORMATS } from '../../../constants/data';
 
 import DefaultButton from '../../Buttons/DefaultButton';
-import { setFormatMint } from '../../../redux/actions/mint';
+import {
+	setFormatMint,
+	setOpenedDrawPopup,
+	setOverMint,
+	setPauseMint,
+	setTimeMint,
+} from '../../../redux/actions/mint';
 
 import styles from './DrawPopup.module.scss';
 
@@ -24,6 +30,16 @@ const DrawPopup: React.FC = () => {
 	const startMint = () => {
 		setOpenPopup(false);
 		dispatch(setFormatMint(format));
+		dispatch(setPauseMint(false));
+		dispatch(setOverMint(false));
+		dispatch(setOpenedDrawPopup(true));
+		dispatch(
+			setTimeMint({
+				hours: 0,
+				minutes: 20,
+				seconds: 0,
+			})
+		);
 	};
 
 	return (
