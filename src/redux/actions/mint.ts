@@ -25,3 +25,8 @@ export const setOpenedDrawPopup = (opened: boolean) => ({
 	type: types.SET_OPENED_DRAW_POPUP,
 	data: opened,
 });
+
+export const setOpenSavePopup = (opened: boolean) => ({
+	type: types.SET_OPEN_SAVE_POPUP,
+	data: opened,
+});

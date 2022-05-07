@@ -1,6 +1,5 @@
 export interface SavePopupProps {
-	title: string;
-	desc: string;
-	drawlName: string;
-	isOpenPopup: boolean;
+	title?: string;
+	desc?: string;
+	drawlName?: string;
 }

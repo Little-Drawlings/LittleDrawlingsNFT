@@ -1,0 +1,42 @@
+@import '../../../styles/variables.scss';
+
+.popup {
+	box-shadow: 0px 24px 38px rgba(33, 34, 57, 0.12);
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	padding: 0 2rem;
+    height: auto;
+	background-color: $light;
+}
+.popup_title {
+	font-family: 'Montserrat';
+	font-weight: 500;
+	font-size: 1.35rem;
+	line-height: 1.5rem;
+	color: $black;
+	margin: 1rem 0 0.5rem 0;
+}
+.popup_desc {
+	font-family: 'Montserrat';
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.25rem;
+	color: $dark;
+}
+.popup_input {
+	font-family: 'Montserrat';
+	font-weight: 400;
+	font-size: 1rem;
+	background: url('../../../assets/svg/input-bg.svg') 100% no-repeat;
+	height: 57px;
+	border: 0;
+	outline: none;
+	padding: 0.6rem 0.6rem 0.6rem 1.25rem;
+}
+.buttons_wrap {
+    width: 100%;
+    display: flex;
+	justify-content: space-around;
+	align-items: center;
+}

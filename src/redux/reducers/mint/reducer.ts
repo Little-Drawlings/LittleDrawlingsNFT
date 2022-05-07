@@ -7,6 +7,7 @@ const initialState = {
 	mintPause: false,
 	mintOver: false,
 	openedDrawPopup: false,
+	openSavePopup: false,
 };
 
 const mintReducer = (
@@ -38,6 +39,11 @@ const mintReducer = (
 			return {
 				...state,
 				openedDrawPopup: action?.data,
+			};
+		case MINT_TYPES.SET_OPEN_SAVE_POPUP:
+			return {
+				...state,
+				openSavePopup: action?.data,
 			};
 		default:
 			return state;

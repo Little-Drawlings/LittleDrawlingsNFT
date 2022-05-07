@@ -37,3 +37,11 @@
 	background-color: transparent;
 	background: url('../../../assets/svg/white-btn-bg.svg') 100% no-repeat;
 }
+.save_popup_btn {
+	min-width: max-content;
+	background: transparent;
+	color: $activeLinkColor;
+	font-size: 1.6rem;
+	font-family: 'LD Scribble';
+	font-weight: 700;
+}

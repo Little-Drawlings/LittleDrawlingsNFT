@@ -19,7 +19,7 @@ interface Time {
 
 const CountDown: React.FC = () => {
 	const dispatch = useDispatch();
-	const [paused, setPaused] = React.useState(true);
+	const [paused, setPaused] = React.useState(false);
 	const [over, setOver] = React.useState(false);
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 
@@ -37,6 +37,10 @@ const CountDown: React.FC = () => {
 		(state: RootState) => state?.mintReducer.mintOver
 	);
 
+	const openedDrawPopup = useSelector(
+		(state: RootState) => state?.mintReducer.openedDrawPopup
+	);
+
 	useEffect(() => {
 		setTime({
 			hours: mintTime.hours,
@@ -46,11 +50,6 @@ const CountDown: React.FC = () => {
 	}, [mintTime]);
 
 	useEffect(() => {
-		console.log({
-			hours: time.hours,
-			minutes: time.minutes,
-			seconds: time.seconds,
-		});
 		dispatch(
 			setTimeMint({
 				hours: time.hours,
@@ -58,8 +57,7 @@ const CountDown: React.FC = () => {
 				seconds: time.seconds,
 			})
 		);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [paused, over]);
+	}, [paused, over, time.hours, time.minutes, time.seconds, dispatch]);
 
 	useEffect(() => {
 		setPaused(mintPause);
@@ -73,7 +71,7 @@ const CountDown: React.FC = () => {
 
 	const tick = () => {
 		if (paused || over) return;
-		if (time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
+		if (time.hours === 0 && time.minutes === 0 && time.seconds === 0 && openedDrawPopup) {
 			dispatch(setOverMint(true));
 		} else if (time.minutes === 0 && time.seconds === 0)
 			setTime({

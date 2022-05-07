@@ -50,10 +50,6 @@ a {
 	align-items: center;
 }
 .popup-content {
-	min-width: 400px;
-	min-height: 300px;
-	box-shadow: 0px 24px 38px rgba(33, 34, 57, 0.12);
-	background-color: $light;
-	border-radius: 1rem;
+	width: 350px;
 	z-index: 3;
 }
