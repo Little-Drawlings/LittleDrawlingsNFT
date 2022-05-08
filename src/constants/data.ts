@@ -1,8 +1,3 @@
-export const HEADER_BG = {
-	WHITE: 'WHITE',
-	PINK: 'PINK',
-};
-
 export const FORMATS = {
 	RECTANGLE: '16:9',
 	SQUARE: '1:1',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CanvasDraw from 'react-canvas-draw';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 
 import Header from '../../components/Header';
 import DefaultButton from '../../components/DefaultButton';
@@ -8,7 +9,7 @@ import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';
 
-import { FORMATS, HEADER_BG } from '../../constants/data';
+import { FORMATS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
@@ -22,6 +23,7 @@ const Studio: React.FC = () => {
 	const [brushColor, setBrushColor] = useState('#FCA5A5');
 	const [brushRadius, setBrushRadius] = useState(5);
 	const [format, setFormat] = useState(FORMATS.RECTANGLE);
+	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [saveData, setSaveData] = useState<SavePopupProps>({
 		title: '',
 		desc: '',
@@ -39,6 +41,14 @@ const Studio: React.FC = () => {
 	const activeFormat = useSelector(
 		(state: RootState) => state?.mintReducer.mintFormat
 	);
+
+	const nightModeMint = useSelector(
+		(state: RootState) => state?.mintReducer.nightMode
+	);
+
+	useEffect(() => {
+		setNightMode(nightModeMint);
+	}, [nightModeMint]);
 
 	useEffect(() => {
 		setFormat(activeFormat);
@@ -75,58 +85,62 @@ const Studio: React.FC = () => {
 
 	return (
 		<>
-			<Header background={HEADER_BG.WHITE} />
+			<Header />
 			{openedDrawPopup ? <SavePopup {...saveData} /> : <DrawPopup />}
-			<div className={styles.content}>
-				<div className={styles.breadcrumbs}>
-					<img className={styles.arrow_img} src={icons.Arrow} alt='arrow' />
-					<span className={styles.breadcrumbs_text}>Back to all canvases</span>
-				</div>
-				<div className={styles.canvas_wrap}>
-					<h3 className={styles.canvas_title}>Untitled</h3>
-					<div className={styles.settings}>
-						<div>
-							<span>Color</span>
-							<input
-								type='color'
-								value={brushColor}
-								onChange={(event) => {
-									setBrushColor(event.target.value);
-								}}
-							/>
-						</div>
-						<div>
-							<span>Radius</span>
-							<input
-								min='2'
-								max='50'
-								type='range'
-								onChange={(event) => {
-									setBrushRadius(+event.target.value);
-								}}
-							/>
-						</div>
-						<CountDown />
+			<div className={cn(styles.content, nightMode && styles.night)}>
+				<div className={styles.wrapper}>
+					<div className={styles.breadcrumbs}>
+						<img className={styles.arrow_img} src={icons.Arrow} alt='arrow' />
+						<span className={styles.breadcrumbs_text}>
+							Back to all canvases
+						</span>
 					</div>
-					<CanvasDraw
-						disabled={pause || over}
-						className={styles.canvas}
-						style={
-							format === FORMATS.SQUARE
-								? { width: '60%', height: '60vh' }
-								: { width: '100%', height: '60vh' }	
-						}
-						hideGrid={true}
-						brushColor={brushColor}
-						lazyRadius={0}
-						brushRadius={brushRadius}
-						onChange={(canvas) => changeCanvasImage(canvas)}
-					/>
-					<DefaultButton
-						className='no_wide_primary_small'
-						title={'Mint'}
-						onClick={mintImage}
-					/>
+					<div className={styles.canvas_wrap}>
+						<h3 className={styles.canvas_title}>Untitled</h3>
+						<div className={styles.settings}>
+							<div>
+								<span>Color</span>
+								<input
+									type='color'
+									value={brushColor}
+									onChange={(event) => {
+										setBrushColor(event.target.value);
+									}}
+								/>
+							</div>
+							<div>
+								<span>Radius</span>
+								<input
+									min='2'
+									max='50'
+									type='range'
+									onChange={(event) => {
+										setBrushRadius(+event.target.value);
+									}}
+								/>
+							</div>
+							<CountDown />
+						</div>
+						<CanvasDraw
+							disabled={pause || over}
+							className={styles.canvas}
+							style={
+								format === FORMATS.SQUARE
+									? { width: '60%', height: '60vh' }
+									: { width: '100%', height: '60vh' }
+							}
+							hideGrid={true}
+							brushColor={brushColor}
+							lazyRadius={0}
+							brushRadius={brushRadius}
+							onChange={(canvas) => changeCanvasImage(canvas)}
+						/>
+						<DefaultButton
+							className='no_wide_primary_small'
+							title={'Mint'}
+							onClick={mintImage}
+						/>
+					</div>
 				</div>
 			</div>
 		</>

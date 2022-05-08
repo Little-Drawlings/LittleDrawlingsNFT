@@ -6,8 +6,6 @@ import icons from '../../constants/icons';
 import DefaultButton from '../DefaultButton';
 import HeaderLink from '../HeaderLink';
 
-import { HEADER_BG } from '../../constants/data';
-
 import styles from './Header.module.scss';
 import { RootState } from '../../redux/reducers';
 import { setNightModeMint } from '../../redux/actions/mint';
@@ -34,12 +32,6 @@ const Header: React.FC<Props> = ({ background }) => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
 
-	const headerClass = () => {
-		return background === HEADER_BG.PINK
-			? styles.header_pink
-			: styles.header_white;
-	};
-
 	const animate = () => {
 		dispatch(setNightModeMint(!nightMode));
 		setAnimateImage(true);
@@ -49,7 +41,7 @@ const Header: React.FC<Props> = ({ background }) => {
 	};
 
 	return (
-		<div className={cn(styles.header, headerClass())}>
+		<div className={cn(styles.header)}>
 			<img className={styles.logo} src={icons.Logo} alt='logo' />
 			<ul className={styles.nav_list}>
 				<li className={styles.nav_list_item}>

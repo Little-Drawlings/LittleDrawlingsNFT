@@ -4,7 +4,6 @@ import cn from 'classnames';
 
 import DefaultButton from '../../components/DefaultButton';
 import Header from '../../components/Header';
-import { HEADER_BG } from '../../constants/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 
@@ -23,7 +22,7 @@ const Mint: React.FC = () => {
 
 	return (
 		<>
-			<Header background={HEADER_BG.PINK} />
+			<Header/>
 			<div className={cn(styles.content, nightMode && styles.night)}>
 				<div className={styles.title_wrap}>
 					<div className={cn(styles.animated, nightMode && styles.fade_in)}>
