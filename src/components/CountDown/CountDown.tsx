@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 
 import {
 	setOverMint,
@@ -11,13 +12,17 @@ import { RootState } from '../../redux/reducers';
 
 import styles from './CountDown.module.scss';
 
+interface Props {
+	className?: string;
+}
+
 interface Time {
 	hours: number;
 	minutes: number;
 	seconds: number;
 }
 
-const CountDown: React.FC = () => {
+const CountDown: React.FC<Props> = ({ className }) => {
 	const dispatch = useDispatch();
 	const [paused, setPaused] = React.useState(false);
 	const [over, setOver] = React.useState(false);
@@ -71,7 +76,12 @@ const CountDown: React.FC = () => {
 
 	const tick = () => {
 		if (paused || over) return;
-		if (time.hours === 0 && time.minutes === 0 && time.seconds === 0 && openedDrawPopup) {
+		if (
+			time.hours === 0 &&
+			time.minutes === 0 &&
+			time.seconds === 0 &&
+			openedDrawPopup
+		) {
 			dispatch(setOverMint(true));
 		} else if (time.minutes === 0 && time.seconds === 0)
 			setTime({
@@ -102,20 +112,23 @@ const CountDown: React.FC = () => {
 	};
 
 	return (
-		<>
+		<div className={cn(className)}>
 			{over ? (
-				<div>{'00:00:00'}</div>
+				<div className={styles.time_over}>{'00:00:00'}</div>
 			) : (
-				<p>{`${time.hours.toString().padStart(2, '0')}:${time.minutes
+				<div className={styles.time_value}>{`${time.hours
 					.toString()
-					.padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`}</p>
+					.padStart(2, '0')}:${time.minutes
+					.toString()
+					.padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`}</div>
 			)}
 			<img
+				className={styles.time_btn}
 				src={paused || over ? icons.Start : icons.Pause}
 				alt=''
 				onClick={goesTime}
 			/>
-		</>
+		</div>
 	);
 };
 

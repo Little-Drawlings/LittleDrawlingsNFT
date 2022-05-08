@@ -29,6 +29,15 @@ const Studio: React.FC = () => {
 		desc: '',
 		drawlName: '',
 	});
+	const colors = [
+		'#FF99F8',
+		'#FFEE00',
+		'#86FA16',
+		'#6FFFF6',
+		'#B38FFF',
+		'#FFAE4F',
+		'#979797',
+	];
 
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 
@@ -97,30 +106,19 @@ const Studio: React.FC = () => {
 					</div>
 					<div className={styles.canvas_wrap}>
 						<h3 className={styles.canvas_title}>Untitled</h3>
-						<div className={styles.settings}>
-							<div>
-								<span>Color</span>
-								<input
-									type='color'
-									value={brushColor}
-									onChange={(event) => {
-										setBrushColor(event.target.value);
-									}}
-								/>
-							</div>
-							<div>
-								<span>Radius</span>
-								<input
-									min='2'
-									max='50'
-									type='range'
-									onChange={(event) => {
-										setBrushRadius(+event.target.value);
-									}}
-								/>
-							</div>
-							<CountDown />
-						</div>
+						<ul className={styles.colors}>
+							{colors.map((color) => {
+								return (
+									<li
+										key={color}
+										className={styles.colors_item}
+										style={{ background: color }}
+										onClick={() => setBrushColor(color)}
+									></li>
+								);
+							})}
+						</ul>
+						<CountDown className={styles.time_wrap} />
 						<CanvasDraw
 							disabled={pause || over}
 							className={styles.canvas}
@@ -135,11 +133,26 @@ const Studio: React.FC = () => {
 							brushRadius={brushRadius}
 							onChange={(canvas) => changeCanvasImage(canvas)}
 						/>
-						<DefaultButton
-							className='no_wide_primary_small'
-							title={'Mint'}
-							onClick={mintImage}
-						/>
+						<div className={styles.settings_wrap}>
+							<div className={styles.settings}>
+								<div>
+									<span>Radius</span>
+									<input
+										min='2'
+										max='50'
+										type='range'
+										onChange={(event) => {
+											setBrushRadius(+event.target.value);
+										}}
+									/>
+								</div>
+							</div>
+							<DefaultButton
+								className='no_wide_primary_small'
+								title={'Mint'}
+								onClick={mintImage}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
