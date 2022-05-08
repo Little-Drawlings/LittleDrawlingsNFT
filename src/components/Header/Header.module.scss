@@ -8,6 +8,7 @@
 	justify-content: space-around;
 	align-items: center;
 	background-color: $pinkBg;
+	backdrop-filter: blur(10px);
 }
 .header_blue {
 	background-color: $pinkBg;
@@ -25,7 +26,8 @@
 .nav_list_item {
 	margin: 0 1rem;
 }
-.connect_wrap, .connect {
+.connect_wrap,
+.connect {
 	display: flex;
 	align-items: center;
 }

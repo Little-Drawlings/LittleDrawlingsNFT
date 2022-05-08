@@ -9,7 +9,7 @@ import {
 import { RootState } from '../../../redux/reducers';
 
 import { SavePopupProps } from '../../../redux/types/data';
-import DefaultButton from '../../Buttons/DefaultButton';
+import DefaultButton from '../../DefaultButton';
 
 import styles from './SavePopup.module.scss';
 

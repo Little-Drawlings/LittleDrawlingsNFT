@@ -3,7 +3,7 @@ import CanvasDraw from 'react-canvas-draw';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../components/Header';
-import DefaultButton from '../../components/Buttons/DefaultButton';
+import DefaultButton from '../../components/DefaultButton';
 import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';

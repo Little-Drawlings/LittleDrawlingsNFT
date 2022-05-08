@@ -1,4 +1,4 @@
-import DefaultButton from '../../components/Buttons/DefaultButton';
+import DefaultButton from '../../components/DefaultButton';
 import Header from '../../components/Header';
 import { HEADER_BG } from '../../constants/data';
 import icons from '../../constants/icons';

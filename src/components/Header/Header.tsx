@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import cn from 'classnames';
 
 import icons from '../../constants/icons';
-import DefaultButton from '../Buttons/DefaultButton';
+import DefaultButton from '../DefaultButton';
 import HeaderLink from '../HeaderLink';
 
 import { HEADER_BG } from '../../constants/data';

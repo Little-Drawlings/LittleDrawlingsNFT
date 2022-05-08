@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 import { FORMATS } from '../../../constants/data';
 
-import DefaultButton from '../../Buttons/DefaultButton';
+import DefaultButton from '../../DefaultButton';
 import {
 	setFormatMint,
 	setOpenedDrawPopup,
@@ -105,7 +105,7 @@ const DrawPopup: React.FC = () => {
 							/>
 							<DefaultButton
 								className='no_wide_primary_small'
-								title='Save'
+								title='Mint'
 								onClick={startMint}
 							/>
 						</div>
