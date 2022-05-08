@@ -51,12 +51,12 @@ const SavePopup: React.FC<SavePopupProps> = ({
 						/>
 						<div className={styles.buttons_wrap}>
 							<DefaultButton
-								className='save_popup_btn'
+								className='no_wide_text_small'
 								title='Save & Close'
 								onClick={() => navigate('/')}
 							/>
 							<DefaultButton
-								className='save_popup_btn'
+								className='no_wide_text_small'
 								title='Mint'
 								onClick={mint}
 							/>

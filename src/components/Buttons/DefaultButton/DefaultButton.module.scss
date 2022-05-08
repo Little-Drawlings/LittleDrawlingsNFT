@@ -128,10 +128,10 @@
 	height: 50px;
 	color: $activeLinkColor;
 	font-family: 'LD Scribble';
-	font-style: normal;
 	font-weight: 700;
 	font-size: 1.625rem;
 	line-height: 2;
+	padding: 10px;
 	margin: 0.5rem;
 	background: url('../../../assets/svg/no-wide-btns/secondary/active-secondary-small.svg')
 		center/contain no-repeat;
@@ -160,15 +160,31 @@
 }
 
 .wide_text_small {
+	background: transparent;
+	width: 243px;
+	height: 50px;
+	color: $activeLinkColor;
+	font-family: 'LD Scribble';
+	font-weight: 700;
+	font-size: 1.625rem;
+	line-height: 100%;
 	&:hover {
 		background: url('../../../assets/svg/wide-btns/text/hover-text-small.svg')
-			center/contain no-repeat;
+			center/100% no-repeat;
 	}
 }
 
 .no_wide_text_small {
+	background: transparent;
+	width: 160px;
+	height: 50px;
+	color: $activeLinkColor;
+	font-family: 'LD Scribble';
+	font-weight: 700;
+	font-size: 1.625rem;
+	line-height: 100%;
 	&:hover {
 		background: url('../../../assets/svg/no-wide-btns/text/hover-text-small.svg')
-			center/contain no-repeat;
+			center/100% no-repeat;
 	}
 }

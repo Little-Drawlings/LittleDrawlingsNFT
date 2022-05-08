@@ -114,7 +114,7 @@ const Studio: React.FC = () => {
 						style={
 							format === FORMATS.SQUARE
 								? { width: '60%', height: '60vh' }
-								: { width: '100%', height: '60vh' }
+								: { width: '100%', height: '60vh' }	
 						}
 						hideGrid={true}
 						brushColor={brushColor}
