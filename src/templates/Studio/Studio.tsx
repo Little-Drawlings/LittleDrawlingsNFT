@@ -123,7 +123,7 @@ const Studio: React.FC = () => {
 						onChange={(canvas) => changeCanvasImage(canvas)}
 					/>
 					<DefaultButton
-						className='mint_button'
+						className='no_wide_primary_small'
 						title={'Mint'}
 						onClick={mintImage}
 					/>

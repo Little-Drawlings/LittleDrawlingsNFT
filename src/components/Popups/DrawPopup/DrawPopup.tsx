@@ -99,13 +99,13 @@ const DrawPopup: React.FC = () => {
 						</div>
 						<div className={styles.buttons_wrap}>
 							<DefaultButton
-								className='cancel_btn'
+								className='no_wide_secondary_small'
 								title='Cancel'
 								onClick={() => navigate('/')}
 							/>
 							<DefaultButton
-								className='popup_btn'
-								title='Mint'
+								className='no_wide_primary_small'
+								title='Save'
 								onClick={startMint}
 							/>
 						</div>

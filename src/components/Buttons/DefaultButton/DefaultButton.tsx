@@ -10,9 +10,8 @@ interface Props {
 
 const DefaultButton: React.FC<Props> = ({
 	title = '',
-	className = '',
-	onClick,
-	...props
+	className = 'wide_primary_active_large',
+	onClick
 }) => {
 	return (
 		<button

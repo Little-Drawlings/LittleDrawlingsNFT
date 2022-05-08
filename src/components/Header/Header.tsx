@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import cn from 'classnames';
 
 import icons from '../../constants/icons';
-import ConnectButton from '../Buttons/ConnectButton';
+import DefaultButton from '../Buttons/DefaultButton';
 import HeaderLink from '../HeaderLink';
 
 import { HEADER_BG } from '../../constants/data';
@@ -57,7 +57,7 @@ const Header: React.FC<Props> = ({ background }) => {
 						</div>
 					</div>
 				) : (
-					<ConnectButton onClick={connect} />
+					<DefaultButton className='wide_secondary_small' onClick={connect} title={'Connect to wallet'} />
 				)}
 			</div>
 		</div>

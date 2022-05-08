@@ -26,24 +26,6 @@
 	width: 1000px;
 	text-align: center;
 	position: relative;
-	&:before {
-		content: '';
-		width: 100px;
-		height: 100px;
-		background: url('../../assets/svg/mintLeft.svg') 100% no-repeat;
-		position: absolute;
-		left: 0;
-		top: 100%;
-	}
-	&:after {
-		content: '';
-		width: 100px;
-		height: 50px;
-		background: url('../../assets/svg/mintRight.svg') 100% no-repeat;
-		position: absolute;
-		right: 0;
-		top: 100%;
-	}
 }
 .title {
 	font-family: 'Montserrat';

@@ -10,23 +10,10 @@ const Mint: React.FC = () => {
 		<>
 			<Header background={HEADER_BG.PINK}/>
 			<div className={styles.content}>
-				<img
-					className={styles.bg_image}
-					src={icons.BackgroundLogo}
-					alt='logo'
-				/>
 				<div className={styles.title_wrap}>
 					<h3 className={styles.title}>Paint & Claim</h3>
 					<p className={styles.text}>Collectable NFT trading game</p>
-				</div>
-				<div className={styles.btn_wrap}>
-					<img
-						className={styles.bg_image}
-						src={icons.MintGirl}
-						alt='MintGirl'
-					/>
-					<DefaultButton title='Mint' onClick={() => null} />
-					<img className={styles.bg_image} src={icons.MintBoy} alt='MintBoy' />
+					<DefaultButton className='no_wide_primary_large' title='Mint Canvas' onClick={() => null} />
 				</div>
 			</div>
 		</>
