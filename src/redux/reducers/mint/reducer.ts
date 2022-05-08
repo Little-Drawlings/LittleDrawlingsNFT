@@ -8,6 +8,7 @@ const initialState = {
 	mintOver: false,
 	openedDrawPopup: false,
 	openSavePopup: false,
+	nightMode: false,
 };
 
 const mintReducer = (
@@ -15,6 +16,11 @@ const mintReducer = (
 	action: IAction<string | boolean>
 ) => {
 	switch (action.type) {
+		case MINT_TYPES.SET_NIGHT_MODE:
+			return {
+				...state,
+				nightMode: action?.data,
+			};
 		case MINT_TYPES.SET_TIME:
 			return {
 				...state,

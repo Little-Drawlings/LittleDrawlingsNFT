@@ -9,6 +9,7 @@ export interface MintAppState {
 	mintOver: boolean;
 	openedDrawPopup: boolean;
 	openSavePopup: boolean;
+	nightMode: boolean;
 }
 
 export interface IStore {

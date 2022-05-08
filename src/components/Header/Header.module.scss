@@ -9,9 +9,8 @@
 	align-items: center;
 	background-color: $pinkBg;
 	backdrop-filter: blur(10px);
-}
-.header_blue {
-	background-color: $pinkBg;
+	z-index: 3;
+	overflow: hidden;
 }
 .header_white {
 	background-color: $whiteBg;
@@ -32,8 +31,12 @@
 	align-items: center;
 }
 .connect_wrap_image {
+	width: 24px;
+	height: 24px;
 	display: inline-block;
 	margin-right: 1rem;
+	transition: all 0.5s ease;
+	cursor: pointer;
 }
 .connect_value {
 	display: inline-block;
@@ -56,4 +59,36 @@
 	font-size: 0.95rem;
 	justify-content: center;
 	align-items: center;
+}
+
+.swipe_down {
+	animation-timing-function: ease-in-out;
+	transform-origin: bottom center;
+	animation-name: swipeDown;
+	animation-duration: 1s;
+}
+
+.swipe_up {
+	animation-timing-function: linear;
+	transform-origin: bottom center;
+	animation-name: swipeUp;
+	animation-duration: 1s;
+}
+
+@keyframes swipeUp {
+	from {
+		transform: translate3d(0, 50px, 0);
+	}
+	to {
+		transform: translate3d(0, 0vh, 0);
+	}
+}
+
+@keyframes swipeDown {
+	from {
+		transform: translate3d(0, -50px, 0);
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+	}
 }

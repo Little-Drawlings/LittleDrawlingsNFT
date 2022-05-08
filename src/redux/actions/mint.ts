@@ -30,3 +30,8 @@ export const setOpenSavePopup = (opened: boolean) => ({
 	type: types.SET_OPEN_SAVE_POPUP,
 	data: opened,
 });
+
+export const setNightModeMint = (nightMode: boolean)  => ({
+	type: types.SET_NIGHT_MODE,
+	data: nightMode,
+});

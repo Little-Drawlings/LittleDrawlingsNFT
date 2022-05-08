@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import icons from '../../constants/icons';
@@ -8,22 +9,43 @@ import HeaderLink from '../HeaderLink';
 import { HEADER_BG } from '../../constants/data';
 
 import styles from './Header.module.scss';
+import { RootState } from '../../redux/reducers';
+import { setNightModeMint } from '../../redux/actions/mint';
 
 interface Props {
 	background?: string;
 }
 
 const Header: React.FC<Props> = ({ background }) => {
-	const [connected, setConnected] = useState(false);
+	const dispatch = useDispatch();
+	const [connected, setConnected] = useState<boolean>(false);
+	const [nightMode, setNightMode] = useState<boolean>(false);
+	const [animateImage, setAnimateImage] = useState<boolean>(false);
 
 	const connect = () => {
 		setConnected(!connected);
 	};
 
+	const nightModeMint = useSelector(
+		(state: RootState) => state?.mintReducer.nightMode
+	);
+
+	useEffect(() => {
+		setNightMode(nightModeMint);
+	}, [nightModeMint]);
+
 	const headerClass = () => {
 		return background === HEADER_BG.PINK
 			? styles.header_pink
 			: styles.header_white;
+	};
+
+	const animate = () => {
+		dispatch(setNightModeMint(!nightMode));
+		setAnimateImage(true);
+		setTimeout(() => {
+			setAnimateImage(false);
+		}, 1000);
 	};
 
 	return (
@@ -47,7 +69,16 @@ const Header: React.FC<Props> = ({ background }) => {
 				</li>
 			</ul>
 			<div className={styles.connect_wrap}>
-				<img className={styles.connect_wrap_image} src={icons.SunIcon} alt='sun' />
+				<img
+					className={cn(
+						styles.connect_wrap_image,
+						animateImage && nightMode && styles.swipe_down,
+						animateImage && !nightMode && styles.swipe_up
+					)}
+					src={nightMode ? icons.MoonIcon : icons.SunIcon}
+					alt='sun-moon'
+					onClick={animate}
+				/>
 				{connected ? (
 					<div className={styles.connect}>
 						<span className={styles.connect_value}>7.00698 ETH</span>
@@ -57,7 +88,11 @@ const Header: React.FC<Props> = ({ background }) => {
 						</div>
 					</div>
 				) : (
-					<DefaultButton className='wide_secondary_small' onClick={connect} title={'Connect to wallet'} />
+					<DefaultButton
+						className='wide_secondary_small'
+						onClick={connect}
+						title={'Connect to wallet'}
+					/>
 				)}
 			</div>
 		</div>
