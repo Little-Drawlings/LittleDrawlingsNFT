@@ -126,7 +126,7 @@
 	}
 }
 .right_images {
-	top: 80px;
+	top: 50px;
 	right: 0;
 	transition: all 1s ease-in-out;
 	.right_img {
@@ -136,17 +136,17 @@
 		transition: all 1s ease-in-out;
 	}
 	&:before {
-		width: 700px;
-		height: 900px;
-		left: 0;
+		width: 500px;
+		height: 700px;
+		right: 0;
 		background: url('../../assets/svg/mint-right-imgs/body.svg') center/100%
 			no-repeat;
 	}
 	&:after {
 		width: 210px;
 		height: 88px;
-		top: 410px;
-		right: 510px;
+		top: 320px;
+		right: 350px;
 		transform: rotate(-4.91deg);
 		background: url('../../assets/svg/mint-right-imgs/hand.svg') center/100%
 			no-repeat;
@@ -157,15 +157,14 @@
 			bottom: 0;
 		}
 		&:before {
-			left: 50px;
+			width: 520px;
 		}
 		&:after {
-			top: 420px;
-			right: 455px;
+			top: 320px;
+			right: 355px;
 			transform: rotate(-14.28deg);
 		}
 	}
-	
 }
 
 .animated {
