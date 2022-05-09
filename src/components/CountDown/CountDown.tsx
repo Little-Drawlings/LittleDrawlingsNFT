@@ -25,13 +25,13 @@ interface Time {
 const CountDown: React.FC<Props> = ({ className }) => {
 	const dispatch = useDispatch();
 	const [paused, setPaused] = React.useState(false);
-	const [over, setOver] = React.useState(false);
+	const [over, setOver] = React.useState(true);
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 
 	const [time, setTime] = useState<Time>({
-		hours: mintTime?.hours || 0,
-		minutes: mintTime?.minutes || 0,
-		seconds: mintTime?.seconds || 0,
+		hours: mintTime?.hours,
+		minutes: mintTime?.minutes,
+		seconds: mintTime?.seconds,
 	});
 
 	const mintPause = useSelector(

@@ -2,10 +2,10 @@ import { IAction } from '../../types/actions';
 import MINT_TYPES from './types';
 
 const initialState = {
-	time: { hours: 0, minutes: 0, seconds: 0 },
+	time: { hours: 0, minutes: 20, seconds: 0 },
 	mintFormat: '',
 	mintPause: false,
-	mintOver: false,
+	mintOver: true,
 	openedDrawPopup: false,
 	openSavePopup: false,
 	nightMode: false,
