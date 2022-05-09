@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
 import DefaultButton from '../../components/DefaultButton';
@@ -10,6 +11,7 @@ import icons from '../../constants/icons';
 import styles from './Mint.module.scss';
 
 const Mint: React.FC = () => {
+	const navigate = useNavigate();
 	const [nightMode, setNightMode] = useState<boolean>(false);
 
 	const nightModeMint = useSelector(
@@ -32,7 +34,7 @@ const Mint: React.FC = () => {
 					<DefaultButton
 						className='no_wide_primary_large'
 						title='Mint Canvas'
-						onClick={() => null}
+						onClick={() => navigate('/studio')}
 					/>
 				</div>
 				<div className={cn(styles.left_images, nightMode && styles.active)}>

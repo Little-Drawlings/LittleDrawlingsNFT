@@ -9,6 +9,7 @@ import HeaderLink from '../HeaderLink';
 import styles from './Header.module.scss';
 import { RootState } from '../../redux/reducers';
 import { setNightModeMint } from '../../redux/actions/mint';
+import { Link } from 'react-router-dom';
 
 interface Props {
 	background?: string;
@@ -42,7 +43,7 @@ const Header: React.FC<Props> = ({ background }) => {
 
 	return (
 		<div className={cn(styles.header)}>
-			<img className={styles.logo} src={icons.Logo} alt='logo' />
+			<Link to={'/'}><img className={styles.logo} src={icons.Logo} alt='logo' /></Link>
 			<ul className={styles.nav_list}>
 				<li className={styles.nav_list_item}>
 					<HeaderLink to='/'>Mint</HeaderLink>

@@ -135,7 +135,7 @@ const Studio: React.FC = () => {
 						/>
 						<div className={styles.settings_wrap}>
 							<div className={styles.settings}>
-								<div>
+								{/* <div>
 									<span>Radius</span>
 									<input
 										min='2'
@@ -145,7 +145,13 @@ const Studio: React.FC = () => {
 											setBrushRadius(+event.target.value);
 										}}
 									/>
-								</div>
+								</div> */}
+								<ul className={styles.settings_list}>
+									<li className={styles.settings_list_item}></li>
+									<li className={styles.settings_list_item}></li>
+									<li className={styles.settings_list_item}></li>
+									<li className={styles.settings_list_item}></li>
+								</ul>
 							</div>
 							<DefaultButton
 								className='no_wide_primary_small'
