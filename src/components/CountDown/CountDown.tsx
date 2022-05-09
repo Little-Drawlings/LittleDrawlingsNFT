@@ -47,11 +47,13 @@ const CountDown: React.FC<Props> = ({ className }) => {
 	);
 
 	useEffect(() => {
-		setTime({
-			hours: mintTime.hours,
-			minutes: mintTime.minutes,
-			seconds: mintTime.seconds,
-		});
+		if (mintTime) {
+			setTime({
+				hours: mintTime?.hours,
+				minutes: mintTime?.minutes,
+				seconds: mintTime?.seconds,
+			});
+		}
 	}, [mintTime]);
 
 	useEffect(() => {
