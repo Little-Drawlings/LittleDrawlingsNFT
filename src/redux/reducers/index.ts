@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import sessionStorage from 'redux-persist/lib/storage/session'
 import mintReducer from './mint/reducer';
 import { MintAppState } from './../types/store';
 
 const rootPersistConfig = {
 	key: 'root',
-	storage: storage
+	storage: sessionStorage
 };
 
 export interface RootState {
