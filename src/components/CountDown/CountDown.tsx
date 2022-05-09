@@ -29,9 +29,9 @@ const CountDown: React.FC<Props> = ({ className }) => {
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 
 	const [time, setTime] = useState<Time>({
-		hours: mintTime.hours,
-		minutes: mintTime.minutes,
-		seconds: mintTime.seconds,
+		hours: mintTime?.hours || 0,
+		minutes: mintTime?.minutes || 0,
+		seconds: mintTime?.seconds || 0,
 	});
 
 	const mintPause = useSelector(
