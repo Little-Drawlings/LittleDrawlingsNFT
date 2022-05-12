@@ -37,10 +37,10 @@ const Mint: React.FC = () => {
 						onClick={() => navigate('/studio')}
 					/>
 				</div>
-				<div className={cn(styles.left_images, nightMode && styles.active)}>
+				<div className={cn(styles.left_images, styles.fade_in, nightMode && styles.active)}>
 					<img className={styles.left_img} src={nightMode ? icons.LeftImageActive : icons.LeftImage} alt='Ground' />
 				</div>
-				<div className={cn(styles.right_images, styles.swipe_down, nightMode && styles.active)}>
+				<div className={cn(styles.right_images, styles.fade_in, nightMode && styles.active)}>
 					<img
 						className={styles.right_img}
 						src={nightMode ? icons.RightImageActive : icons.RightImage}

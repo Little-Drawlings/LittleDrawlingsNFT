@@ -126,22 +126,3 @@
 		opacity: 1;
 	}
 }
-
-.swipe_down {
-	animation-timing-function: ease-in-out;
-	transform-origin: bottom center;
-	animation-name: swipeDown;
-	animation-duration: 2s;
-}
-
-@keyframes swipeDown {
-	from {
-		transform: translate3d(0, -100vh, 0);
-		opacity: 0;
-	}
-
-	to {
-		transform: translate3d(0, 0, 0);
-		opacity: 1;
-	}
-}
