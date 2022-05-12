@@ -52,118 +52,56 @@
 	margin: 0px 0 5rem 0;
 }
 .title {
+	margin: 0;
 	font-family: 'LD Scribble';
 	font-weight: 700;
-	font-size: 6rem;
+	font-size: 96px;
 	line-height: 1;
+	text-align: center;
 	letter-spacing: -0.02em;
-	color: $dark;
-	margin: 0;
+	color: #fffcfe;
+	text-shadow: 2px 4px 2px #1e0212;
 }
 .text {
+	margin: 0;
 	font-family: 'Montserrat';
 	font-weight: 600;
-	font-size: 2rem;
-	line-height: 2.5rem;
-	color: #484649;
-	margin: 0;
+	font-size: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #fffbfe;
+	text-shadow: 2px 3px 2px #1e0212;
 }
 
 .left_images,
 .right_images {
 	z-index: 3;
 	position: absolute;
-	&:before,
-	&:after {
-		content: '';
-		transition: all 1s ease-in-out;
-		z-index: 4;
-		position: absolute;
-	}
+	transition: all 1s ease-in-out;
 }
 
 .left_images {
+	width: 50%;
 	bottom: -0.5rem;
 	left: 0;
-	transition: all 1s ease-in-out;
 	.left_img {
-		position: relative;
-		bottom: -2rem;
-		left: 0;
-		z-index: 2;
 		transition: all 1s ease-in-out;
-	}
-	&:before {
-		width: 384px;
-		height: 555px;
-		bottom: 0;
-		left: 0;
-		background: url('../../assets/svg/mint-left-imgs/boy.svg') center/100%
-			no-repeat;
-	}
-	&:after {
-		width: 273px;
-		height: 84px;
-		top: 240px;
-		left: 225px;
-		z-index: 6;
-		transform: rotate(-4.78deg);
-		background: url('../../assets/svg/mint-left-imgs/hand.svg') center/100%
-			no-repeat;
+		max-width: 100%;
 	}
 	&.active {
-		.left_img {
-			bottom: 0;
-		}
-		&:before {
-			left: 50px;
-		}
-		&:after {
-			top: 223px;
-			left: 270px;
-			transform: rotate(-12.82deg);
-		}
+		width: 52%;
 	}
 }
 .right_images {
-	top: 50px;
-	right: 0;
-	transition: all 1s ease-in-out;
+	width: 40%;
+	top: 4%;
+	right: -5%;
 	.right_img {
-		position: relative;
-		top: 100px;
-		right: 0;
 		transition: all 1s ease-in-out;
-	}
-	&:before {
-		width: 500px;
-		height: 700px;
-		right: 0;
-		background: url('../../assets/svg/mint-right-imgs/body.svg') center/100%
-			no-repeat;
-	}
-	&:after {
-		width: 210px;
-		height: 88px;
-		top: 320px;
-		right: 350px;
-		transform: rotate(-4.91deg);
-		background: url('../../assets/svg/mint-right-imgs/hand.svg') center/100%
-			no-repeat;
-		z-index: 3;
+		max-width: 100%;
 	}
 	&.active {
-		.left_img {
-			bottom: 0;
-		}
-		&:before {
-			width: 520px;
-		}
-		&:after {
-			top: 320px;
-			right: 355px;
-			transform: rotate(-14.28deg);
-		}
+		width: 42%;
 	}
 }
 
@@ -185,6 +123,25 @@
 		opacity: 0;
 	}
 	to {
+		opacity: 1;
+	}
+}
+
+.swipe_down {
+	animation-timing-function: ease-in-out;
+	transform-origin: bottom center;
+	animation-name: swipeDown;
+	animation-duration: 2s;
+}
+
+@keyframes swipeDown {
+	from {
+		transform: translate3d(0, -100vh, 0);
+		opacity: 0;
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
 		opacity: 1;
 	}
 }

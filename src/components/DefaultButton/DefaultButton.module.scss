@@ -99,14 +99,14 @@
 	line-height: 1.3;
 	padding: 10px;
 	background: url('../../assets/svg/wide-btns/secondary/active-secondary-small.svg')
-		center/contain no-repeat;
+		center/100% no-repeat;
 	&:hover {
 		background: url('../../assets/svg/wide-btns/secondary/hover-secondary-small.svg')
-			center/contain no-repeat;
+			center/100% no-repeat;
 	}
 	&:disabled {
 		background: url('../../assets/svg/wide-btns/secondary/disabled-secondary-small.svg')
-			center/contain no-repeat;
+			center/100% no-repeat;
 	}
 }
 

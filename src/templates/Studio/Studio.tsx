@@ -9,7 +9,7 @@ import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';
 
-import { FORMATS } from '../../constants/data';
+import { COLORS, FORMATS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
@@ -20,7 +20,7 @@ import { setOpenSavePopup } from '../../redux/actions/mint';
 const Studio: React.FC = () => {
 	const dispatch = useDispatch();
 	const [drawing, setDrawing] = useState();
-	const [brushColor, setBrushColor] = useState('#FCA5A5');
+	const [brushColor, setBrushColor] = useState(COLORS[0]);
 	const [brushRadius, setBrushRadius] = useState(5);
 	const [format, setFormat] = useState(FORMATS.RECTANGLE);
 	const [nightMode, setNightMode] = useState<boolean>(false);
@@ -29,15 +29,6 @@ const Studio: React.FC = () => {
 		desc: '',
 		drawlName: '',
 	});
-	const colors = [
-		'#FF99F8',
-		'#FFEE00',
-		'#86FA16',
-		'#6FFFF6',
-		'#B38FFF',
-		'#FFAE4F',
-		'#979797',
-	];
 
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 
@@ -100,21 +91,26 @@ const Studio: React.FC = () => {
 				<div className={styles.wrapper}>
 					<div className={styles.breadcrumbs}>
 						<img className={styles.arrow_img} src={icons.Arrow} alt='arrow' />
-						<span className={styles.breadcrumbs_text}>
-							Back to all canvases
-						</span>
+						<span className={styles.breadcrumbs_text}>All canvases</span>
 					</div>
 					<div className={styles.canvas_wrap}>
 						<h3 className={styles.canvas_title}>Untitled</h3>
 						<ul className={styles.colors}>
-							{colors.map((color) => {
+							{COLORS.map((color) => {
 								return (
 									<li
 										key={color}
-										className={styles.colors_item}
-										style={{ background: color }}
+										className={cn(
+											styles.colors_item,
+											brushColor === color && styles.active_color
+										)}
 										onClick={() => setBrushColor(color)}
-									></li>
+									>
+										<span
+											className={styles.colors_item_value}
+											style={{ background: color }}
+										></span>
+									</li>
 								);
 							})}
 						</ul>
@@ -124,8 +120,8 @@ const Studio: React.FC = () => {
 							className={styles.canvas}
 							style={
 								format === FORMATS.SQUARE
-									? { width: '60%', height: '60vh' }
-									: { width: '100%', height: '60vh' }
+									? { width: '100%', height: 'auto', aspectRatio: '1/1' }
+									: { width: '100%', height: 'auto', aspectRatio: '16/9' }
 							}
 							hideGrid={true}
 							brushColor={brushColor}

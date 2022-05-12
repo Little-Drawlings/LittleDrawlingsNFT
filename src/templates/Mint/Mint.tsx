@@ -24,7 +24,7 @@ const Mint: React.FC = () => {
 
 	return (
 		<>
-			<Header/>
+			<Header />
 			<div className={cn(styles.content, nightMode && styles.night)}>
 				<div className={styles.title_wrap}>
 					<div className={cn(styles.animated, nightMode && styles.fade_in)}>
@@ -38,10 +38,14 @@ const Mint: React.FC = () => {
 					/>
 				</div>
 				<div className={cn(styles.left_images, nightMode && styles.active)}>
-					<img className={styles.left_img} src={icons.Ground} alt="Ground" />
+					<img className={styles.left_img} src={nightMode ? icons.LeftImageActive : icons.LeftImage} alt='Ground' />
 				</div>
-				<div className={cn(styles.right_images, nightMode && styles.active)}>
-				<img className={styles.right_img} src={icons.Bubbles} alt="BodyMint" />
+				<div className={cn(styles.right_images, styles.swipe_down, nightMode && styles.active)}>
+					<img
+						className={styles.right_img}
+						src={nightMode ? icons.RightImageActive : icons.RightImage}
+						alt='RightImage'
+					/>
 				</div>
 			</div>
 		</>
