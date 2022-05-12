@@ -93,15 +93,15 @@
 	}
 }
 .right_images {
-	width: 40%;
-	top: 4%;
+	width: 45%;
+	top: 0%;
 	right: -5%;
 	.right_img {
 		transition: all 1s ease-in-out;
 		max-width: 100%;
 	}
 	&.active {
-		width: 42%;
+		width: 47%;
 	}
 }
 

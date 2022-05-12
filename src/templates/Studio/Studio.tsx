@@ -120,8 +120,8 @@ const Studio: React.FC = () => {
 							className={styles.canvas}
 							style={
 								format === FORMATS.SQUARE
-									? { width: '100%', height: 'auto', aspectRatio: '1/1' }
-									: { width: '100%', height: 'auto', aspectRatio: '16/9' }
+									? { width: '100%', minWidth: '50vw', height: 'auto', maxHeight: '100vh', aspectRatio: '1/1' }
+									: { width: '100%', minWidth: '70vw', height: 'auto', maxHeight: '100vh', aspectRatio: '16/9' }
 							}
 							hideGrid={true}
 							brushColor={brushColor}
