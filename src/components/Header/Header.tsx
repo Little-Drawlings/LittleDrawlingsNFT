@@ -41,14 +41,25 @@ const Header: React.FC<Props> = ({ background }) => {
 		}, 1000);
 	};
 
+	const canvasPath = window.location.pathname.includes('/studio/');
+
+	console.log(canvasPath, 'ku canvasPath');
+
 	return (
 		<div className={cn(styles.header)}>
-			<Link to={'/'}><img className={styles.logo} src={icons.Logo} alt='logo' /></Link>
+			<Link to={'/'}>
+				<img className={styles.logo} src={icons.Logo} alt='logo' />
+			</Link>
 			<ul className={styles.nav_list}>
 				<li className={styles.nav_list_item}>
 					<HeaderLink to='/'>Mint</HeaderLink>
 				</li>
-				<li className={styles.nav_list_item}>
+				<li
+					className={cn(
+						styles.nav_list_item,
+						canvasPath && styles.nav_link_item_canvas
+					)}
+				>
 					<HeaderLink to='/studio'>Studio</HeaderLink>
 				</li>
 				<li className={styles.nav_list_item}>

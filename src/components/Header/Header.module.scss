@@ -3,9 +3,9 @@
 .header {
 	width: 100%;
 	height: fit-content;
-	padding: 1rem;
+	padding: 1rem 2rem;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	background-color: $pinkBg;
 	backdrop-filter: blur(10px);
@@ -20,6 +20,23 @@
 }
 .nav_list_item {
 	margin: 0 1rem;
+	position: relative;
+	&.nav_link_item_canvas {
+		a {
+			color: $activeLinkColor;
+		}
+		&:before {
+			content: '';
+			background-color: $activeLinkColor;
+			width: 5px;
+			height: 5px;
+			position: absolute;
+			left: 50%;
+			bottom: -0.5rem;
+			border-radius: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
 }
 .connect_wrap,
 .connect {

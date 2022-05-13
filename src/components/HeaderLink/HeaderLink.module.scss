@@ -3,6 +3,7 @@
 
 .nav_link,
 .nav_link_active {
+	position: relative;
 	font-family: 'DM Sans';
 	font-size: 1.25rem;
 	font-weight: 700;
@@ -15,4 +16,9 @@
 }
 .nav_link_active {
 	color: $activeLinkColor;
+}
+.nav_link_studio {
+	text-decoration: underline;
+	text-underline-offset: 0.5rem;
+	text-decoration-thickness: 3px;
 }

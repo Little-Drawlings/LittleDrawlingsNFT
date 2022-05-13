@@ -25,7 +25,7 @@ const Mint: React.FC = () => {
 	return (
 		<>
 			<Header />
-			<div className={cn(styles.content, nightMode && styles.night)}>
+			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.title_wrap}>
 					<div className={cn(styles.animated, nightMode && styles.fade_in)}>
 						<h3 className={styles.title}>Paint & Claim</h3>
@@ -34,7 +34,7 @@ const Mint: React.FC = () => {
 					<DefaultButton
 						className='no_wide_primary_large'
 						title='Mint Canvas'
-						onClick={() => navigate('/studio')}
+						onClick={() => navigate('/studio/canvas')}
 					/>
 				</div>
 				<div className={cn(styles.left_images, styles.fade_in, nightMode && styles.active)}>

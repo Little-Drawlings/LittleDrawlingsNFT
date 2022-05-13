@@ -8,6 +8,10 @@ import LeftImage from '../assets/svg/mint-left-imgs/left_img_1_state.svg'
 import LeftImageActive from '../assets/svg/mint-left-imgs/left_img_2_state.svg'
 import RightImage from '../assets/svg/mint-right-imgs/right_img_1_state.svg'
 import RightImageActive from '../assets/svg/mint-right-imgs/right_img_2_state.svg'
+import ToolbarPencil from '../assets/svg/toolbar-master/pencil.svg'
+import ToolbarSize from '../assets/svg/toolbar-master/size.svg'
+import ToolbarBrush from '../assets/svg/toolbar-master/brush.svg'
+import ToolbarShadow from '../assets/svg/toolbar-master/shadow.svg'
 
 const icons = {
 	Logo,
@@ -19,7 +23,11 @@ const icons = {
 	LeftImage,
 	LeftImageActive,
 	RightImage,
-	RightImageActive
+	RightImageActive,
+	ToolbarPencil,
+	ToolbarSize,
+	ToolbarBrush,
+	ToolbarShadow
 };
 
 export default icons;

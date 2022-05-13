@@ -10,6 +10,13 @@
 }
 
 .wide_primary_large {
+	width: 390px;
+	height: 80px;
+	color: $primary;
+	font-family: 'LD Scribble';
+	font-weight: 700;
+	font-size: 2.25rem;
+	line-height: 100%;
 	background: url('../../assets/svg/wide-btns/primary/active-primary-large.svg')
 		center/contain no-repeat;
 	&:hover {
@@ -23,6 +30,13 @@
 }
 
 .wide_primary_small {
+	width: 243px;
+	height: 50px;
+	color: $primary;
+	font-family: 'LD Scribble';
+	font-weight: 700;
+	font-size: 1.625rem;
+	line-height: 100%;
 	background: url('../../assets/svg/wide-btns/primary/active-primary-small.svg')
 		center/contain no-repeat;
 	&:hover {
