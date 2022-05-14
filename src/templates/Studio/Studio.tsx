@@ -27,9 +27,10 @@ const Studio: React.FC = () => {
 			<Header />
 			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.filters_wrap}>
-					<div className={styles.filters}>
-						<DefaultDropdown />
-					</div>
+					<DefaultDropdown
+						options={['Newest first', 'Oldest first']}
+						placeholder='Sort by'
+					/>
 					<DefaultButton
 						className='wide_primary_small'
 						title='Mint new canvas'

@@ -8,8 +8,6 @@
 	justify-content: space-between;
 	align-items: center;
 }
-.filters {
-}
 .nft_list {
 	width: 100%;
 	padding: 0 2rem;
@@ -17,4 +15,6 @@
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
+	position: relative;
+	z-index: 1;
 }
