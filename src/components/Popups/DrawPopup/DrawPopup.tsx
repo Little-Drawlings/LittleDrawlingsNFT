@@ -36,8 +36,8 @@ const DrawPopup: React.FC = () => {
 		dispatch(
 			setTimeMint({
 				hours: 0,
-				minutes: 0,
-				seconds: 5,
+				minutes: 20,
+				seconds: 0,
 			})
 		);
 	};
