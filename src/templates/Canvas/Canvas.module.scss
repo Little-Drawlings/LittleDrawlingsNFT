@@ -1,6 +1,5 @@
 @import '../../styles/variables.scss';
 
-
 .wrapper {
 	margin: 5rem 0;
 	display: flex;
@@ -142,14 +141,33 @@
 	margin: 0;
 	margin-left: 163px;
 	.settings_list_item {
+		font-family: 'Gloria Hallelujah';
+		font-weight: 400;
+		background-color: $white;
+		width: 5rem;
+		height: 2rem;
+		padding: 1rem;
+		border: 2px solid $canvasBorder;
+		border-radius: 20px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
 		padding: 0.2rem;
 		position: relative;
-		.brash {
-
+		&.settings_list_item_active {
+			background-color: rgba(255, 255, 0, 0.5);
 		}
+		&:active {
+			top: 2px;
+		}
+		&:nth-child(2) {
+			&:active {
+				top: 0;
+			}
+		}
+	}
+	.settings_image {
+		max-width: 100%;
 	}
 }

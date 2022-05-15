@@ -10,6 +10,7 @@
     "node-sass": "^7.0.1",
     "react": "^18.1.0",
     "react-canvas-draw": "^1.2.1",
+    "react-canvas-draw-pan-zoom": "^1.1.9",
     "react-color-palette": "^6.2.0",
     "react-dom": "^18.1.0",
     "react-dropdown": "^1.10.0",

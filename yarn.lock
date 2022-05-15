@@ -7821,6 +7821,16 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
+react-canvas-draw-pan-zoom@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/react-canvas-draw-pan-zoom/-/react-canvas-draw-pan-zoom-1.1.9.tgz#7059141f4aca4a62ffdd4e6b4f679071fd0636ac"
+  integrity sha512-BhKbS/3CRKQWS7ZMKxo8BpXNBEzp9oEJ1Wen1tGxwqO1x+w2/mZSIT4lpxQW0UozfRgD2WwFijKblV9U0qpfoQ==
+  dependencies:
+    catenary-curve "^1.0.1"
+    lazy-brush "^1.0.1"
+    prop-types "^15.6.2"
+    resize-observer-polyfill "^1.5.0"
+
 react-canvas-draw@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-canvas-draw/-/react-canvas-draw-1.2.1.tgz#2e9183704866b0e9bbb9a93dbb37073a31b858ed"

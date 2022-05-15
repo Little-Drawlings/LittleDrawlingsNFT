@@ -45,7 +45,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 						<h3 className={styles.popup_title}>{title}</h3>
 						<p className={styles.popup_desc}>{desc}</p>
 						<DefaultInput
-							placeholder='name'
+							placeholder='Name'
 							type='text'
 							value={name}
 							onChange={(e) => setName(e.target.value)}

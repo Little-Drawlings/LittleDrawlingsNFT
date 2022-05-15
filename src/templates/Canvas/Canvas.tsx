@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Ref, useEffect, useRef, useState } from 'react';
 import CanvasDraw from 'react-canvas-draw';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,13 @@ import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';
 
-import { COLORS, FORMATS } from '../../constants/data';
+import {
+	COLORS,
+	FORMATS,
+	hexToRGB,
+	rgbaToHex,
+	INSTRUMENTS,
+} from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
@@ -32,6 +38,8 @@ const Canvas: React.FC = () => {
 		drawlName: '',
 	});
 
+	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL);
+
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 
 	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
@@ -47,6 +55,7 @@ const Canvas: React.FC = () => {
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
 	);
+	let modify: any = null;
 
 	useEffect(() => {
 		setNightMode(nightModeMint);
@@ -87,6 +96,34 @@ const Canvas: React.FC = () => {
 
 	const squareFormat = format === FORMATS.SQUARE;
 
+	const pencil = () => {
+		setInstrument(INSTRUMENTS.PENCIL);
+		brushColor === '#fff'
+			? setBrushColor(COLORS[0])
+			: setBrushColor(hexToRGB(brushColor, 1));
+	};
+
+	const pencilBrush = () => {
+		setInstrument(INSTRUMENTS.PENCIL_BRUSH);
+		brushColor === '#fff'
+			? setBrushColor(hexToRGB(COLORS[0], 0.5))
+			: setBrushColor(hexToRGB(brushColor, 0.5));
+	};
+
+	const eraser = () => {
+		setInstrument(INSTRUMENTS.ERASER);
+		setBrushColor('#fff');
+	};
+
+	const setActiveColor = (color: string) => {
+		if (instrument === INSTRUMENTS.ERASER) {
+			setInstrument(INSTRUMENTS.PENCIL);
+		}
+		instrument === INSTRUMENTS.PENCIL_BRUSH
+			? setBrushColor(hexToRGB(color, 0.5))
+			: setBrushColor(color);
+	};
+
 	return (
 		<>
 			<Header />
@@ -108,9 +145,10 @@ const Canvas: React.FC = () => {
 										key={color}
 										className={cn(
 											styles.colors_item,
-											brushColor === color && styles.active_color
+											hexToRGB(brushColor, 1) === hexToRGB(color, 1) &&
+												styles.active_color
 										)}
-										onClick={() => setBrushColor(color)}
+										onClick={() => setActiveColor(color)}
 									>
 										<span
 											className={styles.colors_item_value}
@@ -122,6 +160,7 @@ const Canvas: React.FC = () => {
 						</ul>
 						<CountDown className={styles.time_wrap} />
 						<CanvasDraw
+							ref={(canvasDraw) => (modify = canvasDraw)}
 							disabled={pause || over}
 							className={cn(
 								styles.canvas,
@@ -146,6 +185,7 @@ const Canvas: React.FC = () => {
 							}
 							hideGrid={true}
 							brushColor={brushColor}
+							catenaryColor={brushColor}
 							lazyRadius={0}
 							brushRadius={brushRadius}
 							onChange={(canvas) => changeCanvasImage(canvas)}
@@ -153,9 +193,23 @@ const Canvas: React.FC = () => {
 						<div className={styles.settings_wrap}>
 							<div className={styles.settings}>
 								<ul className={styles.settings_list}>
+									<li
+										className={cn(
+											styles.settings_list_item,
+											instrument === INSTRUMENTS.PENCIL &&
+												styles.settings_list_item_active
+										)}
+										onClick={pencil}
+									>
+										<img
+											className={styles.settings_image}
+											src={icons.ToolbarPencil}
+											alt='ToolbarPencil'
+										/>
+									</li>
 									<li className={styles.settings_list_item}>
 										<input
-										className={styles.brash}
+											className={styles.brash}
 											min={2}
 											max={50}
 											type='range'
@@ -163,6 +217,46 @@ const Canvas: React.FC = () => {
 												setBrushRadius(+event.target.value);
 											}}
 										/>
+									</li>
+									<li
+										className={cn(
+											styles.settings_list_item,
+											instrument === INSTRUMENTS.PENCIL_BRUSH &&
+												styles.settings_list_item_active
+										)}
+										onClick={pencilBrush}
+									>
+										<img
+											className={styles.settings_image}
+											src={icons.ToolbarBrush}
+											alt='ToolbarBrush'
+										/>
+									</li>
+									<li
+										className={cn(
+											styles.settings_list_item,
+											instrument === INSTRUMENTS.ERASER &&
+												styles.settings_list_item_active
+										)}
+										onClick={eraser}
+									>
+										<img
+											className={styles.settings_image}
+											src={icons.ToolbarShadow}
+											alt='ToolbarShadow'
+										/>
+									</li>
+									<li
+										className={styles.settings_list_item}
+										onClick={() => modify?.undo()}
+									>
+										Undo
+									</li>
+									<li
+										className={styles.settings_list_item}
+										onClick={() => modify?.clear()}
+									>
+										Clear
 									</li>
 								</ul>
 							</div>
