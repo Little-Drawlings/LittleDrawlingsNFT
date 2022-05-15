@@ -1,4 +1,4 @@
-import React, { Ref, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CanvasDraw from 'react-canvas-draw';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,6 @@ import {
 	COLORS,
 	FORMATS,
 	hexToRGB,
-	rgbaToHex,
 	INSTRUMENTS,
 } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
