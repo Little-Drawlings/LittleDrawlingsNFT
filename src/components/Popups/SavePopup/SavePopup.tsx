@@ -10,6 +10,7 @@ import { RootState } from '../../../redux/reducers';
 
 import { SavePopupProps } from '../../../redux/types/data';
 import DefaultButton from '../../DefaultButton';
+import DefaultInput from '../../DefaultInput';
 
 import styles from './SavePopup.module.scss';
 
@@ -43,8 +44,8 @@ const SavePopup: React.FC<SavePopupProps> = ({
 					<div className={cn('popup-content', styles.popup)}>
 						<h3 className={styles.popup_title}>{title}</h3>
 						<p className={styles.popup_desc}>{desc}</p>
-						<input
-							className={styles.popup_input}
+						<DefaultInput
+							placeholder='name'
 							type='text'
 							value={name}
 							onChange={(e) => setName(e.target.value)}
