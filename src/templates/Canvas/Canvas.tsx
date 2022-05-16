@@ -10,12 +10,7 @@ import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';
 
-import {
-	COLORS,
-	FORMATS,
-	hexToRGB,
-	INSTRUMENTS,
-} from '../../constants/data';
+import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
@@ -99,14 +94,14 @@ const Canvas: React.FC = () => {
 		setInstrument(INSTRUMENTS.PENCIL);
 		brushColor === '#fff'
 			? setBrushColor(COLORS[0])
-			: setBrushColor(hexToRGB(brushColor, 1));
+			: setBrushColor(brushColor.slice(0, -2));
 	};
 
 	const pencilBrush = () => {
 		setInstrument(INSTRUMENTS.PENCIL_BRUSH);
 		brushColor === '#fff'
-			? setBrushColor(hexToRGB(COLORS[0], 0.5))
-			: setBrushColor(hexToRGB(brushColor, 0.5));
+			? setBrushColor(COLORS[0].concat('7F'))
+			: setBrushColor(brushColor.concat('7F'));
 	};
 
 	const eraser = () => {
@@ -119,9 +114,14 @@ const Canvas: React.FC = () => {
 			setInstrument(INSTRUMENTS.PENCIL);
 		}
 		instrument === INSTRUMENTS.PENCIL_BRUSH
-			? setBrushColor(hexToRGB(color, 0.5))
+			? setBrushColor(color.concat('7F'))
 			: setBrushColor(color);
 	};
+
+	const currentFixColor =
+		instrument === INSTRUMENTS.PENCIL_BRUSH
+			? brushColor.slice(0, -2)
+			: brushColor;
 
 	return (
 		<>
@@ -144,8 +144,7 @@ const Canvas: React.FC = () => {
 										key={color}
 										className={cn(
 											styles.colors_item,
-											hexToRGB(brushColor, 1) === hexToRGB(color, 1) &&
-												styles.active_color
+											currentFixColor === color && styles.active_color
 										)}
 										onClick={() => setActiveColor(color)}
 									>
