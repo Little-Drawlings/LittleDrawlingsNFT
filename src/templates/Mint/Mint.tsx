@@ -38,13 +38,13 @@ const Mint: React.FC = () => {
 					/>
 				</div>
 				<div className={cn(styles.left_images, styles.fade_in, nightMode && styles.active)}>
-					<img className={styles.left_img} src={nightMode ? icons.LeftImageActive : icons.LeftImage} alt='Ground' />
+					<img className={styles.left_img} src={icons.AdamImg} alt='Adam' />
 				</div>
 				<div className={cn(styles.right_images, styles.fade_in, nightMode && styles.active)}>
 					<img
 						className={styles.right_img}
-						src={nightMode ? icons.RightImageActive : icons.RightImage}
-						alt='RightImage'
+						src={icons.GodImg}
+						alt='God'
 					/>
 				</div>
 			</div>

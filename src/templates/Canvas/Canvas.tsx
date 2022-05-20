@@ -22,9 +22,9 @@ const Canvas: React.FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [drawing, setDrawing] = useState();
-	const [brushColor, setBrushColor] = useState(COLORS[0]);
-	const [brushRadius, setBrushRadius] = useState(5);
-	const [format, setFormat] = useState(FORMATS.RECTANGLE);
+	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
+	const [brushRadius, setBrushRadius] = useState<number>(5);
+	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [saveData, setSaveData] = useState<SavePopupProps>({
 		title: '',
@@ -137,7 +137,7 @@ const Canvas: React.FC = () => {
 						<span className={styles.breadcrumbs_text}>All canvases</span>
 					</div>
 					<div className={styles.canvas_wrap}>
-						<ul className={styles.colors}>
+						<ul className={cn(styles.colors, squareFormat && styles.square_colors)}>
 							{COLORS.map((color) => {
 								return (
 									<li
@@ -156,7 +156,7 @@ const Canvas: React.FC = () => {
 								);
 							})}
 						</ul>
-						<CountDown className={styles.time_wrap} />
+						<CountDown className={cn(styles.time_wrap, squareFormat && styles.square_time_wrap)} />
 						<CanvasDraw
 							ref={(canvasDraw) => (modify = canvasDraw)}
 							disabled={pause || over}

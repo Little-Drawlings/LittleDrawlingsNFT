@@ -78,6 +78,9 @@
 	display: flex;
 	align-items: center;
 	z-index: 7;
+	&.square_time_wrap {
+		right: 8rem;
+	}
 }
 
 .colors {
@@ -92,6 +95,9 @@
 	top: 0;
 	left: 6rem;
 	z-index: 7;
+	&.square_colors {
+		left: 2rem;
+	}
 	.colors_item {
 		cursor: pointer;
 		box-sizing: border-box;
