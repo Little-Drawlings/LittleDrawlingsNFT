@@ -96,7 +96,8 @@
 	left: 6rem;
 	z-index: 7;
 	&.square_colors {
-		left: 2rem;
+		left: 0;
+		width: 4rem;
 	}
 	.colors_item {
 		cursor: pointer;
