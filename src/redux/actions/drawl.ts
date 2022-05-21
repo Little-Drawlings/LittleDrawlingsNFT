@@ -7,7 +7,9 @@ export const setDrawl = (drawl: IDrawl) => (dispatch: (arg0: { type: string; dat
         dispatch({
             type: types.GET_DRAWL,
             data: drawl
-        });
+        })
+    }).catch((error) => {
+        throw error;
     })
 }
 
@@ -17,6 +19,8 @@ export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: 
             type: types.GET_DRAWL,
             data: response.data
         });
+    }).catch((error) => {
+        throw error;
     })
 }
 
@@ -26,5 +30,7 @@ export const getAllDrawls = () => (dispatch: (arg0: { type: string; data: IDrawl
             type: types.GET_ALL_DRAWLS,
             data: response.data
         });
+    }).catch((error) => {
+        throw error;
     })
 }

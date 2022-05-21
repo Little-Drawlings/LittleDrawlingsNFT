@@ -22,6 +22,10 @@ const Mint: React.FC = () => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
 
+	const mintCanvas = () => {
+		navigate('/studio/canvas')
+	}
+
 	return (
 		<>
 			<Header />
@@ -34,7 +38,7 @@ const Mint: React.FC = () => {
 					<DefaultButton
 						className='no_wide_primary_large'
 						title='Mint Canvas'
-						onClick={() => navigate('/studio/canvas')}
+						onClick={mintCanvas}
 					/>
 				</div>
 				<div className={cn(styles.left_images, styles.fade_in, nightMode && styles.active)}>

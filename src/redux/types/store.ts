@@ -17,6 +17,10 @@ export interface DrawlAppState {
 	activeDrawl: IDrawl;
 }
 
+export interface AuthAppState {
+	
+}
+
 export interface IStore {
 	dispatch: Dispatch<AnyAction>;
 	getState: () => RootState;

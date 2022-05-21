@@ -10,7 +10,6 @@ import styles from './Header.module.scss';
 import { RootState } from '../../redux/reducers';
 import { setNightModeMint } from '../../redux/actions/mint';
 import { Link } from 'react-router-dom';
-
 interface Props {
 	background?: string;
 }
@@ -42,8 +41,6 @@ const Header: React.FC<Props> = ({ background }) => {
 	};
 
 	const canvasPath = window.location.pathname.includes('/studio/');
-
-	console.log(canvasPath, 'ku canvasPath');
 
 	return (
 		<div className={cn(styles.header)}>

@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import sessionStorage from 'redux-persist/lib/storage/session';
-import { DrawlAppState, MintAppState } from './../types/store';
+import { AuthAppState, DrawlAppState, MintAppState } from './../types/store';
 import mintReducer from './mint/reducer';
 import drawlReducer from './drawl/reducer';
+import authReducer from './auth/reducer';
 
 const rootPersistConfig = {
 	key: 'root',
@@ -12,12 +13,14 @@ const rootPersistConfig = {
 
 export interface RootState {
 	mintReducer: MintAppState;
-	drawlReducer: DrawlAppState
+	drawlReducer: DrawlAppState;
+	authReducer: AuthAppState
 }
 
 const rootReducer = combineReducers({
 	mintReducer,
-	drawlReducer
+	drawlReducer,
+	authReducer
 });
 
 export default persistReducer(rootPersistConfig, rootReducer);
