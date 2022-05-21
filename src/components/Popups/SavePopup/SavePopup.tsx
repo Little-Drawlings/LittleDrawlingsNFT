@@ -2,11 +2,13 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setDrawl } from '../../../redux/actions/drawl';
 import {
 	setOpenedDrawPopup,
 	setOpenSavePopup,
 } from '../../../redux/actions/mint';
 import { RootState } from '../../../redux/reducers';
+import { AppDispatch } from '../../../redux/store';
 
 import { SavePopupProps } from '../../../redux/types/data';
 import DefaultButton from '../../DefaultButton';
@@ -18,8 +20,9 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
 	desc = '',
 	drawlName = '',
+	drawl = ''
 }) => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 	const isOpenPopup = useSelector(
 		(state: RootState) => state?.mintReducer.openSavePopup
@@ -32,6 +35,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	}, [isOpenPopup]);
 
 	const mint = () => {
+		dispatch(setDrawl({id: drawlName, image: drawl}))
 		dispatch(setOpenedDrawPopup(false));
 		dispatch(setOpenSavePopup(false));
 		navigate('/');

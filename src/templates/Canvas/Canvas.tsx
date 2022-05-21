@@ -21,12 +21,13 @@ import styles from './Canvas.module.scss';
 const Canvas: React.FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [drawing, setDrawing] = useState();
+	const [drawing, setDrawing] = useState<string>('');
 	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
 	const [brushRadius, setBrushRadius] = useState<number>(5);
 	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [saveData, setSaveData] = useState<SavePopupProps>({
+		drawl: '',
 		title: '',
 		desc: '',
 		drawlName: '',
@@ -49,7 +50,7 @@ const Canvas: React.FC = () => {
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
 	);
-	let modify: any = null;
+	let modify: CanvasDraw | null;
 
 	useEffect(() => {
 		setNightMode(nightModeMint);
@@ -65,6 +66,7 @@ const Canvas: React.FC = () => {
 				title: 'Time is up!',
 				desc: 'Save your canvas or mint as...',
 				drawlName: 'Drawl #1020',
+				drawl: drawing
 			});
 			dispatch(setOpenSavePopup(true));
 		}
@@ -84,6 +86,7 @@ const Canvas: React.FC = () => {
 			title: 'Mint canvas as...',
 			desc: 'Let’s give your canvas a unique name or mint it with default.',
 			drawlName: 'Drawl #1020',
+			drawl: drawing
 		});
 		dispatch(setOpenSavePopup(true));
 	};

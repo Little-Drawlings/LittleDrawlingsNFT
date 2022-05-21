@@ -10,3 +10,8 @@ export interface ITimeConfig {
 	minutes: number;
 	seconds: number;
 }
+
+export interface IDrawl {
+    id?: string;
+    image: string;
+}

@@ -1,7 +1,7 @@
 import { AnyAction, Dispatch } from 'redux';
 
 import { RootState } from '../reducers';
-import { ITimeConfig } from './reducers';
+import { IDrawl, ITimeConfig } from './reducers';
 export interface MintAppState {
 	time: ITimeConfig;
 	mintFormat: string;
@@ -10,6 +10,11 @@ export interface MintAppState {
 	openedDrawPopup: boolean;
 	openSavePopup: boolean;
 	nightMode: boolean;
+}
+
+export interface DrawlAppState {
+	drawls: IDrawl[];
+	activeDrawl: IDrawl;
 }
 
 export interface IStore {

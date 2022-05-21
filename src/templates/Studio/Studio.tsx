@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -10,14 +10,21 @@ import DefaultButton from '../../components/DefaultButton';
 import { RootState } from '../../redux/reducers';
 
 import styles from './Studio.module.scss';
+import { getAllDrawls } from '../../redux/actions/drawl';
+import { AppDispatch } from '../../redux/store';
 
 const Studio: React.FC = () => {
+	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 	const [nightMode, setNightMode] = useState<boolean>(false);
 
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
 	);
+
+	useEffect(() => {
+		dispatch(getAllDrawls())
+	}, [dispatch])
 
 	useEffect(() => {
 		setNightMode(nightModeMint);

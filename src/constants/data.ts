@@ -1,3 +1,5 @@
+export const BASE_URL = 'http://localhost:3000/';
+
 export const FORMATS = {
 	RECTANGLE: '16:9',
 	SQUARE: '1:1',
