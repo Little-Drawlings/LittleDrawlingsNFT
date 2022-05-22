@@ -1,6 +1,8 @@
 import { IAction } from '../../types/actions';
+import types from './types';
 
 const initialState = {
+	metaMaskData: null
 };
 
 const authReducer = (
@@ -8,6 +10,11 @@ const authReducer = (
 	action: IAction<string | boolean>
 ) => {
 	switch (action.type) {
+		case types.SIGN_IN_METAMASK:
+			return {
+				...state,
+				metaMaskData: action?.data,
+			};
 		default:
 			return state;
 	}

@@ -13,20 +13,22 @@ import { AppDispatch } from '../../redux/store';
 
 import styles from './Header.module.scss';
 import { signInMetamask } from '../../redux/actions/auth';
-interface Props {
-	background?: string;
-}
 
-const Header: React.FC<Props> = ({ background }) => {
+const Header: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const [connected, setConnected] = useState<boolean>(false);
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [animateImage, setAnimateImage] = useState<boolean>(false);
 
 	const connect = () => {
 		dispatch(signInMetamask())
-		setConnected(!connected);
 	};
+
+	const metaMaskData = useSelector(
+		(state: RootState) => state?.authReducer.metaMaskData
+	);
+	const address = metaMaskData?.user?.publicAddress;
+
+
 
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
@@ -84,12 +86,12 @@ const Header: React.FC<Props> = ({ background }) => {
 					alt='sun-moon'
 					onClick={animate}
 				/>
-				{connected ? (
+				{metaMaskData?.user ? (
 					<div className={styles.connect}>
 						<span className={styles.connect_value}>7.00698 ETH</span>
 						<div className={styles.connect_eth}>
 							{' '}
-							<span className={styles.connect_circle}></span> OxE786...C41c ETH
+							<span className={styles.connect_circle}></span> {`${address.substring(0, 5)}...${address.slice(-4)} ETH`}
 						</div>
 					</div>
 				) : (

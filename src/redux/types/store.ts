@@ -17,9 +17,37 @@ export interface DrawlAppState {
 	activeDrawl: IDrawl;
 }
 
-export interface AuthAppState {
-	test: string
+export interface MetaMaskUser {
+	avatar: string
+	createdAt: string
+	description: string
+	discord: string
+	email: string
+	facebook: string
+	instagram: string
+	medium: string
+	name: string
+	nonce: number
+	password: string
+	publicAddress: string
+	telegram: string
+	token: string
+	twitter: string
+	updatedAt: string
+	__v: number
+	_id: string
 }
+
+export interface MetaMaskData {
+	token: string
+	user: MetaMaskUser
+}
+export interface AuthAppState {
+	metaMaskData: MetaMaskData
+
+}
+
+
 
 export interface IStore {
 	dispatch: Dispatch<AnyAction>;

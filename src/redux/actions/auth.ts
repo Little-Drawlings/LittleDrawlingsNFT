@@ -1,6 +1,8 @@
 import { ethers } from "ethers";
 
 import API, { setToken } from '../../api';
+import types from "../reducers/auth/types";
+import { MetaMaskData } from "../types/store";
 
 const getNonce = async (account: string) => {
     return API.get(`user/nonce/${account}`).then((res) => {
@@ -16,7 +18,7 @@ export const signOut = () => {
     })
 }
 
-export const signInMetamask = async () => {
+export const signInMetamask = () => async (dispatch: (arg0: { type: string; data: MetaMaskData }) => void) => {
         const w: any = window;
         const provider = new ethers.providers.Web3Provider(w.ethereum);
         await provider.send("eth_requestAccounts", []);
@@ -25,17 +27,27 @@ export const signInMetamask = async () => {
         const account = coinbase.toLowerCase();
         const nonce = await getNonce(account);
         const signature = await signer.signMessage(`I am signing my one-time nonce: ${nonce}`)
+        const { chainId } = await provider.getNetwork()
+
+        const balance = await provider.getBalance(account);
+
+        console.log(balance);
+        
 
         if (!signature) {
             signOut();
             return null;
         }
-        const data = { account, signature, provider };
+        const data = { account, signature, chainId};
 
         return API.post('/auth/login-metamask', data)
             .then(async (response) => {
                 if (response?.status) {
-                    setToken(response.data.token)
+                    setToken(response.data?.data.token);
+                    dispatch({
+                        type: types.SIGN_IN_METAMASK,
+                        data: response.data?.data
+                    })
                 }
             })
             .catch((error) => {
