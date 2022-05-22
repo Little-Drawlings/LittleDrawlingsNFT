@@ -21,4 +21,8 @@ Api.interceptors.response.use(
     }
 );
 
+export const setToken = (token: string) => {
+    localStorage.setItem('@storage_Key', token);
+};
+
 export default Api;

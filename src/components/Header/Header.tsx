@@ -6,21 +6,25 @@ import icons from '../../constants/icons';
 import DefaultButton from '../DefaultButton';
 import HeaderLink from '../HeaderLink';
 
-import styles from './Header.module.scss';
 import { RootState } from '../../redux/reducers';
 import { setNightModeMint } from '../../redux/actions/mint';
 import { Link } from 'react-router-dom';
+import { AppDispatch } from '../../redux/store';
+
+import styles from './Header.module.scss';
+import { signInMetamask } from '../../redux/actions/auth';
 interface Props {
 	background?: string;
 }
 
 const Header: React.FC<Props> = ({ background }) => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const [connected, setConnected] = useState<boolean>(false);
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [animateImage, setAnimateImage] = useState<boolean>(false);
 
 	const connect = () => {
+		dispatch(signInMetamask())
 		setConnected(!connected);
 	};
 

@@ -18,7 +18,7 @@ export interface DrawlAppState {
 }
 
 export interface AuthAppState {
-	
+	test: string
 }
 
 export interface IStore {
