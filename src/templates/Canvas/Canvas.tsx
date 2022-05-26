@@ -11,7 +11,7 @@ import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';
 
 import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
-import { SavePopupProps } from '../../redux/types/data';
+import { SavePopupProps, Time } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 import { setOpenSavePopup } from '../../redux/actions/mint';
@@ -26,14 +26,25 @@ const Canvas: React.FC = () => {
 	const [brushRadius, setBrushRadius] = useState<number>(5);
 	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
 	const [nightMode, setNightMode] = useState<boolean>(false);
-	const [saveData, setSaveData] = useState<SavePopupProps>({
-		drawl: '',
-		title: '',
-		desc: '',
-		drawlName: '',
+	const [saveData, setSaveData] = useState<SavePopupProps | null>(null);
+	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL);
+	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
+
+	const [time, setTime] = useState<Time>({
+		hours: 0,
+		minutes: 0,
+		seconds: 0,
 	});
 
-	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL);
+	useEffect(() => {
+		if (mintTime) {
+			setTime({
+				hours: mintTime?.hours,
+				minutes: mintTime?.minutes,
+				seconds: mintTime?.seconds,
+			});
+		}
+	}, [mintTime]);
 
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 
@@ -50,6 +61,7 @@ const Canvas: React.FC = () => {
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
 	);
+
 	let modify: CanvasDraw | null;
 
 	useEffect(() => {
@@ -66,7 +78,9 @@ const Canvas: React.FC = () => {
 				title: 'Time is up!',
 				desc: 'Save your canvas or mint as...',
 				drawlName: 'Drawl #1020',
-				drawl: drawing
+				drawl: drawing,
+				format: format,
+				time: time
 			});
 			dispatch(setOpenSavePopup(true));
 		}
@@ -86,7 +100,9 @@ const Canvas: React.FC = () => {
 			title: 'Mint canvas as...',
 			desc: 'Let’s give your canvas a unique name or mint it with default.',
 			drawlName: 'Drawl #1020',
-			drawl: drawing
+			drawl: drawing,
+			format: format,
+			time: time
 		});
 		dispatch(setOpenSavePopup(true));
 	};
@@ -129,7 +145,7 @@ const Canvas: React.FC = () => {
 	return (
 		<>
 			<Header />
-			{openedDrawPopup ? <SavePopup {...saveData} /> : <DrawPopup />}
+			{openedDrawPopup && saveData ? <SavePopup {...saveData} /> : <DrawPopup />}
 			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.wrapper}>
 					<div
@@ -170,19 +186,19 @@ const Canvas: React.FC = () => {
 							style={
 								squareFormat
 									? {
-											width: '100%',
-											minWidth: '50vw',
-											height: 'auto',
-											maxHeight: '100vh',
-											aspectRatio: '1/1',
-									  }
+										width: '100%',
+										minWidth: '50vw',
+										height: 'auto',
+										maxHeight: '100vh',
+										aspectRatio: '1/1',
+									}
 									: {
-											width: '100%',
-											minWidth: '70vw',
-											height: 'auto',
-											maxHeight: '100vh',
-											aspectRatio: '16/9',
-									  }
+										width: '100%',
+										minWidth: '70vw',
+										height: 'auto',
+										maxHeight: '100vh',
+										aspectRatio: '16/9',
+									}
 							}
 							hideGrid={true}
 							brushColor={brushColor}
@@ -198,7 +214,7 @@ const Canvas: React.FC = () => {
 										className={cn(
 											styles.settings_list_item,
 											instrument === INSTRUMENTS.PENCIL &&
-												styles.settings_list_item_active
+											styles.settings_list_item_active
 										)}
 										onClick={pencil}
 									>
@@ -223,7 +239,7 @@ const Canvas: React.FC = () => {
 										className={cn(
 											styles.settings_list_item,
 											instrument === INSTRUMENTS.PENCIL_BRUSH &&
-												styles.settings_list_item_active
+											styles.settings_list_item_active
 										)}
 										onClick={pencilBrush}
 									>
@@ -237,7 +253,7 @@ const Canvas: React.FC = () => {
 										className={cn(
 											styles.settings_list_item,
 											instrument === INSTRUMENTS.ERASER &&
-												styles.settings_list_item_active
+											styles.settings_list_item_active
 										)}
 										onClick={eraser}
 									>

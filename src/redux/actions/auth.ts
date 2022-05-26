@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
-import API, { setToken } from '../../api';
+import API, { deleteToken, setToken } from '../../api';
 import types from "../reducers/auth/types";
 import { MetaMaskData } from "../types/store";
 
@@ -12,7 +12,7 @@ const getNonce = async (account: string) => {
 
 export const signOut = () => {
     return API.post("auth/logout").then(() => {
-        setToken('')
+        deleteToken()
     }).catch((error) => {
         throw error;
     })
@@ -28,11 +28,6 @@ export const signInMetamask = () => async (dispatch: (arg0: { type: string; data
         const nonce = await getNonce(account);
         const signature = await signer.signMessage(`I am signing my one-time nonce: ${nonce}`)
         const { chainId } = await provider.getNetwork()
-
-        const balance = await provider.getBalance(account);
-
-        console.log(balance);
-        
 
         if (!signature) {
             signOut();

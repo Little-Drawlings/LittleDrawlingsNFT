@@ -20,7 +20,9 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
 	desc = '',
 	drawlName = '',
-	drawl = ''
+	drawl = '',
+	format,
+	time
 }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
@@ -35,7 +37,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	}, [isOpenPopup]);
 
 	const mint = () => {
-		dispatch(setDrawl({id: drawlName, image: drawl}))
+		dispatch(setDrawl({id: drawlName, image: drawl, format, time}))
 		dispatch(setOpenedDrawPopup(false));
 		dispatch(setOpenSavePopup(false));
 		navigate('/');

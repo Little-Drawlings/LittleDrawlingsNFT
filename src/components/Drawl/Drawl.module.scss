@@ -36,3 +36,11 @@
 	font-size: 1.25rem;
 	color: $white;
 }
+.time {
+	span {
+		margin-right: 5px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

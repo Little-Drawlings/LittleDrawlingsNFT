@@ -11,15 +11,10 @@ import icons from '../../constants/icons';
 import { RootState } from '../../redux/reducers';
 
 import styles from './CountDown.module.scss';
+import { Time } from '../../redux/types/data';
 
 interface Props {
 	className?: string;
-}
-
-interface Time {
-	hours: number;
-	minutes: number;
-	seconds: number;
 }
 
 const CountDown: React.FC<Props> = ({ className }) => {

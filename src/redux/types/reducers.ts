@@ -14,4 +14,10 @@ export interface ITimeConfig {
 export interface IDrawl {
     id?: string;
     image: string;
+    time: {
+		hours: number;
+		minutes: number;
+		seconds: number;
+	}
+	format: string;
 }
