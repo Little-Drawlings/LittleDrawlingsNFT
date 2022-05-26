@@ -5,19 +5,9 @@ export interface IPersistConfig {
     blacklist: string[];
 }
 
-export interface ITimeConfig {
-	hours: number;
-	minutes: number;
-	seconds: number;
-}
-
 export interface IDrawl {
-    id?: string;
+    name: string;
     image: string;
-    time: {
-		hours: number;
-		minutes: number;
-		seconds: number;
-	}
+    time: number;
 	format: string;
 }

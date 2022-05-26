@@ -1,5 +1,4 @@
 import types from '../reducers/mint/types';
-import { ITimeConfig } from '../types/reducers';
 
 export const setPauseMint = (pause: boolean) => ({
 	type: types.SET_MINT_PAUSE,
@@ -11,7 +10,7 @@ export const setOverMint = (over: boolean) => ({
 	data: over,
 });
 
-export const setTimeMint = (time: ITimeConfig) => ({
+export const setTimeMint = (time: number) => ({
 	type: types.SET_TIME,
 	data: time,
 });

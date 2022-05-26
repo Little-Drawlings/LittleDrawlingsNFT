@@ -54,16 +54,16 @@ const Studio: React.FC = () => {
 					/>
 				</div>
 				<div className={styles.nft_list}>
-					{drawls.map((drawl, key) =>
+					{drawls?.length ? drawls.map((drawl, key) =>
 						<Drawl
 							key={key}
 							image={drawl.image}
-							title={drawl.id || ''}
+							title={drawl.name || ''}
 							size={drawl.format}
 							edited={'3 days ago'}
 							time={drawl.time}
 						/>
-					)}
+					) : null}
 
 				</div>
 			</div>

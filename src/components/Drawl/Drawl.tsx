@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { Time } from '../../redux/types/data';
 import DefaultButton from '../DefaultButton';
 import styles from './Drawl.module.scss';
 
@@ -8,11 +7,14 @@ interface Props {
 	title: string;
 	size: string;
 	edited: string;
-	time: Time;
+	time: number;
 }
 
 const Drawl: React.FC<Props> = ({ image, title, size, edited, time }) => {
 	const navigate = useNavigate();
+	const hours = Math.floor(time / 3600);
+	const minutes = Math.floor(time % 3600 / 60);
+    const seconds = Math.floor(time % 3600 % 60);
 	return (
 		<div className={styles.drawl}>
 			{image ? (
@@ -28,9 +30,9 @@ const Drawl: React.FC<Props> = ({ image, title, size, edited, time }) => {
 				<div className={styles.info_row}>
 					<span className={styles.info_row_value}>Edited {edited}</span>
 					<div className={styles.time}>
-						{time.hours !== 0 && <span className={styles.info_row_value}>{time.hours} h</span>}
-						<span className={styles.info_row_value}>{time.minutes ? time.minutes : 0} min</span>
-						{time.seconds !== 0 && <span className={styles.info_row_value}>{time.seconds} sec</span>}
+						{hours !== 0 && <span className={styles.info_row_value}>{hours} h</span>}
+						<span className={styles.info_row_value}>{minutes ? minutes : 0} min</span>
+						{seconds !== 0 && <span className={styles.info_row_value}>{seconds} sec</span>}
 					</div>
 				</div>
 			</div>

@@ -34,11 +34,7 @@ const DrawPopup: React.FC = () => {
 		dispatch(setOverMint(false));
 		dispatch(setOpenedDrawPopup(true));
 		dispatch(
-			setTimeMint({
-				hours: 0,
-				minutes: 20,
-				seconds: 0,
-			})
+			setTimeMint(1200)
 		);
 	};
 

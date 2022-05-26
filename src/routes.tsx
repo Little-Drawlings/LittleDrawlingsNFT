@@ -4,10 +4,9 @@ import { Navigate } from 'react-router-dom';
 import Mint from './templates/Mint';
 import Studio from './templates/Studio';
 import Canvas from './templates/Canvas';
+import { useEffect, useState } from 'react';
 
 const ProtectedRoute = ({ token, children }: { token: string | null, children: JSX.Element }) => {
-	console.log(token, 'ku token');
-
 	if (!token) {
 		return <Navigate to="/" replace />;
 	}
@@ -15,7 +14,12 @@ const ProtectedRoute = ({ token, children }: { token: string | null, children: J
 };
 
 export const DefaultRoutes = () => {
-	const token = localStorage.getItem('@storage_Key');
+	const [token, setToken] = useState<string | null>(null)
+	const storageToken = localStorage.getItem('@storage_Key');
+
+	useEffect(() => {
+		setToken(storageToken)
+	}, [storageToken])
 
 	return (
 		<Routes>

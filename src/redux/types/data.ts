@@ -3,13 +3,7 @@ export interface SavePopupProps {
 	desc?: string;
 	drawlName?: string;
 	drawl: string;
-	time: Time;
+	time: number;
 	format: string;
 
-}
-
-export interface Time {
-	hours: number;
-	minutes: number;
-	seconds: number;
 }

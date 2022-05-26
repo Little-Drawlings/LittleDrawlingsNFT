@@ -11,7 +11,6 @@ import icons from '../../constants/icons';
 import { RootState } from '../../redux/reducers';
 
 import styles from './CountDown.module.scss';
-import { Time } from '../../redux/types/data';
 
 interface Props {
 	className?: string;
@@ -23,11 +22,7 @@ const CountDown: React.FC<Props> = ({ className }) => {
 	const [over, setOver] = React.useState(true);
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 
-	const [time, setTime] = useState<Time>({
-		hours: mintTime?.hours,
-		minutes: mintTime?.minutes,
-		seconds: mintTime?.seconds,
-	});
+	const [time, setTime] = useState<number>(mintTime);
 
 	const mintPause = useSelector(
 		(state: RootState) => state?.mintReducer.mintPause
@@ -43,23 +38,15 @@ const CountDown: React.FC<Props> = ({ className }) => {
 
 	useEffect(() => {
 		if (mintTime) {
-			setTime({
-				hours: mintTime?.hours,
-				minutes: mintTime?.minutes,
-				seconds: mintTime?.seconds,
-			});
+			setTime(mintTime);
 		}
 	}, [mintTime]);
 
 	useEffect(() => {
 		dispatch(
-			setTimeMint({
-				hours: time.hours,
-				minutes: time.minutes,
-				seconds: time.seconds,
-			})
+			setTimeMint(mintTime)
 		);
-	}, [paused, over, time.hours, time.minutes, time.seconds, dispatch]);
+	}, [paused, over, time, dispatch, mintTime]);
 
 	useEffect(() => {
 		setPaused(mintPause);
@@ -74,30 +61,13 @@ const CountDown: React.FC<Props> = ({ className }) => {
 	const tick = () => {
 		if (paused || over) return;
 		if (
-			time.hours === 0 &&
-			time.minutes === 0 &&
-			time.seconds === 0 &&
+			time == 0 &&
 			openedDrawPopup
 		) {
 			dispatch(setOverMint(true));
-		} else if (time.minutes === 0 && time.seconds === 0)
-			setTime({
-				hours: time.hours - 1,
-				minutes: 59,
-				seconds: 59,
-			});
-		else if (time.seconds === 0)
-			setTime({
-				hours: time.hours,
-				minutes: time.minutes - 1,
-				seconds: 59,
-			});
+		}
 		else
-			setTime({
-				hours: time.hours,
-				minutes: time.minutes,
-				seconds: time.seconds - 1,
-			});
+			setTime(time - 1);
 	};
 
 	const goesTime = () => {
@@ -108,16 +78,20 @@ const CountDown: React.FC<Props> = ({ className }) => {
 		}
 	};
 
+	const hours = Math.floor(time / 3600);
+	const minutes = Math.floor(time % 3600 / 60);
+    const seconds = Math.floor(time % 3600 % 60);
+
 	return (
 		<div className={cn(className)}>
 			{over ? (
 				<div className={styles.time_over}>{'00:00:00'}</div>
 			) : (
-				<div className={styles.time_value}>{`${time.hours
+				<div className={styles.time_value}>{`${hours
 					.toString()
-					.padStart(2, '0')}:${time.minutes
+					.padStart(2, '0')}:${minutes
 					.toString()
-					.padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`}</div>
+					.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</div>
 			)}
 			<img
 				className={styles.time_btn}

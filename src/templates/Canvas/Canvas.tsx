@@ -11,7 +11,7 @@ import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';
 
 import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
-import { SavePopupProps, Time } from '../../redux/types/data';
+import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 import { setOpenSavePopup } from '../../redux/actions/mint';
@@ -30,19 +30,11 @@ const Canvas: React.FC = () => {
 	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL);
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 
-	const [time, setTime] = useState<Time>({
-		hours: 0,
-		minutes: 0,
-		seconds: 0,
-	});
+	const [time, setTime] = useState<number>(0);
 
 	useEffect(() => {
 		if (mintTime) {
-			setTime({
-				hours: mintTime?.hours,
-				minutes: mintTime?.minutes,
-				seconds: mintTime?.seconds,
-			});
+			setTime(mintTime);
 		}
 	}, [mintTime]);
 

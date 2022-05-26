@@ -1,9 +1,9 @@
 import { AnyAction, Dispatch } from 'redux';
 
 import { RootState } from '../reducers';
-import { IDrawl, ITimeConfig } from './reducers';
+import { IDrawl } from './reducers';
 export interface MintAppState {
-	time: ITimeConfig;
+	time: number;
 	mintFormat: string;
 	mintPause: boolean;
 	mintOver: boolean;
