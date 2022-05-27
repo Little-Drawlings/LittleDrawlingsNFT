@@ -5,15 +5,6 @@ import reducers from '../reducers';
 
 let middleware = [thunkMiddleware.default];
 
-const dev = true;
-
-if (dev) {
-    const logger = require('redux-logger');
-    const loggerMiddleware = logger.createLogger({
-        duration: true
-    });
-    middleware = [...middleware, loggerMiddleware];
-}
 const store: any = createStore(reducers, applyMiddleware(...middleware));
 
 const persister = persistStore(store);

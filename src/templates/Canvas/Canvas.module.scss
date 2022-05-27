@@ -17,6 +17,7 @@
 	margin: 2rem 0;
 	z-index: 3;
 }
+
 .breadcrumbs_text {
 	padding-left: 1rem;
 	font-family: 'Gloria Hallelujah';
@@ -24,6 +25,7 @@
 	font-size: 1.25rem;
 	color: $activeLinkColor;
 }
+
 .canvas_wrap {
 	width: max-content;
 	display: flex;
@@ -36,32 +38,42 @@
 	position: relative;
 	z-index: 3;
 }
+
 .settings_wrap {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
+
 .settings {
 	width: calc(100% - 180px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 1rem;
+
 	span {
 		padding-right: 1rem;
 	}
+
 	div {
 		display: flex;
 		align-items: center;
 		margin: 0 1rem;
 	}
 }
+
 .canvas {
 	background-color: $white;
 	background: url('../../assets/svg/border.svg') center/100% no-repeat !important;
+
 	&.square_canvas {
 		background: url('../../assets/svg/square-border.svg') center/100% no-repeat !important;
+	}
+
+	* {
+		touch-action: pan-y
 	}
 }
 
@@ -78,6 +90,7 @@
 	display: flex;
 	align-items: center;
 	z-index: 7;
+
 	&.square_time_wrap {
 		right: 8rem;
 	}
@@ -95,10 +108,12 @@
 	top: 0;
 	left: 6rem;
 	z-index: 7;
+
 	&.square_colors {
 		left: 0;
 		width: 4rem;
 	}
+
 	.colors_item {
 		cursor: pointer;
 		box-sizing: border-box;
@@ -108,30 +123,38 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
 		.colors_item_value {
 			display: inline-block;
 			width: 40px;
 			height: 40px;
 			border-radius: 50% 20% 30% 40%;
+
 			&:nth-child(2n) {
 				border-radius: 50% 40% 20% 50%;
 			}
+
 			&:nth-child(3n) {
 				border-radius: 40% 50% 20% 20%;
 			}
+
 			&:nth-child(4n) {
 				border-radius: 42% 20% 50% 50%;
 			}
+
 			&:nth-child(5n) {
 				border-radius: 50% 50% 30% 40%;
 			}
+
 			&:nth-child(6n) {
 				border-radius: 20% 50% 30% 50%;
 			}
+
 			&:nth-child(7n) {
 				border-radius: 60% 20% 30% 30%;
 			}
 		}
+
 		&.active_color {
 			box-shadow: 0px 4px 15px rgba(145, 169, 255, 0.25);
 			border-radius: 10px;
@@ -147,6 +170,7 @@
 	align-items: center;
 	margin: 0;
 	margin-left: 163px;
+
 	.settings_list_item {
 		font-family: 'Gloria Hallelujah';
 		font-weight: 400;
@@ -162,18 +186,22 @@
 		cursor: pointer;
 		padding: 0.2rem;
 		position: relative;
+
 		&.settings_list_item_active {
 			background-color: rgba(255, 255, 0, 0.5);
 		}
+
 		&:active {
 			top: 2px;
 		}
+
 		&:nth-child(2) {
 			&:active {
 				top: 0;
 			}
 		}
 	}
+
 	.settings_image {
 		max-width: 100%;
 	}

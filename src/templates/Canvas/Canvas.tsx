@@ -87,7 +87,6 @@ const Canvas: React.FC = () => {
 	};
 
 	const mintImage = () => {
-		console.log(drawing);
 		setSaveData({
 			title: 'Mint canvas as...',
 			desc: 'Let’s give your canvas a unique name or mint it with default.',

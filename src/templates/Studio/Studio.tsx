@@ -38,6 +38,9 @@ const Studio: React.FC = () => {
 	useEffect(() => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
+
+	console.log(drawls);
+	
 	return (
 		<>
 			<Header />
@@ -60,7 +63,7 @@ const Studio: React.FC = () => {
 							image={drawl.image}
 							title={drawl.name || ''}
 							size={drawl.format}
-							edited={'3 days ago'}
+							edited={drawl.updatedAt || ''}
 							time={drawl.time}
 						/>
 					) : null}

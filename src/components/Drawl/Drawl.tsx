@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+
 import DefaultButton from '../DefaultButton';
 import styles from './Drawl.module.scss';
 
@@ -28,7 +30,7 @@ const Drawl: React.FC<Props> = ({ image, title, size, edited, time }) => {
 					<span className={styles.info_row_value}>{size}</span>
 				</div>
 				<div className={styles.info_row}>
-					<span className={styles.info_row_value}>Edited {edited}</span>
+					<span className={styles.info_row_value}>Edited {dayjs(edited).format('MM-DD HH:mm')}</span>
 					<div className={styles.time}>
 						{hours !== 0 && <span className={styles.info_row_value}>{hours} h</span>}
 						<span className={styles.info_row_value}>{minutes ? minutes : 0} min</span>
