@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { BASE_URL } from '../constants/data';
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Api = axios.create({
     baseURL: BASE_URL,
@@ -13,7 +14,7 @@ Api.defaults.headers.common['Content-Type'] = `application/json`;
 Api.defaults.headers.common['Accept'] = `application/json`;
 
 const storageToken = localStorage.getItem('@storage_Key');
-if(storageToken) {
+if (storageToken) {
     Api.defaults.headers.common['Authorization'] = `Bearer ${storageToken}`;
 }
 

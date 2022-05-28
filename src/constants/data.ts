@@ -1,5 +1,3 @@
-export const BASE_URL = 'http://localhost:3000/';
-
 export const FORMATS = {
 	RECTANGLE: '16:9',
 	SQUARE: '1:1',
@@ -23,3 +21,11 @@ export const INSTRUMENTS = {
 	FILLING: 'FILLING',
 	ERASER: 'ERASER',
 };
+
+export const DRAWLS_SORT_VALUES = [{
+	label: "Newest first",
+	value: "new"
+}, {
+	label: "Oldest first",
+	value: "old"
+}]

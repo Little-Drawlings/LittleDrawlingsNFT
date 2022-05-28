@@ -10,9 +10,9 @@ async function main() {
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    const contractAddress = '0xfe620436c5069f9a55b4ef7ddb859a3241b7c7e9';
+    const contractAddress = '0xfe620436c5069F9a55B4ef7DDB859A3241B7c7E9';
     const contract = new ethers.Contract(contractAddress, abi, signer);
-    const result = await contract.awardItem(address, 'json', { gasLimit: 21000 });
+    const result = await contract.awardItem(address, 'json', { gasLimit: 210000 });
     console.log("NFT award:", result);
 }
 

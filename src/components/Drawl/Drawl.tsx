@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import cn from 'classnames';
 
 import DefaultButton from '../DefaultButton';
 import styles from './Drawl.module.scss';
@@ -18,7 +19,7 @@ const Drawl: React.FC<Props> = ({ image, title, size, edited, time }) => {
 	const minutes = Math.floor(time % 3600 / 60);
     const seconds = Math.floor(time % 3600 % 60);
 	return (
-		<div className={styles.drawl}>
+		<div className={cn(styles.drawl)}>
 			{image ? (
 				<img className={styles.drawl_image} src={image} alt='drawl' />
 			) : (

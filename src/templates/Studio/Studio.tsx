@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Option } from 'react-dropdown';
 import cn from 'classnames';
 
 import Header from '../../components/Header';
@@ -13,12 +14,15 @@ import { AppDispatch } from '../../redux/store';
 import { IDrawl } from '../../redux/types/reducers';
 
 import styles from './Studio.module.scss';
+import { DRAWLS_SORT_VALUES } from '../../constants/data';
+
 
 const Studio: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [drawls, setDrawls] = useState<IDrawl[]>([])
+	const [dropdown, setDropdown] = useState<string>('')
 
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
@@ -39,16 +43,25 @@ const Studio: React.FC = () => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
 
-	console.log(drawls);
-	
+	const sortDrawls = (option: Option) => {
+		setDropdown(option.value);
+		drawls.sort((a, b) => {
+			const d1 = new Date(a.updatedAt || '').getTime()
+			const d2 = new Date(b.updatedAt || '').getTime()
+			return option.value === 'old' ? d1 - d2 : d2 - d1
+		});
+	}
+
 	return (
 		<>
 			<Header />
 			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.filters_wrap}>
 					<DefaultDropdown
-						options={['Newest first', 'Oldest first']}
+						options={DRAWLS_SORT_VALUES}
 						placeholder='Sort by'
+						onChange={(e) => sortDrawls(e)}
+
 					/>
 					<DefaultButton
 						className='wide_primary_small'
