@@ -10,10 +10,13 @@ async function main() {
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    const contractAddress = '0xfe620436c5069F9a55B4ef7DDB859A3241B7c7E9';
+    const contractAddress = '0xB1936cfEf47AbEe1c11B1791B19E112421Df932a';
     const contract = new ethers.Contract(contractAddress, abi, signer);
-    const result = await contract.awardItem(address, 'json', { gasLimit: 210000 });
+    console.log(address, 'ku address');
+    
+    const result = await contract.ownerOf(1, { gasLimit: 210000 });
     console.log("NFT award:", result);
+
 }
 
 export const setDrawl = (drawl: IDrawl) => async (dispatch: (arg0: { type: string; data: IDrawl }) => void) => {

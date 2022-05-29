@@ -8,6 +8,7 @@ import './styles/styles.scss';
 
 
 function App() {
+
 	return (
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persister}>
