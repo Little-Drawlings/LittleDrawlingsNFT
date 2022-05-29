@@ -10,6 +10,7 @@ export interface MintAppState {
 	openedDrawPopup: boolean;
 	openSavePopup: boolean;
 	nightMode: boolean;
+	balance: string;
 }
 
 export interface DrawlAppState {

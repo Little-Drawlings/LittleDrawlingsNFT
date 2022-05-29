@@ -31,8 +31,12 @@ const Canvas: React.FC = () => {
 	const [saveData, setSaveData] = useState<SavePopupProps | null>(null);
 	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL);
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
-
+	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [time, setTime] = useState<number>(0);
+	const openedDrawPopup = useSelector(
+		(state: RootState) => state?.mintReducer.openedDrawPopup
+	);
+	const [drawPopup, setDrawPopup] = useState<boolean>(openedDrawPopup);
 
 	let ipfs: IPFSHTTPClient | undefined;
 	try {
@@ -50,13 +54,18 @@ const Canvas: React.FC = () => {
 		}
 	}, [mintTime]);
 
+	useEffect(() => {
+		if (activeDrawl) {
+			setDrawPopup(true)
+			setDrawing(activeDrawl?.image)
+			setTime(activeDrawl.time)
+		}
+
+	}, [activeDrawl])
+
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 
 	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
-
-	const openedDrawPopup = useSelector(
-		(state: RootState) => state?.mintReducer.openedDrawPopup
-	);
 
 	const activeFormat = useSelector(
 		(state: RootState) => state?.mintReducer.mintFormat
@@ -88,10 +97,10 @@ const Canvas: React.FC = () => {
 			});
 			dispatch(setOpenSavePopup(true));
 		}
-		if (!openedDrawPopup) {
+		if (!drawPopup) {
 			dispatch(setOpenSavePopup(false));
 		}
-	}, [dispatch, over, openedDrawPopup]);
+	}, [dispatch, over, drawPopup, drawing, format, time]);
 
 	const changeCanvasImage = (canvas: CanvasDraw | any) => {
 		const base64Image = canvas?.canvasContainer.childNodes[1].toDataURL();
@@ -112,8 +121,6 @@ const Canvas: React.FC = () => {
 		console.log(imgFile);
 		const result = await (ipfs as IPFSHTTPClient).add(imgFile);
 		console.log(result);
-		
-		return result;
 
 	};
 
@@ -158,7 +165,7 @@ const Canvas: React.FC = () => {
 			{!ipfs && (
 				<p>Oh oh, Not connected to IPFS. Checkout out the logs for errors</p>
 			)}
-			{openedDrawPopup && saveData ? <SavePopup {...saveData} /> : <DrawPopup />}
+			{drawPopup && saveData ? <SavePopup {...saveData} /> : !drawing ? <DrawPopup /> : null}
 			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.wrapper}>
 					<div
@@ -196,6 +203,7 @@ const Canvas: React.FC = () => {
 								styles.canvas,
 								squareFormat && styles.square_canvas
 							)}
+							imgSrc={drawing}
 							style={
 								squareFormat
 									? {

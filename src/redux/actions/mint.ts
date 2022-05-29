@@ -1,4 +1,22 @@
+import { ethers } from "ethers";
+
 import types from '../reducers/mint/types';
+
+export const getBalance = () => async (dispatch: any) => {
+	const w: any = window;
+	const provider = new ethers.providers.Web3Provider(w.ethereum);
+	const signer = provider.getSigner();
+	const address = await signer.getAddress();
+	provider.getBalance(address).then((balance) => {
+		const balanceInEth = ethers.utils.formatEther(balance)
+		console.log(balanceInEth);
+		
+		dispatch({
+			type: types.SET_BALANCE,
+			data: balanceInEth,
+		})
+	})
+}
 
 export const setPauseMint = (pause: boolean) => ({
 	type: types.SET_MINT_PAUSE,
@@ -30,7 +48,7 @@ export const setOpenSavePopup = (opened: boolean) => ({
 	data: opened,
 });
 
-export const setNightModeMint = (nightMode: boolean)  => ({
+export const setNightModeMint = (nightMode: boolean) => ({
 	type: types.SET_NIGHT_MODE,
 	data: nightMode,
 });

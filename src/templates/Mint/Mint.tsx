@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -7,11 +7,14 @@ import DefaultButton from '../../components/DefaultButton';
 import Header from '../../components/Header';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
+import { getDrawl } from '../../redux/actions/drawl';
+import { AppDispatch } from '../../redux/store';
 
 import styles from './Mint.module.scss';
 
 const Mint: React.FC = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch<AppDispatch>();
 	const [nightMode, setNightMode] = useState<boolean>(false);
 
 	const nightModeMint = useSelector(
@@ -23,6 +26,7 @@ const Mint: React.FC = () => {
 	}, [nightModeMint]);
 
 	const mintCanvas = () => {
+		dispatch(getDrawl(''));
 		navigate('/studio/canvas')
 	}
 

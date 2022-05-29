@@ -9,20 +9,19 @@ import Drawl from '../../components/Drawl';
 import DefaultDropdown from '../../components/DefaultDropdown';
 import DefaultButton from '../../components/DefaultButton';
 import { RootState } from '../../redux/reducers';
-import { getAllDrawls } from '../../redux/actions/drawl';
+import { getAllDrawls, getDrawl } from '../../redux/actions/drawl';
 import { AppDispatch } from '../../redux/store';
 import { IDrawl } from '../../redux/types/reducers';
-
-import styles from './Studio.module.scss';
 import { DRAWLS_SORT_VALUES } from '../../constants/data';
 
+import styles from './Studio.module.scss';
 
 const Studio: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [drawls, setDrawls] = useState<IDrawl[]>([])
-	const [dropdown, setDropdown] = useState<string>('')
+	const [, setDropdown] = useState<string>('')
 
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
@@ -52,6 +51,20 @@ const Studio: React.FC = () => {
 		});
 	}
 
+	const openCanvas = (id?: string) => {
+		if (id) {
+			dispatch(getDrawl(id)).then(() => {
+				navigate('/studio/canvas')
+			})
+
+		}
+	}
+
+	const openNewCanvas = () => {
+		dispatch(getDrawl(''));
+		navigate('/studio/canvas')
+	}
+
 	return (
 		<>
 			<Header />
@@ -66,7 +79,7 @@ const Studio: React.FC = () => {
 					<DefaultButton
 						className='wide_primary_small'
 						title='Mint new canvas'
-						onClick={() => navigate('/studio/canvas')}
+						onClick={openNewCanvas}
 					/>
 				</div>
 				<div className={styles.nft_list}>
@@ -78,6 +91,7 @@ const Studio: React.FC = () => {
 							size={drawl.format}
 							edited={drawl.updatedAt || ''}
 							time={drawl.time}
+							onClick={() => openCanvas(drawl._id)}
 						/>
 					) : null}
 

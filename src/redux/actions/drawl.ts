@@ -13,7 +13,7 @@ async function main() {
     const contractAddress = '0xB1936cfEf47AbEe1c11B1791B19E112421Df932a';
     const contract = new ethers.Contract(contractAddress, abi, signer);
     console.log(address, 'ku address');
-    
+
     const result = await contract.ownerOf(1, { gasLimit: 210000 });
     console.log("NFT award:", result);
 
@@ -34,7 +34,14 @@ export const setDrawl = (drawl: IDrawl) => async (dispatch: (arg0: { type: strin
     })
 }
 
-export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl }) => void) => {
+export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl | null }) => void) => {
+    if (!id) {
+        dispatch({
+            type: types.GET_DRAWL,
+            data: null
+        });
+        return;
+    }
     return API.get(`/drawl/${id}`).then((response) => {
         dispatch({
             type: types.GET_DRAWL,

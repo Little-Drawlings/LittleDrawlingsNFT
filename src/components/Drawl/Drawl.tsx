@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import cn from 'classnames';
 
@@ -11,10 +10,10 @@ interface Props {
 	size: string;
 	edited: string;
 	time: number;
+	onClick: () => void;
 }
 
-const Drawl: React.FC<Props> = ({ image, title, size, edited, time }) => {
-	const navigate = useNavigate();
+const Drawl: React.FC<Props> = ({ image, title, size, edited, time, onClick }) => {
 	const hours = Math.floor(time / 3600);
 	const minutes = Math.floor(time % 3600 / 60);
     const seconds = Math.floor(time % 3600 % 60);
@@ -39,7 +38,7 @@ const Drawl: React.FC<Props> = ({ image, title, size, edited, time }) => {
 					</div>
 				</div>
 			</div>
-			<DefaultButton className='no_wide_primary_small' title={'Touch up'} onClick={() => navigate('/studio/canvas')} />
+			<DefaultButton className='no_wide_primary_small' title={'Touch up'} onClick={onClick} />
 		</div>
 	);
 };

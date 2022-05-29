@@ -7,7 +7,7 @@ import DefaultButton from '../DefaultButton';
 import HeaderLink from '../HeaderLink';
 
 import { RootState } from '../../redux/reducers';
-import { setNightModeMint } from '../../redux/actions/mint';
+import { getBalance, setNightModeMint } from '../../redux/actions/mint';
 import { Link } from 'react-router-dom';
 import { AppDispatch } from '../../redux/store';
 
@@ -18,6 +18,7 @@ const Header: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [animateImage, setAnimateImage] = useState<boolean>(false);
+	const [balance, setBalance] = useState<string>('')
 
 	const connect = () => {
 		dispatch(signInMetamask())
@@ -35,6 +36,18 @@ const Header: React.FC = () => {
 	);
 
 	useEffect(() => {
+		dispatch(getBalance())
+	}, [dispatch])
+
+	const balanceMint = useSelector(
+		(state: RootState) => state?.mintReducer.balance
+	);
+
+	useEffect(() => {
+		setBalance(balanceMint);
+	}, [balanceMint]);
+
+	useEffect(() => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
 
@@ -45,6 +58,9 @@ const Header: React.FC = () => {
 			setAnimateImage(false);
 		}, 1000);
 	};
+
+	console.log(balance);
+	
 
 	const canvasPath = window.location.pathname.includes('/studio/');
 
@@ -88,7 +104,7 @@ const Header: React.FC = () => {
 				/>
 				{metaMaskData?.user ? (
 					<div className={styles.connect}>
-						<span className={styles.connect_value}>7.00698 ETH</span>
+						<span className={styles.connect_value}>{balance.substring(0, 7)} ETH</span>
 						<div className={styles.connect_eth}>
 							{' '}
 							<span className={styles.connect_circle}></span> {`${address.substring(0, 5)}...${address.slice(-4)} ETH`}
