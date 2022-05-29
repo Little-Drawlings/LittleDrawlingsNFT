@@ -108,6 +108,7 @@ const Canvas: React.FC = () => {
 	};
 
 	const mintImage = async () => {
+		setDrawPopup(true)
 		setSaveData({
 			title: 'Mint canvas as...',
 			desc: 'Let’s give your canvas a unique name or mint it with default.',
@@ -121,6 +122,8 @@ const Canvas: React.FC = () => {
 		console.log(imgFile);
 		const result = await (ipfs as IPFSHTTPClient).add(imgFile);
 		console.log(result);
+		console.log(drawPopup, saveData);
+		
 
 	};
 

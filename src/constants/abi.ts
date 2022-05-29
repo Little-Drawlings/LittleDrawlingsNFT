@@ -60,6 +60,25 @@ export const abi = [
             {
                 "indexed": true,
                 "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
                 "name": "from",
                 "type": "address"
             },
@@ -163,17 +182,23 @@ export const abi = [
         "inputs": [
             {
                 "internalType": "address",
-                "name": "to",
+                "name": "recipient",
                 "type": "address"
             },
             {
+                "internalType": "string",
+                "name": "tokenURI",
+                "type": "string"
+            }
+        ],
+        "name": "mintNFT",
+        "outputs": [
+            {
                 "internalType": "uint256",
-                "name": "tokenId",
+                "name": "",
                 "type": "uint256"
             }
         ],
-        "name": "mint",
-        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
@@ -185,6 +210,19 @@ export const abi = [
                 "internalType": "string",
                 "name": "",
                 "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
             }
         ],
         "stateMutability": "view",
@@ -207,6 +245,13 @@ export const abi = [
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -348,6 +393,19 @@ export const abi = [
             }
         ],
         "name": "transferFrom",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
