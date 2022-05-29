@@ -58,8 +58,6 @@ const Header: React.FC = () => {
 			setAnimateImage(false);
 		}, 1000);
 	};
-
-	console.log(balance);
 	
 
 	const canvasPath = window.location.pathname.includes('/studio/');

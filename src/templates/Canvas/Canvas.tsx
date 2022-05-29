@@ -10,14 +10,13 @@ import CountDown from '../../components/CountDown';
 import DrawPopup from '../../components/Popups/DrawPopup';
 import SavePopup from '../../components/Popups/SavePopup';
 
-import { COLORS, dataUrlToFile, FORMATS, INSTRUMENTS } from '../../constants/data';
+import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 import { setOpenSavePopup } from '../../redux/actions/mint';
 
 import styles from './Canvas.module.scss';
-import { create, IPFSHTTPClient } from 'ipfs-http-client';
 
 
 const Canvas: React.FC = () => {
@@ -37,16 +36,6 @@ const Canvas: React.FC = () => {
 		(state: RootState) => state?.mintReducer.openedDrawPopup
 	);
 	const [drawPopup, setDrawPopup] = useState<boolean>(openedDrawPopup);
-
-	let ipfs: IPFSHTTPClient | undefined;
-	try {
-		ipfs = create({
-			url: "https://ipfs.infura.io:5001/",
-		});
-	} catch (error) {
-		console.error("IPFS error ", error);
-		ipfs = undefined;
-	}
 
 	useEffect(() => {
 		if (mintTime) {
@@ -118,13 +107,6 @@ const Canvas: React.FC = () => {
 			time: time
 		});
 		dispatch(setOpenSavePopup(true));
-		const imgFile: File = await dataUrlToFile(drawing, 'Drawl', 'image/png');
-		console.log(imgFile);
-		const result = await (ipfs as IPFSHTTPClient).add(imgFile);
-		console.log(result);
-		console.log(drawPopup, saveData);
-		
-
 	};
 
 	const squareFormat = format === FORMATS.SQUARE;
@@ -165,9 +147,6 @@ const Canvas: React.FC = () => {
 	return (
 		<>
 			<Header />
-			{!ipfs && (
-				<p>Oh oh, Not connected to IPFS. Checkout out the logs for errors</p>
-			)}
 			{drawPopup && saveData ? <SavePopup {...saveData} /> : !drawing ? <DrawPopup /> : null}
 			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.wrapper}>

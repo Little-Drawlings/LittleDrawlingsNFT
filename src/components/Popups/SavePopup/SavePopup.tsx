@@ -2,6 +2,8 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { create, IPFSHTTPClient } from 'ipfs-http-client';
+
 import { setDrawl } from '../../../redux/actions/drawl';
 import {
 	setOpenedDrawPopup,
@@ -15,6 +17,7 @@ import DefaultButton from '../../DefaultButton';
 import DefaultInput from '../../DefaultInput';
 
 import styles from './SavePopup.module.scss';
+import { dataUrlToFile } from '../../../constants/data';
 
 const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
@@ -36,17 +39,30 @@ const SavePopup: React.FC<SavePopupProps> = ({
 		setOpenPopup(isOpenPopup);
 	}, [isOpenPopup]);
 
-	const mint = () => {
-		dispatch(setDrawl({name: drawlName, image: drawl, format, time}))
+	const mint = async () => {
+		const imgFile: File = await dataUrlToFile(drawl, 'Drawl', 'image/png');
+		console.log(imgFile);
+		const ipfsObj = await (ipfs as IPFSHTTPClient).add(imgFile);
+		dispatch(setDrawl({ name: drawlName, image: drawl, format, time }, ipfsObj?.path))
 		dispatch(setOpenedDrawPopup(false));
 		dispatch(setOpenSavePopup(false));
 		navigate('/');
 	};
 
+	let ipfs: IPFSHTTPClient | undefined;
+	try {
+		ipfs = create({
+			url: "https://ipfs.infura.io:5001/api/v0",
+		});
+	} catch (error) {
+		console.error("IPFS error ", error);
+		ipfs = undefined;
+	}
+
 	return (
 		<>
-			{openPopup && (
-				<div className={cn('popup-overlay')}>
+			{openPopup && ipfs && (
+				<div className={cn('popup-overlay')} >
 					<div className={cn('popup-content', styles.popup)}>
 						<h3 className={styles.popup_title}>{title}</h3>
 						<p className={styles.popup_desc}>{desc}</p>
@@ -69,6 +85,11 @@ const SavePopup: React.FC<SavePopupProps> = ({
 							/>
 						</div>
 					</div>
+				</div>
+			)}
+			{openPopup && !ipfs && (
+				<div className={cn('popup-overlay')} >
+					<p>Oh oh, Not connected to IPFS. Checkout out the logs for errors</p>
 				</div>
 			)}
 		</>
