@@ -21,7 +21,9 @@ const Header: React.FC = () => {
 	const [balance, setBalance] = useState<string>('')
 
 	const connect = () => {
-		dispatch(signInMetamask())
+		dispatch(signInMetamask()).then(() => {
+			dispatch(getBalance())
+		})
 	};
 
 	const metaMaskData = useSelector(

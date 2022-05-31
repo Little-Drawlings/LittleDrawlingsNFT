@@ -45,6 +45,8 @@ const Canvas: React.FC = () => {
 
 	useEffect(() => {
 		if (activeDrawl) {
+			console.log(activeDrawl);
+			
 			setDrawPopup(true)
 			setDrawing(activeDrawl?.image)
 			setTime(activeDrawl.time)
