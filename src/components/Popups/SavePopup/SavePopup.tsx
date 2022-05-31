@@ -41,12 +41,14 @@ const SavePopup: React.FC<SavePopupProps> = ({
 
 	const mint = async () => {
 		const imgFile: File = await dataUrlToFile(drawl, 'Drawl', 'image/png');
-		console.log(imgFile);
-		const ipfsObj = await (ipfs as IPFSHTTPClient).add(imgFile);
-		dispatch(setDrawl({ name: drawlName, image: drawl, format, time }, ipfsObj?.path))
-		dispatch(setOpenedDrawPopup(false));
-		dispatch(setOpenSavePopup(false));
-		navigate('/');
+		return await (ipfs as IPFSHTTPClient).add(imgFile).then((res) => {
+			dispatch(setDrawl({ name: drawlName, image: drawl, format, time }, res?.path))
+			dispatch(setOpenedDrawPopup(false));
+			dispatch(setOpenSavePopup(false));
+		}).then(() => {
+			navigate('/');
+		});
+
 	};
 
 	let ipfs: IPFSHTTPClient | undefined;

@@ -10,7 +10,7 @@ async function contract(ipfsPath: string) {
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    const contractAddress = '0x0d5C1bC24C55F773FD6529B4d7BC9b68672954e1';
+    const contractAddress = '0x31755035Cc6898956B7B5431707Da6AA3388A393';
     const contract = new ethers.Contract(contractAddress, abi, signer);
     if (address && ipfsPath) {
         return await contract.mintNFT(address, ipfsPath, { gasLimit: 210000 });
