@@ -9,8 +9,6 @@ export const getBalance = () => async (dispatch: any) => {
 	const address = await signer.getAddress();
 	provider.getBalance(address).then((balance) => {
 		const balanceInEth = ethers.utils.formatEther(balance)
-		console.log(balanceInEth);
-		
 		dispatch({
 			type: types.SET_BALANCE,
 			data: balanceInEth,

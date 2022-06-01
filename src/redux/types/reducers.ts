@@ -13,5 +13,6 @@ export interface IDrawl {
     createdAt?: string;
     updatedAt?: string;
     userID?: string;
+    id?: string;
     _id?: string;
 }

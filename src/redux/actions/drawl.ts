@@ -20,7 +20,9 @@ async function contract(ipfsPath: string) {
 
 export const setDrawl = (drawl: IDrawl, ipfsPath: string) => async (dispatch: (arg0: { type: string; data: IDrawl }) => void) => {
     contract(ipfsPath).then(() => {
-        return API.post(`/drawl`, drawl).then(() => {
+        const id = drawl?.id;
+        const apiReq = id ? API.put(`/drawl`, drawl) : API.post(`/drawl`, drawl);
+        return apiReq.then(() => {
             dispatch({
                 type: types.GET_DRAWL,
                 data: drawl

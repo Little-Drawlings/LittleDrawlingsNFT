@@ -19,7 +19,8 @@ interface Props {
 const CountDown: React.FC<Props> = ({ className }) => {
 	const dispatch = useDispatch();
 	const [paused, setPaused] = React.useState(false);
-	const [over, setOver] = React.useState(true);
+	const [over, setOver] = React.useState(false);
+	
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 
 	const [time, setTime] = useState<number>(mintTime);
@@ -61,7 +62,7 @@ const CountDown: React.FC<Props> = ({ className }) => {
 	const tick = () => {
 		if (paused || over) return;
 		if (
-			time == 0 &&
+			time === 0 &&
 			openedDrawPopup
 		) {
 			dispatch(setOverMint(true));

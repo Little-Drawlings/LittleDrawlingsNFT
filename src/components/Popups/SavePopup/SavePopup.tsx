@@ -18,6 +18,7 @@ import DefaultInput from '../../DefaultInput';
 
 import styles from './SavePopup.module.scss';
 import { dataUrlToFile } from '../../../constants/data';
+import { IDrawl } from '../../../redux/types/reducers';
 
 const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
@@ -29,6 +30,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
+	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const isOpenPopup = useSelector(
 		(state: RootState) => state?.mintReducer.openSavePopup
 	);
@@ -42,7 +44,11 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	const mint = async () => {
 		const imgFile: File = await dataUrlToFile(drawl, 'Drawl', 'image/png');
 		return await (ipfs as IPFSHTTPClient).add(imgFile).then((res) => {
-			dispatch(setDrawl({ name: drawlName, image: drawl, format, time }, res?.path))
+			let drawlData: IDrawl = { name: drawlName, image: drawl, format, time }
+			if(activeDrawl?._id) {
+				drawlData = {...drawlData, id: activeDrawl?._id}
+			}
+			dispatch(setDrawl(drawlData, res?.path))
 			dispatch(setOpenedDrawPopup(false));
 			dispatch(setOpenSavePopup(false));
 		}).then(() => {

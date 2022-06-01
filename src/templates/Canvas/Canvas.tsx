@@ -3,6 +3,7 @@ import CanvasDraw from 'react-canvas-draw';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
+import mergeImages from 'merge-images';
 
 import Header from '../../components/Header';
 import DefaultButton from '../../components/DefaultButton';
@@ -45,8 +46,6 @@ const Canvas: React.FC = () => {
 
 	useEffect(() => {
 		if (activeDrawl) {
-			console.log(activeDrawl);
-			
 			setDrawPopup(true)
 			setDrawing(activeDrawl?.image)
 			setTime(activeDrawl.time)
@@ -93,8 +92,8 @@ const Canvas: React.FC = () => {
 		}
 	}, [dispatch, over, drawPopup, drawing, format, time]);
 
-	const changeCanvasImage = (canvas: CanvasDraw | any) => {
-		const base64Image = canvas?.canvasContainer.childNodes[1].toDataURL();
+	const changeCanvasImage = async (canvas: CanvasDraw | any) => {
+		const base64Image = await mergeImages([canvas?.canvasContainer.childNodes[0].toDataURL(), canvas?.canvasContainer.childNodes[1].toDataURL()]).then(b64 => b64);
 		setDrawing(base64Image);
 	};
 
@@ -268,7 +267,7 @@ const Canvas: React.FC = () => {
 											alt='ToolbarShadow'
 										/>
 									</li>
-									<li
+									{/* <li
 										className={styles.settings_list_item}
 										onClick={() => modify?.undo()}
 									>
@@ -276,10 +275,10 @@ const Canvas: React.FC = () => {
 									</li>
 									<li
 										className={styles.settings_list_item}
-										onClick={() => modify?.clear()}
+										onClick={() =>modify?.clear()}
 									>
 										Clear
-									</li>
+									</li> */}
 								</ul>
 							</div>
 							<DefaultButton
