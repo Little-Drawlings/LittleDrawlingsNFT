@@ -9,6 +9,7 @@ import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 import { getDrawl } from '../../redux/actions/drawl';
 import { AppDispatch } from '../../redux/store';
+import { setOpenDrawPopup } from '../../redux/actions/mint';
 
 import styles from './Mint.module.scss';
 
@@ -27,9 +28,9 @@ const Mint: React.FC = () => {
 
 	const mintCanvas = () => {
 		dispatch(getDrawl(''));
+		dispatch(setOpenDrawPopup(true));
 		navigate('/studio/canvas')
 	}
-
 	return (
 		<>
 			<Header />

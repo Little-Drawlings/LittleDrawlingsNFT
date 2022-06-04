@@ -7,7 +7,7 @@ export interface MintAppState {
 	mintFormat: string;
 	mintPause: boolean;
 	mintOver: boolean;
-	openedDrawPopup: boolean;
+	openDrawPopup: boolean;
 	openSavePopup: boolean;
 	nightMode: boolean;
 	balance: string;

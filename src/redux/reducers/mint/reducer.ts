@@ -6,7 +6,7 @@ const initialState = {
 	mintFormat: '',
 	mintPause: false,
 	mintOver: false,
-	openedDrawPopup: false,
+	openDrawPopup: false,
 	openSavePopup: false,
 	nightMode: false,
 	balance: ''
@@ -47,10 +47,10 @@ const mintReducer = (
 				...state,
 				mintPause: action?.data,
 			};
-		case MINT_TYPES.SET_OPENED_DRAW_POPUP:
+		case MINT_TYPES.SET_OPEN_DRAW_POPUP:
 			return {
 				...state,
-				openedDrawPopup: action?.data,
+				openDrawPopup: action?.data,
 			};
 		case MINT_TYPES.SET_OPEN_SAVE_POPUP:
 			return {

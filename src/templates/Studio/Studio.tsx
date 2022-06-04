@@ -15,7 +15,7 @@ import { IDrawl } from '../../redux/types/reducers';
 import { DRAWLS_SORT_VALUES } from '../../constants/data';
 
 import styles from './Studio.module.scss';
-import { setOverMint } from '../../redux/actions/mint';
+import { setOpenDrawPopup, setOverMint } from '../../redux/actions/mint';
 
 const Studio: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -58,12 +58,12 @@ const Studio: React.FC = () => {
 			dispatch(getDrawl(id)).then(() => {
 				navigate('/studio/canvas')
 			})
-
 		}
 	}
 
 	const openNewCanvas = () => {
 		dispatch(getDrawl(''));
+		dispatch(setOpenDrawPopup(true))
 		navigate('/studio/canvas')
 	}
 

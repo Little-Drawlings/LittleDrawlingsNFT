@@ -15,14 +15,32 @@ import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
-import { setOpenSavePopup } from '../../redux/actions/mint';
 
 import styles from './Canvas.module.scss';
+import { setOpenSavePopup } from '../../redux/actions/mint';
 
 
 const Canvas: React.FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const openDrawPopup = useSelector(
+		(state: RootState) => state?.mintReducer.openDrawPopup
+	);
+	const openSavePopup = useSelector(
+		(state: RootState) => state?.mintReducer.openSavePopup
+	);
+	const activeFormat = useSelector(
+		(state: RootState) => state?.mintReducer.mintFormat
+	);
+	const nightModeMint = useSelector(
+		(state: RootState) => state?.mintReducer.nightMode
+	);
+	const drawlsList = useSelector(
+		(state: RootState) => state?.drawlReducer.drawls
+	);
+	let modify: CanvasDraw | null;
+	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
+	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
 	const [drawing, setDrawing] = useState<string>('');
 	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
 	const [brushRadius, setBrushRadius] = useState<number>(5);
@@ -33,10 +51,9 @@ const Canvas: React.FC = () => {
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [time, setTime] = useState<number>(0);
-	const openedDrawPopup = useSelector(
-		(state: RootState) => state?.mintReducer.openedDrawPopup
-	);
-	const [drawPopup, setDrawPopup] = useState<boolean>(openedDrawPopup);
+
+	const [drawPopup, setDrawPopup] = useState<boolean>(openDrawPopup);
+	const [savePopup, setSavePopup] = useState<boolean>(openSavePopup);
 
 	useEffect(() => {
 		if (mintTime) {
@@ -46,26 +63,19 @@ const Canvas: React.FC = () => {
 
 	useEffect(() => {
 		if (activeDrawl) {
-			setDrawPopup(true)
 			setDrawing(activeDrawl?.image)
 			setTime(activeDrawl.time)
 		}
 
 	}, [activeDrawl])
 
-	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
+	useEffect(() => {
+		setDrawPopup(openDrawPopup);
+	}, [openDrawPopup]);
 
-	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
-
-	const activeFormat = useSelector(
-		(state: RootState) => state?.mintReducer.mintFormat
-	);
-
-	const nightModeMint = useSelector(
-		(state: RootState) => state?.mintReducer.nightMode
-	);
-
-	let modify: CanvasDraw | null;
+	useEffect(() => {
+		setSavePopup(openSavePopup);
+	}, [openSavePopup]);
 
 	useEffect(() => {
 		setNightMode(nightModeMint);
@@ -79,18 +89,13 @@ const Canvas: React.FC = () => {
 		if (over) {
 			setSaveData({
 				title: 'Time is up!',
-				desc: 'Save your canvas or mint as...',
-				drawlName: 'Drawl #1020',
+				drawlName: activeDrawl ? activeDrawl.name : `#Drawl ${drawlsList?.length + 1}`,
 				drawl: drawing,
 				format: format,
 				time: time
 			});
-			dispatch(setOpenSavePopup(true));
 		}
-		if (!drawPopup) {
-			dispatch(setOpenSavePopup(false));
-		}
-	}, [dispatch, over, drawPopup, drawing, format, time]);
+	}, [dispatch, over, drawing, format, time, drawlsList, activeDrawl]);
 
 	const changeCanvasImage = async (canvas: CanvasDraw | any) => {
 		const base64Image = await mergeImages([canvas?.canvasContainer.childNodes[0].toDataURL(), canvas?.canvasContainer.childNodes[1].toDataURL()]).then(b64 => b64);
@@ -98,16 +103,14 @@ const Canvas: React.FC = () => {
 	};
 
 	const mintImage = async () => {
-		setDrawPopup(true)
+		dispatch(setOpenSavePopup(true));
 		setSaveData({
 			title: 'Mint canvas as...',
-			desc: 'Let’s give your canvas a unique name or mint it with default.',
-			drawlName: 'Drawl #1020',
+			drawlName: activeDrawl ? activeDrawl.name : `Drawl #${drawlsList?.length + 1}`,
 			drawl: drawing,
 			format: format,
 			time: time
 		});
-		dispatch(setOpenSavePopup(true));
 	};
 
 	const squareFormat = format === FORMATS.SQUARE;
@@ -148,7 +151,8 @@ const Canvas: React.FC = () => {
 	return (
 		<>
 			<Header />
-			{drawPopup && saveData ? <SavePopup {...saveData} /> : !drawing ? <DrawPopup /> : null}
+			{drawPopup && <DrawPopup />}
+			{savePopup && <SavePopup {...saveData} />}
 			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.wrapper}>
 					<div

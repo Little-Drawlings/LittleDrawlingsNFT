@@ -33,8 +33,8 @@ const CountDown: React.FC<Props> = ({ className }) => {
 		(state: RootState) => state?.mintReducer.mintOver
 	);
 
-	const openedDrawPopup = useSelector(
-		(state: RootState) => state?.mintReducer.openedDrawPopup
+	const openDrawPopup = useSelector(
+		(state: RootState) => state?.mintReducer.openDrawPopup
 	);
 
 	useEffect(() => {
@@ -63,7 +63,7 @@ const CountDown: React.FC<Props> = ({ className }) => {
 		if (paused || over) return;
 		if (
 			time === 0 &&
-			openedDrawPopup
+			openDrawPopup
 		) {
 			dispatch(setOverMint(true));
 		}

@@ -36,8 +36,8 @@ export const setFormatMint = (format: string) => ({
 	data: format,
 });
 
-export const setOpenedDrawPopup = (opened: boolean) => ({
-	type: types.SET_OPENED_DRAW_POPUP,
+export const setOpenDrawPopup = (opened: boolean) => ({
+	type: types.SET_OPEN_DRAW_POPUP,
 	data: opened,
 });
 
