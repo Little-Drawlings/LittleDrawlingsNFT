@@ -13,9 +13,9 @@ import { getAllDrawls, getDrawl } from '../../redux/actions/drawl';
 import { AppDispatch } from '../../redux/store';
 import { IDrawl } from '../../redux/types/reducers';
 import { DRAWLS_SORT_VALUES } from '../../constants/data';
+import { setOpenDrawPopup, setOverMint } from '../../redux/actions/mint';
 
 import styles from './Studio.module.scss';
-import { setOpenDrawPopup, setOverMint } from '../../redux/actions/mint';
 
 const Studio: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();

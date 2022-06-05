@@ -98,7 +98,22 @@ const Canvas: React.FC = () => {
 	}, [dispatch, over, drawing, format, time, drawlsList, activeDrawl]);
 
 	const changeCanvasImage = async (canvas: CanvasDraw | any) => {
-		const base64Image = await mergeImages([canvas?.canvasContainer.childNodes[0].toDataURL(), canvas?.canvasContainer.childNodes[1].toDataURL()]).then(b64 => b64);
+		const canvasImages = []
+		for (let i = 0; i < canvas?.canvasContainer.childNodes.length; i++) {
+			canvasImages.push(canvas?.canvasContainer.childNodes[i].toDataURL())
+		}
+		const destinationCanvas = document.createElement("canvas");
+		const el = canvas?.canvasContainer.childNodes[3]
+		destinationCanvas.width = el.width;
+		destinationCanvas.height = el.height;
+		let destCtx = destinationCanvas.getContext('2d');
+		if (destCtx) {
+			destCtx.fillStyle = "#fff";
+			destCtx.fillRect(0, 0, el.width, el.height);
+			destCtx.drawImage(el, 0, 0);
+		}
+		const resEl = destinationCanvas.toDataURL();
+		const base64Image = await mergeImages([resEl, ...canvasImages]).then(b64 => b64);
 		setDrawing(base64Image);
 	};
 
@@ -184,6 +199,8 @@ const Canvas: React.FC = () => {
 						</ul>
 						<CountDown className={cn(styles.time_wrap, squareFormat && styles.square_time_wrap)} />
 						<CanvasDraw
+							backgroundColor={'#fff'}
+							hideInterface={true}
 							ref={(canvasDraw) => (modify = canvasDraw)}
 							disabled={pause || over}
 							className={cn(
