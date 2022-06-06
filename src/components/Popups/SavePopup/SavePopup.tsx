@@ -2,12 +2,12 @@ import cn from 'classnames';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import * as ipns from 'ipns'
 import { create, IPFSHTTPClient } from 'ipfs-http-client';
 
-import { setDrawl } from '../../../redux/actions/drawl';
 import { RootState } from '../../../redux/reducers';
 import { AppDispatch } from '../../../redux/store';
-
+import { setDrawl } from '../../../redux/actions/drawl';
 import { SavePopupProps } from '../../../redux/types/data';
 import DefaultButton from '../../DefaultButton';
 import DefaultInput from '../../DefaultInput';
@@ -29,6 +29,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [name, setName] = useState<string>(drawlName);
 
+
 	const save = async () => {
 		const imgFile: File = await dataUrlToFile(drawl, 'Drawl', 'image/png');
 		return await (ipfs as IPFSHTTPClient).add(imgFile).then((res) => {
@@ -43,6 +44,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 		});
 
 	};
+	
 
 	const mint = () => {
 		dispatch(setOpenSavePopup(false))

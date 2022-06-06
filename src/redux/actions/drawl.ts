@@ -5,7 +5,10 @@ import { IDrawl } from '../types/reducers';
 import { ethers } from "ethers";
 import { abi } from '../../constants/abi';
 
-async function contract(ipfsPath: string) {
+async function contract(ipfsPath: string, id?: string) {
+    if (id) {
+        return
+    }
     const w: any = window;
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
@@ -19,11 +22,10 @@ async function contract(ipfsPath: string) {
 }
 
 export const setDrawl = (drawl: IDrawl, ipfsPath: string) => async (dispatch: (arg0: { type: string; data: IDrawl }) => void) => {
-    contract(ipfsPath).then((res) => {
-        const hash = res.hash
-        const id = drawl?.id;
-        const data = {...drawl, hash}
-        const apiReq = id ? API.put(`/drawl`, data) : API.post(`/drawl`, data);
+    const id = drawl?.id;
+    contract(ipfsPath, id).then((res) => {
+        const hash = res?.hash;
+        const apiReq = id ? API.put(`/drawl`, drawl) : API.post(`/drawl`, { ...drawl, hash });
         return apiReq.then(() => {
             dispatch({
                 type: types.GET_DRAWL,

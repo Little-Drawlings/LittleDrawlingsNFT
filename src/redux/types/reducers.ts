@@ -10,6 +10,7 @@ export interface IDrawl {
     image: string;
     time: number;
     format: string;
+    hash?: string;
     createdAt?: string;
     updatedAt?: string;
     userID?: string;

@@ -17,7 +17,7 @@ import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
 
 import styles from './Canvas.module.scss';
-import { setOpenSavePopup } from '../../redux/actions/mint';
+import { setOpenSavePopup, setTimeMint } from '../../redux/actions/mint';
 
 
 const Canvas: React.FC = () => {
@@ -63,11 +63,10 @@ const Canvas: React.FC = () => {
 
 	useEffect(() => {
 		if (activeDrawl) {
+			dispatch(setTimeMint(activeDrawl?.time))
 			setDrawing(activeDrawl?.image)
-			setTime(activeDrawl.time)
 		}
-
-	}, [activeDrawl])
+	}, [activeDrawl, dispatch])
 
 	useEffect(() => {
 		setDrawPopup(openDrawPopup);
@@ -108,7 +107,7 @@ const Canvas: React.FC = () => {
 		destinationCanvas.height = el.height;
 		let destCtx = destinationCanvas.getContext('2d');
 		if (destCtx) {
-			destCtx.fillStyle = "#fff";
+			destCtx.fillStyle = '#fff';
 			destCtx.fillRect(0, 0, el.width, el.height);
 			destCtx.drawImage(el, 0, 0);
 		}

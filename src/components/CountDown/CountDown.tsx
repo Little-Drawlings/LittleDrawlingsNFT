@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import {
+	setOpenSavePopup,
 	setOverMint,
 	setPauseMint,
 	setTimeMint,
@@ -18,29 +19,21 @@ interface Props {
 
 const CountDown: React.FC<Props> = ({ className }) => {
 	const dispatch = useDispatch();
-	const [paused, setPaused] = React.useState(false);
-	const [over, setOver] = React.useState(false);
-	
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
-
-	const [time, setTime] = useState<number>(mintTime);
-
 	const mintPause = useSelector(
 		(state: RootState) => state?.mintReducer.mintPause
 	);
-
 	const mintOver = useSelector(
 		(state: RootState) => state?.mintReducer.mintOver
 	);
+	const [paused, setPaused] = React.useState(false);
+	const [over, setOver] = React.useState(false);
+	const [time, setTime] = useState<number>(mintTime);
 
-	const openDrawPopup = useSelector(
-		(state: RootState) => state?.mintReducer.openDrawPopup
-	);
+	
 
 	useEffect(() => {
-		if (mintTime) {
-			setTime(mintTime);
-		}
+		setTime(mintTime);
 	}, [mintTime]);
 
 	useEffect(() => {
@@ -62,13 +55,15 @@ const CountDown: React.FC<Props> = ({ className }) => {
 	const tick = () => {
 		if (paused || over) return;
 		if (
-			time === 0 &&
-			openDrawPopup
+			time === 0
 		) {
+			dispatch(setOpenSavePopup(true))
 			dispatch(setOverMint(true));
 		}
-		else
-			setTime(time - 1);
+		else {
+			dispatch(setTimeMint(time - 1));
+		}
+
 	};
 
 	const goesTime = () => {
@@ -81,7 +76,7 @@ const CountDown: React.FC<Props> = ({ className }) => {
 
 	const hours = Math.floor(time / 3600);
 	const minutes = Math.floor(time % 3600 / 60);
-    const seconds = Math.floor(time % 3600 % 60);
+	const seconds = Math.floor(time % 3600 % 60);
 
 	return (
 		<div className={cn(className)}>
@@ -91,8 +86,8 @@ const CountDown: React.FC<Props> = ({ className }) => {
 				<div className={styles.time_value}>{`${hours
 					.toString()
 					.padStart(2, '0')}:${minutes
-					.toString()
-					.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</div>
+						.toString()
+						.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</div>
 			)}
 			<img
 				className={styles.time_btn}

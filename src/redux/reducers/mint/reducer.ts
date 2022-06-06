@@ -2,7 +2,7 @@ import { IAction } from '../../types/actions';
 import MINT_TYPES from './types';
 
 const initialState = {
-	time: 1200,
+	time: 0,
 	mintFormat: '',
 	mintPause: false,
 	mintOver: false,

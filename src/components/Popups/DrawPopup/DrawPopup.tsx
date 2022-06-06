@@ -31,9 +31,7 @@ const DrawPopup: React.FC = () => {
 		dispatch(setPauseMint(false));
 		dispatch(setOverMint(false));
 		dispatch(setOpenDrawPopup(false));
-		dispatch(
-			setTimeMint(1200)
-		);
+		dispatch(setTimeMint(1200));
 	};
 
 	const cancel = () => {
