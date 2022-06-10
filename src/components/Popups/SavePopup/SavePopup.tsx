@@ -2,8 +2,8 @@ import cn from 'classnames';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import * as ipns from 'ipns'
-import { create, IPFSHTTPClient } from 'ipfs-http-client';
+import { IPFSHTTPClient } from 'ipfs-http-client';
+import { Rings } from "react-loader-spinner";
 
 import { RootState } from '../../../redux/reducers';
 import { AppDispatch } from '../../../redux/store';
@@ -12,10 +12,13 @@ import { SavePopupProps } from '../../../redux/types/data';
 import DefaultButton from '../../DefaultButton';
 import DefaultInput from '../../DefaultInput';
 
-import styles from './SavePopup.module.scss';
+import ipfs from '../../../api/ipfs';
+
 import { dataUrlToFile } from '../../../constants/data';
 import { IDrawl } from '../../../redux/types/reducers';
 import { setOpenSavePopup } from '../../../redux/actions/mint';
+
+import styles from './SavePopup.module.scss';
 
 const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
@@ -28,36 +31,32 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	const navigate = useNavigate();
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [name, setName] = useState<string>(drawlName);
+	const [loading, setLoading] = useState<boolean>(false)
 
 
 	const save = async () => {
+		setLoading(true);
 		const imgFile: File = await dataUrlToFile(drawl, 'Drawl', 'image/png');
-		return await (ipfs as IPFSHTTPClient).add(imgFile).then((res) => {
-			let drawlData: IDrawl = { name: name, image: drawl, format, time }
-			if (activeDrawl?._id) {
-				drawlData = { ...drawlData, id: activeDrawl?._id }
-			}
-			dispatch(setDrawl(drawlData, res?.path))
-		}).then(() => {
+		const fileHash = await (ipfs as IPFSHTTPClient).add(imgFile).then(res => res.path);
+		let drawlData: IDrawl = { name: name, image: drawl, format, time }
+		if (activeDrawl?._id) {
+			drawlData = { ...drawlData, id: activeDrawl?._id }
+		} else {
+			await (ipfs as IPFSHTTPClient).name.resolve
+		}
+		const ipnsLink = await (ipfs as IPFSHTTPClient).name.publish(fileHash).then((res) => {
+			return res.name
+		})
+		dispatch(setDrawl(drawlData, ipnsLink)).then(() => {
+			setLoading(false);
 			dispatch(setOpenSavePopup(false))
 			navigate('/');
 		});
-
 	};
-	
+
 
 	const mint = () => {
 		dispatch(setOpenSavePopup(false))
-	}
-
-	let ipfs: IPFSHTTPClient | undefined;
-	try {
-		ipfs = create({
-			url: "https://ipfs.infura.io:5001/api/v0",
-		});
-	} catch (error) {
-		console.error("IPFS error ", error);
-		ipfs = undefined;
 	}
 
 	return (
@@ -92,6 +91,13 @@ const SavePopup: React.FC<SavePopupProps> = ({
 					<p>Oh oh, Not connected to IPFS. Checkout out the logs for errors</p>
 				</div>
 			)}
+			{loading && <Rings
+				wrapperClass={styles.spinner}
+				height="100"
+				width="100"
+				color='#6B6DB1'
+				ariaLabel='loading'
+			/>}
 		</>
 	);
 };

@@ -35,3 +35,5 @@ export async function dataUrlToFile(dataUrl: string, fileName: string, type: str
 	const blob: Blob = await res.blob();
 	return new File([blob], fileName, { type: type });
 }
+
+export const CONTRACT_ADDRESS = '0x34D595AD97C87e9DC0d37471E22BD8c96D958d26'
