@@ -6,35 +6,29 @@ import { ethers } from "ethers";
 import { abi } from '../../constants/abi';
 import { CONTRACT_ADDRESS } from '../../constants/data';
 
-async function contract(ipfsPath: string, id?: string) {
-    if (id) {
-        return
-    }
+export const contractDrawl = async (ipnsPath: string) => {
     const w: any = window;
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
     const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
-    if (address && ipfsPath) {
-        return await contract.mintNFT(address, ipfsPath, { gasLimit: 210000 });
+    if (address && ipnsPath) {
+        return await contract.mintNFT(address, ipnsPath, { gasLimit: 210000 });
     }
-    return;
 }
 
-export const setDrawl = (drawl: IDrawl, ipfsPath: string) => async (dispatch: (arg0: { type: string; data: IDrawl }) => void) => {
+export const setDrawl = (drawl: IDrawl) => async (dispatch: (arg0: { type: string; data: IDrawl }) => void) => {
     const id = drawl?.id;
-    contract(ipfsPath, id).then((res) => {
-        const hash = res?.hash;
-        const apiReq = id ? API.put(`/drawl`, drawl) : API.post(`/drawl`, { ...drawl, hash });
-        return apiReq.then(() => {
-            dispatch({
-                type: types.GET_DRAWL,
-                data: drawl
-            })
-        }).catch((error) => {
-            throw error;
-        })
-    });
+    const apiRequest = id ? API.put(`/drawl`, drawl) : API.post(`/drawl`, drawl);
+    return apiRequest.then((result) => {
+        dispatch({
+            type: types.GET_DRAWL,
+            data: drawl
+        });
+        return result.data.data
+    }).catch((error) => {
+        throw error;
+    })
 }
 
 export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl | null }) => void) => {
