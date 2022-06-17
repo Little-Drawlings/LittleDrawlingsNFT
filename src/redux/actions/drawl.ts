@@ -5,6 +5,7 @@ import { IDrawl } from '../types/reducers';
 import { ethers } from "ethers";
 import { abi } from '../../constants/abi';
 import { CONTRACT_ADDRESS } from '../../constants/data';
+import { setLoading } from './mint';
 
 export const contractDrawl = async (ipnsPath: string) => {
     const w: any = window;
@@ -17,21 +18,29 @@ export const contractDrawl = async (ipnsPath: string) => {
     }
 }
 
-export const setDrawl = (drawl: IDrawl) => async (dispatch: (arg0: { type: string; data: IDrawl }) => void) => {
+export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => async (dispatch: (arg0: { type: string; data: IDrawl | boolean }) => void) => {
+    dispatch(setLoading(true));
+    const formData = new FormData();
+    for (let key in drawl) {
+        if (key && drawl[key]) {
+            formData.append(key, drawl[key]);
+        }
+    }
     const id = drawl?.id;
-    const apiRequest = id ? API.put(`/drawl`, drawl) : API.post(`/drawl`, drawl);
+    const apiRequest = id ? API.put(`/drawl`, formData) : API.post(`/drawl`, formData);
     return apiRequest.then((result) => {
+        const drawlData: IDrawl = result.data.data
         dispatch({
             type: types.GET_DRAWL,
-            data: drawl
+            data: drawlData
         });
-        return result.data.data
+        return drawlData
     }).catch((error) => {
         throw error;
-    })
+    }).finally(() => dispatch(setLoading(false)))
 }
 
-export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl | null }) => void) => {
+export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl | null | boolean}) => void) => {
     if (!id) {
         dispatch({
             type: types.GET_DRAWL,
@@ -39,6 +48,7 @@ export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: 
         });
         return;
     }
+    dispatch(setLoading(true));
     return API.get(`/drawl/${id}`).then((response) => {
         dispatch({
             type: types.GET_DRAWL,
@@ -46,10 +56,11 @@ export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: 
         });
     }).catch((error) => {
         throw error;
-    })
+    }).finally(() => dispatch(setLoading(false)))
 }
 
-export const getAllDrawls = () => (dispatch: (arg0: { type: string; data: IDrawl[] }) => void) => {
+export const getAllDrawls = () => (dispatch: (arg0: { type: string; data: IDrawl[] | boolean }) => void) => {
+    dispatch(setLoading(true));
     return API.get(`/drawl/getAll`).then((response) => {
         dispatch({
             type: types.GET_ALL_DRAWLS,
@@ -57,5 +68,5 @@ export const getAllDrawls = () => (dispatch: (arg0: { type: string; data: IDrawl
         });
     }).catch((error) => {
         throw error;
-    })
+    }).finally(() => dispatch(setLoading(false)))
 }

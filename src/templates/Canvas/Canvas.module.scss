@@ -66,14 +66,12 @@
 
 .canvas {
 	background-color: $white;
-	background: url('../../assets/svg/border.svg') center/100% no-repeat !important;
-
-	&.square_canvas {
-		background: url('../../assets/svg/square-border.svg') center/100% no-repeat !important;
-	}
+	border-radius: 1.25rem;
+	border: 0.25rem solid $dark;
 
 	* {
-		touch-action: pan-y
+		touch-action: pan-y;
+		border-radius: 1.25rem;
 	}
 }
 

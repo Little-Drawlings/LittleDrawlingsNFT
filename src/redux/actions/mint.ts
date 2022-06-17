@@ -50,3 +50,8 @@ export const setNightModeMint = (nightMode: boolean) => ({
 	type: types.SET_NIGHT_MODE,
 	data: nightMode,
 });
+
+export const setLoading = (loading: boolean) => ({
+    type: types.SET_LOADING,
+    data: loading
+});

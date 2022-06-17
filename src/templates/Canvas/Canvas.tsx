@@ -51,6 +51,7 @@ const Canvas: React.FC = () => {
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [time, setTime] = useState<number>(0);
+	const [base64, setBase64] = useState<string>('');
 
 	const [drawPopup, setDrawPopup] = useState<boolean>(openDrawPopup);
 	const [savePopup, setSavePopup] = useState<boolean>(openSavePopup);
@@ -89,12 +90,12 @@ const Canvas: React.FC = () => {
 			setSaveData({
 				title: 'Time is up!',
 				drawlName: activeDrawl ? activeDrawl.name : `#Drawl ${drawlsList?.length + 1}`,
-				drawl: drawing,
+				drawl: base64,
 				format: format,
 				time: time
 			});
 		}
-	}, [dispatch, over, drawing, format, time, drawlsList, activeDrawl]);
+	}, [dispatch, over, base64, format, time, drawlsList, activeDrawl]);
 
 	const changeCanvasImage = async (canvas: CanvasDraw | any) => {
 		const canvasImages = []
@@ -113,7 +114,7 @@ const Canvas: React.FC = () => {
 		}
 		const resEl = destinationCanvas.toDataURL();
 		const base64Image = await mergeImages([resEl, ...canvasImages]).then(b64 => b64);
-		setDrawing(base64Image);
+		setBase64(base64Image);
 	};
 
 	const mintImage = async () => {
@@ -121,7 +122,7 @@ const Canvas: React.FC = () => {
 		setSaveData({
 			title: 'Mint canvas as...',
 			drawlName: activeDrawl ? activeDrawl.name : `Drawl #${drawlsList?.length + 1}`,
-			drawl: drawing,
+			drawl: base64,
 			format: format,
 			time: time
 		});
@@ -287,7 +288,7 @@ const Canvas: React.FC = () => {
 											alt='ToolbarShadow'
 										/>
 									</li>
-									{/* <li
+									<li
 										className={styles.settings_list_item}
 										onClick={() => modify?.undo()}
 									>
@@ -298,7 +299,7 @@ const Canvas: React.FC = () => {
 										onClick={() =>modify?.clear()}
 									>
 										Clear
-									</li> */}
+									</li>
 								</ul>
 							</div>
 							<DefaultButton

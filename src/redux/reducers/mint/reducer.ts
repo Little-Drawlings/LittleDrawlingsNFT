@@ -9,7 +9,8 @@ const initialState = {
 	openDrawPopup: false,
 	openSavePopup: false,
 	nightMode: false,
-	balance: ''
+	balance: '',
+	loading: false
 };
 
 const mintReducer = (
@@ -56,6 +57,11 @@ const mintReducer = (
 			return {
 				...state,
 				openSavePopup: action?.data,
+			};
+		case MINT_TYPES.SET_LOADING:
+			return {
+				...state,
+				loading: action?.data
 			};
 		default:
 			return state;

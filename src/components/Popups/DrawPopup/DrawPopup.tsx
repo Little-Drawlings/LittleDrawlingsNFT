@@ -40,7 +40,7 @@ const DrawPopup: React.FC = () => {
 	}
 
 	return (
-		<div className={cn('popup-overlay')}>
+		<div className={cn('overlay')}>
 			<div className={cn('popup-content', styles.popup)}>
 				<h3 className={styles.popup_title}>Let’s drawl</h3>
 				<h5 className={styles.format_title}>Select format</h5>

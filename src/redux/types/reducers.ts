@@ -16,4 +16,6 @@ export interface IDrawl {
     userID?: string;
     id?: string;
     _id?: string;
+    ipnsLink: string
 }
+
