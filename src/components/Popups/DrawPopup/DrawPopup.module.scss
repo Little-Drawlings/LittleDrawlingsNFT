@@ -8,18 +8,21 @@
 	background-color: $light;
 	border-radius: 1rem;
 }
+
 .popup_title {
 	font-family: 'LD Scribble';
 	font-weight: 700;
 	font-size: 2.5rem;
 	color: $black;
 }
+
 .format_wrap {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 	margin-bottom: 2rem;
 }
+
 .format_title {
 	font-family: 'Montserrat';
 	font-weight: 500;
@@ -28,6 +31,7 @@
 	width: 100%;
 	color: $darkGrey;
 }
+
 .format {
 	font-family: 'Montserrat';
 	font-size: 0.875rem;
@@ -39,18 +43,23 @@
 	border-radius: 0.5rem;
 	border: 0;
 	cursor: pointer;
+
 	&:first-child {
 		margin-left: 0;
 	}
+
 	&:last-child {
 		margin-right: 0;
 	}
+
 	&.active {
 		background-color: $light;
 		border: 2px solid $dark;
 	}
+
 	&.disabled {
 		background-color: $grey;
+		opacity: 0.5;
 		cursor: default;
 	}
 }
@@ -71,6 +80,7 @@
 	width: 52px;
 	height: 50px;
 }
+
 .small_rectangle {
 	width: 70px;
 	height: 51px;

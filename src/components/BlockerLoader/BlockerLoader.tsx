@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Rings } from 'react-loader-spinner';
+import cn from 'classnames';
 
 import { RootState } from "../../redux/reducers";
 
@@ -18,7 +19,7 @@ const BlockerLoader: React.FC = () => {
     return (
         <>
             {loading && (
-                <div className='overlay'>
+                <div className={cn(styles.overlay, 'overlay')}>
                     <Rings
                         wrapperClass={styles.spinner}
                         height='100'

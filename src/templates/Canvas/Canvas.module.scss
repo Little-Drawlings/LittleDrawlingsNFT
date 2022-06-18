@@ -161,42 +161,36 @@
 }
 
 .settings_list {
-	width: 100%;
 	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 0;
 	margin-left: 163px;
+	background-color: $white;
+
 
 	.settings_list_item {
 		font-family: 'Gloria Hallelujah';
 		font-weight: 400;
-		background-color: $white;
-		width: 5rem;
 		height: 2rem;
 		padding: 1rem;
-		border: 2px solid $canvasBorder;
-		border-radius: 20px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
-		padding: 0.2rem;
+		padding: 0.2rem 0.5rem;
 		position: relative;
+		border-right: 3px solid $dark;
+		border-bottom: 3px solid $dark;
+
+		&:first-child {
+			position: relative;
+			border-left: 3px solid $dark;
+		}
 
 		&.settings_list_item_active {
-			background-color: rgba(255, 255, 0, 0.5);
-		}
-
-		&:active {
-			top: 2px;
-		}
-
-		&:nth-child(2) {
-			&:active {
-				top: 0;
-			}
+			background: url('../../assets/svg/toolbar-hover.svg') center/100% no-repeat;
 		}
 	}
 

@@ -15,9 +15,10 @@ import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
+import { setOpenSavePopup, setTimeMint } from '../../redux/actions/mint';
 
 import styles from './Canvas.module.scss';
-import { setOpenSavePopup, setTimeMint } from '../../redux/actions/mint';
+import RangeInput from '../../components/RangeInput';
 
 
 const Canvas: React.FC = () => {
@@ -250,13 +251,13 @@ const Canvas: React.FC = () => {
 										/>
 									</li>
 									<li className={styles.settings_list_item}>
-										<input
-											className={styles.brash}
+										<RangeInput
+											step={1}
 											min={2}
 											max={50}
-											type='range'
-											onChange={(event) => {
-												setBrushRadius(+event.target.value);
+											value={brushRadius}
+											onChange={(e) => {
+												setBrushRadius(+e.target.value);
 											}}
 										/>
 									</li>
@@ -296,7 +297,7 @@ const Canvas: React.FC = () => {
 									</li>
 									<li
 										className={styles.settings_list_item}
-										onClick={() =>modify?.clear()}
+										onClick={() => modify?.clear()}
 									>
 										Clear
 									</li>

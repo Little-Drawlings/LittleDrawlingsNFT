@@ -46,6 +46,7 @@ a {
   justify-content: center;
   align-items: center;
 }
+
 .popup-content {
   width: 350px;
   z-index: 8;
@@ -61,6 +62,7 @@ a {
   align-items: center;
   z-index: 2;
   overflow: hidden;
+
   &::before {
     content: "";
     position: absolute;
@@ -69,16 +71,15 @@ a {
     height: 210%;
     z-index: 1;
     transition: bottom 1s ease-in-out;
-    background: linear-gradient(
-        180deg,
+    background: linear-gradient(180deg,
         #e3fcff 0%,
         #fcecf5 31.42%,
         #f0cedd 61.98%,
-        #a6b1d6 100%
-      ),
+        #a6b1d6 100%),
       no-repeat;
     transform: rotate(-180deg);
   }
+
   &.night {
     &::before {
       bottom: -100%;
@@ -86,77 +87,16 @@ a {
   }
 }
 
-//range
-
-input[type="range"] {
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  width: 90%;
-  height: 20px;
-  margin: 0;
-  border: none;
-  padding: 1px 2px;
-  border-radius: 14px;
-  background: $grey;
-  box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-  -webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-  outline: none; /* no focus outline */
-}
-
-input[type="range"]::-moz-range-track {
-  border: inherit;
-  background: transparent;
-}
-
-input[type="range"]::-ms-track {
-  border: inherit;
-  color: transparent; /* don't drawn vertical reference line */
-  background: transparent;
-}
-
-input[type="range"]::-ms-fill-lower,
-input[type="range"]::-ms-fill-upper {
-  background: transparent;
-}
-
-input[type="range"]::-ms-tooltip {
-  display: none;
-}
-
-/* thumb */
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 18px;
-  border: none;
-  border-radius: 12px;
-  background: $canvasBorder;
-}
-input[type="range"]::-moz-range-thumb {
-  width: 40px;
-  height: 18px;
-  border: none;
-  border-radius: 12px;
-  background: $canvasBorder;
-}
-
-input[type="range"]::-ms-thumb {
-  width: 40px;
-  height: 18px;
-  border-radius: 12px;
-  border: 0;
-  background: $canvasBorder;
-}
-
 .dropdown {
   &.is-open {
     z-index: 30;
-    & + .dropdown-placeholder {
+
+    &+.dropdown-placeholder {
       opacity: 1;
     }
   }
-  & + .dropdown-placeholder {
+
+  &+.dropdown-placeholder {
     opacity: 0;
   }
 }
