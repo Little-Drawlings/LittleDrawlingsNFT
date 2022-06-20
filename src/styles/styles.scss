@@ -48,7 +48,7 @@ a {
 }
 
 .popup-content {
-  width: 350px;
+  min-width: 350px;
   z-index: 8;
 }
 
@@ -99,4 +99,27 @@ a {
   &+.dropdown-placeholder {
     opacity: 0;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.slider-container {
+  width: 90%;
+}
+
+.slider-control-centerleft {
+  transform: translateX(-90%)!important;
+}
+
+.slider-control-centerright {
+  transform: translateX(90%)!important;
+  text-align: right;
 }

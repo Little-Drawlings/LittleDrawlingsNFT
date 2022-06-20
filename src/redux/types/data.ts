@@ -6,3 +6,14 @@ export interface SavePopupProps {
 	format?: string;
 
 }
+
+export interface DefaultPopupProps {
+	title: string,
+	desc?: string;
+	cancelClass?: string,
+	approveClass?: string,
+	cancelText: string,
+	approveText: string,
+	approveBtnClass?: string,
+	approve: () => void
+}

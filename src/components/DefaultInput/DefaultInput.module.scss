@@ -2,11 +2,10 @@
 
 .input_container {
 	display: flex;
-	justify-content: center;
 	position: relative;
 }
 .input {
-	width: 100%;
+	min-width: 250px;
 	font-family: 'Montserrat';
 	font-weight: 400;
 	font-size: 1rem;

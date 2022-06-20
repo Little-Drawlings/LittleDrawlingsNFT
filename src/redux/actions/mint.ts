@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 
 import types from '../reducers/mint/types';
+import { DefaultPopupProps } from "../types/data";
 
 export const getBalance = () => async (dispatch: any) => {
 	const w: any = window;
@@ -46,12 +47,23 @@ export const setOpenSavePopup = (opened: boolean) => ({
 	data: opened,
 });
 
+export const setOpenDefaultPopup = (opened: boolean) => ({
+	type: types.SET_OPEN_DEFAULT_POPUP,
+	data: opened,
+});
+
+export const setDefaultPopupProps = (data: DefaultPopupProps) => ({
+	type: types.SET_DEFAULT_POPUP_PROPS,
+	data: data,
+});
+
+
 export const setNightModeMint = (nightMode: boolean) => ({
 	type: types.SET_NIGHT_MODE,
 	data: nightMode,
 });
 
 export const setLoading = (loading: boolean) => ({
-    type: types.SET_LOADING,
-    data: loading
+	type: types.SET_LOADING,
+	data: loading
 });

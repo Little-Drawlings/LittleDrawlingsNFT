@@ -23,6 +23,7 @@
 			center/contain no-repeat;
 	}
 	&:disabled {
+		color: $linkColor;
 		background: url('../../assets/svg/wide-btns/primary/disabled-primary-large.svg')
 			center/contain no-repeat;
 	}
@@ -43,6 +44,7 @@
 			center/contain no-repeat;
 	}
 	&:disabled {
+		color: $linkColor;
 		background: url('../../assets/svg/wide-btns/primary/disabled-primary-small.svg')
 			center/contain no-repeat;
 	}
@@ -63,13 +65,14 @@
 			center/contain no-repeat;
 	}
 	&:disabled {
+		color: $linkColor;
 		background: url('../../assets/svg/no-wide-btns/primary/disabled-primary-large.svg')
 			center/contain no-repeat;
 	}
 }
 
 .no_wide_primary_small {
-	width: 171px;
+	width: 180px;
 	height: 50px;
 	color: $activeLinkColor;
 	font-family: 'LD Scribble';
@@ -85,6 +88,7 @@
 			center/contain no-repeat;
 	}
 	&:disabled {
+		color: $linkColor;
 		background: url('../../assets/svg/no-wide-btns/primary/disabled-primary-small.svg')
 			center/contain no-repeat;
 	}
@@ -98,6 +102,7 @@
 			center/contain no-repeat;
 	}
 	&:disabled {
+		color: $linkColor;
 		background: url('../../assets/svg/wide-btns/secondary/disabled-secondary-large.svg')
 			center/contain no-repeat;
 	}
@@ -132,13 +137,14 @@
 			center/contain no-repeat;
 	}
 	&:disabled {
+		color: $linkColor;
 		background: url('../../assets/svg/no-wide-btns/secondary/disabled-secondary-large.svg')
 			center/contain no-repeat;
 	}
 }
 
 .no_wide_secondary_small {
-	width: 171px;
+	width: 180px;
 	height: 50px;
 	color: $activeLinkColor;
 	font-family: 'LD Scribble';
@@ -153,6 +159,7 @@
 			center/contain no-repeat;
 	}
 	&:disabled {
+		color: $linkColor;
 		background: url('../../assets/svg/no-wide-btns/secondary/disabled-secondary-small.svg')
 			center/contain no-repeat;
 	}
@@ -166,6 +173,14 @@
 }
 
 .no_wide_text_large {
+	background: transparent;
+	width: 391px;
+	height: 80px;
+	color: $activeLinkColor;
+	font-family: 'LD Scribble';
+	font-weight: 700;
+	font-size: 1.625rem;
+	line-height: 1;
 	&:hover {
 		background: url('../../assets/svg/no-wide-btns/text/hover-text-large.svg')
 			center/contain no-repeat;
@@ -189,7 +204,7 @@
 
 .no_wide_text_small {
 	background: transparent;
-	width: 160px;
+	width: 180px;
 	height: 50px;
 	color: $activeLinkColor;
 	font-family: 'LD Scribble';
@@ -200,4 +215,16 @@
 		background: url('../../assets/svg/no-wide-btns/text/hover-text-small.svg')
 			center/100% no-repeat;
 	}
+}
+
+.m_zero {
+	margin: 0;
+}
+
+.m_05 {
+	margin: 0.5rem
+}
+
+.m_bottom_05 {
+	margin: 0 0 0.5rem 0;
 }

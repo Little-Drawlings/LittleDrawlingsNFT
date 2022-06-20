@@ -1,6 +1,7 @@
 import { AnyAction, Dispatch } from 'redux';
 
 import { RootState } from '../reducers';
+import { DefaultPopupProps } from './data';
 import { IDrawl } from './reducers';
 export interface MintAppState {
 	time: number;
@@ -9,6 +10,8 @@ export interface MintAppState {
 	mintOver: boolean;
 	openDrawPopup: boolean;
 	openSavePopup: boolean;
+	openDefaultPopup: boolean;
+	defaultPopupProps: DefaultPopupProps
 	nightMode: boolean;
 	balance: string;
 	loading: boolean;

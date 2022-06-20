@@ -1,7 +1,7 @@
-import cn from 'classnames';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 
 
 import { RootState } from '../../../redux/reducers';
@@ -15,7 +15,7 @@ import { dataUrlToFile } from '../../../constants/data';
 import { IDrawl } from '../../../redux/types/reducers';
 import { setOpenSavePopup } from '../../../redux/actions/mint';
 
-import styles from './SavePopup.module.scss';
+import styles from '../DefaultPopup/DefaultPopup.module.scss';
 
 const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
@@ -51,37 +51,35 @@ const SavePopup: React.FC<SavePopupProps> = ({
 			});
 	};
 
-	const mint = () => {
+	const close = () => {
 		dispatch(setOpenSavePopup(false));
 	};
 
 	return (
-		<>
-			<div className={cn('overlay')} onClick={mint}>
-				<div className={cn('popup-content', styles.popup)} onClick={e => e.stopPropagation()}>
-					<h3 className={styles.popup_title}>{title}</h3>
-					<p className={styles.popup_desc}>Save your canvas or mint as...</p>
-					<DefaultInput
-						placeholder='Name'
-						type='text'
-						value={name}
-						onChange={(e) => setName(e.target.value)}
+		<div className={cn('overlay')} onClick={close}>
+			<div className={cn('popup-content', styles.popup)} onClick={e => e.stopPropagation()}>
+				<h3 className={styles.popup_title}>{title}</h3>
+				<p className={styles.popup_desc}>Save your canvas or mint as...</p>
+				<DefaultInput
+					placeholder='Name'
+					type='text'
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+				<div className={styles.buttons_wrap}>
+					<DefaultButton
+						className='no_wide_text_small'
+						title='Save & Close'
+						onClick={save}
 					/>
-					<div className={styles.buttons_wrap}>
-						<DefaultButton
-							className='no_wide_text_small'
-							title='Save & Close'
-							onClick={save}
-						/>
-						<DefaultButton
-							className='no_wide_text_small'
-							title='Mint'
-							onClick={mint}
-						/>
-					</div>
+					<DefaultButton
+						className='no_wide_text_small'
+						title='Mint'
+						onClick={close}
+					/>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

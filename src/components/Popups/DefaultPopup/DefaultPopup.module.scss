@@ -1,0 +1,34 @@
+@import '../../../styles/variables.scss';
+
+.popup {
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 2rem;
+	height: auto;
+	background-color: $light;
+}
+
+.popup_title {
+	font-family: 'Montserrat';
+	font-weight: 500;
+	font-size: 1.35rem;
+	line-height: 1.5rem;
+	color: $black;
+	margin: 1rem 0 0.5rem 0;
+}
+
+.popup_desc {
+	font-family: 'Montserrat';
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.25rem;
+	color: $dark;
+}
+
+.buttons_wrap {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}

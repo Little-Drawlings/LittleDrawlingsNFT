@@ -8,9 +8,11 @@ const initialState = {
 	mintOver: false,
 	openDrawPopup: false,
 	openSavePopup: false,
+	openDefaultPopup: false,
 	nightMode: false,
 	balance: '',
-	loading: false
+	loading: false,
+	defaultPopupProps: {}
 };
 
 const mintReducer = (
@@ -57,6 +59,16 @@ const mintReducer = (
 			return {
 				...state,
 				openSavePopup: action?.data,
+			};
+		case MINT_TYPES.SET_OPEN_DEFAULT_POPUP:
+			return {
+				...state,
+				openDefaultPopup: action?.data,
+			};
+		case MINT_TYPES.SET_DEFAULT_POPUP_PROPS:
+			return {
+				...state,
+				defaultPopupProps: action?.data,
 			};
 		case MINT_TYPES.SET_LOADING:
 			return {

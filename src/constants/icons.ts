@@ -11,6 +11,13 @@ import ToolbarBrush from '../assets/svg/toolbar-master/brush.svg';
 import ToolbarShadow from '../assets/svg/toolbar-master/shadow.svg';
 import CaretUp from '../assets/svg/dropdown/caret-up.svg';
 import CaretDown from '../assets/svg/dropdown/caret-down.svg';
+import GalleryCanvas from '../assets/svg/gallery/canvas.svg';
+import GalleryBrash from '../assets/svg/gallery/brash.svg';
+import GalleryColor from '../assets/svg/gallery/color.svg';
+import GalleryMarker from '../assets/svg/gallery/marker.svg';
+import PrevArrow from '../assets/svg/gallery/prev-arrow.svg';
+import NextArrow from '../assets/svg/gallery/next-arrow.svg'
+
 
 const icons = {
 	Logo,
@@ -26,6 +33,12 @@ const icons = {
 	ToolbarShadow,
 	CaretUp,
 	CaretDown,
+	GalleryCanvas,
+	GalleryBrash,
+	GalleryColor,
+	GalleryMarker,
+	PrevArrow,
+	NextArrow
 };
 
 export default icons;
