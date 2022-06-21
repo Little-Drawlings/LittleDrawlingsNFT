@@ -12,6 +12,8 @@ import { setDefaultPopupProps, setOpenDefaultPopup } from '../../redux/actions/m
 
 import styles from './Gallery.module.scss';
 import GallerySlider from '../../components/GallerySlider';
+import GallerySuppliesItem from '../../components/GallerySuppliesItem';
+import icons from '../../constants/icons';
 
 const Gallery: React.FC = () => {
     const dispatch = useDispatch();
@@ -56,6 +58,17 @@ const Gallery: React.FC = () => {
         }));
     };
 
+    const stake = () => {
+        dispatch(setOpenDefaultPopup(true));
+        dispatch(setDefaultPopupProps({
+            title: `Stake Brush supply?`,
+            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            cancelText: 'Cancel',
+            approveText: 'Stake',
+            approve: () => dispatch(setOpenDefaultPopup(false))
+        }));
+    }
+
     const getClaimValue = (e: { target: { value: string | number; }; }) => {
         let value = +e?.target?.value > 0 ? +e?.target?.value : +e?.target?.value * -1;
         setClaimValue(value);
@@ -97,7 +110,19 @@ const Gallery: React.FC = () => {
                             </div>
                         </div>
                     </div>
+                    <h3 className={styles.gallery_title}>Staked supplies</h3>
                     <GallerySlider />
+                    <h3 className={styles.gallery_title}>Unstaked supplies</h3>
+                    <div className={styles.gallery_supplies}>
+                        <GallerySuppliesItem title={'Brash'} image={icons.GalleryBrash} type={'Rare'} onClick={stake} />
+                        <GallerySuppliesItem title={'Canvas'} image={icons.GalleryCanvas} type={'Rare'} onClick={stake} />
+                        <GallerySuppliesItem title={'Color'} image={icons.GalleryColor} type={'Rare'} onClick={stake} />
+                        <GallerySuppliesItem title={'Marker'} image={icons.GalleryMarker} type={'Rare'} onClick={stake} />
+                        <GallerySuppliesItem title={'Canvas'} image={icons.GalleryCanvas} type={'Rare'} onClick={stake} />
+                        <GallerySuppliesItem title={'Canvas'} image={icons.GalleryCanvas} type={'Rare'} onClick={stake} />
+                        <GallerySuppliesItem title={'Color'} image={icons.GalleryColor} type={'Rare'} onClick={stake} />
+                        <GallerySuppliesItem title={'Brash'} image={icons.GalleryBrash} type={'Rare'} onClick={stake} />
+                    </div>
                 </div>
             </div>
             {defaultPopup && <DefaultPopup />}

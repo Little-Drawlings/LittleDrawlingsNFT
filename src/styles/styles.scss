@@ -112,7 +112,7 @@ input[type=number] {
 }
 
 .slider-container {
-  width: 90%;
+  width: calc(100% - 8rem);
 }
 
 .slider-control-centerleft {

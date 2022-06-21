@@ -19,7 +19,6 @@ const DefaultPopup: React.FC = () => {
     const [popupProps, setPopupProps] = useState<DefaultPopupProps>(defaultPopupProps);
 
     useEffect(() => {
-        console.log(defaultPopupProps, 'ku defaultPopupProps');
         setPopupProps(defaultPopupProps);
     }, [defaultPopupProps]);
 

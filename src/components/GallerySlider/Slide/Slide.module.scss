@@ -15,8 +15,9 @@
     margin: 1rem;
     padding: 1rem;
     transition: box-shadow 0.5s ease-in-out;
-
     &:hover {
+        backdrop-filter: 0;
+        background: $white;
         box-shadow: 0px 8px 12px rgba(78, 75, 154, 0.15);
     }
 }
