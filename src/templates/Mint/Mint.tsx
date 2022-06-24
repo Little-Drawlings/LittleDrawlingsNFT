@@ -33,14 +33,29 @@ const Mint: React.FC = () => {
 	}
 	return (
 		<>
-			<div>
-				<p>
-					Style for every woman, now in regular sizes 02-28.
-					<label htmlFor="modalPDP-1" onClick={(e) => console.log(e.target)}>Learn More <input type="checkbox" id="modalPDP-1" name="test" /></label>
-				</p>
-
-
-				<label htmlFor="modalPDP-1">Last Name 2: </label>
+			<Header />
+			<div className={cn('content', nightMode && 'night')}>
+				<div className={styles.title_wrap}>
+					<div className={cn(styles.animated, nightMode && styles.fade_in)}>
+						<h3 className={styles.title}>Paint & Claim</h3>
+						<p className={styles.text}>Collectable NFT trading game</p>
+					</div>
+					<DefaultButton
+						className='no_wide_primary_large'
+						title='Mint Canvas'
+						onClick={mintCanvas}
+					/>
+				</div>
+				<div className={cn(styles.left_images, styles.fade_in, nightMode && styles.active)}>
+					<img className={styles.left_img} src={icons.AdamImg} alt='Adam' />
+				</div>
+				<div className={cn(styles.right_images, styles.fade_in, nightMode && styles.active)}>
+					<img
+						className={styles.right_img}
+						src={icons.GodImg}
+						alt='God'
+					/>
+				</div>
 			</div>
 		</>
 	);
