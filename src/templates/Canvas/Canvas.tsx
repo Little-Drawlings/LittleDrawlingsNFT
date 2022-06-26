@@ -8,8 +8,8 @@ import mergeImages from 'merge-images';
 import Header from '../../components/Header';
 import DefaultButton from '../../components/DefaultButton';
 import CountDown from '../../components/CountDown';
-import DrawPopup from '../../components/popups/DrawPopup';
-import SavePopup from '../../components/popups/SavePopup';
+import DrawPopup from '../../components/Popups/DrawPopup';
+import SavePopup from '../../components/Popups/SavePopup';
 
 import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';

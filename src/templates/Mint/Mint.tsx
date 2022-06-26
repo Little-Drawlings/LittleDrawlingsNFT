@@ -5,12 +5,12 @@ import { motion } from "framer-motion"
 
 import Header from '../../components/Header';
 import { RootState } from '../../redux/reducers';
-import Welcome from '../../components/mintComponents/Welcome';
-import MasterStudio from '../../components/mintComponents/MasterStudio';
-import MintStudio from '../../components/mintComponents/MintStudio';
-import LetsDraw from '../../components/mintComponents/LetsDraw';
-import RoadMap from '../../components/mintComponents/RoadMap';
-import MintFooter from '../../components/mintComponents/MintFooter';
+import Welcome from '../../components/MintComponents/Welcome';
+import MasterStudio from '../../components/MintComponents/MasterStudio';
+import MintStudio from '../../components/MintComponents/MintStudio';
+import LetsDraw from '../../components/MintComponents/LetsDraw';
+import RoadMap from '../../components/MintComponents/RoadMap';
+import MintFooter from '../../components/MintComponents/MintFooter';
 
 import styles from './Mint.module.scss';
 
