@@ -9,7 +9,7 @@ export const contractDrawl = async (ipnsPath: string) => {
     const w: any = window;
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
-    const address = await signer.getAddress();
+    //const address = await signer.getAddress();
     // const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
     // if (address && ipnsPath) {
     //     return await contract.mintNFT(address, ipnsPath, { gasLimit: 210000 });
