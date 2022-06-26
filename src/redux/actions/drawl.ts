@@ -19,7 +19,6 @@ export const contractDrawl = async (ipnsPath: string) => {
 export const getAbiData = () => {
     const url = process.env.REACT_APP_ABI_URL;
     console.log(url);
-    
     if (!url) return;
     return API.get(url).then(response => console.log(JSON.stringify(response), 'ku response')
     )
