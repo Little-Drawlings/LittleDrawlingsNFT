@@ -1,0 +1,58 @@
+@import '../../../styles/variables.scss';
+
+.road_map {
+    margin: 2rem 0;
+}
+
+.title_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.phase_wrap {
+    width: calc(100% - 10rem);
+    display: flex;
+    margin: 5rem;
+    &.first {
+        justify-content: flex-end;
+        align-items: center;
+    }
+    &.second {
+        flex-direction: column;
+    }
+}
+
+.phase_title {
+    margin: 0;
+    font-family: 'Mali';
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+    text-transform: uppercase;
+    color: $maliColor;
+}
+
+.phase_list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style-image: url('../../../assets/svg/mint/phase-list-style.svg');
+}
+
+.phase_item {
+    font-family: 'Mali';
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: $maliColor;
+}
+
+.phase_img {
+    max-width: 100%;
+    &.first {
+        margin-top: 4rem;
+    }
+}

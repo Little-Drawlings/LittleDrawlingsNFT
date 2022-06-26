@@ -3,8 +3,6 @@ import types from '../reducers/drawl/types';
 import { IDrawl } from '../types/reducers';
 
 import { ethers } from "ethers";
-import { abi } from '../../constants/abi';
-import { CONTRACT_ADDRESS } from '../../constants/data';
 import { setLoading } from './mint';
 
 export const contractDrawl = async (ipnsPath: string) => {
@@ -12,10 +10,19 @@ export const contractDrawl = async (ipnsPath: string) => {
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
-    if (address && ipnsPath) {
-        return await contract.mintNFT(address, ipnsPath, { gasLimit: 210000 });
-    }
+    // const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
+    // if (address && ipnsPath) {
+    //     return await contract.mintNFT(address, ipnsPath, { gasLimit: 210000 });
+    // }
+}
+
+export const getAbiData = () => {
+    const url = process.env.REACT_APP_ABI_URL;
+    console.log(url);
+    
+    if (!url) return;
+    return API.get(url).then(response => console.log(JSON.stringify(response), 'ku response')
+    )
 }
 
 export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => async (dispatch: (arg0: { type: string; data: IDrawl | boolean }) => void) => {
@@ -40,7 +47,7 @@ export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => asy
     }).finally(() => dispatch(setLoading(false)))
 }
 
-export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl | null | boolean}) => void) => {
+export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl | null | boolean }) => void) => {
     if (!id) {
         dispatch({
             type: types.GET_DRAWL,

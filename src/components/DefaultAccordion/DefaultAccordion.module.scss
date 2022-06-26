@@ -1,0 +1,69 @@
+@import '../../styles/variables.scss';
+
+.accordion {
+    width: 100%;
+    margin: 0.5rem;
+    background: rgba(255, 252, 254, 0.4);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    border: 3px solid transparent;
+    cursor: pointer;
+    &:hover {
+        border: 3px solid #5CC6EB;
+    }
+
+    &.open {
+        &:hover {
+            border: 3px solid transparent;
+        }
+    }
+}
+
+.accordion_title_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accordion_title {
+    font-family: 'Mali';
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+    text-transform: uppercase;
+    color: $maliColor;
+}
+
+.accordion_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 0;
+    transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+    &.open {
+        .content_text {
+            visibility: visible;
+        }
+
+        transition: all 1s ease-in-out;
+        max-height: 1000px;
+    }
+}
+
+.content_text {
+    padding: 1rem;
+    visibility: hidden;
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    text-align: center;
+    color: $maliColor;
+}

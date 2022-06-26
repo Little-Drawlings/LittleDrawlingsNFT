@@ -11,6 +11,8 @@
 	backdrop-filter: blur(10px);
 	z-index: 3;
 	overflow: hidden;
+	position: fixed;
+    top: 0;
 }
 .nav_list {
 	margin: 0;

@@ -1,0 +1,30 @@
+@import '../../../styles/variables.scss';
+
+.mint_studio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub_title {
+    width: 100%;
+    margin: 0;
+    font-family: 'Mali';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 3.25rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: $maliColor
+}
+.canvas_img_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.canvas_img {
+    max-width: 55vw;
+}

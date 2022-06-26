@@ -12,7 +12,7 @@ import icons from "../../../constants/icons";
 
 import styles from './Welcome.module.scss';
 
-const Welcome = () => {
+const Welcome: React.FC = () => {
     const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -32,11 +32,11 @@ const Welcome = () => {
 	}
 
     return (
-        <div className={styles.welcome}>
+        <div className={cn('mint-wrapper', styles.welcome)}>
             <div className={styles.title_wrap}>
                 <div className={cn(styles.animated, nightMode && styles.fade_in)}>
-                    <h3 className={styles.title}>Paint & Claim</h3>
-                    <p className={styles.text}>Collectable NFT trading game</p>
+                    <h3 className={styles.title}><span className='title-span'>Welcome to</span></h3>
+                    <img className={styles.welcome_image} src={icons.WelcomeImg} alt='Welcome' />
                 </div>
                 <DefaultButton
                     className='no_wide_primary_large'
@@ -45,7 +45,7 @@ const Welcome = () => {
                 />
             </div>
             <div className={cn(styles.left_images, styles.fade_in, nightMode && styles.active)}>
-                <img className={styles.left_img} src={icons.AdamImg} alt='Adam' />
+                <img className={cn(styles.left_img)} src={icons.AdamImg} alt='Adam' />
             </div>
             <div className={cn(styles.right_images, styles.fade_in, nightMode && styles.active)}>
                 <img
