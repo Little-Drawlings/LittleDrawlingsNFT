@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
-import { motion } from "framer-motion"
 
 import Header from '../../components/Header';
 import { RootState } from '../../redux/reducers';
@@ -12,7 +11,6 @@ import LetsDraw from '../../components/MintComponents/LetsDraw';
 import RoadMap from '../../components/MintComponents/RoadMap';
 import MintFooter from '../../components/MintComponents/MintFooter';
 
-import styles from './Mint.module.scss';
 
 const Mint: React.FC = () => {
 	const nightModeMint = useSelector(

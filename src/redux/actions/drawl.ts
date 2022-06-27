@@ -9,19 +9,23 @@ export const contractDrawl = async (ipnsPath: string) => {
     const w: any = window;
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
-    //const address = await signer.getAddress();
-    // const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
-    // if (address && ipnsPath) {
-    //     return await contract.mintNFT(address, ipnsPath, { gasLimit: 210000 });
-    // }
+    const contractData: any = await getContractData();
+    console.log(contractData);
+    
+    const address = await signer.getAddress();
+    const contract = new ethers.Contract(contractData.address, contractData.abi, signer);
+    if (address && ipnsPath) {
+        return await contract.mintNFT(address, ipnsPath, { gasLimit: 210000 });
+    }
 }
 
-export const getAbiData = () => {
-    const url = process.env.REACT_APP_ABI_URL;
-    console.log(url);
-    if (!url) return;
-    return API.get(url).then(response => console.log(JSON.stringify(response), 'ku response')
-    )
+export const getContractData = () => (dispatch: (arg0: { type: string; data: boolean }) => void) => {
+    dispatch(setLoading(true));
+    return API.get(`/drawl/getContractData`).then((response) => {
+        return response?.data
+    }).catch((error) => {
+        throw error;
+    }).finally(() => dispatch(setLoading(false)))
 }
 
 export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => async (dispatch: (arg0: { type: string; data: IDrawl | boolean }) => void) => {
