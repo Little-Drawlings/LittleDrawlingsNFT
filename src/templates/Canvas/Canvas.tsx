@@ -9,8 +9,8 @@ import Header from '../../components/Header';
 import DefaultButton from '../../components/DefaultButton';
 import CountDown from '../../components/CountDown';
 import RangeInput from '../../components/RangeInput';
-import DrawPopup from '../../components/popups/DrawPopup';
-import SavePopup from '../../components/popups/SavePopup';
+import DrawPopup from '../../components/popupsComponents/DrawPopup';
+import SavePopup from '../../components/popupsComponents/SavePopup';
 
 import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';

@@ -8,7 +8,7 @@ import DefaultInput from '../../components/DefaultInput';
 
 import { RootState } from '../../redux/reducers';
 import { setDefaultPopupProps, setOpenDefaultPopup } from '../../redux/actions/mint';
-import DefaultPopup from '../../components/popups/DefaultPopup';
+import DefaultPopup from '../../components/popupsComponents/DefaultPopup';
 
 import styles from './Gallery.module.scss';
 import GallerySlider from '../../components/GallerySlider';
