@@ -1,13 +1,10 @@
 import cn from 'classnames';
 
 import icons from '../../../constants/icons';
-import { getAbiData } from '../../../redux/actions/drawl';
 
 import styles from './RoadMap.module.scss';
 
 const RoadMap: React.FC = () => {
-    getAbiData()
-    
     return (
         <div className={cn('mint-wrapper', 'mint-height_auto', styles.road_map)}>
             <div className={styles.title_wrap}>
