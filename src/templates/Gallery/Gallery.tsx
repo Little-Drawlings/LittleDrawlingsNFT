@@ -5,10 +5,10 @@ import cn from 'classnames';
 import Header from '../../components/Header';
 import DefaultButton from '../../components/DefaultButton';
 import DefaultInput from '../../components/DefaultInput';
-import DefaultPopup from '../../components/Popups/DefaultPopup';
 
 import { RootState } from '../../redux/reducers';
 import { setDefaultPopupProps, setOpenDefaultPopup } from '../../redux/actions/mint';
+import DefaultPopup from '../../components/popups/DefaultPopup';
 
 import styles from './Gallery.module.scss';
 import GallerySlider from '../../components/GallerySlider';

@@ -8,8 +8,9 @@ import mergeImages from 'merge-images';
 import Header from '../../components/Header';
 import DefaultButton from '../../components/DefaultButton';
 import CountDown from '../../components/CountDown';
-import DrawPopup from '../../components/Popups/DrawPopup';
-import SavePopup from '../../components/Popups/SavePopup';
+import RangeInput from '../../components/RangeInput';
+import DrawPopup from '../../components/popups/DrawPopup';
+import SavePopup from '../../components/popups/SavePopup';
 
 import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
@@ -18,8 +19,6 @@ import icons from '../../constants/icons';
 import { setOpenSavePopup, setTimeMint } from '../../redux/actions/mint';
 
 import styles from './Canvas.module.scss';
-import RangeInput from '../../components/RangeInput';
-
 
 const Canvas: React.FC = () => {
 	const dispatch = useDispatch();
