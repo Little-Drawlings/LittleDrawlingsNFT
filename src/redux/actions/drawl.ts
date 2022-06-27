@@ -10,8 +10,11 @@ export const contractDrawl = async (ipnsPath: string) => {
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
     const contractData: any = await getContractData();
-    console.log(contractData);
-    
+
+    if (!contractData) {
+        return
+    }
+
     const address = await signer.getAddress();
     const contract = new ethers.Contract(contractData.address, contractData.abi, signer);
     if (address && ipnsPath) {
@@ -19,13 +22,12 @@ export const contractDrawl = async (ipnsPath: string) => {
     }
 }
 
-export const getContractData = () => (dispatch: (arg0: { type: string; data: boolean }) => void) => {
-    dispatch(setLoading(true));
+export const getContractData = () => {
     return API.get(`/drawl/getContractData`).then((response) => {
         return response?.data
     }).catch((error) => {
         throw error;
-    }).finally(() => dispatch(setLoading(false)))
+    })
 }
 
 export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => async (dispatch: (arg0: { type: string; data: IDrawl | boolean }) => void) => {
