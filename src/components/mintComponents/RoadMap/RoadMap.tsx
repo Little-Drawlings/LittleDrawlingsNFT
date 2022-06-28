@@ -11,8 +11,8 @@ const RoadMap: React.FC = () => {
                 <img src={icons.RoadMap} alt="RoadMap" />
             </div>
             <div className={cn(styles.phase_wrap, styles.first)}>
-                <img className={cn(styles.phase_img, styles.first)} src={icons.Phase1} alt="Phase1" />
-                <div>
+                <img className={cn(styles.phase_img, styles.end)} src={icons.Phase1} alt="Phase1" />
+                <div className={styles.text_wrap}>
                     <h3 className={styles.phase_title}>Phase 1</h3>
                     <ul className={styles.phase_list}>
                         <li className={styles.phase_item}>Canvas dNFT MVP Alpha Mint Access by Donation</li>
@@ -21,7 +21,7 @@ const RoadMap: React.FC = () => {
                     </ul>
                 </div>
             </div>
-            <div className={cn(styles.phase_wrap, styles.second)}>
+            <div className={cn(styles.phase_wrap, styles.column)}>
                 <h3 className={styles.phase_title}>Phase 2</h3>
                 <ul className={styles.phase_list}>
                     <li className={styles.phase_item}>Initial Mint of Little Drawlings dNfts</li>
@@ -29,9 +29,9 @@ const RoadMap: React.FC = () => {
                     <li className={styles.phase_item}>dNFT visual attribute and metadata reward boosting upgrades</li>
                 </ul>
             </div>
-            <div className={styles.phase_wrap}>
+            <div className={cn(styles.phase_wrap, styles.end)}>
                 <img className={styles.phase_img} src={icons.Phase2} alt="Phase2" />
-                <div>
+                <div className={styles.text_wrap}>
                     <h3 className={styles.phase_title}>Phase 3</h3>
                     <ul className={styles.phase_list}>
                         <li className={styles.phase_item}>Community & Dev Team collaboration of future organization structure</li>
@@ -42,7 +42,7 @@ const RoadMap: React.FC = () => {
                 </div>
             </div>
             <div className={styles.phase_wrap}>
-                <div>
+                <div className={styles.text_wrap}>
                     <h3 className={styles.phase_title}>Phase 4</h3>
                     <ul className={styles.phase_list}>
                         <li className={styles.phase_item}>Next Gen NFT drop</li>

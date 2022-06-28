@@ -4,6 +4,10 @@
     margin: 2rem 0;
 }
 
+.text_wrap {
+    max-width: 50%;
+}
+
 .title_wrap {
     width: 100%;
     display: flex;
@@ -15,16 +19,25 @@
     width: calc(100% - 10rem);
     display: flex;
     margin: 5rem;
+
+    &.end,
     &.first {
         justify-content: flex-end;
         align-items: center;
     }
-    &.second {
+
+    &.end {
+        margin-top: -10rem;
+    }
+
+    &.column {
+        max-width: 50%;
         flex-direction: column;
     }
 }
 
 .phase_title {
+    max-width: 50%;
     margin: 0;
     font-family: 'Mali';
     font-weight: 600;
@@ -35,6 +48,7 @@
 }
 
 .phase_list {
+    max-width: 50%;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -51,8 +65,9 @@
 }
 
 .phase_img {
-    max-width: 100%;
-    &.first {
+    max-width: 50%;
+
+    &.end {
         margin-top: 4rem;
     }
 }
