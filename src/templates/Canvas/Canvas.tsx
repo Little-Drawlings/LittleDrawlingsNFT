@@ -12,6 +12,8 @@ import RangeInput from '../../components/RangeInput';
 import DrawPopup from '../../components/popupsComponents/DrawPopup';
 import SavePopup from '../../components/popupsComponents/SavePopup';
 
+import { getAllDrawls } from '../../redux/actions/drawl';
+import { AppDispatch } from '../../redux/store';
 import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
@@ -19,9 +21,10 @@ import icons from '../../constants/icons';
 import { setOpenSavePopup, setTimeMint } from '../../redux/actions/mint';
 
 import styles from './Canvas.module.scss';
+import axios from 'axios';
 
 const Canvas: React.FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 	const openDrawPopup = useSelector(
 		(state: RootState) => state?.mintReducer.openDrawPopup
@@ -35,13 +38,14 @@ const Canvas: React.FC = () => {
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
 	);
-	const drawlsList = useSelector(
+	const drawls = useSelector(
 		(state: RootState) => state?.drawlReducer.drawls
 	);
 	let modify: CanvasDraw | null;
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
-	const [drawing, setDrawing] = useState<string>('');
+	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
+	const [drawing, setDrawing] = useState<string>(activeDrawl.image);
 	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
 	const [brushRadius, setBrushRadius] = useState<number>(5);
 	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
@@ -49,12 +53,16 @@ const Canvas: React.FC = () => {
 	const [saveData, setSaveData] = useState<SavePopupProps | null>(null);
 	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL);
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
-	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [time, setTime] = useState<number>(0);
 	const [base64, setBase64] = useState<string>('');
+	const [drawlsList, setDrawlsList] = useState(drawls);
 
 	const [drawPopup, setDrawPopup] = useState<boolean>(openDrawPopup);
 	const [savePopup, setSavePopup] = useState<boolean>(openSavePopup);
+
+	useEffect(() => {
+		dispatch(getAllDrawls())
+	}, [dispatch])
 
 	useEffect(() => {
 		if (mintTime) {
@@ -63,11 +71,15 @@ const Canvas: React.FC = () => {
 	}, [mintTime]);
 
 	useEffect(() => {
+		setDrawlsList(drawls);
+	}, [drawls]);
+
+	useEffect(() => {
 		if (activeDrawl) {
 			dispatch(setTimeMint(activeDrawl?.time))
-			setDrawing(activeDrawl?.image)
+			axios.get(drawing).then((result: any) => setDrawing(result))
 		}
-	}, [activeDrawl, dispatch])
+	}, [activeDrawl, dispatch, drawing])
 
 	useEffect(() => {
 		setDrawPopup(openDrawPopup);
@@ -162,6 +174,7 @@ const Canvas: React.FC = () => {
 		instrument === INSTRUMENTS.PENCIL_BRUSH
 			? brushColor.slice(0, -2)
 			: brushColor;
+
 
 	return (
 		<>

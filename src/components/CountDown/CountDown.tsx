@@ -44,8 +44,11 @@ const CountDown: React.FC<Props> = ({ className }) => {
 
 	useEffect(() => {
 		setPaused(mintPause);
+	}, [mintPause]);
+
+	useEffect(() => {
 		setOver(mintOver);
-	}, [mintPause, mintOver]);
+	}, [mintOver]);
 
 	useEffect(() => {
 		let timerID = setInterval(() => tick(), 1000);

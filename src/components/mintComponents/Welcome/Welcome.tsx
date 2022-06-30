@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import cn from 'classnames';
 
 import { getDrawl } from "../../../redux/actions/drawl";
-import { setOpenDrawPopup } from "../../../redux/actions/mint";
+import { setOpenDrawPopup, setTimeMint } from "../../../redux/actions/mint";
 import { RootState } from "../../../redux/reducers";
 import { AppDispatch } from "../../../redux/store";
 import DefaultButton from "../../DefaultButton";
@@ -28,6 +28,7 @@ const Welcome: React.FC = () => {
     const mintCanvas = () => {
 		dispatch(getDrawl(''));
 		dispatch(setOpenDrawPopup(true));
+        dispatch(setTimeMint(1200));
 		navigate('/studio/canvas')
 	}
 

@@ -13,7 +13,7 @@ import { getAllDrawls, getDrawl } from '../../redux/actions/drawl';
 import { AppDispatch } from '../../redux/store';
 import { IDrawl } from '../../redux/types/reducers';
 import { DRAWLS_SORT_VALUES } from '../../constants/data';
-import { setOpenDrawPopup, setOverMint } from '../../redux/actions/mint';
+import { setOpenDrawPopup, setOverMint, setTimeMint } from '../../redux/actions/mint';
 
 import styles from './Studio.module.scss';
 
@@ -54,16 +54,20 @@ const Studio: React.FC = () => {
 
 	const openCanvas = (id?: string) => {
 		if (id) {
-			dispatch(setOverMint(false))
-			dispatch(getDrawl(id)).then(() => {
-				navigate('/studio/canvas')
+			dispatch(setOverMint(false));
+			dispatch(getDrawl(id)).then((res: any) => {
+				if (res) {
+					navigate('/studio/canvas')
+				}
+
 			})
 		}
 	}
 
 	const openNewCanvas = () => {
 		dispatch(getDrawl(''));
-		dispatch(setOpenDrawPopup(true))
+		dispatch(setOpenDrawPopup(true));
+		dispatch(setTimeMint(1200));
 		navigate('/studio/canvas')
 	}
 
