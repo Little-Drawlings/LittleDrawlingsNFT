@@ -92,7 +92,7 @@ const Studio: React.FC = () => {
 					{drawls?.length ? drawls.map((drawl, key) =>
 						<Drawl
 							key={key}
-							image={'https://ipfs.pragmaticdlt.com/ipns/' + drawl.ipnsLink}
+							image={drawl.image}
 							title={drawl.name || ''}
 							size={drawl.format}
 							edited={drawl.updatedAt || ''}
