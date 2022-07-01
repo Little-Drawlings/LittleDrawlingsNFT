@@ -21,7 +21,6 @@ import icons from '../../constants/icons';
 import { setOpenSavePopup, setTimeMint } from '../../redux/actions/mint';
 
 import styles from './Canvas.module.scss';
-import axios from 'axios';
 
 const Canvas: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -45,7 +44,7 @@ const Canvas: React.FC = () => {
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
-	const [drawing, setDrawing] = useState<string>(activeDrawl.image);
+	const [drawing, setDrawing] = useState<string>('');
 	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
 	const [brushRadius, setBrushRadius] = useState<number>(5);
 	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
@@ -77,9 +76,9 @@ const Canvas: React.FC = () => {
 	useEffect(() => {
 		if (activeDrawl) {
 			dispatch(setTimeMint(activeDrawl?.time))
-			axios.get(drawing).then((result: any) => setDrawing(result))
+			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`)
 		}
-	}, [activeDrawl, dispatch, drawing])
+	}, [activeDrawl, dispatch])
 
 	useEffect(() => {
 		setDrawPopup(openDrawPopup);
