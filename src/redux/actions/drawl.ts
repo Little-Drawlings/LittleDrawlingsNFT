@@ -53,8 +53,6 @@ export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => asy
 }
 
 export const getDrawl = (id: string) => (dispatch: (arg0: { type: string; data: IDrawl | null | boolean }) => void) => {
-    console.log(id, 'ku id');
-    
     if (!id) {
         dispatch({
             type: types.GET_DRAWL,
