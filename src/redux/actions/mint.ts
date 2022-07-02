@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import { deleteToken } from "../../api";
 
 import types from '../reducers/mint/types';
 import { DefaultPopupProps } from "../types/data";
@@ -7,14 +8,20 @@ export const getBalance = () => async (dispatch: any) => {
 	const w: any = window;
 	const provider = new ethers.providers.Web3Provider(w.ethereum);
 	const signer = provider.getSigner();
-	const address = await signer.getAddress();
-	provider.getBalance(address).then((balance) => {
-		const balanceInEth = ethers.utils.formatEther(balance)
-		dispatch({
-			type: types.SET_BALANCE,
-			data: balanceInEth,
+	let address = '';
+	try {
+		address = await signer.getAddress();
+		provider.getBalance(address).then((balance) => {
+			const balanceInEth = ethers.utils.formatEther(balance)
+			dispatch({
+				type: types.SET_BALANCE,
+				data: balanceInEth,
+			})
 		})
-	})
+	}
+	catch {
+		deleteToken()
+	}
 }
 
 export const setPauseMint = (pause: boolean) => ({

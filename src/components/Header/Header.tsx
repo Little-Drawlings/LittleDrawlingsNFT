@@ -13,37 +13,38 @@ import { AppDispatch } from '../../redux/store';
 
 import styles from './Header.module.scss';
 import { signInMetamask } from '../../redux/actions/auth';
+import { deleteToken } from '../../api';
 
 const Header: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const [nightMode, setNightMode] = useState<boolean>(false);
-	const [animateImage, setAnimateImage] = useState<boolean>(false);
-	const [balance, setBalance] = useState<string>('')
-
-	const connect = () => {
-		dispatch(signInMetamask()).then(() => {
-			dispatch(getBalance())
-		})
-	};
-
-	const metaMaskData = useSelector(
-		(state: RootState) => state?.authReducer.metaMaskData
-	);
-	const address = metaMaskData?.user?.publicAddress;
-
-
-
+	const canvasPath = window.location.pathname.includes('/studio/');
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
 	);
+	const metaMaskData = useSelector(
+		(state: RootState) => state?.authReducer.metaMaskData
+	);
+	const balanceMint = useSelector(
+		(state: RootState) => state?.mintReducer.balance
+	);
+
+	const [nightMode, setNightMode] = useState<boolean>(false);
+	const [animateImage, setAnimateImage] = useState<boolean>(false);
+	const [balance, setBalance] = useState<string>('');
+	const [address, setAddress] = useState<string>('');
+
+	useEffect(() => {
+		if (metaMaskData) {
+			setAddress(metaMaskData.user?.publicAddress);
+		}
+		else {
+			deleteToken();
+		}
+	}, [metaMaskData])
 
 	useEffect(() => {
 		dispatch(getBalance())
 	}, [dispatch])
-
-	const balanceMint = useSelector(
-		(state: RootState) => state?.mintReducer.balance
-	);
 
 	useEffect(() => {
 		setBalance(balanceMint);
@@ -60,9 +61,12 @@ const Header: React.FC = () => {
 			setAnimateImage(false);
 		}, 1000);
 	};
-	
 
-	const canvasPath = window.location.pathname.includes('/studio/');
+	const connect = () => {
+		dispatch(signInMetamask()).then(() => {
+			dispatch(getBalance())
+		})
+	};
 
 	return (
 		<div className={cn(styles.header)}>
