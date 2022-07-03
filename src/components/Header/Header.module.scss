@@ -107,3 +107,13 @@
 		transform: translate3d(0, 0, 0);
 	}
 }
+
+@media only screen and (max-width: 1200px) {
+	.connect_value, .connect_eth {
+		font-size: 0.8rem;
+	}
+	.connect_circle {
+		width: 20px;
+		height: 20px;
+	}
+}

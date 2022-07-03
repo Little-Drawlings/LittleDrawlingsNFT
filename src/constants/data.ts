@@ -13,6 +13,7 @@ export const COLORS = [
 	'#B38FFF',
 	'#FFAE4F',
 	'#979797',
+	'#000',
 ];
 
 export const INSTRUMENTS = {

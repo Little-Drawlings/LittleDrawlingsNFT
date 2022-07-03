@@ -7,18 +7,29 @@
 	font-family: 'DM Sans';
 	font-size: 1.25rem;
 	font-weight: 700;
+
 	&:hover {
 		color: $secondary;
 	}
 }
+
 .nav_link {
 	color: $linkColor;
 }
+
 .nav_link_active {
 	color: $activeLinkColor;
 }
+
 .nav_link_studio {
 	text-decoration: underline;
 	text-underline-offset: 0.5rem;
 	text-decoration-thickness: 3px;
+}
+
+@media only screen and (max-width: 1200px) {
+	.nav_link,
+	.nav_link_active {
+		font-size: 1rem;
+	}
 }
