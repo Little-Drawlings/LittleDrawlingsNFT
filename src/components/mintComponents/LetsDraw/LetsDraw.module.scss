@@ -25,3 +25,13 @@
 .jump_img_pallette {
     margin-top: -5rem;
 }
+
+.clouds_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .clouds_img {
+        max-width: 50%;
+    }
+}

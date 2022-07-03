@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cn from "classnames";
 
 import styles from './DefaultAccordion.module.scss';
@@ -7,11 +7,19 @@ interface Props {
     title: string;
     icon?: JSX.Element;
     text: string;
-
+    isDefaultOpen?: boolean
 }
 
-const DefaultAccordion: React.FC<Props> = ({ title, icon = null, text }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+const DefaultAccordion: React.FC<Props> = ({ title, icon = null, text, isDefaultOpen = false }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(isDefaultOpen);
+
+    useEffect(() => {
+        if (isDefaultOpen) {
+            setTimeout(() => {
+                setIsOpen(isDefaultOpen)
+            }, 500)
+        }
+    }, [isDefaultOpen])
 
     const toggle = () => {
         setIsOpen(!isOpen)
