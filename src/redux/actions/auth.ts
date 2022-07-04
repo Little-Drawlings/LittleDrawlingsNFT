@@ -20,7 +20,6 @@ export const signOut = () => {
 }
 
 export const signInMetamask = () => async (dispatch: (arg0: { type: string; data: MetaMaskData | boolean }) => void) => {
-    dispatch(setLoading(true));
     const w: any = window;
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     await provider.send("eth_requestAccounts", []);
@@ -36,7 +35,7 @@ export const signInMetamask = () => async (dispatch: (arg0: { type: string; data
         return null;
     }
     const data = { account, signature, chainId };
-
+    dispatch(setLoading(true));
     return API.post('/auth/login-metamask', data)
         .then(async (response) => {
             if (response?.status) {

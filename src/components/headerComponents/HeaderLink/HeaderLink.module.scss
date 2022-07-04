@@ -32,7 +32,9 @@
 	color: $activeLinkColor;
 	font-size: 2.5rem!important;
 	line-height: 3.25rem;
-
+	&.white_link {
+		color: $white;
+	}
 	&.nav_link_active {
 		color: $secondary;
 	}

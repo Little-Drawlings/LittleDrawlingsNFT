@@ -23,6 +23,11 @@
 
 .open_mobile_header {
 	background: $white;
+
+	&.header_night_mode {
+		background: rgba(8, 3, 33, 0.7);
+		backdrop-filter: blur(60px);
+	}
 }
 
 .nav_list {

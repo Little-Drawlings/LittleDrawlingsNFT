@@ -77,7 +77,7 @@ const Header: React.FC = () => {
 
 	return (
 		<div className={styles.header_wrap}>
-			<div className={cn(styles.header, openMenu && styles.open_mobile_header)}>
+			<div className={cn(styles.header, openMenu && styles.open_mobile_header, nightMode && styles.header_night_mode)}>
 				<Link to={'/'}>
 					<img className={styles.logo} src={icons.Logo} alt='logo' />
 				</Link>
@@ -142,7 +142,7 @@ const Header: React.FC = () => {
 					{openMenu && (
 						<img
 							className={styles.burger_icon}
-							src={icons.BurgerArrow}
+							src={nightMode ? icons.BurgerArrowNight : icons.BurgerArrow}
 							alt='BurgerArrow'
 							onClick={() => setOpenMenu(!openMenu)}
 						/>
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
 				</div>
 			</div>
 			<motion.div animate={openMenu ? 'open' : 'closed'} variants={variants}>
-				{openMenu && <MobileHeader />}
+				{openMenu && <MobileHeader nightModeProp={nightMode} />}
 			</motion.div>
 		</div>
 	);

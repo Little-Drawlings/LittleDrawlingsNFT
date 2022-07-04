@@ -7,8 +7,13 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: calc(100vh - 57px);
-    z-index: 100;
+    z-index: 10;
     background: $white;
+
+    &.mobile_header_night {
+        background: rgba(8, 3, 33, 0.7);
+        backdrop-filter: blur(60px);
+    }
 }
 
 .info_wrap {
@@ -56,6 +61,9 @@
     display: inline-block;
     font-size: 0.95rem;
     margin-right: 0.3rem;
+    &.connect_value_night {
+        color: $light;
+    }
 }
 
 .connect_circle {
@@ -75,6 +83,9 @@
     font-size: 0.95rem;
     justify-content: center;
     align-items: center;
+    &.connect_eth_night {
+        color: $light;
+    }
 }
 
 .copyright {
