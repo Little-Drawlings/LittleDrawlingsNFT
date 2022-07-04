@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import Header from '../../components/Header';
+import Header from '../../components/headerComponents/Header';
 import { RootState } from '../../redux/reducers';
 
 import Welcome from '../../components/mintComponents/Welcome';

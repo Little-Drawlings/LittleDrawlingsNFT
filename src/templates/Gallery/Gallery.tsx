@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import Header from '../../components/Header';
+import Header from '../../components/headerComponents/Header';
 import DefaultButton from '../../components/DefaultButton';
 import DefaultInput from '../../components/DefaultInput';
 

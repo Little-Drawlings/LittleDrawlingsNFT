@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Option } from 'react-dropdown';
 import cn from 'classnames';
 
-import Header from '../../components/Header';
+import Header from '../../components/headerComponents/Header';
 import Drawl from '../../components/Drawl';
 import DefaultDropdown from '../../components/DefaultDropdown';
 import DefaultButton from '../../components/DefaultButton';

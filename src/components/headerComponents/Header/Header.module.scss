@@ -1,32 +1,46 @@
-@import '../../styles/variables';
+@import '../../../styles/variables';
+
+.header_wrap {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	height: fit-content;
+	z-index: 3;
+	display: flex;
+	flex-direction: column;
+}
 
 .header {
 	width: 100%;
-	height: fit-content;
 	padding: 1rem 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	background-color: $pinkBg;
 	backdrop-filter: blur(10px);
-	z-index: 3;
 	overflow: hidden;
-	position: fixed;
-    top: 0;
 }
+
+.open_mobile_header {
+	background: $white;
+}
+
 .nav_list {
 	margin: 0;
 	padding: 0;
 	display: flex;
 	align-items: center;
 }
+
 .nav_list_item {
 	margin: 0 1rem;
 	position: relative;
+
 	&.nav_link_item_canvas {
 		a {
 			color: $activeLinkColor;
 		}
+
 		&:before {
 			content: '';
 			background-color: $activeLinkColor;
@@ -40,11 +54,13 @@
 		}
 	}
 }
+
 .connect_wrap,
 .connect {
 	display: flex;
 	align-items: center;
 }
+
 .connect_wrap_image {
 	width: 24px;
 	height: 24px;
@@ -53,11 +69,13 @@
 	transition: all 0.5s ease;
 	cursor: pointer;
 }
+
 .connect_value {
 	display: inline-block;
 	font-size: 0.95rem;
 	margin-right: 0.3rem;
 }
+
 .connect_circle {
 	display: inline-block;
 	width: 30px;
@@ -66,8 +84,9 @@
 	border-radius: 50%;
 	margin-right: 0.2rem;
 }
+
 .connect_eth {
-	background: url('../../assets/svg/connected-bg.svg') 100% center no-repeat;
+	background: url('../../../assets/svg/connected-bg.svg') 100% center no-repeat;
 	width: 200px;
 	padding: 1rem 0.4rem;
 	display: flex;
@@ -90,10 +109,16 @@
 	animation-duration: 1s;
 }
 
+.burger_icon {
+	display: none;
+	max-width: 100%;
+}
+
 @keyframes swipeUp {
 	from {
 		transform: translate3d(0, 50px, 0);
 	}
+
 	to {
 		transform: translate3d(0, 0vh, 0);
 	}
@@ -103,17 +128,41 @@
 	from {
 		transform: translate3d(0, -50px, 0);
 	}
+
 	to {
 		transform: translate3d(0, 0, 0);
 	}
 }
 
 @media only screen and (max-width: 1200px) {
-	.connect_value, .connect_eth {
+
+	.header {
+		padding: 0.5rem;
+	}
+
+	.connect_value,
+	.connect_eth {
 		font-size: 0.8rem;
 	}
+
 	.connect_circle {
 		width: 20px;
 		height: 20px;
+	}
+
+	.nav_list_item {
+		margin: 0 0.5rem;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+
+	.nav_list,
+	.connect {
+		display: none;
+	}
+
+	.burger_icon {
+		display: inline-block;
 	}
 }

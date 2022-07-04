@@ -30,9 +30,12 @@ import Phase1 from '../assets/svg/mint/phase1.svg';
 import Phase2 from '../assets/svg/mint/phase2.svg';
 import Phase3 from '../assets/svg/mint/phase3.svg';
 import Parallax from '../assets/svg/mint/parallax.svg';
-
 import LeftClouds from '../assets/svg/mint/left-clouds.svg';
 import RightClouds from '../assets/svg/mint/right-clouds.svg';
+import BurgerIcon from '../assets/svg/burger-icon.svg';
+import BurgerArrow from '../assets/svg/burger-arrow.svg';
+
+
 
 const icons = {
 	Logo,
@@ -68,7 +71,9 @@ const icons = {
 	Phase3,
 	Parallax,
 	LeftClouds,
-	RightClouds
+	RightClouds,
+	BurgerIcon,
+	BurgerArrow
 };
 
 export default icons;

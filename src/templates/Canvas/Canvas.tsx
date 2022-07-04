@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import mergeImages from 'merge-images';
 
-import Header from '../../components/Header';
+import Header from '../../components/headerComponents/Header';
 import DefaultButton from '../../components/DefaultButton';
 import CountDown from '../../components/CountDown';
 import RangeInput from '../../components/RangeInput';
