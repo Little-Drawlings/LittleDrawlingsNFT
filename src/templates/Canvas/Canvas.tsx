@@ -45,7 +45,7 @@ const Canvas: React.FC = () => {
 	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [drawing, setDrawing] = useState<string>('');
-	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
+	const [brushColor, setBrushColor] = useState<string>(COLORS[0].concat('7F'));
 	const [brushRadius, setBrushRadius] = useState<number>(5);
 	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
 	const [nightMode, setNightMode] = useState<boolean>(false);
@@ -144,15 +144,15 @@ const Canvas: React.FC = () => {
 	const pencil = () => {
 		setInstrument(INSTRUMENTS.PENCIL);
 		brushColor === '#fff'
-			? setBrushColor(COLORS[0])
-			: setBrushColor(brushColor.slice(0, -2));
+			? setBrushColor(COLORS[0].concat('7F'))
+			: setBrushColor(brushColor.concat('7F'));
 	};
 
 	const pencilBrush = () => {
 		setInstrument(INSTRUMENTS.PENCIL_BRUSH);
 		brushColor === '#fff'
-			? setBrushColor(COLORS[0].concat('7F'))
-			: setBrushColor(brushColor.concat('7F'));
+			? setBrushColor(COLORS[0])
+			: setBrushColor(brushColor.slice(0, -2));
 	};
 
 	const eraser = () => {
@@ -164,13 +164,13 @@ const Canvas: React.FC = () => {
 		if (instrument === INSTRUMENTS.ERASER) {
 			setInstrument(INSTRUMENTS.PENCIL);
 		}
-		instrument === INSTRUMENTS.PENCIL_BRUSH
+		instrument === INSTRUMENTS.PENCIL
 			? setBrushColor(color.concat('7F'))
 			: setBrushColor(color);
 	};
 
 	const currentFixColor =
-		instrument === INSTRUMENTS.PENCIL_BRUSH
+		instrument === INSTRUMENTS.PENCIL
 			? brushColor.slice(0, -2)
 			: brushColor;
 
@@ -212,7 +212,6 @@ const Canvas: React.FC = () => {
 						<CountDown className={cn(styles.time_wrap, squareFormat && styles.square_time_wrap)} />
 						<CanvasDraw
 							backgroundColor={'#fff'}
-							hideInterface={true}
 							ref={(canvasDraw) => (modify = canvasDraw)}
 							disabled={pause || over}
 							className={cn(
