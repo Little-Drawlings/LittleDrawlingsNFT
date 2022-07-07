@@ -35,7 +35,7 @@ const Welcome: React.FC = () => {
     return (
         <div className={cn('mint-wrapper', styles.welcome)}>
             <div className={styles.title_wrap}>
-                <div className={cn(styles.animated, nightMode && styles.fade_in)}>
+                <div className={cn(styles.welcome_image_wrap ,styles.animated, nightMode && styles.fade_in)}>
                     <h3 className={styles.title}><span className='title-span'>Welcome to</span></h3>
                     <img className={styles.welcome_image} src={icons.WelcomeImg} alt='Welcome' />
                 </div>
