@@ -2,6 +2,21 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
 
+import {
+	Animator,
+	ScrollContainer,
+	ScrollPage,
+	batch,
+	Fade,
+	FadeIn,
+	Move,
+	MoveIn,
+	MoveOut,
+	Sticky,
+	StickyIn,
+	ZoomIn
+} from "react-scroll-motion";
+
 import Header from '../../components/headerComponents/Header';
 import { RootState } from '../../redux/reducers';
 
@@ -18,6 +33,9 @@ const Mint: React.FC = () => {
 	);
 	const [nightMode, setNightMode] = useState<boolean>(false);
 
+	const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
+	const FadeUp = batch(Fade(), Move(), Sticky());
+
 	useEffect(() => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
@@ -26,12 +44,22 @@ const Mint: React.FC = () => {
 		<>
 			<Header />
 			<div className={cn('content', nightMode && 'night')}>
-				<Welcome />
-				<MasterStudio />
-				<MintStudio />
-				<LetsDraw/>
-				<RoadMap />
-				<MintFooter/>
+				<ScrollContainer>
+					<Welcome />
+					<ScrollPage page={0}>
+						<Animator animation={FadeUp}>
+							<MasterStudio />
+						</Animator>
+					</ScrollPage>
+					<ScrollPage page={3}>
+						<Animator animation={batch(Fade(), Sticky(), MoveOut(0, -50))}>
+							<MintStudio />
+						</Animator>
+					</ScrollPage>
+					<LetsDraw />
+					<RoadMap />
+					<MintFooter />
+				</ScrollContainer>
 			</div>
 		</>
 	);
