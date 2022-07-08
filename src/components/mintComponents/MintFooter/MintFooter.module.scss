@@ -1,10 +1,14 @@
-// .mint_footer {
-//     background: url('../../../assets/svg/mint/parallax.svg') no-repeat;
-//     background-position: cover;
-// }
-
 .mint_footer {
     img {
         max-width: 100%;
+    }
+    .parallax_img {
+        width: 100vw;
+        height: 100vh;
+
+        & > div {
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
+        }
     }
 }

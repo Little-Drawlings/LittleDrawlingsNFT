@@ -29,7 +29,9 @@ import RoadMap from '../assets/svg/mint/road-map.svg';
 import Phase1 from '../assets/svg/mint/phase1.svg';
 import Phase2 from '../assets/svg/mint/phase2.svg';
 import Phase3 from '../assets/svg/mint/phase3.svg';
-import Parallax from '../assets/svg/mint/parallax.svg';
+import ParallaxPlan1 from '../assets/svg/mint/parallax/parallax-plan1.svg';
+import ParallaxPlan2 from '../assets/svg/mint/parallax/parallax-plan2.svg';
+import ParallaxPlan3 from '../assets/svg/mint/parallax/parallax-plan3.svg';
 import LeftClouds from '../assets/svg/mint/left-clouds.svg';
 import RightClouds from '../assets/svg/mint/right-clouds.svg';
 import BurgerIcon from '../assets/svg/burger-icon.svg';
@@ -68,7 +70,9 @@ const icons = {
 	Phase1,
 	Phase2,
 	Phase3,
-	Parallax,
+	ParallaxPlan1,
+	ParallaxPlan2,
+	ParallaxPlan3,
 	LeftClouds,
 	RightClouds,
 	BurgerIcon,

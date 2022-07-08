@@ -35,6 +35,10 @@ const Gallery: React.FC = () => {
         setDefaultPopup(openDefaultPopup);
     }, [openDefaultPopup]);
 
+    useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
 
     const claim = async () => {
         dispatch(setOpenDefaultPopup(true));

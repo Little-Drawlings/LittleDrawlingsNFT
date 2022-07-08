@@ -108,6 +108,10 @@ const Canvas: React.FC = () => {
 		}
 	}, [dispatch, over, base64, format, time, drawlsList, activeDrawl]);
 
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
 	const changeCanvasImage = async (canvas: CanvasDraw | any) => {
 		const canvasImages = []
 		for (let i = 0; i < canvas?.canvasContainer.childNodes.length; i++) {
@@ -309,7 +313,7 @@ const Canvas: React.FC = () => {
 										className={styles.settings_list_item}
 										onClick={() => modify?.clear()}
 									>
-										Clear
+										Restart
 									</li>
 								</ul>
 							</div>

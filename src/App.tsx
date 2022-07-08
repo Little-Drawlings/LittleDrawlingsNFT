@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 import { persister, store } from './redux/store';
 import BlockerLoader from './components/BlockerLoader';
@@ -14,7 +15,9 @@ function App() {
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persister}>
 				<BlockerLoader />
-				<DefaultRoutes />
+				<ParallaxProvider>
+					<DefaultRoutes />
+				</ParallaxProvider>
 			</PersistGate>
 		</Provider>
 	);
