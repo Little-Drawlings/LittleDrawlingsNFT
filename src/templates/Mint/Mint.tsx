@@ -45,13 +45,16 @@ const Mint: React.FC = () => {
 			<Header />
 			<div className={cn('content', nightMode && 'night')}>
 				<ScrollContainer>
-					<Welcome />
-					<ScrollPage page={0}>
-						<Animator animation={FadeUp}>
+					<>
+						<ScrollPage page={0} key={0}>
+							<Welcome />
+						</ScrollPage></>
+					<ScrollPage page={1} key={1}>
+						<Animator animation={batch(Fade(), Sticky(), MoveOut(0, -50))}>
 							<MasterStudio />
 						</Animator>
 					</ScrollPage>
-					<ScrollPage page={3}>
+					<ScrollPage page={2} key={2}>
 						<Animator animation={batch(Fade(), Sticky(), MoveOut(0, -50))}>
 							<MintStudio />
 						</Animator>

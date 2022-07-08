@@ -7,9 +7,9 @@ import MoonIcon from '../assets/svg/moonIcon.svg';
 import AdamImg from '../assets/svg/mint/adam.svg';
 import GodImg from '../assets/svg/mint/god.svg';
 import WelcomeImg from '../assets/svg/mint/welcome.svg';
-import ToolbarPencil from '../assets/svg/toolbar-master/pencil.svg';
-import ToolbarBrush from '../assets/svg/toolbar-master/brush.svg';
-import ToolbarShadow from '../assets/svg/toolbar-master/shadow.svg';
+import ToolbarPencil from '../assets/svg/toolbar-master/Asset_highlighter.svg';
+import ToolbarBrush from '../assets/svg/toolbar-master/Asset_paintbrush.svg';
+import ToolbarEraser from '../assets/svg/toolbar-master/Asset_eraser.svg';
 import CaretUp from '../assets/svg/dropdown/caret-up.svg';
 import CaretDown from '../assets/svg/dropdown/caret-down.svg';
 import GalleryCanvas from '../assets/svg/gallery/canvas.svg';
@@ -48,7 +48,7 @@ const icons = {
 	WelcomeImg,
 	ToolbarPencil,
 	ToolbarBrush,
-	ToolbarShadow,
+	ToolbarEraser,
 	CaretUp,
 	CaretDown,
 	GalleryCanvas,

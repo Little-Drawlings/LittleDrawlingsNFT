@@ -295,8 +295,8 @@ const Canvas: React.FC = () => {
 									>
 										<img
 											className={styles.settings_image}
-											src={icons.ToolbarShadow}
-											alt='ToolbarShadow'
+											src={icons.ToolbarEraser}
+											alt='ToolbarEraser'
 										/>
 									</li>
 									<li
