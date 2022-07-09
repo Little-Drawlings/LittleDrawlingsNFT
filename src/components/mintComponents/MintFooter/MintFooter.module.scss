@@ -1,12 +1,28 @@
 .mint_footer {
-    img {
+    position: relative;
+
+    .parallax_bg_wrap {
+        position: absolute;
+        top: -90%;
+        z-index: 5;
+    }
+
+    .parallax_bg {
+
         max-width: 100%;
     }
+
+    .footer_bg {
+        max-width: 100%;
+        position: relative;
+        z-index: 6;
+    }
+
     .parallax_img {
         width: 100vw;
         height: 100vh;
 
-        & > div {
+        &>div {
             background-size: contain !important;
             background-repeat: no-repeat !important;
         }
