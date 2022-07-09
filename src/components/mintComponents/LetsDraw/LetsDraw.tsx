@@ -14,29 +14,26 @@ const LetsDraw = () => {
         triggerOnce: true,
     });
 
-    const [leftImageRef, leftImageView] = useInView({
+    const [imageRef, imageView] = useInView({
         threshold: 0.5,
-        triggerOnce: true,
-    });
-
-    const [rightImageRef, rightImageView] = useInView({
-        threshold: 0.5,
-        triggerOnce: true,
+        triggerOnce: false,
     });
 
     const leftImageVariants = {
-        visible: { x: 0, y: 0 },
+        visible: { x: '-30%', y: 0, scale: 0.5 },
         hidden: {
             x: '80%',
             y: '50%',
+            scale: 0.7
         },
     };
 
     const rightImageVariants = {
-        visible: { x: 0, y: 0 },
+        visible: { x: '30%', y: 0, scale: 0.5 },
         hidden: {
             x: '-80%',
             y: '50%',
+            scale: 0.7
         },
     };
 
@@ -71,8 +68,7 @@ const LetsDraw = () => {
                         className={styles.clouds_img}
                         src={icons.LeftClouds}
                         alt='LeftClouds'
-                        animate={leftImageView ? 'visible' : 'hidden'}
-                        ref={leftImageRef}
+                        animate={imageView ? 'visible' : 'hidden'}
                         transition={{ duration: 2, ease: 'easeOut' }}
                         variants={leftImageVariants}
                     />
@@ -80,8 +76,7 @@ const LetsDraw = () => {
                         className={styles.clouds_img}
                         src={icons.RightClouds}
                         alt='RightClouds'
-                        animate={rightImageView ? 'visible' : 'hidden'}
-                        ref={rightImageRef}
+                        animate={imageView ? 'visible' : 'hidden'}
                         transition={{ duration: 2, ease: 'easeOut' }}
                         variants={rightImageVariants}
                     />
@@ -90,6 +85,7 @@ const LetsDraw = () => {
                     className={styles.jump_img}
                     src={icons.JumpGuy}
                     alt='JumpGuy'
+                    ref={imageRef}
                     animate={{ translateY: [90, 0, 90] }}
                     transition={{ duration: 1, repeat: Infinity }}
                 />

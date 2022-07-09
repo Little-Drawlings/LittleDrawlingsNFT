@@ -2,6 +2,11 @@
     margin: 2rem 0;
 }
 
+.title, .accordions_wrap {
+    z-index: 6;
+    position: relative;
+}
+
 .accordions_wrap {
     display: flex;
     flex-direction: column;
@@ -27,10 +32,13 @@
 }
 
 .clouds_wrap {
+    position: absolute;
+    top: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 5;
     .clouds_img {
         max-width: 50%;
     }

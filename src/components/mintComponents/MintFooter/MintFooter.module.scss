@@ -1,14 +1,10 @@
 .mint_footer {
     position: relative;
 
-    .parallax_bg_wrap {
+    .parallax_bg {
         position: absolute;
         top: -90%;
         z-index: 5;
-    }
-
-    .parallax_bg {
-
         max-width: 100%;
     }
 

@@ -1,15 +1,13 @@
-<svg width="510" height="944" viewBox="0 0 510 944" fill="none" xmlns="http://www.w3.org/2000/svg">
-	<ellipse rx="143.531" ry="140.584" transform="matrix(-1 0 0 1 253.526 368.84)" fill="white" />
-	<ellipse rx="143.531" ry="140.584" transform="matrix(-1 0 0 1 366.204 242.709)" fill="white" />
-	<ellipse rx="143.531" ry="140.584" transform="matrix(-1 0 0 1 253.526 141.102)" fill="white" />
-	<ellipse rx="97.0284" ry="95.0365" transform="matrix(-1 0 0 1 156.05 562.415)" fill="white" />
-	<ellipse rx="87.1914" ry="73.5766" transform="matrix(-1 0 0 1 309.865 647.817)" fill="white" />
-	<ellipse cx="129.5" cy="141" rx="135.5" ry="126" fill="white" />
-	<ellipse cx="127.433" cy="360.957" rx="126.539" ry="117.81" fill="white" />
-	<ellipse cx="126.539" cy="427.525" rx="126.539" ry="117.81" fill="white" />
-	<ellipse cx="388.561" cy="682.416" rx="52.3149" ry="48.6131" fill="white" />
-	<ellipse rx="46.9492" ry="38.5401" transform="matrix(-1 0 0 1 351.895 509.423)" fill="white" />
-	<circle r="48.5" transform="matrix(-1 0 0 1 34.5 247.5)" fill="white" />
-	<ellipse rx="59.469" ry="50.365" transform="matrix(-1 0 0 1 205.235 730.592)" fill="white" />
-	<ellipse rx="76" ry="81.5" transform="matrix(-1 0 0 1 179 862.5)" fill="white" />
+<svg width="921" height="1409" viewBox="0 0 921 1409" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<ellipse rx="259.339" ry="254.015" transform="matrix(-1 0 0 1 457.868 665.335)" fill="white" />
+	<ellipse rx="258.891" ry="254.015" transform="matrix(-1 0 0 1 661.312 437.599)" fill="white" />
+	<ellipse rx="259.339" ry="253.577" transform="matrix(-1 0 0 1 457.868 254.094)" fill="white" />
+	<ellipse rx="175.277" ry="171.679" transform="matrix(-1 0 0 1 281.696 1014.83)" fill="white" />
+	<ellipse rx="157.392" ry="133.139" transform="matrix(-1 0 0 1 559.815 1168.99)" fill="white" />
+	<ellipse cx="249.053" cy="254.532" rx="228.486" ry="212.847" fill="white" />
+	<ellipse cx="230.275" cy="651.321" rx="228.486" ry="212.847" fill="white" />
+	<ellipse cx="228.486" cy="771.321" rx="228.486" ry="212.847" fill="white" />
+	<ellipse cx="701.557" cy="1231.61" rx="94.3456" ry="88.0292" fill="white" />
+	<ellipse rx="84.5086" ry="69.635" transform="matrix(-1 0 0 1 635.378 918.912)" fill="white" />
+	<ellipse rx="107.313" ry="90.6569" transform="matrix(-1 0 0 1 370.227 1318.33)" fill="white" />
 </svg>

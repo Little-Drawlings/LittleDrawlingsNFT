@@ -76,7 +76,7 @@ const Header: React.FC = () => {
 	};
 
 	return (
-		<div className={styles.header_wrap}>
+		<header className={styles.header_wrap}>
 			<div className={cn(styles.header, openMenu && styles.open_mobile_header, nightMode && styles.header_night_mode)}>
 				<Link to={'/'}>
 					<img className={styles.logo} src={icons.Logo} alt='logo' />
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
 			<motion.div animate={openMenu ? 'open' : 'closed'} variants={variants}>
 				{openMenu && <MobileHeader nightModeProp={nightMode} />}
 			</motion.div>
-		</div>
+		</header>
 	);
 };
 
