@@ -45,12 +45,12 @@ const Canvas: React.FC = () => {
 	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
 	const [drawing, setDrawing] = useState<string>('');
-	const [brushColor, setBrushColor] = useState<string>(COLORS[0].concat('7F'));
+	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
 	const [brushRadius, setBrushRadius] = useState<number>(5);
 	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [saveData, setSaveData] = useState<SavePopupProps | null>(null);
-	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL);
+	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL_BRUSH);
 	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
 	const [time, setTime] = useState<number>(0);
 	const [base64, setBase64] = useState<string>('');
@@ -166,7 +166,7 @@ const Canvas: React.FC = () => {
 
 	const setActiveColor = (color: string) => {
 		if (instrument === INSTRUMENTS.ERASER) {
-			setInstrument(INSTRUMENTS.PENCIL);
+			pencilBrush()
 		}
 		instrument === INSTRUMENTS.PENCIL
 			? setBrushColor(color.concat('7F'))
@@ -253,15 +253,15 @@ const Canvas: React.FC = () => {
 									<li
 										className={cn(
 											styles.settings_list_item,
-											instrument === INSTRUMENTS.PENCIL &&
+											instrument === INSTRUMENTS.PENCIL_BRUSH &&
 											styles.settings_list_item_active
 										)}
-										onClick={pencil}
+										onClick={pencilBrush}
 									>
 										<img
 											className={styles.settings_image}
-											src={icons.ToolbarPencil}
-											alt='ToolbarPencil'
+											src={icons.ToolbarBrush}
+											alt='ToolbarBrush'
 										/>
 									</li>
 									<li className={styles.settings_list_item}>
@@ -278,15 +278,15 @@ const Canvas: React.FC = () => {
 									<li
 										className={cn(
 											styles.settings_list_item,
-											instrument === INSTRUMENTS.PENCIL_BRUSH &&
+											instrument === INSTRUMENTS.PENCIL &&
 											styles.settings_list_item_active
 										)}
-										onClick={pencilBrush}
+										onClick={pencil}
 									>
 										<img
 											className={styles.settings_image}
-											src={icons.ToolbarBrush}
-											alt='ToolbarBrush'
+											src={icons.ToolbarPencil}
+											alt='ToolbarPencil'
 										/>
 									</li>
 									<li
