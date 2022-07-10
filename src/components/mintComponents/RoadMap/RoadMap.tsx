@@ -45,16 +45,10 @@ const RoadMap: React.FC = () => {
                     variants={variants}
                 />
                 <div className={styles.text_wrap}>
-                    <h3 className={styles.phase_title}>Phase 1</h3>
+                    <h3 className={styles.phase_title}>Phase 1 MVP</h3>
                     <ul className={styles.phase_list}>
                         <li className={styles.phase_item}>
-                            Canvas dNFT MVP Alpha Mint Access by Donation
-                        </li>
-                        <li className={styles.phase_item}>
-                            Partnership engagement & community exchange fludity optimization
-                        </li>
-                        <li className={styles.phase_item}>
-                            Staking & rewards/Canvas minting
+                            The Artist EnDAOment will vote on and work alongside the Little Drawlings core team concerning further development with initial focus on three pillars of improvement
                         </li>
                     </ul>
                 </div>
@@ -63,13 +57,7 @@ const RoadMap: React.FC = () => {
                 <h3 className={styles.phase_title}>Phase 2</h3>
                 <ul className={styles.phase_list}>
                     <li className={styles.phase_item}>
-                        Initial Mint of Little Drawlings dNfts
-                    </li>
-                    <li className={styles.phase_item}>
-                        Top tier NFT artist contest & charity raffles
-                    </li>
-                    <li className={styles.phase_item}>
-                        dNFT visual attribute and metadata reward boosting upgrades
+                        Artboard upgrades
                     </li>
                 </ul>
             </div>
@@ -83,18 +71,12 @@ const RoadMap: React.FC = () => {
                     transition={{ duration: 2, ease: 'easeOut' }}
                     variants={variants}
                 />
-                <div className={styles.text_wrap}>
+                <div className={cn(styles.text_wrap, styles.wrap_start)}>
                     <h3 className={styles.phase_title}>Phase 3</h3>
                     <ul className={styles.phase_list}>
                         <li className={styles.phase_item}>
-                            Community & Dev Team collaboration of future organization
-                            structure
+                            Further decentralization
                         </li>
-                        <li className={styles.phase_item}>
-                            Explore of multi-chain game implementation
-                        </li>
-                        <li className={styles.phase_item}>Begin DAO development</li>
-                        <li className={styles.phase_item}>iOS development begins</li>
                     </ul>
                 </div>
             </div>
@@ -102,11 +84,7 @@ const RoadMap: React.FC = () => {
                 <div className={styles.text_wrap}>
                     <h3 className={styles.phase_title}>Phase 4</h3>
                     <ul className={styles.phase_list}>
-                        <li className={styles.phase_item}>Next Gen NFT drop</li>
-                        <li className={styles.phase_item}>Game upgrades/overhaul</li>
-                        <li className={styles.phase_item}>
-                            DAO tranfer of power; voting begins
-                        </li>
+                        <li className={styles.phase_item}>Studio game additions</li>
                     </ul>
                 </div>
                 <motion.img

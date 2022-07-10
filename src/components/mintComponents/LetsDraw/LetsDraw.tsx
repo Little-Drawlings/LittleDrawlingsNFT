@@ -16,7 +16,7 @@ const LetsDraw = () => {
 
     const [imageRef, imageView] = useInView({
         threshold: 0.5,
-        triggerOnce: false,
+        triggerOnce: true,
     });
 
     const leftImageVariants = {

@@ -19,6 +19,7 @@
 .phase_wrap {
     width: calc(100% - 10rem);
     display: flex;
+    align-items: center;
     margin: 5rem;
 
     &.end,
@@ -34,7 +35,19 @@
     &.column {
         max-width: 50%;
         flex-direction: column;
+        align-items: flex-start;
     }
+    &:last-child {
+        margin: 0 5rem 5rem 5rem;
+
+        .phase_img {
+            margin-top: -10rem;
+        }
+    }
+}
+
+.wrap_start {
+    align-items: flex-start;
 }
 
 .phase_title {
@@ -66,9 +79,5 @@
 }
 
 .phase_img {
-    max-width: 50%;
-
-    &.end {
-        margin-top: 4rem;
-    }
+    max-width: 40%;
 }

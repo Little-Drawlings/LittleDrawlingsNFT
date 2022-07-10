@@ -19,7 +19,6 @@ import GalleryMarker from '../assets/svg/gallery/marker.svg';
 import PrevArrow from '../assets/svg/gallery/prev-arrow.svg';
 import NextArrow from '../assets/svg/gallery/next-arrow.svg';
 import FlyingGirl from '../assets/svg/mint/flying-girl.svg';
-import MintCanvas from '../assets/svg/mint/canvas.svg';
 import AccStake from '../assets/svg/mint/acc-stake.svg';
 import AccBrush from '../assets/svg/mint/acc-brush.svg';
 import AccPallette from '../assets/svg/mint/acc-pallette.svg';
@@ -60,7 +59,6 @@ const icons = {
 	PrevArrow,
 	NextArrow,
 	FlyingGirl,
-	MintCanvas,
 	AccStake,
 	AccBrush,
 	AccPallette,
