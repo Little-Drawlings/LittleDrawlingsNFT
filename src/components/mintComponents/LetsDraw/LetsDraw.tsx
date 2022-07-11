@@ -47,7 +47,7 @@ const LetsDraw = () => {
                     <DefaultAccordion
                         isDefaultOpen={firstAccordionView}
                         title='Stake'
-                        text='Stake your NFTs in your Gallery to recieve donations of $paint. Little Drawlings, Canvas, and Paintings alike accrue donations daily.'
+                        text='Stake your NFTs in the Studio to access the Artboard and compete in mini games!'
                         icon={<img src={icons.AccStake} alt='AccStake' />}
                     />
                 </motion.div>
