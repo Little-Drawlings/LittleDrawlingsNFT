@@ -44,6 +44,7 @@ const Welcome: React.FC = () => {
                     title='Mint Canvas'
                     onClick={mintCanvas}
                 />
+                <img className={styles.welcome_image} src={icons.Banner} alt="Banner" />
             </div>
             <div className={cn(styles.left_images, styles.fade_in, nightMode && styles.active)}>
                 <img className={cn(styles.left_img)} src={icons.AdamImg} alt='Adam' />

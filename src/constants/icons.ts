@@ -36,6 +36,7 @@ import RightClouds from '../assets/svg/mint/right-clouds.svg';
 import BurgerIcon from '../assets/svg/burger-icon.svg';
 import BurgerArrow from '../assets/svg/burger-arrow.svg';
 import BurgerArrowNight from '../assets/svg/burger-arrow-night.svg';
+import Banner from '../assets/svg/mint/banner.svg';
 
 const icons = {
 	Logo,
@@ -75,7 +76,8 @@ const icons = {
 	RightClouds,
 	BurgerIcon,
 	BurgerArrow,
-	BurgerArrowNight
+	BurgerArrowNight,
+	Banner
 };
 
 export default icons;
