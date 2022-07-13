@@ -3,12 +3,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 import icons from '../../../constants/icons';
+import useWindowDimensions from '../../../constants/useWindowDimensions';
 
 import DefaultAccordion from '../../DefaultAccordion';
 
 import styles from './LetsDraw.module.scss';
 
 const LetsDraw = () => {
+    const { width } = useWindowDimensions();
     const [firstAccordionRef, firstAccordionView] = useInView({
         threshold: 0.5,
         triggerOnce: true,
@@ -36,6 +38,21 @@ const LetsDraw = () => {
             scale: 0.7
         },
     };
+
+    const jumpAnimate = () => {
+        if (width > 1200) {
+            return { translateY: [90, 0, 90] }
+        }
+        else if (width > 768) {
+            return { translateY: [40, 0, 40] }
+        }
+        else if (width > 480) {
+            return { translateY: [20, 0, 20] }
+        }
+        else {
+            return { translateY: [-20, -10, -20] }
+        }
+    }
 
     return (
         <div className={cn('mint-wrapper', 'mint-height_auto', styles.mint_draw)}>
@@ -86,7 +103,7 @@ const LetsDraw = () => {
                     src={icons.JumpGuy}
                     alt='JumpGuy'
                     ref={imageRef}
-                    animate={{ translateY: [90, 0, 90] }}
+                    animate={jumpAnimate()}
                     transition={{ duration: 1, repeat: Infinity }}
                 />
                 <img

@@ -2,7 +2,7 @@
 
 .mint_studio {
     overflow: initial !important;
-    height: 1700vh !important;
+    height: 900vh !important;
 }
 
 .sub_title {
@@ -54,70 +54,44 @@
 
 .image_2 {
     z-index: 7;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas2.svg") center/contain no-repeat;
+    background: url("../../../assets/svg/mint/mintCanvas/canvas3.svg") center/contain no-repeat;
 }
 
 .image_3 {
     z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas3.svg") center/contain no-repeat;
+    background: url("../../../assets/svg/mint/mintCanvas/canvas5.svg") center/contain no-repeat;
 }
 
 .image_4 {
     z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas4.svg") center/contain no-repeat;
+    background: url("../../../assets/svg/mint/mintCanvas/canvas7.svg") center/contain no-repeat;
 }
 
 .image_5 {
     z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas5.svg") center/contain no-repeat;
+    background: url("../../../assets/svg/mint/mintCanvas/canvas9.svg") center/contain no-repeat;
 }
 
 .image_6 {
     z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas6.svg") center/contain no-repeat;
+    background: url("../../../assets/svg/mint/mintCanvas/canvas11.svg") center/contain no-repeat;
 }
 
 .image_7 {
     z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas7.svg") center/contain no-repeat;
+    background: url("../../../assets/svg/mint/mintCanvas/canvas13.svg") center/contain no-repeat;
 }
 .image_8 {
     z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas8.svg") center/contain no-repeat;
+    background: url("../../../assets/svg/mint/mintCanvas/canvas15.svg") center/contain no-repeat;
 }
 .image_9 {
     z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas9.svg") center/contain no-repeat;
-}
-.image_10 {
-    z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas10.svg") center/contain no-repeat;
-}
-.image_11 {
-    z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas11.svg") center/contain no-repeat;
-}
-.image_12 {
-    z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas12.svg") center/contain no-repeat;
-}
-.image_13 {
-    z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas13.svg") center/contain no-repeat;
-}
-.image_14 {
-    z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas14.svg") center/contain no-repeat;
-}
-.image_16 {
-    z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas15.svg") center/contain no-repeat;
-}
-.image_16 {
-    z-index: 8;
-    background: url("../../../assets/svg/mint/mintCanvas/canvas16.svg") center/contain no-repeat;
-}
-.image_17 {
-    z-index: 8;
     background: url("../../../assets/svg/mint/mintCanvas/canvas17.svg") center/contain no-repeat;
+}
+
+@media only screen and (max-width: 768px) {
+    .sticky {
+        height: 50vh;
+    }
 }

@@ -10,7 +10,7 @@ import DefaultButton from '../../DefaultButton';
 
 import styles from './MintStudio.module.scss';
 
-const images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+const images = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const MintStudio: React.FC = () => {
     const navigate = useNavigate();

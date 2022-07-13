@@ -48,3 +48,23 @@
         }
     }
 }
+
+@media only screen and (max-width: 992px) {
+    .master_studio {
+        height: auto !important;
+    }
+    .clouds_list {
+        .clouds_item {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .clouds_list {
+        .clouds_item {
+            width: 25%;
+            height: auto;
+        }
+    }
+}

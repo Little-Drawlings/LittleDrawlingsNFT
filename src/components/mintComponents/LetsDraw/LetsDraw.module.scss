@@ -43,3 +43,16 @@
         max-width: 50%;
     }
 }
+
+@media only screen and (max-width: 1200px) {
+    .accordions_wrap {
+        width: auto;
+        max-width: 80%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .jump_img {
+        max-width: 70%;
+    }
+}

@@ -3,13 +3,16 @@ import { useParallax } from 'react-scroll-parallax';
 
 import icons from '../../../constants/icons';
 
-import styles from './MasterStudio.module.scss';
 import { motion } from 'framer-motion';
+import useWindowDimensions from '../../../constants/useWindowDimensions';
+
+import styles from './MasterStudio.module.scss';
 
 const MasterStudio: React.FC = () => {
+    const { width } = useWindowDimensions();
     const parallaxList = useParallax<HTMLDivElement>({
         easing: 'ease',
-        translateX: [50, -50],
+        translateX: width > 900 ? [50, -50] : [0, 0],
     });
 
     return (

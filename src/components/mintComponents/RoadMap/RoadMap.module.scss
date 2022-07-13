@@ -37,6 +37,7 @@
         flex-direction: column;
         align-items: flex-start;
     }
+
     &:last-child {
         margin: 0 5rem 5rem 5rem;
 
@@ -80,4 +81,64 @@
 
 .phase_img {
     max-width: 40%;
+}
+
+@media only screen and (max-width: 992px) {
+    .road_map {
+        margin: 1rem 0 20rem 0;
+    }
+    .title_wrap {
+        img {
+            max-width: 50%;
+        }
+    }
+
+    .phase_wrap {
+        width: 100%;
+        margin: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &.first {
+            flex-direction: column-reverse;
+        }
+
+        &.column {
+            max-width: 100%;
+            align-items: center;
+        }
+
+        &.end {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            flex-direction: column-reverse;
+            margin: 1rem;
+            .phase_img {
+                margin-top: 0;
+            }
+        }
+    }
+
+    .text_wrap {
+        width: 100%;
+    }
+
+    .phase_title {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .phase_list {
+        width: 90%;
+        max-width: 90%;
+        font-size: 1.5rem;
+
+        & .phase_item {
+            font-size: 1rem;
+        }
+    }
 }
