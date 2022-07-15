@@ -1,7 +1,7 @@
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom';
 import cn from 'classnames';
 
-import styles from './HeaderLink.module.scss';
+import styles from './NavLink.module.scss';
 
 interface Props {
 	children?: string;
@@ -9,7 +9,7 @@ interface Props {
 	className?: string
 }
 
-const HeaderLink: React.FC<Props> = ({ children, to, className, ...props }: LinkProps) => {
+const NavLink: React.FC<Props> = ({ children, to, className, ...props }: LinkProps) => {
 	let resolved = useResolvedPath(to);
 	let match = useMatch({ path: resolved.pathname, end: true })?.pathname || '';
 
@@ -33,4 +33,4 @@ const HeaderLink: React.FC<Props> = ({ children, to, className, ...props }: Link
 	);
 };
 
-export default HeaderLink;
+export default NavLink;

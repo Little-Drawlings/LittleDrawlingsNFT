@@ -1,5 +1,5 @@
 /** variables **/
-@import '../../../styles/variables';
+@import '../../styles/variables';
 
 .nav_link,
 .nav_link_active {
@@ -40,6 +40,10 @@
 	}
 }
 
+.footer_nav {
+	color: $activeLinkColor;
+}
+
 @media only screen and (max-width: 1200px) {
 
 	.nav_link,
@@ -47,3 +51,4 @@
 		font-size: 1rem;
 	}
 }
+

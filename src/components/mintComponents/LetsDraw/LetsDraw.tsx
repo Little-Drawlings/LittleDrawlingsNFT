@@ -22,19 +22,19 @@ const LetsDraw = () => {
     });
 
     const leftImageVariants = {
-        visible: { x: '-30%', y: 0, scale: 0.5 },
+        visible: { x: '-30%', y: '20%', scale: 0.5 },
         hidden: {
             x: '80%',
-            y: '50%',
+            y: '70%',
             scale: 0.7
         },
     };
 
     const rightImageVariants = {
-        visible: { x: '30%', y: 0, scale: 0.5 },
+        visible: { x: '30%', y: '20%', scale: 0.5 },
         hidden: {
             x: '-80%',
-            y: '50%',
+            y: '70%',
             scale: 0.7
         },
     };
@@ -78,6 +78,9 @@ const LetsDraw = () => {
                     text='Touch up any mistakes or make adjustments to newly received paintings in the artboard!'
                     icon={<img src={icons.AccPallette} alt='AccPallette' />}
                 />
+            </div>
+            <div className={styles.no_draw}>
+                <img src={icons.NoDraw} alt="NoDraw" />
             </div>
             <div className={styles.jump_wrap}>
                 <div className={styles.clouds_wrap}>

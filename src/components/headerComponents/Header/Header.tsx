@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 import icons from '../../../constants/icons';
 import DefaultButton from '../../DefaultButton';
-import HeaderLink from '../HeaderLink';
+import NavLink from '../../NavLink';
 
 import { RootState } from '../../../redux/reducers';
 import { getBalance, setNightModeMint } from '../../../redux/actions/mint';
@@ -83,23 +83,23 @@ const Header: React.FC = () => {
 				</Link>
 				<ul className={styles.nav_list}>
 					<li className={styles.nav_list_item}>
-						<HeaderLink to='/'>Mint</HeaderLink>
+						<NavLink to='/'>Mint</NavLink>
 					</li>
 					<li
 						className={cn(
 							styles.nav_list_item,
 							canvasPath && styles.nav_link_item_canvas
 						)}>
-						<HeaderLink to='/studio'>Studio</HeaderLink>
+						<NavLink to='/studio'>Studio</NavLink>
 					</li>
 					<li className={styles.nav_list_item}>
-						<HeaderLink to='/gallery'>Gallery</HeaderLink>
+						<NavLink to='/gallery'>Gallery</NavLink>
 					</li>
 					<li className={styles.nav_list_item}>
-						<HeaderLink to='/shop'>Shop</HeaderLink>
+						<NavLink to='/shop'>Shop</NavLink>
 					</li>
 					<li className={styles.nav_list_item}>
-						<HeaderLink to='/whitepaper'>Whitepaper</HeaderLink>
+						<NavLink to='/whitepaper'>Whitepaper</NavLink>
 					</li>
 				</ul>
 				<div className={styles.connect_wrap}>

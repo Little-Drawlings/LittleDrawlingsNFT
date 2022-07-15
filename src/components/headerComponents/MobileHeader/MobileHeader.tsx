@@ -9,7 +9,7 @@ import { getBalance } from "../../../redux/actions/mint";
 import { RootState } from "../../../redux/reducers";
 import { AppDispatch } from "../../../redux/store";
 import DefaultButton from "../../DefaultButton";
-import HeaderLink from "../HeaderLink";
+import NavLink from "../../NavLink";
 
 import styles from './MobileHeader.module.scss';
 
@@ -56,21 +56,21 @@ const MobileHeader: React.FC<Props> = ({ nightModeProp }) => {
         <div className={cn(styles.mobile_header, nightMode && styles.mobile_header_night)}>
             <ul className={styles.nav_list}>
                 <li className={styles.nav_list_item}>
-                    <HeaderLink className={cn('mobile_link', nightMode && 'white_link')} to='/'>Mint</HeaderLink>
+                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/'>Mint</NavLink>
                 </li>
                 <li
                     className={styles.nav_list_item}
                 >
-                    <HeaderLink className={cn('mobile_link', nightMode && 'white_link')} to='/studio'>Studio</HeaderLink>
+                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/studio'>Studio</NavLink>
                 </li>
                 <li className={styles.nav_list_item}>
-                    <HeaderLink className={cn('mobile_link', nightMode && 'white_link')} to='/gallery'>Gallery</HeaderLink>
+                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/gallery'>Gallery</NavLink>
                 </li>
                 <li className={styles.nav_list_item}>
-                    <HeaderLink className={cn('mobile_link', nightMode && 'white_link')} to='/shop'>Shop</HeaderLink>
+                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/shop'>Shop</NavLink>
                 </li>
                 <li className={styles.nav_list_item}>
-                    <HeaderLink className={cn('mobile_link', nightMode && 'white_link')} to='/whitepaper'>Whitepaper</HeaderLink>
+                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/whitepaper'>Whitepaper</NavLink>
                 </li>
             </ul>
             <div className={styles.info_wrap}>
