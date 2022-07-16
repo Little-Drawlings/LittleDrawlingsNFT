@@ -9,14 +9,10 @@ interface Props {
 	title: string;
 	size: string;
 	edited: string;
-	time: number;
 	onClick: () => void;
 }
 
-const Drawl: React.FC<Props> = ({ image, title, size, edited, time, onClick }) => {
-	const hours = Math.floor(time / 3600);
-	const minutes = Math.floor(time % 3600 / 60);
-    const seconds = Math.floor(time % 3600 % 60);
+const Drawl: React.FC<Props> = ({ image, title, size, edited, onClick }) => {
 	return (
 		<div className={cn(styles.drawl)}>
 			{image ? (
@@ -31,11 +27,6 @@ const Drawl: React.FC<Props> = ({ image, title, size, edited, time, onClick }) =
 				</div>
 				<div className={styles.info_row}>
 					<span className={styles.info_row_value}>Edited {dayjs(edited).format('MM-DD HH:mm')}</span>
-					<div className={styles.time}>
-						{hours !== 0 && <span className={styles.info_row_value}>{hours} h</span>}
-						<span className={styles.info_row_value}>{minutes ? minutes : 0} min</span>
-						{seconds !== 0 && <span className={styles.info_row_value}>{seconds} sec</span>}
-					</div>
 				</div>
 			</div>
 			<DefaultButton className='no_wide_primary_small' title={'Touch up'} onClick={onClick} />

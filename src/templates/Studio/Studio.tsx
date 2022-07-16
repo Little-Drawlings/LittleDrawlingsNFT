@@ -96,11 +96,9 @@ const Studio: React.FC = () => {
 							title={drawl.name || ''}
 							size={drawl.format}
 							edited={drawl.updatedAt || ''}
-							time={drawl.time}
 							onClick={() => openCanvas(drawl._id)}
 						/>
 					) : null}
-
 				</div>
 			</div>
 		</>

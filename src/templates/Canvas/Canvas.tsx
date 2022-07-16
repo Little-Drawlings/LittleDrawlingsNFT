@@ -7,7 +7,6 @@ import mergeImages from 'merge-images';
 
 import Header from '../../components/headerComponents/Header';
 import DefaultButton from '../../components/DefaultButton';
-import CountDown from '../../components/CountDown';
 import RangeInput from '../../components/RangeInput';
 import DrawPopup from '../../components/popupsComponents/DrawPopup';
 import SavePopup from '../../components/popupsComponents/SavePopup';
@@ -51,8 +50,6 @@ const Canvas: React.FC = () => {
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [saveData, setSaveData] = useState<SavePopupProps | null>(null);
 	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL_BRUSH);
-	const mintTime = useSelector((state: RootState) => state?.mintReducer.time);
-	const [time, setTime] = useState<number>(0);
 	const [base64, setBase64] = useState<string>('');
 	const [drawlsList, setDrawlsList] = useState(drawls);
 
@@ -62,12 +59,6 @@ const Canvas: React.FC = () => {
 	useEffect(() => {
 		dispatch(getAllDrawls())
 	}, [dispatch])
-
-	useEffect(() => {
-		if (mintTime) {
-			setTime(mintTime);
-		}
-	}, [mintTime]);
 
 	useEffect(() => {
 		setDrawlsList(drawls);
@@ -95,18 +86,6 @@ const Canvas: React.FC = () => {
 	useEffect(() => {
 		setFormat(activeFormat);
 	}, [activeFormat]);
-
-	useEffect(() => {
-		if (over) {
-			setSaveData({
-				title: 'Time is up!',
-				drawlName: activeDrawl ? activeDrawl.name : `#Drawl ${drawlsList?.length + 1}`,
-				drawl: base64,
-				format: format,
-				time: time
-			});
-		}
-	}, [dispatch, over, base64, format, time, drawlsList, activeDrawl]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0)
@@ -138,8 +117,7 @@ const Canvas: React.FC = () => {
 			title: 'Mint canvas as...',
 			drawlName: activeDrawl ? activeDrawl.name : `Drawl #${drawlsList?.length + 1}`,
 			drawl: base64,
-			format: format,
-			time: time
+			format: format
 		});
 	};
 
@@ -213,7 +191,6 @@ const Canvas: React.FC = () => {
 								);
 							})}
 						</ul>
-						<CountDown className={cn(styles.time_wrap, squareFormat && styles.square_time_wrap)} />
 						<CanvasDraw
 							backgroundColor={'#fff'}
 							ref={(canvasDraw) => (modify = canvasDraw)}
