@@ -11,9 +11,10 @@ import { RootState } from '../../../redux/reducers';
 import { getBalance, setNightModeMint } from '../../../redux/actions/mint';
 import { Link } from 'react-router-dom';
 import { AppDispatch } from '../../../redux/store';
-import { signInMetamask } from '../../../redux/actions/auth';
 import { deleteToken } from '../../../api';
 import MobileHeader from '../MobileHeader';
+import CautionPopup from '../../popupsComponents/CautionPopup';
+import { signInMetamask } from '../../../redux/actions/auth';
 
 import styles from './Header.module.scss';
 
@@ -35,6 +36,8 @@ const Header: React.FC = () => {
 	const [balance, setBalance] = useState<string>('');
 	const [address, setAddress] = useState<string>('');
 	const [openMenu, setOpenMenu] = useState<boolean>(false);
+	const [viewPopup, setViewPopup] = useState<boolean>(false);
+	const [popupOpened, setPopupOpened] = useState<boolean>(false);
 
 	const variants = {
 		open: { opacity: 1, x: 0 },
@@ -69,10 +72,18 @@ const Header: React.FC = () => {
 		}, 1000);
 	};
 
+	useEffect(() => {
+		const openedPopup = !!localStorage.getItem('@caution-viewed');
+		setPopupOpened(openedPopup);
+	}, []);
+
 	const connect = () => {
-		dispatch(signInMetamask()).then(() => {
-			dispatch(getBalance());
-		});
+		setViewPopup(true);
+		if (popupOpened) {
+			dispatch(signInMetamask()).then(() => {
+				dispatch(getBalance());
+			});
+		}
 	};
 
 	return (
@@ -152,6 +163,7 @@ const Header: React.FC = () => {
 			<motion.div animate={openMenu ? 'open' : 'closed'} variants={variants}>
 				{openMenu && <MobileHeader nightModeProp={nightMode} />}
 			</motion.div>
+			{viewPopup && <CautionPopup />}
 		</header>
 	);
 };
