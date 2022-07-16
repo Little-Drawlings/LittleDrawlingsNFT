@@ -16,6 +16,7 @@ import { IDrawl } from '../../../redux/types/reducers';
 import { setOpenSavePopup } from '../../../redux/actions/mint';
 
 import styles from '../DefaultPopup/DefaultPopup.module.scss';
+import WaitPopup from '../WaitPopup';
 
 const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
@@ -30,6 +31,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 		(state: RootState) => state?.drawlReducer.activeDrawl
 	);
 	const [name, setName] = useState<string>(drawlName);
+	const [timePopup, setTimePopup] = useState<boolean>(false);
 
 	const exit = () => {
 		dispatch(setOpenSavePopup(false));
@@ -37,6 +39,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	};
 
 	const save = async () => {
+		setTimePopup(true);
 		const imgFile: File = await dataUrlToFile(drawl, name, 'image/png');
 		let drawlData: any = { name: name, image: imgFile, format, time };
 		drawlData = { ...drawlData, id: activeDrawl?._id };
@@ -47,6 +50,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 				}
 			})
 			.finally(() => {
+				setTimePopup(false);
 				exit();
 			});
 	};
@@ -77,6 +81,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 						title='Mint'
 						onClick={close}
 					/>
+					{timePopup && <WaitPopup />}
 				</div>
 			</div>
 		</div>

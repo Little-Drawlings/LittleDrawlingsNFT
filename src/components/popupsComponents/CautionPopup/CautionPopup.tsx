@@ -6,9 +6,9 @@ import { signInMetamask } from '../../../redux/actions/auth';
 import { getBalance } from '../../../redux/actions/mint';
 import { AppDispatch } from '../../../redux/store';
 import icons from '../../../constants/icons';
+import DefaultButton from '../../DefaultButton';
 
 import styles from './CautionPopup.module.scss';
-import DefaultButton from '../../DefaultButton';
 
 const CautionPopup: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();

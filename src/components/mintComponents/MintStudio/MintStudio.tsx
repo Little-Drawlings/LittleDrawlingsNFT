@@ -20,7 +20,6 @@ const MintStudio: React.FC = () => {
             map[image] = false;
             return map;
         }, {})
-
     );
 
     useLayoutEffect(() => {
@@ -36,44 +35,48 @@ const MintStudio: React.FC = () => {
             setVisibleImagesMap(newVisibleImagesMap);
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll);
         handleScroll();
 
-        return () => window.removeEventListener("scroll", handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const mintCanvas = () => {
         dispatch(getDrawl(''));
         dispatch(setOpenDrawPopup(true));
         dispatch(setTimeMint(1200));
-        navigate('/studio/canvas')
-    }
+        navigate('/studio/canvas');
+    };
 
     return (
         <div className={cn('mint-wrapper', styles.mint_studio)}>
             <div className={styles.sticky}>
-                <h3 className={cn('mint-title', styles.title)}><span className='title-span'>Studio</span></h3>
+                <h3 className={cn('mint-title', styles.title)}>
+                    <span className='title-span'>Studio</span>
+                </h3>
                 <p className={styles.sub_title}>paint your masterpiece</p>
 
                 <div className={styles.canvas_img_wrap}>
                     {images.map((image) => (
                         <div
                             className={cn(styles.image, styles[`image_${image}`], {
-                                image_visible: visibleImagesMap[image]
+                                image_visible: visibleImagesMap[image],
                             })}
                             key={image}
                         />
                     ))}
                 </div>
 
-                <DefaultButton
-                    className='no_wide_primary_large'
-                    title='Mint Canvas'
-                    onClick={mintCanvas}
-                />
+                <div className={styles.button_wrap}>
+                    <DefaultButton
+                        className='no_wide_primary_large'
+                        title='Mint Canvas'
+                        onClick={mintCanvas}
+                    />
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default MintStudio
+export default MintStudio;

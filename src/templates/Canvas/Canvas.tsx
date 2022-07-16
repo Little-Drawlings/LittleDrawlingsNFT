@@ -17,7 +17,7 @@ import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
-import { setOpenSavePopup, setTimeMint } from '../../redux/actions/mint';
+import { setOpenSavePopup } from '../../redux/actions/mint';
 
 import styles from './Canvas.module.scss';
 
@@ -43,7 +43,7 @@ const Canvas: React.FC = () => {
 	const pause = useSelector((state: RootState) => state?.mintReducer.mintPause);
 	const over = useSelector((state: RootState) => state?.mintReducer.mintOver);
 	const activeDrawl = useSelector((state: RootState) => state?.drawlReducer.activeDrawl);
-	const [drawing, setDrawing] = useState<string>('');
+	const [drawing, setDrawing] = useState<any>('');
 	const [brushColor, setBrushColor] = useState<string>(COLORS[0]);
 	const [brushRadius, setBrushRadius] = useState<number>(5);
 	const [format, setFormat] = useState<string>(FORMATS.RECTANGLE);
@@ -66,8 +66,7 @@ const Canvas: React.FC = () => {
 
 	useEffect(() => {
 		if (activeDrawl) {
-			dispatch(setTimeMint(activeDrawl?.time))
-			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`)
+			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`);
 		}
 	}, [activeDrawl, dispatch])
 
@@ -155,6 +154,19 @@ const Canvas: React.FC = () => {
 		instrument === INSTRUMENTS.PENCIL
 			? brushColor.slice(0, -2)
 			: brushColor;
+
+	const getImage = async (imageUrl: string) => {
+		const response = await fetch(imageUrl)
+		const imageBlob = await response.blob()
+		const reader = new FileReader();
+		reader.readAsDataURL(imageBlob);
+		
+		reader.onloadend = () => {
+			const base64data = reader.result?.toString() || '';
+			console.log(base64data);
+			return base64data;
+		}
+	}
 
 
 	return (
