@@ -104,13 +104,7 @@ const Header: React.FC = () => {
 						<NavLink to='/studio'>Studio</NavLink>
 					</li>
 					<li className={styles.nav_list_item}>
-						<NavLink to='/gallery'>Gallery</NavLink>
-					</li>
-					<li className={styles.nav_list_item}>
-						<NavLink to='/shop'>Shop</NavLink>
-					</li>
-					<li className={styles.nav_list_item}>
-						<NavLink to='/whitepaper'>Whitepaper</NavLink>
+						<a className={styles.nav_list_item_link} href='https://littledrawlings.gitbook.io' target='_blank' rel='noreferrer'>Whitepaper</a>
 					</li>
 				</ul>
 				<div className={styles.connect_wrap}>

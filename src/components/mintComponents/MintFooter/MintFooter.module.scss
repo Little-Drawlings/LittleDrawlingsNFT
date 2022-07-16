@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .mint_footer {
     position: relative;
     overflow: initial !important;
@@ -60,6 +62,18 @@
     font-size: 0.75rem;
     line-height: 1.25rem;
     color: rgba(255, 255, 255, 0.5);
+}
+
+.nav_list_item_link {
+    position: relative;
+    font-family: 'Mali';
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $activeLinkColor;
+
+    &:hover {
+        color: $secondary;
+    }
 }
 
 @media only screen and (max-width: 768px) {

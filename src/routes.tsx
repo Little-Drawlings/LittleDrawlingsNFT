@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom';
 import Mint from './templates/Mint';
 import Studio from './templates/Studio';
 import Canvas from './templates/Canvas';
-import Gallery from './templates/Gallery';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 	if (!localStorage.getItem('@storage_Key')) {
@@ -24,9 +23,6 @@ export const DefaultRoutes = () => {
 				</ProtectedRoute>} />
 			<Route path="studio" element={<ProtectedRoute>
 				<Studio />
-			</ProtectedRoute>} />
-			<Route path="gallery" element={<ProtectedRoute>
-				<Gallery />
 			</ProtectedRoute>} />
 			<Route path="*" element={<p>There's nothing here: 404!</p>} />
 		</Routes>

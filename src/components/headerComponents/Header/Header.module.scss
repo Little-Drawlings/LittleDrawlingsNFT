@@ -41,6 +41,18 @@
 	margin: 0 1rem;
 	position: relative;
 
+	.nav_list_item_link {
+		position: relative;
+		font-family: 'Mali';
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: $linkColor;
+
+		&:hover {
+			color: $secondary;
+		}
+	}
+
 	&.nav_link_item_canvas {
 		a {
 			color: $activeLinkColor;

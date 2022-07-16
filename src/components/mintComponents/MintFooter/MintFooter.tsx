@@ -48,7 +48,7 @@ const MintFooter: React.FC = () => {
                                 <NavLink className='footer_nav' to='/studio/canvas'>Mint</NavLink>
                             </li>
                             <li className={styles.nav_list_item}>
-                                <NavLink className='footer_nav' to='/whitepaper'>Whitepaper</NavLink>
+                            <a className={styles.nav_list_item_link} href='https://littledrawlings.gitbook.io' target='_blank' rel='noreferrer'>Whitepaper</a>
                             </li>
                         </ul>
                     </div>
