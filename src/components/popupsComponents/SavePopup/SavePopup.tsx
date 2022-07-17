@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
-
 import { RootState } from '../../../redux/reducers';
 import { AppDispatch } from '../../../redux/store';
 import { contractDrawl, setDrawl } from '../../../redux/actions/drawl';
@@ -23,7 +22,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	drawlName = '',
 	drawl = '',
 	format = '',
-	ipnsLink = ''
+	ipnsLink = '',
 }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
@@ -61,7 +60,9 @@ const SavePopup: React.FC<SavePopupProps> = ({
 
 	return (
 		<div className={cn('overlay')} onClick={close}>
-			<div className={cn('popup-content', styles.popup)} onClick={e => e.stopPropagation()}>
+			<div
+				className={cn('popup-content', styles.popup)}
+				onClick={(e) => e.stopPropagation()}>
 				<h3 className={styles.popup_title}>{title}</h3>
 				<p className={styles.popup_desc}>Save your canvas or mint as...</p>
 				<DefaultInput
