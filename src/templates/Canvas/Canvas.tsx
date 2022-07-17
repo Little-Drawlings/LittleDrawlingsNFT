@@ -11,7 +11,7 @@ import RangeInput from '../../components/RangeInput';
 import DrawPopup from '../../components/popupsComponents/DrawPopup';
 import SavePopup from '../../components/popupsComponents/SavePopup';
 
-import { getAllDrawls } from '../../redux/actions/drawl';
+
 import { AppDispatch } from '../../redux/store';
 import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
@@ -56,9 +56,6 @@ const Canvas: React.FC = () => {
 	const [drawPopup, setDrawPopup] = useState<boolean>(openDrawPopup);
 	const [savePopup, setSavePopup] = useState<boolean>(openSavePopup);
 
-	useEffect(() => {
-		dispatch(getAllDrawls())
-	}, [dispatch])
 
 	useEffect(() => {
 		setDrawlsList(drawls);
@@ -116,7 +113,8 @@ const Canvas: React.FC = () => {
 			title: 'Mint canvas as...',
 			drawlName: activeDrawl ? activeDrawl.name : `Drawl #${drawlsList?.length + 1}`,
 			drawl: base64,
-			format: format
+			format: format,
+			ipnsLink: activeDrawl?.ipnsLink
 		});
 	};
 
@@ -163,7 +161,6 @@ const Canvas: React.FC = () => {
 		
 		reader.onloadend = () => {
 			const base64data = reader.result?.toString() || '';
-			console.log(base64data);
 			return base64data;
 		}
 	}

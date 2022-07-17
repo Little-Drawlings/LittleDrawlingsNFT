@@ -23,7 +23,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	drawlName = '',
 	drawl = '',
 	format = '',
-	time = 0,
+	ipnsLink = ''
 }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
@@ -41,7 +41,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	const save = async () => {
 		setTimePopup(true);
 		const imgFile: File = await dataUrlToFile(drawl, name, 'image/png');
-		let drawlData: any = { name: name, image: imgFile, format, time };
+		let drawlData: any = { name: name, image: imgFile, format, ipnsLink };
 		drawlData = { ...drawlData, id: activeDrawl?._id };
 		dispatch(setDrawl(drawlData))
 			.then((res: IDrawl) => {
@@ -73,13 +73,13 @@ const SavePopup: React.FC<SavePopupProps> = ({
 				<div className={styles.buttons_wrap}>
 					<DefaultButton
 						className='no_wide_text_small'
-						title='Save & Close'
-						onClick={save}
+						title='Close'
+						onClick={exit}
 					/>
 					<DefaultButton
 						className='no_wide_text_small'
 						title='Mint'
-						onClick={close}
+						onClick={save}
 					/>
 					{timePopup && <WaitPopup />}
 				</div>

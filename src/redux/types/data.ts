@@ -4,6 +4,7 @@ export interface SavePopupProps {
 	drawl?: string;
 	time?: number;
 	format?: string;
+	ipnsLink?: string;
 
 }
 

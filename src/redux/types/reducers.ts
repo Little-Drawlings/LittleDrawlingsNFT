@@ -8,7 +8,7 @@ export interface IPersistConfig {
 export interface IDrawl {
     name: string;
     image: string;
-    time: number;
+    time?: number;
     format: string;
     hash?: string;
     createdAt?: string;

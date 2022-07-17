@@ -9,11 +9,11 @@ import Drawl from '../../components/Drawl';
 import DefaultDropdown from '../../components/DefaultDropdown';
 import DefaultButton from '../../components/DefaultButton';
 import { RootState } from '../../redux/reducers';
-import { getAllDrawls, getDrawl } from '../../redux/actions/drawl';
+import { contractDrawl, getAllDrawls, getDrawl, setDrawl } from '../../redux/actions/drawl';
 import { AppDispatch } from '../../redux/store';
 import { IDrawl } from '../../redux/types/reducers';
-import { DRAWLS_SORT_VALUES } from '../../constants/data';
-import { setOpenDrawPopup, setOverMint, setTimeMint } from '../../redux/actions/mint';
+import { DRAWLS_SORT_VALUES, FORMATS } from '../../constants/data';
+import { setOverMint } from '../../redux/actions/mint';
 
 import styles from './Studio.module.scss';
 
@@ -64,11 +64,16 @@ const Studio: React.FC = () => {
 		}
 	}
 
-	const openNewCanvas = () => {
-		dispatch(getDrawl(''));
-		dispatch(setOpenDrawPopup(true));
-		dispatch(setTimeMint(1200));
-		navigate('/studio/canvas')
+	const mintCanvas = async () => {
+		const name = `Drawl #${drawlsList?.length + 1}`
+		const data = {
+			name: name,
+			format: FORMATS.RECTANGLE
+		}
+		dispatch(setDrawl(data))
+			.then(() => {
+				contractDrawl();
+			}).then(() => dispatch(getAllDrawls()))
 	}
 
 	return (
@@ -85,14 +90,14 @@ const Studio: React.FC = () => {
 					<DefaultButton
 						className='wide_primary_small'
 						title='Mint new canvas'
-						onClick={openNewCanvas}
+						onClick={mintCanvas}
 					/>
 				</div>
 				<div className={styles.nft_list}>
 					{drawls?.length ? drawls.map((drawl, key) =>
 						<Drawl
 							key={key}
-							image={drawl.image}
+							image={drawl.image || ''}
 							title={drawl.name || ''}
 							size={drawl.format}
 							edited={drawl.updatedAt || ''}

@@ -5,7 +5,7 @@ import { IDrawl } from '../types/reducers';
 import { ethers } from "ethers";
 import { setLoading } from './mint';
 
-export const contractDrawl = async (ipnsPath: string) => {
+export const contractDrawl = async (ipnsPath: string = '') => {
     const w: any = window;
     const provider = new ethers.providers.Web3Provider(w.ethereum);
     const signer = provider.getSigner();
@@ -17,7 +17,7 @@ export const contractDrawl = async (ipnsPath: string) => {
 
     const address = await signer.getAddress();
     const contract = new ethers.Contract(contractData.address, contractData.abi, signer);
-    if (address && ipnsPath) {
+    if (address) {
         return await contract.mintNFT(address, ipnsPath, { gasLimit: 210000 });
     }
 }
@@ -30,7 +30,7 @@ export const getContractData = () => {
     })
 }
 
-export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => async (dispatch: (arg0: { type: string; data: IDrawl | boolean }) => void) => {
+export const setDrawl = (drawl: { [x: string]: string | Blob; id?: any; }) => async (dispatch: (arg0: { type: string; data: IDrawl | boolean }) => void) => {
     dispatch(setLoading(true));
     const formData = new FormData();
     for (let key in drawl) {
@@ -38,6 +38,7 @@ export const setDrawl = (drawl: { [x: string]: string | Blob; id: any; }) => asy
             formData.append(key, drawl[key]);
         }
     }
+    
     const id = drawl?.id;
     const apiRequest = id ? API.put(`/drawl`, formData) : API.post(`/drawl`, formData);
     return apiRequest.then((result) => {
