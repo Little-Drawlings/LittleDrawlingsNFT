@@ -29,7 +29,7 @@ const Drawl: React.FC<Props> = ({ image, title, size, edited, onClick }) => {
 					<span className={styles.info_row_value}>Edited {dayjs(edited).format('MM-DD HH:mm')}</span>
 				</div>
 			</div>
-			<DefaultButton className='no_wide_primary_small' title={'Touch up'} onClick={onClick} />
+			<DefaultButton className='no_wide_primary_small' title={'Paint'} onClick={onClick} />
 		</div>
 	);
 };

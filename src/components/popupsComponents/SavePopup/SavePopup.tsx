@@ -34,7 +34,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 
 	const exit = () => {
 		dispatch(setOpenSavePopup(false));
-		navigate('/');
+		navigate('/studio');
 	};
 
 	const save = async () => {
@@ -64,7 +64,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 				className={cn('popup-content', styles.popup)}
 				onClick={(e) => e.stopPropagation()}>
 				<h3 className={styles.popup_title}>{title}</h3>
-				<p className={styles.popup_desc}>Save your canvas or mint as...</p>
+				<p className={styles.popup_desc}>Give your canvas a unique name or save by default.</p>
 				<DefaultInput
 					placeholder='Name'
 					type='text'
@@ -74,12 +74,12 @@ const SavePopup: React.FC<SavePopupProps> = ({
 				<div className={styles.buttons_wrap}>
 					<DefaultButton
 						className='no_wide_text_small'
-						title='Close'
+						title='Cancel'
 						onClick={exit}
 					/>
 					<DefaultButton
 						className='no_wide_text_small'
-						title='Mint'
+						title='Display'
 						onClick={save}
 					/>
 					{timePopup && <WaitPopup />}

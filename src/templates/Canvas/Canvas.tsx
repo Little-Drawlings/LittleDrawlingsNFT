@@ -8,7 +8,6 @@ import mergeImages from 'merge-images';
 import Header from '../../components/headerComponents/Header';
 import DefaultButton from '../../components/DefaultButton';
 import RangeInput from '../../components/RangeInput';
-import DrawPopup from '../../components/popupsComponents/DrawPopup';
 import SavePopup from '../../components/popupsComponents/SavePopup';
 
 
@@ -52,8 +51,6 @@ const Canvas: React.FC = () => {
 	const [instrument, setInstrument] = useState(INSTRUMENTS.PENCIL_BRUSH);
 	const [base64, setBase64] = useState<string>('');
 	const [drawlsList, setDrawlsList] = useState(drawls);
-
-	const [drawPopup, setDrawPopup] = useState<boolean>(openDrawPopup);
 	const [savePopup, setSavePopup] = useState<boolean>(openSavePopup);
 
 
@@ -66,10 +63,6 @@ const Canvas: React.FC = () => {
 			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`);
 		}
 	}, [activeDrawl, dispatch])
-
-	useEffect(() => {
-		setDrawPopup(openDrawPopup);
-	}, [openDrawPopup]);
 
 	useEffect(() => {
 		setSavePopup(openSavePopup);
@@ -110,7 +103,7 @@ const Canvas: React.FC = () => {
 	const mintImage = async () => {
 		dispatch(setOpenSavePopup(true));
 		setSaveData({
-			title: 'Mint canvas as...',
+			title: 'Let’s save canvas as!',
 			drawlName: activeDrawl ? activeDrawl.name : `Drawl #${drawlsList?.length + 1}`,
 			drawl: base64,
 			format: format,
@@ -169,7 +162,6 @@ const Canvas: React.FC = () => {
 	return (
 		<>
 			<Header />
-			{drawPopup && <DrawPopup />}
 			{savePopup && <SavePopup {...saveData} />}
 			<div className={cn('content', nightMode && 'night')}>
 				<div className={styles.wrapper}>
