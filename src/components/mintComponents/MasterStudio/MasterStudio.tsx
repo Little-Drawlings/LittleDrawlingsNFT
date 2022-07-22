@@ -30,7 +30,7 @@ const MasterStudio: React.FC = () => {
                 <ul className={styles.clouds_list}>
                     <li className={styles.clouds_item}>draw</li>
                     <li className={styles.clouds_item}>mint</li>
-                    <li className={styles.clouds_item}>stake</li>
+                    <li className={styles.clouds_item}>play</li>
                 </ul>
             </div>
         </div>

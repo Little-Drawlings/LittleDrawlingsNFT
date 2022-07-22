@@ -64,13 +64,7 @@ const MobileHeader: React.FC<Props> = ({ nightModeProp }) => {
                     <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/studio'>Studio</NavLink>
                 </li>
                 <li className={styles.nav_list_item}>
-                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/gallery'>Gallery</NavLink>
-                </li>
-                <li className={styles.nav_list_item}>
-                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/shop'>Shop</NavLink>
-                </li>
-                <li className={styles.nav_list_item}>
-                    <NavLink className={cn('mobile_link', nightMode && 'white_link')} to='/whitepaper'>Whitepaper</NavLink>
+                    <a className={styles.nav_list_item_link} href='https://littledrawlings.gitbook.io' target='_blank' rel='noreferrer'>Whitepaper</a>
                 </li>
             </ul>
             <div className={styles.info_wrap}>
