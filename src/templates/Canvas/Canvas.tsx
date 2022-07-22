@@ -297,7 +297,7 @@ const Canvas: React.FC = () => {
 							</div>
 							<DefaultButton
 								className='no_wide_primary_small'
-								title={'Mint'}
+								title={'Save'}
 								onClick={mintImage}
 							/>
 						</div>

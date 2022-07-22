@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
-import { contractDrawl, getDrawl, setDrawl } from '../../../redux/actions/drawl';
-import { setFormatMint } from '../../../redux/actions/mint';
+import { contractDrawl, setDrawl } from '../../../redux/actions/drawl';
 import { RootState } from '../../../redux/reducers';
 import { AppDispatch } from '../../../redux/store';
 import { getAllDrawls } from '../../../redux/actions/drawl';
@@ -13,7 +12,6 @@ import icons from '../../../constants/icons';
 
 import styles from './Welcome.module.scss';
 import { dataUrlToFile, FORMATS } from '../../../constants/data';
-import { IDrawl } from '../../../redux/types/reducers';
 
 
 const Welcome: React.FC = () => {
@@ -47,7 +45,8 @@ const Welcome: React.FC = () => {
         const name = `Drawl #${drawlsList?.length + 1}`
         const data = {
             name: name,
-            format: FORMATS.RECTANGLE
+            format: FORMATS.RECTANGLE,
+            //image: await dataUrlToFile('', 'watermark', 'png')
         }
         dispatch(setDrawl(data))
             .then(() => {
