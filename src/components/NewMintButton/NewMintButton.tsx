@@ -22,7 +22,7 @@ const NewMintButton: React.FC<Props> = ({ className = 'no_wide_primary_large' })
 
     useEffect(() => {
         dispatch(getAllDrawls())
-    }, [dispatch, drawls])
+    }, [dispatch])
 
     useEffect(() => {
         setDrawlsList(drawls);
