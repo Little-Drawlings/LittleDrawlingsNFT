@@ -7,22 +7,22 @@ import cn from 'classnames';
 import Header from '../../components/headerComponents/Header';
 import Drawl from '../../components/Drawl';
 import DefaultDropdown from '../../components/DefaultDropdown';
-import DefaultButton from '../../components/DefaultButton';
 import { RootState } from '../../redux/reducers';
-import { contractDrawl, getAllDrawls, getDrawl, setDrawl } from '../../redux/actions/drawl';
+import { getAllDrawls, getDrawl } from '../../redux/actions/drawl';
 import { AppDispatch } from '../../redux/store';
 import { IDrawl } from '../../redux/types/reducers';
-import { DRAWLS_SORT_VALUES, FORMATS } from '../../constants/data';
+import { DRAWLS_SORT_VALUES } from '../../constants/data';
 import { setOverMint } from '../../redux/actions/mint';
 
 import styles from './Studio.module.scss';
+import NewMintButton from '../../components/NewMintButton';
 
 const Studio: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
 	const [nightMode, setNightMode] = useState<boolean>(false);
-	const [drawls, setDrawls] = useState<IDrawl[]>([])
-	const [, setDropdown] = useState<string>('')
+	const [drawls, setDrawls] = useState<IDrawl[]>([]);
+	const [, setDropdown] = useState<string>('');
 
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
@@ -32,12 +32,12 @@ const Studio: React.FC = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getAllDrawls())
-	}, [dispatch])
+		dispatch(getAllDrawls());
+	}, [dispatch]);
 
 	useEffect(() => {
-		setDrawls(drawlsList)
-	}, [drawlsList])
+		setDrawls(drawlsList);
+	}, [drawlsList]);
 
 	useEffect(() => {
 		setNightMode(nightModeMint);
@@ -46,35 +46,22 @@ const Studio: React.FC = () => {
 	const sortDrawls = (option: Option) => {
 		setDropdown(option.value);
 		drawls.sort((a, b) => {
-			const d1 = new Date(a.updatedAt || '').getTime()
-			const d2 = new Date(b.updatedAt || '').getTime()
-			return option.value === 'old' ? d1 - d2 : d2 - d1
+			const d1 = new Date(a.updatedAt || '').getTime();
+			const d2 = new Date(b.updatedAt || '').getTime();
+			return option.value === 'old' ? d1 - d2 : d2 - d1;
 		});
-	}
+	};
 
 	const openCanvas = (id?: string) => {
 		if (id) {
 			dispatch(setOverMint(false));
 			dispatch(getDrawl(id)).then((res: any) => {
 				if (res) {
-					navigate('/studio/canvas')
+					navigate('/studio/canvas');
 				}
-
-			})
+			});
 		}
-	}
-
-	const mintCanvas = async () => {
-		const name = `Drawl #${drawlsList?.length + 1}`
-		const data = {
-			name: name,
-			format: FORMATS.RECTANGLE
-		}
-		dispatch(setDrawl(data))
-			.then(() => {
-				contractDrawl();
-			}).then(() => dispatch(getAllDrawls()))
-	}
+	};
 
 	return (
 		<>
@@ -85,25 +72,22 @@ const Studio: React.FC = () => {
 						options={DRAWLS_SORT_VALUES}
 						placeholder='Sort by'
 						onChange={(e) => sortDrawls(e)}
-
 					/>
-					<DefaultButton
-						className='wide_primary_small'
-						title='Mint new canvas'
-						onClick={mintCanvas}
-					/>
+					<NewMintButton className='wide_primary_small'/>
 				</div>
 				<div className={styles.nft_list}>
-					{drawls?.length ? drawls.map((drawl, key) =>
-						<Drawl
-							key={key}
-							image={drawl.image || ''}
-							title={drawl.name || ''}
-							size={drawl.format}
-							edited={drawl.updatedAt || ''}
-							onClick={() => openCanvas(drawl._id)}
-						/>
-					) : null}
+					{drawls?.length
+						? drawls.map((drawl, key) => (
+							<Drawl
+								key={key}
+								image={drawl.image || ''}
+								title={drawl.name || ''}
+								size={drawl.format}
+								edited={drawl.updatedAt || ''}
+								onClick={() => openCanvas(drawl._id)}
+							/>
+						))
+						: null}
 				</div>
 			</div>
 		</>

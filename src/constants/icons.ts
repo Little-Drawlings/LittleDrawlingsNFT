@@ -38,7 +38,8 @@ import BurgerArrow from '../assets/svg/burger-arrow.svg';
 import BurgerArrowNight from '../assets/svg/burger-arrow-night.svg';
 import Banner from '../assets/svg/mint/banner.svg';
 import NoDraw from '../assets/svg/mint/no_draw.svg';
-import Time from '../assets/svg//time.svg';
+import Time from '../assets/svg/time.svg';
+
 
 const icons = {
 	Logo,
@@ -81,7 +82,7 @@ const icons = {
 	BurgerArrowNight,
 	Banner,
 	NoDraw,
-	Time
+	Time,
 };
 
 export default icons;

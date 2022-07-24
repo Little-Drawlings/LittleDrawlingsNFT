@@ -18,14 +18,14 @@ const DefaultButton: React.FC<Props> = ({
 	className = 'wide_primary_active_large',
 	onClick
 }) => {
-	const classNames = () => {
+	const getClassNames = () => {
 		const classArray = className.split(' ');
 		return classArray.map(c => styles[c])
 	};
 	return (
 		<button
 			style={style}
-			className={cn(styles.default_btn, classNames())}
+			className={cn(styles.default_btn, getClassNames())}
 			disabled={disabled}
 			onClick={onClick}
 		>

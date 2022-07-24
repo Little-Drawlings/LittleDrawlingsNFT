@@ -23,9 +23,6 @@ import styles from './Canvas.module.scss';
 const Canvas: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
-	const openDrawPopup = useSelector(
-		(state: RootState) => state?.mintReducer.openDrawPopup
-	);
 	const openSavePopup = useSelector(
 		(state: RootState) => state?.mintReducer.openSavePopup
 	);
@@ -146,17 +143,17 @@ const Canvas: React.FC = () => {
 			? brushColor.slice(0, -2)
 			: brushColor;
 
-	const getImage = async (imageUrl: string) => {
-		const response = await fetch(imageUrl)
-		const imageBlob = await response.blob()
-		const reader = new FileReader();
-		reader.readAsDataURL(imageBlob);
+	// const getImage = async (imageUrl: string) => {
+	// 	const response = await fetch(imageUrl)
+	// 	const imageBlob = await response.blob()
+	// 	const reader = new FileReader();
+	// 	reader.readAsDataURL(imageBlob);
 		
-		reader.onloadend = () => {
-			const base64data = reader.result?.toString() || '';
-			return base64data;
-		}
-	}
+	// 	reader.onloadend = () => {
+	// 		const base64data = reader.result?.toString() || '';
+	// 		return base64data;
+	// 	}
+	// }
 
 
 	return (

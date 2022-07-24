@@ -1,20 +1,12 @@
 import { useLayoutEffect, useState } from 'react';
 import cn from 'classnames';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import { getDrawl } from '../../../redux/actions/drawl';
-import { setOpenDrawPopup, setTimeMint } from '../../../redux/actions/mint';
-import { AppDispatch } from '../../../redux/store';
-import DefaultButton from '../../DefaultButton';
 
 import styles from './MintStudio.module.scss';
+import NewMintButton from '../../NewMintButton';
 
 const images = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const MintStudio: React.FC = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch<AppDispatch>();
     const [visibleImagesMap, setVisibleImagesMap] = useState(
         images.reduce((map: any, image) => {
             map[image] = false;
@@ -41,13 +33,6 @@ const MintStudio: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const mintCanvas = () => {
-        dispatch(getDrawl(''));
-        dispatch(setOpenDrawPopup(true));
-        dispatch(setTimeMint(1200));
-        navigate('/studio/canvas');
-    };
-
     return (
         <div className={cn('mint-wrapper', styles.mint_studio)}>
             <div className={styles.sticky}>
@@ -68,11 +53,7 @@ const MintStudio: React.FC = () => {
                 </div>
 
                 <div className={styles.button_wrap}>
-                    <DefaultButton
-                        className='no_wide_primary_large'
-                        title='Mint Canvas'
-                        onClick={mintCanvas}
-                    />
+                    <NewMintButton />
                 </div>
             </div>
         </div>

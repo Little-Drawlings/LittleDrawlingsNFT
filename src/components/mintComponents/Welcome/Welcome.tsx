@@ -1,58 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-
-import { contractDrawl, setDrawl } from '../../../redux/actions/drawl';
 import { RootState } from '../../../redux/reducers';
-import { AppDispatch } from '../../../redux/store';
-import { getAllDrawls } from '../../../redux/actions/drawl';
 import DefaultButton from '../../DefaultButton';
 import icons from '../../../constants/icons';
+import NewMintButton from '../../NewMintButton';
 
 import styles from './Welcome.module.scss';
-import { dataUrlToFile, FORMATS } from '../../../constants/data';
-
 
 const Welcome: React.FC = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch<AppDispatch>();
 
     const nightModeMint = useSelector(
         (state: RootState) => state?.mintReducer.nightMode
     );
-    const drawls = useSelector(
-        (state: RootState) => state?.drawlReducer.drawls
-    );
 
     const [nightMode, setNightMode] = useState<boolean>(false);
-    const [drawlsList, setDrawlsList] = useState(drawls);
 
     useEffect(() => {
         setNightMode(nightModeMint);
     }, [nightModeMint]);
-
-    useEffect(() => {
-        dispatch(getAllDrawls())
-    }, [dispatch])
-
-    useEffect(() => {
-        setDrawlsList(drawls);
-    }, [drawls]);
-
-
-    const mintCanvas = async () => {
-        const name = `Drawl #${drawlsList?.length + 1}`
-        const data = {
-            name: name,
-            format: FORMATS.RECTANGLE,
-            //image: await dataUrlToFile('', 'watermark', 'png')
-        }
-        dispatch(setDrawl(data))
-            .then(() => {
-                contractDrawl();
-            })
-    }
 
     const paint = () => {
         navigate('/studio');
@@ -77,11 +45,7 @@ const Welcome: React.FC = () => {
                     />
                 </div>
                 <div className={styles.buttons_wrap}>
-                    <DefaultButton
-                        className='no_wide_primary_large'
-                        title='Mint Canvas'
-                        onClick={mintCanvas}
-                    />
+                    <NewMintButton />
                     <DefaultButton
                         className='no_wide_primary_large'
                         title='Paint'
