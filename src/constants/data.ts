@@ -33,8 +33,6 @@ export const DRAWLS_SORT_VALUES = [{
 
 export async function dataUrlToFile(dataUrl: string, fileName: string, type: string): Promise<File> {
 	const res: Response = await fetch(dataUrl);
-	console.log(res);
-
 	const blob: Blob = await res.blob();
 	return new File([blob], fileName, { type: type });
 }

@@ -6,6 +6,7 @@ import { contractDrawl, getAllDrawls, setDrawl } from "../../redux/actions/drawl
 import { RootState } from "../../redux/reducers";
 import { AppDispatch } from "../../redux/store";
 import { dataUrlToFile, FORMATS, WATERMARK } from "../../constants/data";
+import { IDrawl } from "../../redux/types/reducers";
 
 interface Props {
     className?: string;
@@ -17,12 +18,11 @@ const NewMintButton: React.FC<Props> = ({ className = 'no_wide_primary_large' })
     const drawls = useSelector(
         (state: RootState) => state?.drawlReducer.drawls
     );
-
     const [drawlsList, setDrawlsList] = useState(drawls);
 
     useEffect(() => {
         dispatch(getAllDrawls())
-    }, [dispatch])
+    }, [dispatch, drawls])
 
     useEffect(() => {
         setDrawlsList(drawls);
@@ -37,8 +37,10 @@ const NewMintButton: React.FC<Props> = ({ className = 'no_wide_primary_large' })
             image: imgFile
         }
         dispatch(setDrawl(data))
-            .then(() => {
-                contractDrawl();
+            .then((res: IDrawl) => {
+                if (res?.ipnsLink && res?._id) {
+                    dispatch(contractDrawl(res.ipnsLink, res._id));
+                }
             })
     }
 

@@ -44,8 +44,8 @@ const SavePopup: React.FC<SavePopupProps> = ({
 		drawlData = { ...drawlData, id: activeDrawl?._id };
 		dispatch(setDrawl(drawlData))
 			.then((res: IDrawl) => {
-				if (res.ipnsLink) {
-					contractDrawl(res.ipnsLink);
+				if (res.ipnsLink && res?._id) {
+					dispatch(contractDrawl(res.ipnsLink, res._id));
 				}
 			})
 			.finally(() => {
