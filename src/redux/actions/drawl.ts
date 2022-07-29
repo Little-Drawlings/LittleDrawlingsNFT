@@ -5,6 +5,8 @@ import { IDrawl } from '../types/reducers';
 import { ethers } from 'ethers';
 import { setLoading } from './mint';
 
+const PRICE = process.env.REACT_APP_PRICE;
+
 export const contractDrawl =
     (ipnsPath: string = '', drawlId: string) =>
         async (dispatch: (arg0: { type: string; data: boolean }) => void) => {
@@ -28,7 +30,7 @@ export const contractDrawl =
             );
             if (address) {
                 return await contract
-                    .mintNFT(address, ipnsPath, { gasLimit: 210000 })
+                    .mintNFT(address, ipnsPath, { gasLimit: 210000, value: Number(PRICE) * 10 ** 18 })
                     .then(() => dispatch(setLoading(false)));
             }
         };
