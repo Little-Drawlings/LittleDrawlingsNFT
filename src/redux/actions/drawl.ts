@@ -29,9 +29,15 @@ export const contractDrawl =
                 signer
             );
             if (address) {
-                return await contract
-                    .mintNFT(address, ipnsPath, { gasLimit: 210000, value: Number(PRICE) * 10 ** 18 })
-                    .then(() => dispatch(setLoading(false)));
+                try {
+                    return await contract
+                        .mintNFT(address, ipnsPath, { gasLimit: 210000, value: Number(PRICE) * 10 ** 18 })
+                } catch {
+                    deleteDrawl(drawlId);
+                } finally {
+                    dispatch(setLoading(false));
+                }
+
             }
         };
 
@@ -82,6 +88,7 @@ export const setDrawl =
                     return drawlData;
                 })
                 .catch((error) => {
+                    dispatch(setLoading(false));
                     throw error;
                 });
         };
