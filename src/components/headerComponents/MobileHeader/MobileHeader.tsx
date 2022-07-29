@@ -73,7 +73,7 @@ const MobileHeader: React.FC<Props> = ({ nightModeProp }) => {
                         <span className={cn(styles.connect_value, nightMode && styles.connect_value_night)}>{balance.substring(0, 7)} ETH</span>
                         <div className={cn(styles.connect_eth, nightMode && styles.connect_eth_night)}>
                             {' '}
-                            <span className={styles.connect_circle}></span> {`${address.substring(0, 5)}...${address.slice(-4)} ETH`}
+                            <span className={styles.connect_circle}></span> {`${address.substring(0, 5)}...${address.slice(-4)} RBTC`}
                         </div>
                     </div>
                 ) : (

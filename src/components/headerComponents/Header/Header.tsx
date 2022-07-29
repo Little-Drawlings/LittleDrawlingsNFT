@@ -126,7 +126,7 @@ const Header: React.FC = () => {
 							<div className={styles.connect_eth}>
 								{' '}
 								<span className={styles.connect_circle}></span>{' '}
-								{`${address.substring(0, 5)}...${address.slice(-4)} ETH`}
+								{`${address.substring(0, 5)}...${address.slice(-4)} RBTC`}
 							</div>
 						</div>
 					) : (
