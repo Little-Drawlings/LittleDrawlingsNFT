@@ -20,16 +20,16 @@ import NewMintButton from '../../components/NewMintButton';
 const Studio: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
-	const [nightMode, setNightMode] = useState<boolean>(false);
-	const [drawls, setDrawls] = useState<IDrawl[]>([]);
-	const [, setDropdown] = useState<string>('');
-
 	const nightModeMint = useSelector(
 		(state: RootState) => state?.mintReducer.nightMode
 	);
 	const drawlsList = useSelector(
 		(state: RootState) => state?.drawlReducer.drawls
 	);
+
+	const [nightMode, setNightMode] = useState<boolean>(false);
+	const [drawls, setDrawls] = useState<IDrawl[]>(drawlsList);
+	const [, setDropdown] = useState<string>('');
 
 	useEffect(() => {
 		dispatch(getAllDrawls());

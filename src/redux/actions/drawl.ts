@@ -7,8 +7,25 @@ import { setLoading } from './mint';
 
 const PRICE = process.env.REACT_APP_PRICE;
 
+export const getAllDrawls =
+    () =>
+        (dispatch: (arg0: { type: string; data: IDrawl[] | boolean }) => void) => {
+            dispatch(setLoading(true));
+            return API.get(`/drawl/getAll`)
+                .then((response) => {
+                    dispatch({
+                        type: types.GET_ALL_DRAWLS,
+                        data: response.data,
+                    });
+                })
+                .catch((error) => {
+                    throw error;
+                })
+                .finally(() => dispatch(setLoading(false)));
+        };
+
 export const contractDrawl =
-    (ipnsPath: string = '', drawlId: string) =>
+    (ipnsPath: string, drawlId: string) =>
         async (dispatch: (arg0: { type: string; data: boolean }) => void) => {
             dispatch(setLoading(true));
             const w: any = window;
@@ -30,15 +47,18 @@ export const contractDrawl =
             );
             if (address) {
                 try {
+                    const ipnsLink = ipnsPath || '';
                     return await contract
-                        .mintNFT(address, ipnsPath, { gasLimit: 210000, value: Number(PRICE) * 10 ** 18 })
+                        .mintNFT(address, ipnsLink, { gasLimit: 210000, value: Number(PRICE) * 10 ** 18 })
                 } catch {
-                    deleteDrawl(drawlId);
+                    if (!ipnsPath) {
+                        deleteDrawl(drawlId);
+                    }
                 } finally {
-                    dispatch(setLoading(false));
+                    dispatch(setLoading(false))
                 }
-
             }
+            return address
         };
 
 export const getContractData = () => {
@@ -113,23 +133,6 @@ export const getDrawl =
                         data: response.data,
                     });
                     return response.data;
-                })
-                .catch((error) => {
-                    throw error;
-                })
-                .finally(() => dispatch(setLoading(false)));
-        };
-
-export const getAllDrawls =
-    () =>
-        (dispatch: (arg0: { type: string; data: IDrawl[] | boolean }) => void) => {
-            dispatch(setLoading(true));
-            return API.get(`/drawl/getAll`)
-                .then((response) => {
-                    dispatch({
-                        type: types.GET_ALL_DRAWLS,
-                        data: response.data,
-                    });
                 })
                 .catch((error) => {
                     throw error;

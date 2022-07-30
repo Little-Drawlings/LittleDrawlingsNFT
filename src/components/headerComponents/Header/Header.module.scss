@@ -169,7 +169,12 @@
 
 	.nav_list_item {
 		margin: 0 0.5rem;
+		.nav_list_item_link {
+			font-size: 1rem;
+		}
 	}
+
+	
 }
 
 @media only screen and (max-width: 992px) {
