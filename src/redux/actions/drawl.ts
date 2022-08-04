@@ -25,7 +25,7 @@ export const getAllDrawls =
         };
 
 export const contractDrawl =
-    (ipnsPath: string, drawlId: string) =>
+    (ipnsPath: string) =>
         async (dispatch: (arg0: { type: string; data: boolean }) => void) => {
             dispatch(setLoading(true));
             const w: any = window;
@@ -34,7 +34,6 @@ export const contractDrawl =
             const contractData: any = await getContractData();
 
             if (!contractData) {
-                deleteDrawl(drawlId);
                 dispatch(setLoading(false));
                 return;
             }
@@ -48,17 +47,15 @@ export const contractDrawl =
             if (address) {
                 try {
                     const ipnsLink = ipnsPath || '';
-                    return await contract
-                        .mintNFT(address, ipnsLink, { gasLimit: 210000, value: Number(PRICE) * 10 ** 18 })
+                    return await contract.mintNFT(address, ipnsLink, {
+                        gasLimit: 210000,
+                        value: Number(PRICE) * 10 ** 18,
+                    });
                 } catch {
-                    if (!ipnsPath) {
-                        deleteDrawl(drawlId);
-                    }
-                } finally {
-                    dispatch(setLoading(false))
+                    dispatch(setLoading(false));
                 }
             }
-            return address
+            return address;
         };
 
 export const getContractData = () => {
@@ -110,7 +107,8 @@ export const setDrawl =
                 .catch((error) => {
                     dispatch(setLoading(false));
                     throw error;
-                });
+                })
+                .finally(() => dispatch(setLoading(false)));
         };
 
 export const getDrawl =

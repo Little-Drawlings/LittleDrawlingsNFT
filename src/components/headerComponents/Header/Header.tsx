@@ -121,12 +121,12 @@ const Header: React.FC = () => {
 					{metaMaskData?.user ? (
 						<div className={styles.connect}>
 							<span className={styles.connect_value}>
-								{balance.substring(0, 7)} ETH
+								{balance.substring(0, 7)} RBTC
 							</span>
 							<div className={styles.connect_eth}>
 								{' '}
 								<span className={styles.connect_circle}></span>{' '}
-								{`${address.substring(0, 5)}...${address.slice(-4)} RBTC`}
+								{`${address.substring(0, 5)}...${address.slice(-4)}`}
 							</div>
 						</div>
 					) : (

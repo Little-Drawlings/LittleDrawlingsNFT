@@ -10,7 +10,6 @@ import {
 import { RootState } from '../../redux/reducers';
 import { AppDispatch } from '../../redux/store';
 import { dataUrlToFile, FORMATS, WATERMARK } from '../../constants/data';
-import { IDrawl } from '../../redux/types/reducers';
 
 interface Props {
     className?: string;
@@ -44,9 +43,10 @@ const NewMintButton: React.FC<Props> = ({
             format: FORMATS.RECTANGLE,
             image: imgFile,
         };
-        dispatch(setDrawl(data)).then((res: IDrawl) => {
-            if (res?._id) {
-                dispatch(contractDrawl(res.ipnsLink, res._id));
+        dispatch(contractDrawl('')).then(async (tx: any) => {
+            let receipt = await tx.wait();
+            if(receipt) {
+                dispatch(setDrawl(data))
             }
         })
     };

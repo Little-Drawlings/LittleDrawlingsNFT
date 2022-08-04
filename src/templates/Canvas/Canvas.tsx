@@ -12,7 +12,7 @@ import SavePopup from '../../components/popupsComponents/SavePopup';
 
 
 import { AppDispatch } from '../../redux/store';
-import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
+import { COLORS, FORMATS, INSTRUMENTS, WATERMARK } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
@@ -56,8 +56,11 @@ const Canvas: React.FC = () => {
 	}, [drawls]);
 
 	useEffect(() => {
-		if (activeDrawl) {
+		if (activeDrawl?.ipnsLink) {
 			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`);
+		}
+		else {
+			setDrawing(WATERMARK)
 		}
 	}, [activeDrawl, dispatch])
 
@@ -142,18 +145,6 @@ const Canvas: React.FC = () => {
 		instrument === INSTRUMENTS.PENCIL
 			? brushColor.slice(0, -2)
 			: brushColor;
-
-	// const getImage = async (imageUrl: string) => {
-	// 	const response = await fetch(imageUrl)
-	// 	const imageBlob = await response.blob()
-	// 	const reader = new FileReader();
-	// 	reader.readAsDataURL(imageBlob);
-		
-	// 	reader.onloadend = () => {
-	// 		const base64data = reader.result?.toString() || '';
-	// 		return base64data;
-	// 	}
-	// }
 
 
 	return (
