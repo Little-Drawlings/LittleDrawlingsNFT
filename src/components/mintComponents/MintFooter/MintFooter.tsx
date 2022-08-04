@@ -1,3 +1,4 @@
+import React from 'react';
 import cn from 'classnames';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
@@ -7,8 +8,10 @@ import icons from '../../../constants/icons';
 import NavLink from '../../NavLink';
 
 import styles from './MintFooter.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const MintFooter: React.FC = () => {
+    const navigate = useNavigate();
     const [ref, view] = useInView({
         threshold: 0.5,
         triggerOnce: false,
@@ -48,7 +51,19 @@ const MintFooter: React.FC = () => {
                                 <NavLink className='footer_nav' to='/studio/canvas'>Mint</NavLink>
                             </li>
                             <li className={styles.nav_list_item}>
-                            <a className={styles.nav_list_item_link} href='https://littledrawlings.gitbook.io' target='_blank' rel='noreferrer'>Whitepaper</a>
+                                <a className={styles.nav_list_item_link} href='https://littledrawlings.gitbook.io' target='_blank' rel='noreferrer'>Whitepaper</a>
+                            </li>
+                            <li className={styles.nav_list_item}>
+                                <button className={cn(styles.nav_list_item_link, styles.button)} onClick={() => navigate('/terms')}>Term and Conditions</button>
+                            </li>
+                            <li className={styles.nav_list_item}>
+                                <button className={cn(styles.nav_list_item_link, styles.button)} onClick={() => navigate('/privacy')}>Privacy Policy</button>
+                            </li>
+                            <li className={styles.nav_list_item}>
+                                <button className={cn(styles.nav_list_item_link, styles.button)} onClick={() => navigate('/disclaimer')}>Disclaimer</button>
+                            </li>
+                            <li className={styles.nav_list_item}>
+                                <button className={cn(styles.nav_list_item_link, styles.button)} onClick={() => navigate('/cookies')}>Cookies Policy</button>
                             </li>
                         </ul>
                     </div>

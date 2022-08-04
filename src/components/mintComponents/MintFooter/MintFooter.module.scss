@@ -51,6 +51,28 @@
 
 .nav_list_item {
     margin: 0 1rem;
+
+    .nav_list_item_link {
+        position: relative;
+        font-family: 'Mali';
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $activeLinkColor;
+
+
+
+        &:hover {
+            color: $secondary;
+        }
+    }
+
+    .nav_list_item_link.button {
+        color: $white;
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+
+    }
 }
 
 .footer_logo {
@@ -64,17 +86,7 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-.nav_list_item_link {
-    position: relative;
-    font-family: 'Mali';
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: $activeLinkColor;
 
-    &:hover {
-        color: $secondary;
-    }
-}
 
 @media only screen and (max-width: 768px) {
     .footer_nav {
@@ -83,10 +95,12 @@
         justify-content: flex-start;
         align-items: flex-start;
         margin: 1rem 0;
+
         .nav_list_item {
             margin: 0.2rem 0;
         }
     }
+
     .footer_nav_wrap {
         flex-direction: column-reverse;
         justify-content: flex-start;

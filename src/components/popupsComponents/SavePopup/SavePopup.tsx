@@ -45,12 +45,12 @@ const SavePopup: React.FC<SavePopupProps> = ({
 		dispatch(contractDrawl(drawlData?.ipnsLink)).then(async (tx: any) => {
 			let receipt = await tx.wait();
 			if (receipt) {
-				dispatch(setDrawl(drawlData))
+				dispatch(setDrawl(drawlData)).finally(() => {
+					setTimePopup(false);
+					exit();
+				});
 			}
-		}).finally(() => {
-			setTimePopup(false);
-			exit();
-		});
+		})
 	};
 
 	const close = () => {
