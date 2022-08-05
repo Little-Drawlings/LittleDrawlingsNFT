@@ -42,15 +42,10 @@ const SavePopup: React.FC<SavePopupProps> = ({
 		const imgFile: File = await dataUrlToFile(drawl, name, 'image/png');
 		let drawlData: any = { name: name, image: imgFile, format, ipnsLink };
 		drawlData = { ...drawlData, id: activeDrawl?._id };
-		dispatch(contractDrawl(drawlData?.ipnsLink)).then(async (tx: any) => {
-			let receipt = await tx.wait();
-			if (receipt) {
-				dispatch(setDrawl(drawlData)).finally(() => {
-					setTimePopup(false);
-					exit();
-				});
-			}
-		})
+		dispatch(setDrawl(drawlData)).finally(() => {
+			setTimePopup(false);
+			exit();
+		});
 	};
 
 	const close = () => {

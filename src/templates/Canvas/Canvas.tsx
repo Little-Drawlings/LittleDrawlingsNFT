@@ -57,7 +57,8 @@ const Canvas: React.FC = () => {
 
 	useEffect(() => {
 		if (activeDrawl?.ipnsLink) {
-			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`);
+			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.image}`);
+			//setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`);
 		}
 		else {
 			setDrawing(WATERMARK)
