@@ -1,21 +1,19 @@
-@import '../../styles/variables.scss';
-
-.content {
-    display: flex;
-    flex-direction: column;
-    margin: 5rem;
+.filters_wrap {
+    width: 100%;
+	position: relative;
+	z-index: 3;
+	margin-top: 6rem;
+    padding: 1rem 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-
-.breadcrumbs {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin: 2rem 0;
-}
-.breadcrumbs_text {
-    padding-left: 0.5rem;
-    font-family: 'Gloria Hallelujah';
-    font-weight: 400;
-    font-size: 1.25rem;
-    color: $activeLinkColor;
+.nft_list {
+	width: 100%;
+	padding: 0 2rem;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	position: relative;
+	z-index: 1;
 }

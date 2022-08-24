@@ -1,0 +1,7 @@
+const SIGN_IN_METAMASK = 'SIGN_IN_METAMASK'
+
+const AUTH_TYPES = {
+    SIGN_IN_METAMASK
+};
+
+export default AUTH_TYPES;

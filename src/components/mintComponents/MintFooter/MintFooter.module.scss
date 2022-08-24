@@ -1,0 +1,109 @@
+@import '../../../styles/variables.scss';
+
+.mint_footer {
+    position: relative;
+    overflow: initial !important;
+
+    .parallax_bg {
+        position: absolute;
+        top: -90%;
+        z-index: 5;
+        max-width: 100%;
+    }
+
+    .footer_bg {
+        max-width: 100%;
+        position: relative;
+        z-index: 6;
+        margin-bottom: -4px;
+    }
+
+    .parallax_img {
+        width: 100vw;
+        height: 100vh;
+
+        &>div {
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
+        }
+    }
+}
+
+.footer_content {
+    position: relative;
+}
+
+.footer_text {
+    position: absolute;
+    bottom: 0;
+    z-index: 15;
+    margin: 0 2rem;
+}
+
+.footer_nav_wrap,
+.footer_nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav_list_item {
+    margin: 0 1rem;
+
+    .nav_list_item_link {
+        position: relative;
+        font-family: 'Mali';
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $activeLinkColor;
+
+
+
+        &:hover {
+            color: $secondary;
+        }
+    }
+
+    .nav_list_item_link.button {
+        color: $white;
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+
+    }
+}
+
+.footer_logo {
+    opacity: 0.7;
+}
+
+.footer_copyright {
+    font-family: 'Poppins';
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .footer_nav {
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: 1rem 0;
+
+        .nav_list_item {
+            margin: 0.2rem 0;
+        }
+    }
+
+    .footer_nav_wrap {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}

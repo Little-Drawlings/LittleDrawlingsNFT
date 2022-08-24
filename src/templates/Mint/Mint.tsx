@@ -1,33 +1,41 @@
-import DefaultButton from '../../components/Buttons/DefaultButton';
-import Header from '../../components/Header';
-import { HEADER_BG } from '../../constants/data';
-import icons from '../../constants/icons';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import cn from 'classnames';
 
-import styles from './Mint.module.scss';
+import Header from '../../components/headerComponents/Header';
+import { RootState } from '../../redux/reducers';
+
+import Welcome from '../../components/mintComponents/Welcome';
+import MintStudio from '../../components/mintComponents/MintStudio';
+import LetsDraw from '../../components/mintComponents/LetsDraw';
+import RoadMap from '../../components/mintComponents/RoadMap';
+import MintFooter from '../../components/mintComponents/MintFooter';
+import MasterStudio from '../../components/mintComponents/MasterStudio';
 
 const Mint: React.FC = () => {
+	const nightModeMint = useSelector(
+		(state: RootState) => state?.mintReducer.nightMode
+	);
+	const [nightMode, setNightMode] = useState<boolean>(false);
+
+	useEffect(() => {
+		setNightMode(nightModeMint);
+	}, [nightModeMint]);
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
 	return (
 		<>
-			<Header background={HEADER_BG.BLUE}/>
-			<div className={styles.content}>
-				<img
-					className={styles.bg_image}
-					src={icons.BackgroundLogo}
-					alt='logo'
-				/>
-				<div className={styles.title_wrap}>
-					<h3 className={styles.title}>Paint & Claim</h3>
-					<p className={styles.text}>Collectable NFT trading game</p>
-				</div>
-				<div className={styles.btn_wrap}>
-					<img
-						className={styles.bg_image}
-						src={icons.MintGirl}
-						alt='MintGirl'
-					/>
-					<DefaultButton title='Mint' />
-					<img className={styles.bg_image} src={icons.MintBoy} alt='MintBoy' />
-				</div>
+			<Header />
+			<div className={cn('content', nightMode && 'night')}>
+				<Welcome />
+				<MasterStudio />
+				<MintStudio />
+				<LetsDraw />
+				<RoadMap />
+				<MintFooter />
 			</div>
 		</>
 	);

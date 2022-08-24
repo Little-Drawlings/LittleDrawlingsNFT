@@ -1,20 +1,26 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import sessionStorage from 'redux-persist/lib/storage/session';
+import { AuthAppState, DrawlAppState, MintAppState } from './../types/store';
 import mintReducer from './mint/reducer';
-import { MintAppState } from './../types/store';
+import drawlReducer from './drawl/reducer';
+import authReducer from './auth/reducer';
 
 const rootPersistConfig = {
 	key: 'root',
-	storage: storage
+	storage: sessionStorage
 };
 
 export interface RootState {
-    mintReducer: MintAppState;
+	mintReducer: MintAppState;
+	drawlReducer: DrawlAppState;
+	authReducer: AuthAppState
 }
 
 const rootReducer = combineReducers({
 	mintReducer,
+	drawlReducer,
+	authReducer
 });
 
 export default persistReducer(rootPersistConfig, rootReducer);

@@ -1,18 +1,23 @@
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 import { persister, store } from './redux/store';
+import BlockerLoader from './components/BlockerLoader';
+import { DefaultRoutes } from './routes';
 
-import { useRoutes } from "react-router-dom";
-import { routes } from './routes';
 import './styles/styles.scss';
 
+
 function App() {
-	let children = useRoutes(routes);
+
 	return (
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persister}>
-				{children}
+				<BlockerLoader />
+				<ParallaxProvider>
+					<DefaultRoutes />
+				</ParallaxProvider>
 			</PersistGate>
 		</Provider>
 	);

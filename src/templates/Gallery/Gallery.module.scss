@@ -1,0 +1,103 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+    width: calc(100% - 4rem);
+    margin: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    position: relative;
+}
+
+.claim_form_wrap {
+    width: 100%;
+    min-height: 60vh;
+    animation: changeBg 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: step-end;
+    background: transparent;
+}
+
+.claim_form_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.claim_form {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    min-width: 50%;
+    border-radius: 4px;
+    padding: 2rem;
+}
+
+.claim_form_content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_buttons_wrap,
+.form_input_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.claim_form_title {
+    margin: 1rem 0;
+    font-family: 'LD Scribble';
+    font-weight: 700;
+    font-size: 3.125rem;
+    line-height: 1;
+    color: $black;
+}
+
+.form_available {
+    margin-bottom: 1rem;
+}
+
+.form_available_value {
+    padding: 1rem;
+    margin: 0;
+    background: url('../../assets/svg/gallery/claim-bg.svg') center/100% no-repeat;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 1;
+    color: $valueColor;
+}
+
+.gallery_title {
+    margin: 2rem 0 1rem 0;
+    padding-left: 4rem;
+    width: 100%;
+    font-family: 'LD Scribble';
+    font-weight: 700;
+    font-size: 3.125rem;
+    line-height: 3.125rem;
+    color: #332D41;
+}
+
+.gallery_supplies {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+@keyframes changeBg {
+
+    0%,
+    100% {
+        background: url('../../assets/svg/gallery/gallery-bg.svg') center/contain no-repeat;
+        background-size: contain;
+    }
+
+    50% {
+        background: url('../../assets/svg/gallery/gallery-bg2.svg') center/contain no-repeat;
+        background-size: contain;
+    }
+}

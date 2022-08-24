@@ -1,39 +1,151 @@
 /** variables **/
-@import './variables.scss';
-@import './fonts.css';
+@import "./variables.scss";
+@import "./fonts.css";
 
 html {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 html,
 body {
-	font-family: 'Montserrat';
-	margin: 0;
-	padding: 0;
-	min-width: 100%;
-	min-height: 100%;
+  font-family: "Montserrat";
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 div {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-body, #root {
-	color: $dark;
-	background-color: $white;
-	min-height: 100vh;
-	display: flex;
-    flex-direction: column;
+body,
+#root {
+  color: $dark;
+  background-color: $white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 ul {
-	list-style: none;
+  list-style: none;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
-.wrapper {
-	position: relative;
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  min-width: 350px;
+  z-index: 8;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  transition: all 0.5s ease-in-out;
+  background: url('../assets/svg/mint/light-bg.svg') center/cover no-repeat;
+  &.night {
+    background: url('../assets/svg/mint/dark-bg.svg') center/cover no-repeat;
+  }
+}
+
+.dropdown {
+  &.is-open {
+    z-index: 30;
+
+    &+.dropdown-placeholder {
+      opacity: 1;
+    }
+  }
+
+  &+.dropdown-placeholder {
+    opacity: 0;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.slider-container {
+  width: calc(100% - 8rem);
+}
+
+.slider-control-centerleft {
+  transform: translateX(-90%) !important;
+}
+
+.slider-control-centerright {
+  transform: translateX(90%) !important;
+  text-align: right;
+}
+
+.mint-wrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  &.mint-height_auto {
+    height: auto;
+  }
+}
+
+.mint-title {
+  width: 100%;
+  height: 15.5rem;
+  margin: 0;
+  background: url('../assets/svg/mint/blush.svg') center/contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'LD Scribble';
+  font-weight: 700;
+  font-size: 6rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #3E3782;
+
+  .title-span {
+    display: inline-block;
+    margin-top: 5rem;
+  }
+  @media only screen and (max-width: 768px) {
+    & {
+      height: 7rem;
+    }
+    .title-span {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.image_visible {
+  opacity: 1;
 }
