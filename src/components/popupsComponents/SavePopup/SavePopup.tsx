@@ -5,17 +5,17 @@ import cn from 'classnames';
 
 import { RootState } from '../../../redux/reducers';
 import { AppDispatch } from '../../../redux/store';
-import { contractDrawl, setDrawl } from '../../../redux/actions/drawl';
+import { setDrawl } from '../../../redux/actions/drawl';
 import { SavePopupProps } from '../../../redux/types/data';
 import DefaultButton from '../../DefaultButton';
 import DefaultInput from '../../DefaultInput';
 
 import { dataUrlToFile } from '../../../constants/data';
-import { IDrawl } from '../../../redux/types/reducers';
 import { setOpenSavePopup } from '../../../redux/actions/mint';
+import WaitPopup from '../WaitPopup';
 
 import styles from '../DefaultPopup/DefaultPopup.module.scss';
-import WaitPopup from '../WaitPopup';
+
 
 const SavePopup: React.FC<SavePopupProps> = ({
 	title = '',
@@ -40,7 +40,7 @@ const SavePopup: React.FC<SavePopupProps> = ({
 	const save = async () => {
 		setTimePopup(true);
 		const imgFile: File = await dataUrlToFile(drawl, name, 'image/png');
-		let drawlData: any = { name: name, image: imgFile, format, ipnsLink };
+		let drawlData: any = { name: name, image: imgFile, format, ipnsLink};
 		drawlData = { ...drawlData, id: activeDrawl?._id };
 		dispatch(setDrawl(drawlData)).finally(() => {
 			setTimePopup(false);

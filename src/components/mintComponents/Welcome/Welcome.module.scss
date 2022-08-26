@@ -86,12 +86,14 @@
 .buttons_wrap {
 	display: flex;
 	flex-direction: column;
+
 	button {
 		margin: 0.5rem 0;
 	}
 }
 
-@media only screen and (max-width: 1400px), screen and (max-height: 700px) {
+@media only screen and (max-width: 1400px),
+screen and (max-height: 700px) {
 	.welcome_image {
 		max-width: 70%;
 	}
@@ -134,5 +136,16 @@
 		button {
 			margin: 0;
 		}
+	}
+}
+
+@media screen and (min-width: 900px) and (max-height: 850px) {
+	.title_wrap {
+		margin: 12rem 0 0 0;
+	}
+
+	.welcome_image {
+		margin: 0;
+		max-width: 50%;
 	}
 }

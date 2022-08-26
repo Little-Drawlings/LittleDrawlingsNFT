@@ -10,6 +10,8 @@ import {
 import { RootState } from '../../redux/reducers';
 import { AppDispatch } from '../../redux/store';
 import { dataUrlToFile, FORMATS, WATERMARK } from '../../constants/data';
+import { signInMetamask } from '../../redux/actions/auth';
+import { getBalance } from '../../redux/actions/mint';
 
 interface Props {
     className?: string;
@@ -19,6 +21,9 @@ const NewMintButton: React.FC<Props> = ({
     className = 'no_wide_primary_large',
 }) => {
     const dispatch = useDispatch<AppDispatch>();
+    const metaMaskData = useSelector(
+        (state: RootState) => state?.authReducer.metaMaskData
+    );
 
     const drawls = useSelector((state: RootState) => state?.drawlReducer.drawls);
     const [drawlsList, setDrawlsList] = useState(drawls);
@@ -32,23 +37,37 @@ const NewMintButton: React.FC<Props> = ({
     }, [drawls]);
 
     const mintCanvas = async () => {
-        const name = `Drawl #${drawlsList?.length + 1}`;
-        const imgFile: File = await dataUrlToFile(
-            WATERMARK,
-            'watermark',
-            'image/png'
-        );
-        const data = {
-            name: name,
-            format: FORMATS.RECTANGLE,
-            image: imgFile,
-        };
-        dispatch(contractDrawl('')).then(async (tx: any) => {
-            let receipt = await tx.wait();
-            if(receipt) {
-                dispatch(setDrawl(data))
-            }
-        })
+        if (!metaMaskData) {
+            connect();
+        }
+        else {
+            const name = `Drawl #${drawlsList?.length + 1}`;
+            const imgFile: File = await dataUrlToFile(
+                WATERMARK,
+                'watermark',
+                'image/png'
+            );
+            let data = {
+                name: name,
+                format: FORMATS.RECTANGLE,
+                image: imgFile,
+                tokenId: ''
+            };
+            dispatch(contractDrawl('')).then(async (tx: any) => {
+                let receipt = await tx.wait();
+                const tokenId = receipt?.events[0]?.args?.tokenId?._hex
+                data = {...data, tokenId: tokenId}
+                if (receipt && tokenId) {
+                    dispatch(setDrawl(data))
+                }
+            })
+        }
+    };
+
+    const connect = () => {
+        dispatch(signInMetamask()).then(() => {
+            dispatch(getBalance());
+        });
     };
 
     return (

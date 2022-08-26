@@ -17,5 +17,6 @@ export interface IDrawl {
     id?: string;
     _id?: string;
     ipnsLink: string
+    tokenId: string;
 }
 
