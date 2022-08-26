@@ -29,8 +29,10 @@ const NewMintButton: React.FC<Props> = ({
     const [drawlsList, setDrawlsList] = useState(drawls);
 
     useEffect(() => {
-        dispatch(getAllDrawls());
-    }, [dispatch]);
+        if (metaMaskData) {
+            dispatch(getAllDrawls());
+        }
+    }, [dispatch, metaMaskData]);
 
     useEffect(() => {
         setDrawlsList(drawls);
@@ -56,7 +58,7 @@ const NewMintButton: React.FC<Props> = ({
             dispatch(contractDrawl('')).then(async (tx: any) => {
                 let receipt = await tx.wait();
                 const tokenId = receipt?.events[0]?.args?.tokenId?._hex
-                data = {...data, tokenId: tokenId}
+                data = { ...data, tokenId: tokenId }
                 if (receipt && tokenId) {
                     dispatch(setDrawl(data))
                 }
