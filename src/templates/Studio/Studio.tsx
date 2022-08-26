@@ -62,7 +62,7 @@ const Studio: React.FC = () => {
 			let drawlData = await Promise.all(drawlsList.map(async drawl => {
 				const tokenId = drawl?.tokenId;
 				if (tokenId) {
-					const owner = await getDrawnOwner(tokenId);
+					const owner = await getDrawlOwner(tokenId);
 					return address?.toString()?.toLowerCase() === owner?.toString()?.toLowerCase() ? drawl : null
 				}
 				else {
@@ -80,7 +80,7 @@ const Studio: React.FC = () => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
 
-	const getDrawnOwner = async (tokenId?: string) => {
+	const getDrawlOwner = async (tokenId?: string) => {
 		if (!contractData?.address || !tokenId?.length) {
 			return;
 		}
