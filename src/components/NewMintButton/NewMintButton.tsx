@@ -5,6 +5,7 @@ import DefaultButton from '../DefaultButton';
 import {
     contractDrawl,
     getAllDrawls,
+    getContractData,
     setDrawl,
 } from '../../redux/actions/drawl';
 import { RootState } from '../../redux/reducers';
@@ -26,13 +27,25 @@ const NewMintButton: React.FC<Props> = ({
     );
 
     const drawls = useSelector((state: RootState) => state?.drawlReducer.drawls);
+
+    const [address, setAddress] = useState<string>("");
     const [drawlsList, setDrawlsList] = useState(drawls);
+
 
     useEffect(() => {
         if (metaMaskData) {
-            dispatch(getAllDrawls());
+            setAddress(metaMaskData.user?.publicAddress);
         }
-    }, [dispatch, metaMaskData]);
+    }, [metaMaskData]);
+
+    useEffect(() => {
+        if (address) {
+            getContractData().then((res) => {
+                dispatch(getAllDrawls(res, address));
+
+            });
+        }
+    }, [address, dispatch]);
 
     useEffect(() => {
         setDrawlsList(drawls);

@@ -7,15 +7,42 @@ import { setLoading } from './mint';
 
 const PRICE = process.env.REACT_APP_PRICE;
 
+const getDrawlOwner = async (contractData: { abi: any; address: string }, tokenId: string) => {
+    if (!contractData?.address || !tokenId?.length) {
+        return;
+    }
+    const w: any = window;
+    const provider = new ethers.providers.Web3Provider(w.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+        contractData.address,
+        contractData.abi,
+        signer
+    );
+    return await contract.ownerOf(tokenId);
+};
+
 export const getAllDrawls =
-    () =>
+    (contractData: { abi: any; address: string }, address: string) =>
         (dispatch: (arg0: { type: string; data: IDrawl[] | boolean }) => void) => {
             dispatch(setLoading(true));
             return API.get(`/drawl/getAll`)
-                .then((response) => {
+                .then(async (response) => {
+                    const drawlsList = response.data || [];
+                    let drawlData = await Promise.all(drawlsList.map(async (drawl: IDrawl) => {
+                        const tokenId = drawl?.tokenId;
+                        if (tokenId) {
+                            const owner = await getDrawlOwner(contractData, tokenId);
+                            return address?.toString()?.toLowerCase() === owner?.toString()?.toLowerCase() ? drawl : null
+                        }
+                        else {
+                            return null
+                        }
+                    }));
+                    drawlData = drawlData?.filter(Boolean);
                     dispatch({
                         type: types.GET_ALL_DRAWLS,
-                        data: response.data,
+                        data: drawlData,
                     });
                 })
                 .catch((error) => {

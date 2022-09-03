@@ -83,7 +83,8 @@ const Canvas: React.FC = () => {
 	const changeCanvasImage = async (canvas: CanvasDraw | any) => {
 		const canvasImages = []
 		for (let i = 0; i < canvas?.canvasContainer.childNodes.length; i++) {
-			canvasImages.push(canvas?.canvasContainer.childNodes[i].toDataURL())
+			const canvasChild = canvas?.canvasContainer.childNodes[i];
+			canvasImages.push(canvasChild.toDataURL())
 		}
 		const destinationCanvas = document.createElement("canvas");
 		const el = canvas?.canvasContainer.childNodes[3]
@@ -145,13 +146,11 @@ const Canvas: React.FC = () => {
 		instrument === INSTRUMENTS.PENCIL
 			? brushColor.slice(0, -2)
 			: brushColor;
-
-
 	return (
 		<>
 			<Header />
 			{savePopup && <SavePopup {...saveData} />}
-			<div className={cn('content', nightMode && 'night')}>
+			<div className={cn('content', styles.content, nightMode && 'night')}>
 				<div className={styles.wrapper}>
 					<div
 						className={styles.breadcrumbs}
@@ -193,19 +192,21 @@ const Canvas: React.FC = () => {
 								squareFormat
 									? {
 										width: '100%',
-										minWidth: '50vw',
+										minWidth: '1200px',
 										height: 'auto',
 										maxHeight: '100vh',
 										aspectRatio: '1/1',
 									}
 									: {
 										width: '100%',
-										minWidth: '70vw',
+										minWidth: '1200px',
 										height: 'auto',
 										maxHeight: '100vh',
 										aspectRatio: '16/9',
 									}
 							}
+							canvasWidth={1200}
+							canvasHeight={700}
 							hideGrid={true}
 							brushColor={brushColor}
 							catenaryColor={brushColor}
