@@ -23,11 +23,9 @@ const getDrawlOwner = async (contractData: { abi: any; address: string }, tokenI
 };
 
 export const getAllDrawls =
-    (contractData: { abi: any; address: string }, address: string, loading: boolean = true) =>
+    (contractData: { abi: any; address: string }, address: string) =>
         (dispatch: (arg0: { type: string; data: IDrawl[] | boolean }) => void) => {
-            if (loading) {
-                dispatch(setLoading(true));
-            }
+            dispatch(setLoading(true));
             return API.get(`/drawl/getAll`)
                 .then(async (response) => {
                     const drawlsList = response.data || [];

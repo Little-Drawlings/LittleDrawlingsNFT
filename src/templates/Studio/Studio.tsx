@@ -9,8 +9,6 @@ import Drawl from "../../components/Drawl";
 import DefaultDropdown from "../../components/DefaultDropdown";
 import { RootState } from "../../redux/reducers";
 import {
-	getAllDrawls,
-	getContractData,
 	getDrawl
 } from "../../redux/actions/drawl";
 import { AppDispatch } from "../../redux/store";
@@ -30,28 +28,10 @@ const Studio: React.FC = () => {
 	const drawlsList = useSelector(
 		(state: RootState) => state?.drawlReducer.drawls
 	);
-	const metaMaskData = useSelector(
-		(state: RootState) => state?.authReducer.metaMaskData
-	);
 
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [drawls, setDrawls] = useState<IDrawl[] | any[]>([]);
 	const [, setDropdown] = useState<string>("");
-	const [address, setAddress] = useState<string>("");
-
-	useEffect(() => {
-		if (metaMaskData) {
-			setAddress(metaMaskData.user?.publicAddress);
-		}
-	}, [metaMaskData]);
-
-	useEffect(() => {
-		if (address) {
-			getContractData().then((res) => {
-				dispatch(getAllDrawls(res, address, true));
-			});
-		}
-	}, [address, dispatch]);
 
 	useEffect(() => {
 		setDrawls(drawlsList);

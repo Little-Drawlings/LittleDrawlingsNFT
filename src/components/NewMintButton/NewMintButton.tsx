@@ -41,7 +41,7 @@ const NewMintButton: React.FC<Props> = ({
     useEffect(() => {
         if (address) {
             getContractData().then((res) => {
-                dispatch(getAllDrawls(res, address, false));
+                dispatch(getAllDrawls(res, address));
 
             });
         }
