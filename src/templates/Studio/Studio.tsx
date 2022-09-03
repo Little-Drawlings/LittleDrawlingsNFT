@@ -11,14 +11,13 @@ import { RootState } from "../../redux/reducers";
 import {
 	getAllDrawls,
 	getContractData,
-	getDrawl,
+	getDrawl
 } from "../../redux/actions/drawl";
 import { AppDispatch } from "../../redux/store";
 import { IDrawl } from "../../redux/types/reducers";
 import { DRAWLS_SORT_VALUES } from "../../constants/data";
 import { setOverMint } from "../../redux/actions/mint";
 import NewMintButton from "../../components/NewMintButton";
-import { ethers } from "ethers";
 
 import styles from "./Studio.module.scss";
 
@@ -37,10 +36,6 @@ const Studio: React.FC = () => {
 
 	const [nightMode, setNightMode] = useState<boolean>(false);
 	const [drawls, setDrawls] = useState<IDrawl[] | any[]>([]);
-	const [contractData, setContractData] = useState<{
-		abi: any;
-		address: string;
-	}>({ abi: {}, address: "" });
 	const [, setDropdown] = useState<string>("");
 	const [address, setAddress] = useState<string>("");
 
@@ -51,49 +46,20 @@ const Studio: React.FC = () => {
 	}, [metaMaskData]);
 
 	useEffect(() => {
-		dispatch(getAllDrawls());
-		getContractData().then((res) => {
-			setContractData(res);
-		});
-	}, [dispatch]);
+		if (address) {
+			getContractData().then((res) => {
+				dispatch(getAllDrawls(res, address, true));
+			});
+		}
+	}, [address, dispatch]);
 
 	useEffect(() => {
-		const getDrawlData = async () => {
-			let drawlData = await Promise.all(drawlsList.map(async drawl => {
-				const tokenId = drawl?.tokenId;
-				if (tokenId) {
-					const owner = await getDrawlOwner(tokenId);
-					return address?.toString()?.toLowerCase() === owner?.toString()?.toLowerCase() ? drawl : null
-				}
-				else {
-					return null
-				}
-			}));
-			drawlData = drawlData?.filter(Boolean)
-			setDrawls(drawlData);
-		}
-		getDrawlData();
-
-	}, [address, drawlsList]);
+		setDrawls(drawlsList);
+	}, [drawlsList]);
 
 	useEffect(() => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
-
-	const getDrawlOwner = async (tokenId?: string) => {
-		if (!contractData?.address || !tokenId?.length) {
-			return;
-		}
-		const w: any = window;
-		const provider = new ethers.providers.Web3Provider(w.ethereum);
-		const signer = provider.getSigner();
-		const contract = new ethers.Contract(
-			contractData.address,
-			contractData.abi,
-			signer
-		);
-		return await contract.ownerOf(tokenId);
-	};
 
 	const sortDrawls = (option: Option) => {
 		setDropdown(option.value);
