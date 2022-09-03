@@ -1,5 +1,8 @@
 @import '../../styles/variables.scss';
 
+.content {
+	min-width: max-content!important;
+}
 .wrapper {
 	margin: 5rem 0;
 	display: flex;
@@ -7,7 +10,8 @@
 	align-items: center;
 	z-index: 3;
 	position: relative;
-	max-width: 100%;
+	min-width: max-content;
+	overflow: auto;
 }
 
 .breadcrumbs {
@@ -38,7 +42,6 @@
 	background-color: $canvasBorder;
 	position: relative;
 	z-index: 3;
-	max-width: calc(100% - 2rem);
 	margin: 1rem;
 }
 

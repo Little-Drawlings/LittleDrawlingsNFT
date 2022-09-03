@@ -40,8 +40,6 @@ export const getAllDrawls =
                         }
                     }));
                     drawlData = drawlData?.filter(Boolean);
-                    console.log(drawlData, 'ku drawlData');
-
                     dispatch({
                         type: types.GET_ALL_DRAWLS,
                         data: drawlData,
