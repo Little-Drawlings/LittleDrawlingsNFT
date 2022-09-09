@@ -36,7 +36,7 @@ export const getAllDrawls =
                             return address?.toString()?.toLowerCase() === owner?.toString()?.toLowerCase() ? drawl : null
                         }
                         else {
-                            return null
+                            return null;
                         }
                     }));
                     drawlData = drawlData?.filter(Boolean);
@@ -66,23 +66,28 @@ export const contractDrawl =
             }
 
             const address = await signer.getAddress();
-            const contract = new ethers.Contract(
+            const contract = new ethers.Contract( 
                 contractData.address,
                 contractData.abi,
                 signer
             );
+
             if (address) {
+                const {_hex} = await contract._tokenIds();
+                const dec = parseInt(_hex, 16);
+                const hex = (dec + 1).toString(16);
                 try {
                     const ipnsLink = ipnsPath || '';
                     return await contract.mintNFT(address, ipnsLink, {
                         gasLimit: 210000,
                         value: Number(PRICE) * 10 ** 18,
-                    });
+                    }).then((res: any) => console.log(res, 'ku contract res')
+                    );
                 } catch {
                     dispatch(setLoading(false));
                 }
+                return hex;
             }
-            return address;
         };
 
 export const getContractData = () => {

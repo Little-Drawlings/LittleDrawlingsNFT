@@ -37,7 +37,9 @@ export const signInMetamask = () => async (dispatch: (arg0: { type: string; data
 
             const ethersProvider = new ethers.providers.Web3Provider(provider);
 
-            const isMetamask = ethersProvider.connection?.url === 'metamask'
+            const isMetamask = ethersProvider.connection?.url === 'metamask';
+
+
 
 
             const { chainId } = await ethersProvider.getNetwork();
@@ -85,9 +87,10 @@ export const signInMetamask = () => async (dispatch: (arg0: { type: string; data
                 .then(async (response) => {
                     if (response?.status) {
                         setToken(response.data?.data.token);
+                        const data = {...response.data?.data, isMetamask: ethersProvider.connection?.url === 'metamask'}
                         dispatch({
                             type: types.SIGN_IN_METAMASK,
-                            data: response.data?.data
+                            data: data
                         })
                     }
                 })

@@ -29,12 +29,14 @@ const NewMintButton: React.FC<Props> = ({
     const drawls = useSelector((state: RootState) => state?.drawlReducer.drawls);
 
     const [address, setAddress] = useState<string>("");
+    const [isMetaMask, setIsMetaMask] = useState<boolean>(false);
     const [drawlsList, setDrawlsList] = useState(drawls);
 
 
     useEffect(() => {
         if (metaMaskData) {
             setAddress(metaMaskData.user?.publicAddress);
+            setIsMetaMask(metaMaskData?.isMetamask)
         }
     }, [metaMaskData]);
 
@@ -69,10 +71,20 @@ const NewMintButton: React.FC<Props> = ({
                 tokenId: ''
             };
             dispatch(contractDrawl('')).then(async (tx: any) => {
-                let receipt = await tx.wait();
-                const tokenId = receipt?.events[0]?.args?.tokenId?._hex
-                data = { ...data, tokenId: tokenId }
-                if (receipt && tokenId) {
+                console.log(tx, 'ku tx');
+                if (isMetaMask) {
+                    let receipt = await tx.wait();
+                    const tokenId = receipt?.events[0]?.args?.tokenId?._hex;
+                    console.log(tokenId);
+                    
+                    data = { ...data, tokenId: tokenId }
+                    if (receipt && tokenId) {
+                        dispatch(setDrawl(data))
+                    }
+                }
+                else {
+                    const tokenId = tx;
+                    data = { ...data, tokenId: tokenId }
                     dispatch(setDrawl(data))
                 }
             })

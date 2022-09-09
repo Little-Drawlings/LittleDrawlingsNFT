@@ -44,12 +44,12 @@ export interface MetaMaskUser {
 }
 
 export interface MetaMaskData {
-	token: string
-	user: MetaMaskUser
+	token: string;
+	user: MetaMaskUser;
+	isMetamask: boolean;
 }
 export interface AuthAppState {
-	metaMaskData: MetaMaskData
-
+	metaMaskData: MetaMaskData;
 }
 
 
