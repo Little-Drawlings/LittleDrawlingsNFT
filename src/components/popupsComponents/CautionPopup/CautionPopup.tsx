@@ -44,8 +44,7 @@ const CautionPopup: React.FC = () => {
                         <p className={styles.popup_text}>
                             <span className={styles.bold}>
                                 Little Drawlings is an experimental project
-                            </span>
-                            featuring non-fungible tokens (NFTs) utilizing the mutable IPNS
+                            </span>&nbsp;featuring non-fungible tokens (NFTs) utilizing the mutable IPNS
                             (InterPlanetary Name System) protocol within the IPFS
                             (InterPlanetary File System) Peer-to-Peer (P2P){' '}
                             <span className={styles.bold}>public</span> file sharing network.

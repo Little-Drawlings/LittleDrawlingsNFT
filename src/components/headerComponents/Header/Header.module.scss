@@ -188,3 +188,10 @@
 		display: inline-block;
 	}
 }
+
+@media only screen and (max-width: 430px) {
+	.header a img{
+		width: 200px;
+		display: block;
+	}
+}

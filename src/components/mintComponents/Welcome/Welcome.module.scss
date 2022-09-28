@@ -17,7 +17,7 @@
 }
 
 .welcome_image {
-	max-width: 100%;
+	max-width: 45%;
 	margin-top: 1rem;
 }
 
@@ -94,9 +94,9 @@
 
 @media only screen and (max-width: 1400px),
 screen and (max-height: 700px) {
-	.welcome_image {
-		max-width: 70%;
-	}
+	//.welcome_image {
+	//	max-width: 70%;
+	//}
 
 	.left_img,
 	.right_img {
