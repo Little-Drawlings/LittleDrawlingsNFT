@@ -17,6 +17,10 @@ export interface IDrawl {
     id?: string;
     _id?: string;
     ipnsLink: string
+    ipnsImage: string
     tokenId: string;
+    artist: string;
+    title: string;
+    description: string;
 }
 

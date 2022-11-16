@@ -19,7 +19,7 @@ const getDrawlOwner = async (contractData: { abi: any; address: string }, tokenI
         contractData.abi,
         signer
     );
-    return await contract.ownerOf(tokenId);
+    return await contract.ownerOf(parseInt(tokenId, 16));
 };
 
 export const getAllDrawls =
@@ -52,7 +52,7 @@ export const getAllDrawls =
         };
 
 export const contractDrawl =
-    (ipnsPath: string) =>
+    (createdItem: any) =>
         async (dispatch: (arg0: { type: string; data: boolean }) => void) => {
             dispatch(setLoading(true));
             const w: any = window;
@@ -73,22 +73,166 @@ export const contractDrawl =
             );
 
             if (address) {
-                const {_hex} = await contract._tokenIds();
-                const dec = parseInt(_hex, 16);
-                const hex = (dec + 1).toString(16);
-                try {
-                    const ipnsLink = ipnsPath || '';
-                    return await contract.mintNFT(address, ipnsLink, {
-                        gasLimit: 210000,
-                        value: Number(PRICE) * 10 ** 18,
-                    }).then((res: any) => console.log(res, 'ku contract res')
-                    );
-                } catch {
-                    dispatch(setLoading(false));
+
+                const data = new Promise((resolve) => {
+                    contract.on("Transfer", async (from, to, amount, event) => {
+                        const receipt = await event.getTransactionReceipt();
+                        const tnx = await event.getTransaction();
+
+                        const dataToDecode = receipt.logs.find((log: any) => {
+                            return log.data.toLowerCase().includes(address?.toLowerCase()?.slice(2, -1))
+                        })
+
+                        if(!dataToDecode) resolve(null)
+                        const decodeData = await ethers.utils.defaultAbiCoder.decode([ "address", "uint256" ], dataToDecode.data);
+
+                        if (address?.toLowerCase() === tnx.from?.toLowerCase()) {
+                            event.removeListener();
+                            resolve(decodeData[1]);
+                        }
+                    });
+                })
+
+                const mint = new Promise(async (resolve) => {
+                    const res = contract.mintNFT(address?.toLowerCase(), `https://${createdItem.ipnsLink}.ipns.cf-ipfs.com`, {
+                        gasLimit: 1100000,
+                        value: Number(PRICE) * 10 ** 18
+                    })
+                        .then((res: any) => {
+                            resolve(res)
+                        })
+                        .catch((err: any) => {
+                            resolve(err)
+                        })
+
+                    return res;
+                })
+
+                const mintRes = await mint;
+
+                // @ts-ignore
+                if (mintRes.toString().includes("user rejected transaction") || mintRes.toString().includes("UserDeclinedError")) {
+                    contract.removeAllListeners("Transfer")
+                    return null
+                } else {
+                    return await data
                 }
-                return hex;
             }
         };
+
+export const updateInfo = (drawl: any) =>
+    async (dispatch: (arg0: { type: string; data: boolean }) => void) => {
+        const w: any = window;
+        const provider = new ethers.providers.Web3Provider(w.ethereum);
+        const signer = provider.getSigner();
+        const contractData: any = await getContractData();
+
+        if (!contractData) {
+            dispatch(setLoading(false));
+            return;
+        }
+
+        const address = await signer.getAddress();
+        const contract = new ethers.Contract(
+            contractData.address,
+            contractData.abi,
+            signer
+        );
+
+        if (address) {
+            const data = new Promise((resolve) => {
+                contract.on("NFTUpdated", async (from, tokenId) => {
+                    if (from.toLowerCase() === address.toLowerCase() && parseInt(tokenId, 16) === parseInt(drawl.tokenId, 16)) {
+                        contract.removeAllListeners("NFTUpdated")
+                        resolve(true)
+                    }
+                });
+            })
+
+            const mint = new Promise(async (resolve) => {
+                const res = contract.updateInfo(parseInt(drawl.tokenId, 16), {
+                    gasLimit: 1100000,
+                    value: Number(process.env.REACT_APP_UPDATE_INFO_PRICE) * 10 ** 18
+                })
+                    .then((res: any) => {
+                        resolve(res)
+                    })
+                    .catch((err: any) => {
+                        resolve(err)
+                    })
+
+                return res;
+            })
+
+            const mintRes = await mint;
+
+            // @ts-ignore
+            if (mintRes.toString().includes("user rejected transaction") || mintRes.toString().includes("UserDeclinedError")) {
+                contract.removeAllListeners("Transfer")
+                return null
+            } else {
+                return await data
+            }
+        }
+    }
+
+export const updateImage = (drawlData: any) =>
+    async (dispatch: (arg0: { type: string; data: boolean }) => void) => {
+        const w: any = window;
+        const provider = new ethers.providers.Web3Provider(w.ethereum);
+        const signer = provider.getSigner();
+        const contractData: any = await getContractData();
+
+        if (!contractData) {
+            dispatch(setLoading(false));
+            return;
+        }
+
+        const address = await signer.getAddress();
+        const contract = new ethers.Contract(
+            contractData.address,
+            contractData.abi,
+            signer
+        );
+
+        if (address) {
+            const data = new Promise((resolve) => {
+                contract.on("NFTUpdated", async (from, tokenId) => {
+
+                    if (from.toLowerCase() === address.toLowerCase() && parseInt(tokenId, 16) === parseInt(drawlData.tokenId, 16)) {
+                        contract.removeAllListeners("NFTUpdated")
+                        resolve(true)
+                    }
+                });
+            })
+
+            const mint = new Promise(async (resolve) => {
+                const res = contract.updateImage(parseInt(drawlData.tokenId, 16), {
+                    gasLimit: 1100000,
+                    value: Number(process.env.REACT_APP_UPDATE_IMAGE_PRICE) * (10 ** 18)
+                })
+                    .then((res: any) => {
+                        resolve(res)
+                    })
+                    .catch((err: any) => {
+                        resolve(err)
+                    })
+
+                return res;
+            })
+
+            const mintRes = await mint;
+
+            // @ts-ignore
+            if (mintRes.toString().includes("user rejected transaction") || mintRes.toString().includes("UserDeclinedError")) {
+                contract.removeAllListeners("Transfer")
+                return null
+            } else {
+                return await data
+            }
+        }
+    }
+
 
 export const getContractData = () => {
     return API.get(`/drawl/getContractData`)

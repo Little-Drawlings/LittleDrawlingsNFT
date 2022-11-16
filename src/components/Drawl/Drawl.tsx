@@ -10,9 +10,10 @@ interface Props {
 	size: string;
 	edited: string;
 	onClick: () => void;
+	onProvenanceClick: () => void;
 }
 
-const Drawl: React.FC<Props> = ({ image, title, size, edited, onClick }) => {
+const Drawl: React.FC<Props> = ({ image, title, size, edited, onClick, onProvenanceClick }) => {
 	return (
 		<div className={cn(styles.drawl)}>
 			{image ? (
@@ -29,7 +30,10 @@ const Drawl: React.FC<Props> = ({ image, title, size, edited, onClick }) => {
 					<span className={styles.info_row_value}>Edited {dayjs(edited).format('MM-DD HH:mm')}</span>
 				</div>
 			</div>
-			<DefaultButton className='no_wide_primary_small' title={'Paint'} onClick={onClick} />
+			<div className={styles.buttons_row}>
+				<DefaultButton className='no_wide_primary_small' title={'Paint'} onClick={onClick} />
+				<DefaultButton className='no_wide_primary_small provenance'  title={'Provenance'} onClick={onProvenanceClick} />
+			</div>
 		</div>
 	);
 };

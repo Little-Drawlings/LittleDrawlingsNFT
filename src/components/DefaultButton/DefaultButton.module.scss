@@ -88,6 +88,14 @@
 		color: $linkColor;
 		background: url('../../assets/svg/no-wide-btns/primary/disabled-primary-small.svg') center/contain no-repeat;
 	}
+
+	&.provenance{
+		background: url('../../assets/svg/no-wide-btns/tertiary/active-tertiary-small.svg') center/contain no-repeat;
+
+		&:hover{
+			background: url('../../assets/svg/no-wide-btns/tertiary/hover-tertiary-small.svg') center/contain no-repeat;
+		}
+	}
 }
 
 .wide_secondary_large {
@@ -218,6 +226,17 @@
 
 .m_bottom_05 {
 	margin: 0 0 0.5rem 0;
+}
+
+.provenance_form{
+	width: 130px;
+	margin: 0;
+	background-size: 100% 100%;
+
+	&:hover,
+	&:disabled{
+		background-size: 100% 100%;
+	}
 }
 
 @media only screen and (max-width: 992px) {

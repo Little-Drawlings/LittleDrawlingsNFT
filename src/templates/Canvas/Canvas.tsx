@@ -12,7 +12,7 @@ import SavePopup from '../../components/popupsComponents/SavePopup';
 
 
 import { AppDispatch } from '../../redux/store';
-import { COLORS, FORMATS, INSTRUMENTS, WATERMARK } from '../../constants/data';
+import { COLORS, FORMATS, INSTRUMENTS } from '../../constants/data';
 import { SavePopupProps } from '../../redux/types/data';
 import { RootState } from '../../redux/reducers';
 import icons from '../../constants/icons';
@@ -56,12 +56,7 @@ const Canvas: React.FC = () => {
 	}, [drawls]);
 
 	useEffect(() => {
-		if (activeDrawl?.ipnsLink) {
-			setDrawing(`https://ipfs.pragmaticdlt.com/ipns/${activeDrawl?.ipnsLink}`);
-		}
-		else {
-			setDrawing(WATERMARK)
-		}
+		setDrawing(activeDrawl.image);
 	}, [activeDrawl, dispatch])
 
 	useEffect(() => {

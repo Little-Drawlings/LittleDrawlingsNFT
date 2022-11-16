@@ -54,6 +54,11 @@ export const setOpenSavePopup = (opened: boolean) => ({
 	data: opened,
 });
 
+export const setOpenProvenancePopup = (opened: boolean) => ({
+	type: types.SET_OPEN_PROVENANCE_POPUP,
+	data: opened,
+});
+
 export const setOpenDefaultPopup = (opened: boolean) => ({
 	type: types.SET_OPEN_DEFAULT_POPUP,
 	data: opened,

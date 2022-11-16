@@ -14,10 +14,11 @@ import {
 import { AppDispatch } from "../../redux/store";
 import { IDrawl } from "../../redux/types/reducers";
 import { DRAWLS_SORT_VALUES } from "../../constants/data";
-import { setOverMint } from "../../redux/actions/mint";
+import {setOpenProvenancePopup, setOverMint} from "../../redux/actions/mint";
 import NewMintButton from "../../components/NewMintButton";
 
 import styles from "./Studio.module.scss";
+import ProvenancePopup from "../../components/popupsComponents/ProvenancePopup";
 
 const Studio: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -28,8 +29,12 @@ const Studio: React.FC = () => {
 	const drawlsList = useSelector(
 		(state: RootState) => state?.drawlReducer.drawls
 	);
+	const openProvenancePopup = useSelector(
+		(state: RootState) => state?.mintReducer.openProvenancePopup
+	);
 
 	const [nightMode, setNightMode] = useState<boolean>(false);
+	const [provenancePopup, setProvenancePopup] = useState<boolean>(false);
 	const [drawls, setDrawls] = useState<IDrawl[] | any[]>([]);
 	const [, setDropdown] = useState<string>("");
 
@@ -40,6 +45,10 @@ const Studio: React.FC = () => {
 	useEffect(() => {
 		setNightMode(nightModeMint);
 	}, [nightModeMint]);
+
+	useEffect(() => {
+		setProvenancePopup(openProvenancePopup);
+	}, [openProvenancePopup]);
 
 	const sortDrawls = (option: Option) => {
 		setDropdown(option.value);
@@ -60,6 +69,16 @@ const Studio: React.FC = () => {
 			});
 		}
 	};
+
+	const openPopup = (id?: string) => {
+		if (id) {
+			dispatch(setOverMint(false));
+			dispatch(getDrawl(id)).then((res: any) => {
+				if (res) dispatch(setOpenProvenancePopup(true))
+			});
+		}
+
+	}
 
 	return (
 		<>
@@ -83,11 +102,13 @@ const Studio: React.FC = () => {
 								size={drawl.format}
 								edited={drawl.updatedAt || ""}
 								onClick={() => openCanvas(drawl._id)}
+								onProvenanceClick={() => openPopup(drawl._id)}
 							/>
 						))
 						: null}
 				</div>
 			</div>
+			{provenancePopup && <ProvenancePopup/>}
 		</>
 	);
 };

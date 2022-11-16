@@ -9,6 +9,7 @@ interface Props {
 	style?: CSS.Properties;
 	className?: string;
 	onClick: () => void;
+	bType?: any;
 }
 
 const DefaultButton: React.FC<Props> = ({
@@ -16,7 +17,8 @@ const DefaultButton: React.FC<Props> = ({
 	disabled = false,
 	style,
 	className = 'wide_primary_active_large',
-	onClick
+	onClick,
+	bType = "button"
 }) => {
 	const getClassNames = () => {
 		const classArray = className.split(' ');
@@ -28,6 +30,7 @@ const DefaultButton: React.FC<Props> = ({
 			className={cn(styles.default_btn, getClassNames())}
 			disabled={disabled}
 			onClick={onClick}
+			type={bType}
 		>
 			{title}
 		</button>

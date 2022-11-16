@@ -10,7 +10,7 @@ const GallerySlider: React.FC = () => {
         <Carousel
             className={styles.carousel}
             adaptiveHeight={true}
-            cellAlign='left'
+            // cellAlign='left'
             cellSpacing={20}
             dragging={true}
             wrapAround={true}

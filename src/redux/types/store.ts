@@ -10,6 +10,7 @@ export interface MintAppState {
 	mintOver: boolean;
 	openDrawPopup: boolean;
 	openSavePopup: boolean;
+	openProvenancePopup: boolean;
 	openDefaultPopup: boolean;
 	defaultPopupProps: DefaultPopupProps
 	nightMode: boolean;

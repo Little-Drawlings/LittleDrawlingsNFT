@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import DefaultButton from '../DefaultButton';
 import {
-    contractDrawl,
+    contractDrawl, deleteDrawl,
     getAllDrawls,
     getContractData,
-    setDrawl,
 } from '../../redux/actions/drawl';
 import { RootState } from '../../redux/reducers';
 import { AppDispatch } from '../../redux/store';
 import { dataUrlToFile, FORMATS, WATERMARK } from '../../constants/data';
 import { signInMetamask } from '../../redux/actions/auth';
-import { getBalance } from '../../redux/actions/mint';
+import {getBalance, setLoading} from '../../redux/actions/mint';
+import Api from "../../api";
 
 interface Props {
     className?: string;
@@ -29,14 +29,12 @@ const NewMintButton: React.FC<Props> = ({
     const drawls = useSelector((state: RootState) => state?.drawlReducer.drawls);
 
     const [address, setAddress] = useState<string>("");
-    const [isMetaMask, setIsMetaMask] = useState<boolean>(false);
     const [drawlsList, setDrawlsList] = useState(drawls);
 
 
     useEffect(() => {
         if (metaMaskData) {
             setAddress(metaMaskData.user?.publicAddress);
-            setIsMetaMask(metaMaskData?.isMetamask)
         }
     }, [metaMaskData]);
 
@@ -58,6 +56,7 @@ const NewMintButton: React.FC<Props> = ({
             connect();
         }
         else {
+            dispatch(setLoading(true));
             const name = `Drawl #${drawlsList?.length + 1}`;
             const imgFile: File = await dataUrlToFile(
                 WATERMARK,
@@ -68,25 +67,39 @@ const NewMintButton: React.FC<Props> = ({
                 name: name,
                 format: FORMATS.RECTANGLE,
                 image: imgFile,
-                tokenId: ''
             };
-            dispatch(contractDrawl('')).then(async (tx: any) => {
-                console.log(tx, 'ku tx');
-                if (isMetaMask) {
-                    let receipt = await tx.wait();
-                    const tokenId = receipt?.events[0]?.args?.tokenId?._hex;
-                    console.log(tokenId);
-                    
-                    data = { ...data, tokenId: tokenId }
-                    if (receipt && tokenId) {
-                        dispatch(setDrawl(data))
-                    }
+
+
+            const formData = new FormData();
+            for (let key in data) {
+                // @ts-ignore
+                formData.append(key, data[key]);
+            }
+
+            const createdItem = await Api.post("/drawl", formData)
+                .then(res => {
+                    if (!res?.data?.status) return null
+                    return res?.data?.data
+                })
+
+            if (!createdItem) {
+                dispatch(setLoading(false));
+                return;
+            }
+
+            dispatch(contractDrawl(createdItem)).then(async (tx: any) => {
+                if (!tx) {
+                    await deleteDrawl(createdItem?._id)
+                    dispatch(setLoading(false));
+                    return;
                 }
-                else {
-                    const tokenId = tx;
-                    data = { ...data, tokenId: tokenId }
-                    dispatch(setDrawl(data))
-                }
+
+                await Api.post("drawl/confirmCreate", {...createdItem, tokenId: tx._hex});
+                await getContractData().then((res) => {
+                    dispatch(getAllDrawls(res, address));
+
+                });
+                dispatch(setLoading(false));
             })
         }
     };

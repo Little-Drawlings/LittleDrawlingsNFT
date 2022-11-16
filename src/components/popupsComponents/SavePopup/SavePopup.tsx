@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 import { RootState } from '../../../redux/reducers';
 import { AppDispatch } from '../../../redux/store';
-import { setDrawl } from '../../../redux/actions/drawl';
+import {updateImage} from '../../../redux/actions/drawl';
 import { SavePopupProps } from '../../../redux/types/data';
 import DefaultButton from '../../DefaultButton';
 import DefaultInput from '../../DefaultInput';
@@ -15,6 +15,7 @@ import { setOpenSavePopup } from '../../../redux/actions/mint';
 import WaitPopup from '../WaitPopup';
 
 import styles from '../DefaultPopup/DefaultPopup.module.scss';
+import Api from "../../../api";
 
 
 const SavePopup: React.FC<SavePopupProps> = ({
@@ -41,8 +42,22 @@ const SavePopup: React.FC<SavePopupProps> = ({
 		setTimePopup(true);
 		const imgFile: File = await dataUrlToFile(drawl, name, 'image/png');
 		let drawlData: any = { name: name, image: imgFile, format, ipnsLink};
-		drawlData = { ...drawlData, id: activeDrawl?._id };
-		dispatch(setDrawl(drawlData)).finally(() => {
+		drawlData = { ...drawlData, id: activeDrawl?._id, tokenId: activeDrawl?.tokenId };
+
+
+		dispatch(updateImage(drawlData)).then(async (res: any) => {
+
+			const formData = new FormData();
+			for (let key in drawlData) {
+				// @ts-ignore
+				formData.append(key, drawlData[key]);
+			}
+
+			Api.put("/drawl", formData)
+				.then(() => {
+					console.log("save")
+				})
+
 			setTimePopup(false);
 			exit();
 		});
