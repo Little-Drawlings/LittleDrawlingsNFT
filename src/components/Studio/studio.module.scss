@@ -1,0 +1,151 @@
+@import "../../assets/scss/mixins";
+
+.studio{
+  min-height: 100vh;
+  background-image: url("./img/studio_bg.png");
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 50px;
+
+  @media screen and (max-width: 767px){
+    padding-top: 60px;
+  }
+
+  &:before{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 60vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 5.78%, #FFFFFF 100%);
+  }
+
+  &_mint_btn{
+    @include paintButton;
+    margin-left: auto;
+    margin-bottom: 34px;
+
+    @media screen and (max-width: 767px){
+      width: 120px;
+      height: 40px;
+      font-size: 23px;
+    }
+  }
+
+  &_grid{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 448px);
+    position: relative;
+    grid-gap: 32px;
+    justify-content: center;
+
+    @media screen and (max-width: 550px){
+      grid-template-columns: 1fr;
+    }
+
+    &_item{
+      padding: 24px 19px;
+      background-color: rgba(117, 13, 74, 0.14);
+      backdrop-filter: blur(3px);
+      border-radius: 30px;
+      
+      &_image{
+        background-color: #E4E4E4;
+        width: 100%;
+        position: relative;
+        border-radius: 20px;
+        margin-bottom: 12px;
+        padding-top: 56.25%;
+
+        img{
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          border-radius: 10px;
+        }
+        
+        &:after{
+          content: '';
+          display: block;
+          width: calc(100% + 10px);
+          height: calc(100% + 9px);
+          position: absolute;
+          left: -6px;
+          top: -5px;
+          background-image: url("./img/border.svg");
+          background-size: 100% 100%;
+        }
+      }
+
+      &_info{
+        padding: 0 7px;
+        margin-bottom: 18px;
+
+        &_row{
+          display: flex;
+          justify-content: space-between;
+          font-size: 24px;
+          color: #1D2569;
+
+          @media screen and (max-width: 550px){
+            font-size: 18px;
+          }
+        }
+      }
+
+      &_buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &_paint{
+          @include paintButton;
+
+          @media screen and (max-width: 550px){
+            width: 120px;
+            height: 40px;
+            font-size: 23px;
+          }
+        }
+
+        &_provenance{
+          @include provenanceButton;
+          margin-left: 23px;
+
+          @media screen and (max-width: 550px){
+            width: 120px;
+            height: 40px;
+            font-size: 23px;
+            margin-left: 14px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.container{
+  width: 100%;
+  max-width: 1468px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  @media screen and (max-width: 550px){
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
