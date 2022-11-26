@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import styles from './header.module.scss'
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import {pathList} from "../../../routes/path";
 import {Context} from "../../../store";
 import useAuthRLogin from "../../../hooks/auth/useAuthWallet";
@@ -10,14 +10,17 @@ import useAuth from "../../../hooks/auth/useAuth";
 import logo from '../../../assets/img/logo_header.svg'
 import logoAlpha from '../../../assets/img/logo_alpha.svg'
 import rskLogo from '../../../assets/img/rsk_logo.svg'
+import {localStorageGet} from "../../../utils/localStorage";
 
 const Header = () => {
     const [{user}, ACTION] = useContext(Context);
     const [userBalance, setUserBalance] = useState(null)
 
     const authRLogin = useAuthRLogin()
+    const navigate = useNavigate()
     const {customAddress, getBalance} = useCommon()
     const auth = useAuth()
+
 
     useEffect(() => {
         if (user) {
@@ -28,6 +31,18 @@ const Header = () => {
 
     const clearCurrentDrawl = () => ACTION.SET_CURRENT_DRAWL(null)
 
+    const checkLogin = async (event, page) => {
+        const token = localStorageGet("token", null)
+        if (!token) {
+            event.preventDefault()
+            await authRLogin.login()
+            navigate(page)
+            return
+        }
+
+        clearCurrentDrawl()
+    }
+
     return (
         <div className={styles.header}>
             <Link to={"/"} className={styles.header_logo}>
@@ -36,12 +51,13 @@ const Header = () => {
             </Link>
             <nav className={styles.header_nav}>
                 <NavLink
-                    onClick={clearCurrentDrawl}
+                    onClick={(event) => checkLogin(event, pathList.canvas.path)}
                     className={({ isActive }) =>
                         isActive ? styles.active : undefined
                     }
                     to={pathList.canvas.path}>Mint</NavLink>
                 <NavLink
+                    onClick={(event) => checkLogin(event, pathList.studio.path)}
                     className={({ isActive }) =>
                         isActive ? styles.active : undefined
                     }

@@ -1,8 +1,24 @@
 import React from 'react';
 import styles from './mainIntro.module.scss'
 import girlImg from './img/girl.svg'
+import {localStorageGet} from "../../../utils/localStorage";
+import useAuthRLogin from "../../../hooks/auth/useAuthWallet";
+import {Link, useNavigate} from "react-router-dom";
+import {pathList} from "../../../routes/path";
 
 const MainIntro = () => {
+    const authRLogin1 = useAuthRLogin()
+    const navigate = useNavigate()
+
+    const checkLogin = async (event, page) => {
+        const token = localStorageGet("token", null)
+        if (!token) {
+            event.preventDefault()
+            await authRLogin1.login()
+            navigate(page)
+        }
+    }
+
     return (
         <>
             <div className={styles.main_intro}>
@@ -16,8 +32,12 @@ const MainIntro = () => {
                             <p>Thank you for your patronage; see you in the studio!</p>
                         </div>
                         <div className={styles.main_intro_info_buttons}>
-                            <div className={styles.main_intro_info_buttons_mint}>Paint + Mint</div>
-                            <div className={styles.main_intro_info_buttons_more}>Learn More</div>
+                            <Link
+                                onClick={(event) => checkLogin(event, pathList.canvas.path)}
+                                to={pathList.canvas.path}
+                                className={styles.main_intro_info_buttons_mint}
+                            >Paint + Mint</Link>
+                            <a href="https://littledrawlings.gitbook.io/" target="_blank" className={styles.main_intro_info_buttons_more}>Learn More</a>
                         </div>
                     </div>
                     <div className={styles.main_intro_image}>
