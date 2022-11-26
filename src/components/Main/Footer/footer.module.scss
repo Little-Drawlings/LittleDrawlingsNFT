@@ -1,0 +1,99 @@
+.footer{
+  background-color: #FFDDDD;
+  padding: 53px 50px;
+  position: relative;
+
+  @media screen and (max-width: 767px){
+    padding: 25px 15px 17px;
+    background-color: #fff;
+  }
+
+  &_content{
+    width: fit-content;
+    margin: 0 auto;
+
+    &_row{
+      display: flex;
+      align-items: flex-start;
+
+      @media screen and (max-width: 767px){
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      & > * + *{
+        margin-left: 50px;
+
+        @media screen and (max-width: 1000px){
+          margin-left: 30px;
+        }
+
+        @media screen and (max-width: 767px){
+          margin-left: 0;
+        }
+      }
+    }
+
+    &_logo{
+      display: block;
+
+      @media screen and (max-width: 767px){
+        width: 305px;
+        margin-bottom: 18px;
+        max-width: 100%;
+      }
+    }
+
+    &_legal{
+      list-style: none;
+
+      @media screen and (max-width: 767px){
+        width: 50%;
+      }
+
+      li {
+        & + &{
+          margin-top: 6px;
+        }
+
+        a{
+          font-size: 14px;
+          color: #490a0a;
+        }
+      }
+    }
+
+    &_social{
+      align-self: center;
+
+      @media screen and (max-width: 767px){
+        margin-left: 20px;
+      }
+
+      img{
+        display: block;
+
+        @media screen and (max-width: 1000px){
+          width: 50px;
+        }
+
+        @media screen and (max-width: 767px){
+          width: 33px;
+        }
+      }
+    }
+
+    &_copy{
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      color: #490a0a;
+      margin-top: -17px;
+
+      @media screen and (max-width: 767px){
+        margin-top: 18px;
+        text-align: center;
+      }
+    }
+  }
+
+}

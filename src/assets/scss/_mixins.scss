@@ -1,0 +1,31 @@
+@mixin defaultButton{
+  width: 161px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 100% 100%;
+  font-family: 'LD Scribble', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+@mixin paintButton{
+  @include defaultButton;
+  background-image: url(../../assets/img/buttons/exhibit.svg);
+
+  &:hover{
+    background-image: url(../../assets/img/buttons/exhibit_hover.svg);
+  }
+}
+
+@mixin provenanceButton{
+  @include defaultButton;
+  background-image: url(../../assets/img/buttons/provenance.svg);
+
+  &:hover{
+    background-image: url(../../assets/img/buttons/provenance_hover.svg);
+  }
+}

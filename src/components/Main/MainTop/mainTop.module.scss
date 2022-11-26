@@ -1,0 +1,33 @@
+.main_top{
+  height: 1117px;
+  display: flex;
+  background-image: url("img/main_top_background.png");
+
+  @media screen and (max-width: 1300px){
+    height: 900px;
+    padding-bottom: 100px;
+  }
+
+  @media screen and (max-width: 767px){
+    background-image: url("img/main_top_background_mob.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    height: 393px;
+    padding-bottom: 0;
+  }
+
+  img{
+    max-height: calc(100% - 100px);
+    max-width: calc(100% - 60px);
+    margin: auto;
+
+    @media screen and (max-width: 1300px){
+      max-width: 70%;
+    }
+
+    @media screen and (max-width: 767px){
+      max-width: 100%;
+    }
+  }
+}

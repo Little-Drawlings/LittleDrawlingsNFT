@@ -1,0 +1,325 @@
+$itemWidth: 190px;
+$itemWidthTablet: 140px;
+$itemGap: 109px;
+$itemGapTablet: 60px;
+$transitionDuration: 1s;
+
+.main_adam{
+  background-image: url("./img/adam_bg.png");
+  background-size: cover;
+  background-position: center;
+  margin-top: -360px;
+  padding: 1105px 50px 70px;
+  position: relative;
+
+  @media screen and (max-width: 1000px){
+    padding-top: 700px;
+  }
+
+  @media screen and (max-width: 767px){
+    background-image: url("./img/adam_bg_mob.png");
+    background-position: center top;
+    padding: 31px 7px 20px;
+    margin-top: -80px;
+
+
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  &_info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 144px;
+
+    @media screen and (max-width: 767px){
+      display: block;
+      margin-bottom: 0;
+    }
+  }
+
+  &_qoute{
+    width: 587px;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    color: #B87067;
+    letter-spacing: 0.035em;
+    position: relative;
+    z-index: 2;
+
+    @media screen and (max-width: 767px){
+      background-color: rgba(255, 227, 235, 0.49);
+      border-radius: 6px;
+      width: 321px;
+      margin: 0 auto 179px;
+      padding: 10px 7px;
+    }
+
+
+    &_text{
+      font-size: 30px;
+
+      @media screen and (max-width: 1000px){
+        font-size: 24px;
+      }
+
+      @media screen and (max-width: 767px){
+        font-size: 11px;
+        color: #3f0c06;
+      }
+    }
+
+    &_author{
+      font-family: "Cooper Black", sans-serif;
+      font-size: 34px;
+      margin-top: 34px;
+
+      @media screen and (max-width: 1000px){
+        font-size: 30px;
+      }
+
+      @media screen and (max-width: 767px){
+        font-size: 14px;
+        color: #3f0c06;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  &:after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 666px;
+    position: absolute;
+    bottom: -210px;
+    left: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 57.97%);
+
+    @media screen and (max-width: 767px){
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 768px){
+
+  .main_adam_info_item{
+    width: $itemWidth;
+    height: 200px;
+    position: relative;
+
+    @media screen and (max-width: 1300px){
+      width: $itemWidthTablet;
+      height: 140px;
+    }
+
+    & + .main_adam_info_item{
+      margin-left: $itemGap;
+
+      @media screen and (max-width: 1000px){
+        margin-left: $itemGapTablet;
+      }
+    }
+
+    &:nth-child(1) &_inner{
+      left: 0;
+      text-align: right;
+    }
+
+    &:nth-child(2) &_inner{
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: right;
+    }
+
+    &:nth-child(3) &_inner{
+      right: 0;
+      flex-direction: row-reverse;
+
+      .main_adam_info_item_content_text{
+        padding-left: 30px;
+        padding-right: 0;
+      }
+
+      .main_adam_info_item_content_title{
+        padding-left: 30px;
+        padding-right: 0;
+      }
+    }
+
+    &_inner{
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 66, 51, 0.65);
+      box-shadow: 7px 7px 0 rgba(158, 60, 60, 0.5);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      transition: $transitionDuration;
+
+    }
+
+    &_icon{
+      margin: auto;
+
+      img{
+        display: block;
+        height: 92px;
+        transition: $transitionDuration;
+
+        @media screen and (max-width: 1000px){
+          height: 70px;
+        }
+      }
+    }
+
+    &:nth-child(2) &_icon img{
+      height: auto;
+      width: 68px;
+
+      @media screen and (max-width: 1000px){
+        width: 50px;
+      }
+    }
+
+    &_content{
+      overflow: hidden;
+      transition: $transitionDuration;
+      color: #fff;
+      max-width: 0;
+
+      &_title{
+        width: 550px;
+        font-family: "Cooper Black", sans-serif;
+        font-size: 28px;
+        padding-right: 30px;
+
+        @media screen and (max-width: 1000px){
+          font-size: 20px;
+          width: 400px;
+        }
+      }
+
+      &_text{
+        font-size: 16px;
+        width: 550px;
+        padding-right: 30px;
+
+        @media screen and (max-width: 1000px){
+          font-size: 12px;
+          width: 400px;
+        }
+      }
+    }
+  }
+
+  .main_adam_info_item:hover{
+    z-index: 2;
+
+    .main_adam_info_item_inner{
+      width: calc((#{$itemWidth} * 3) + (#{$itemGap * 2}));
+      background-color: rgba(255, 66, 51, 1);
+
+      @media screen and (max-width: 1000px){
+        width: calc((#{$itemWidthTablet} * 3) + (#{$itemGapTablet * 2}));
+      }
+    }
+
+    .main_adam_info_item_icon img{
+      height: 110px;
+
+      @media screen and (max-width: 1000px){
+        height: 80px;
+      }
+    }
+
+    .main_adam_info_item_content{
+      max-width: 550px;
+
+      @media screen and (max-width: 1000px){
+        max-width: 400px;
+      }
+    }
+  }
+
+  .main_adam_info_item:nth-child(2):hover img{
+    height: auto;
+    width: 85px;
+
+    @media screen and (max-width: 1000px){
+      width: 65px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px){
+  .main_adam_info_item{
+    background-color: #FF4233;
+    box-shadow: 0 7px 0 rgba(158, 60, 60, 0.5);
+    border-radius: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+    & + &{
+      margin-top: 12px;
+    }
+
+    &_inner{
+      display: flex;
+      align-items: center;
+      padding: 12px 15px 12px 37px;
+    }
+
+    &:nth-child(1) &_icon{
+      width: 66px;
+      margin-right: 37px;
+    }
+    &:nth-child(2) &_icon{
+      width: 59px;
+      margin-right: 20px;
+    }
+    &:nth-child(3) &_icon{
+      width: 70px;
+      margin-right: 20px;
+      margin-bottom: -45px;
+    }
+
+    &_icon{
+      width: 50px;
+      flex: none;
+
+      img{
+        width: 100%;
+        display: block;
+      }
+    }
+    
+    &_content{
+      color: #fff;
+      text-align: right;
+
+      &_title{
+        font-family: "Cooper Black", sans-serif;
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      &_text{
+        font-size: 10px;
+      }
+    }
+
+    &:nth-child(3) &_content {
+      &_title{
+        margin-left: -40px;
+      }
+    }
+  }
+}
+

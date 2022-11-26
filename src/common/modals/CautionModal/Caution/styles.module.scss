@@ -1,0 +1,103 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+.popup {
+  background: $white;
+  border: 1.6rem solid #FFBABA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1.25rem;
+  max-width: 1000px;
+  padding: 1rem;
+
+}
+
+.popup_header {
+  position: relative;
+}
+
+.popup_header_logo {
+  position: absolute;
+  left: 0;
+  top: -20px;
+  transform: translate(0%, 50%);
+}
+
+.popup_header_title {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 3rem;
+  text-align: center;
+  color: #B70000;
+  margin: 0;
+}
+
+.popup_text {
+  color: $black;
+  font-size: 1.1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+
+  & .bold {
+    font-weight: 700;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.caution_prompt {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #DC0000;
+  width: 60%;
+  margin: 1rem auto;
+}
+
+.button_wrap {
+  display: flex;
+  justify-content: center;
+
+  &_btn{
+    @include provenanceButton;
+    color: $dark;
+    background-image: url(../../../../assets/img/buttons/cancel.svg);
+    width: 200px;
+
+    &:hover{
+      background-image: url(../../../../assets/img/buttons/cancel_hover.svg);
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .popup {
+    max-width: 90%;
+  }
+
+  .popup_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .popup_header_logo {
+    position: relative;
+    top: 0;
+    transform: translate(0%, 0%);
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  .popup_header_title {
+    font-size: 1.2rem;
+  }
+
+  .popup_text, .caution_prompt {
+    font-size: 0.85rem;
+    width: 100%;
+    margin: 0.5rem 0 0 0;
+  }
+}
