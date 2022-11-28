@@ -28,7 +28,7 @@ const MainIntro = () => {
                         <div className={styles.main_intro_info_subtitle}>our MVP Alpha mint  </div>
                         <div className={styles.main_intro_info_text}>
                             <p>Patrons are invited to paint and mint an MVP Canvas NFT, touch-up their masterpieces in the artboard, collaborate with friends, and share with the community. The Little Drawlings team appreciates your support as we develop fun studio games to accompany the Little Drawlings character NFT mint.</p>
-                            <p>All MVP donations accepted in RBTC (rootstock bitcoin.)</p>
+                            <p>All MVP donations accepted in <b>RBTC (rootstock bitcoin.)</b></p>
                             <p>Thank you for your patronage; see you in the studio!</p>
                         </div>
                         <div className={styles.main_intro_info_buttons}>

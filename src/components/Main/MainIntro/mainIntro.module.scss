@@ -76,10 +76,12 @@
     }
 
     &_text{
+      font-family: 'SofiaPro Soft Light', sans-serif;
       font-size: 28px;
       line-height: 100%;
       color: #441800;
       margin-bottom: 40px;
+      font-weight: 100;
 
       @media screen and (max-width: 1000px){
         font-size: 20px;
@@ -87,6 +89,11 @@
 
       @media screen and (max-width: 767px){
         font-size: 14px;
+      }
+
+      b{
+        font-family:"sofia-pro-soft", sans-serif;
+        font-weight: 500;
       }
 
       p + p{
@@ -277,8 +284,8 @@
       }
 
       &_text{
+        font-family: 'SofiaPro Soft Light', sans-serif;
         font-size: 28px;
-        font-style: normal;
 
         @media screen and (max-width: 1300px){
           font-size: 20px;

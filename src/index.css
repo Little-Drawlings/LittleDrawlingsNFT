@@ -68,6 +68,11 @@
 }
 
 @font-face {
+    font-family: 'SofiaPro Soft Light';
+    src: url('./assets/fonts/SofiaProLight/Sofia_Pro_Soft_Light.otf') format('opentype');
+}
+
+@font-face {
     font-family: 'Mali';
     src: url('./assets/fonts/Mali/Mali-SemiBold.ttf') format('truetype');
     font-weight: 600;

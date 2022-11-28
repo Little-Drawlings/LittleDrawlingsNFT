@@ -157,6 +157,10 @@ const Canvas = () => {
 
     }
 
+    const canvasUndo = () => modify.undo()
+    const canvasRestart = () => modify.clear()
+
+
     useEffect(() => {
         const token = localStorageGet("token", null)
         if (!token) navigate("/")
@@ -243,7 +247,11 @@ const Canvas = () => {
                                 </div>
                             }
                         </div>
-                        <div>
+                        <div className={styles.canvas_buttons}>
+                            <div className={styles.canvas_buttons_clear}>
+                                <div onClick={canvasUndo}>UNDO</div>
+                                <div onClick={canvasRestart}>RESTART</div>
+                            </div>
                             <div
                                 onClick={getDrawnImage}
                                 className={styles.canvas_mint_btn}>

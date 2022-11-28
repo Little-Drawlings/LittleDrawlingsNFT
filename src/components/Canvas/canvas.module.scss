@@ -203,9 +203,33 @@
     }
   }
 
+  &_buttons{
+    display: flex;
+    align-items: center;
+
+    &_clear{
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+
+      & > div{
+        & + div{
+          margin-left: 4px;
+        }
+
+        font-size: 16px;
+        padding: 6px 10px;
+        background-color: #fff;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+    }
+  }
+
   &_mint_btn{
     @include paintButton;
     margin-left: auto;
+    margin-right: auto;
   }
 
   &_change_size{
