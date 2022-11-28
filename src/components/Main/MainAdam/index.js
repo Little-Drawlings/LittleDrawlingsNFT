@@ -26,7 +26,7 @@ const MainAdam = () => {
                         </div>
                         <div className={styles.main_adam_info_item_content}>
                             <div className={styles.main_adam_info_item_content_title}>Mutable metadata <br/>secured with IPFS</div>
-                            <div className={styles.main_adam_info_item_content_text}>IPFS builds on the principles of peer-to-peer networking ang content-based addressing to create a decentralized, distributed, and trustless data storage and delivery network. Our mutable NFTs use IPNS, a content naming protocol whitin IPFS.</div>
+                            <div className={styles.main_adam_info_item_content_text}>IPFS builds on the principles of peer-to-peer networking ang content-based addressing to create a decentralized, distributed, and trustless data storage and delivery network. Our mutable NFTs use IPNS, a content naming protocol within IPFS.</div>
                         </div>
                     </div>
                 </div>
