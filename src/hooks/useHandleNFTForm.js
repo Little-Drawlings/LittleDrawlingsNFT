@@ -67,6 +67,7 @@ const useHandleNftForm = ({item, onRequestClose, callback}) => {
         const newFormData = new FormData()
 
         newFormData.append("image", img)
+        newFormData.append("creator", item?.creator)
         newFormData.append("id", item?._id)
 
         await handleNft.updateNFTPhoto(newFormData, item)
