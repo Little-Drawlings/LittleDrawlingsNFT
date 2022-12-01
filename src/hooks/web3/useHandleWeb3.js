@@ -67,7 +67,6 @@ const useHandleWeb3 = () => {
         const contractData = await getContract();
 
         if (!contractData) {
-            // dispatch(setLoading(false));
             return;
         }
 
@@ -79,51 +78,29 @@ const useHandleWeb3 = () => {
         );
 
         if (address) {
+            try {
+            const mint = await contract.mintNFT(address?.toLowerCase(), `https://${createdItem.ipnsLink}.ipns.cf-ipfs.com`, {
+                    gasLimit: 1100000,
+                    value: Number(PRICE) * 10 ** 18
+                })
+                const receipt = await mint.wait()
 
-            const data = new Promise((resolve) => {
-                contract.on("Transfer", async (from, to, amount, event) => {
-                    const receipt = await event.getTransactionReceipt();
-                    const tnx = await event.getTransaction();
-
+                if (!!receipt.status) {
                     const dataToDecode = receipt.logs.find(log => {
                         return log.data.toLowerCase().includes(address?.toLowerCase()?.slice(2, -1))
                     })
 
-                    if (!dataToDecode) resolve(null)
+                    if (!dataToDecode) return null
                     const decodeData = await ethers.utils.defaultAbiCoder.decode(["address", "uint256"], dataToDecode.data);
 
-                    if (address?.toLowerCase() === tnx.from?.toLowerCase()) {
-                        event.removeListener();
-                        resolve(decodeData[1]);
-                    }
-                });
-            })
-
-            const mint = new Promise(async (resolve) => {
-                const res = contract.mintNFT(address?.toLowerCase(), `https://${createdItem.ipnsLink}.ipns.cf-ipfs.com`, {
-                    gasLimit: 1100000,
-                    value: Number(PRICE) * 10 ** 18
-                })
-                    .then((res) => {
-                        resolve(res)
-                    })
-                    .catch((err) => {
-                        resolve(err)
-                    })
-
-                return res;
-            })
-
-            const mintRes = await mint;
-
-            if (mintRes.toString().includes("user rejected transaction") || mintRes.toString().includes("UserDeclinedError")) {
-                contract.removeAllListeners("Transfer")
+                    return decodeData[1];
+                }
+            } catch (e) {
+                console.error("Minting error: ", e)
                 return null
-            } else {
-                return await data
             }
         }
-
+        return null
     }
 
     const updateNFTInfo = async (drawl) => {
@@ -133,7 +110,6 @@ const useHandleWeb3 = () => {
         const contractData = await getContract();
 
         if (!contractData) {
-            // dispatch(setLoading(false));
             return;
         }
 
@@ -145,39 +121,21 @@ const useHandleWeb3 = () => {
         );
 
         if (address) {
-            const data = new Promise((resolve) => {
-                contract.on("NFTUpdated", async (from, tokenId) => {
-                    if (from.toLowerCase() === address.toLowerCase() && parseInt(tokenId?._hex, 16) === parseInt(drawl.tokenId, 16)) {
-                        contract.removeAllListeners("NFTUpdated")
-                        resolve(true)
-                    }
-                });
-            })
-
-            const mint = new Promise(async (resolve) => {
-                const res = contract.updateInfo(parseInt(drawl.tokenId, 16), {
+            try {
+                const mint = await contract.updateInfo(parseInt(drawl.tokenId, 16), {
                     gasLimit: 1100000,
                     value: Number(process.env.REACT_APP_UPDATE_INFO_PRICE) * 10 ** 18
                 })
-                    .then((res) => {
-                        resolve(res)
-                    })
-                    .catch((err) => {
-                        resolve(err)
-                    })
+                const receipt = await mint.wait()
 
-                return res;
-            })
-
-            const mintRes = await mint;
-
-            if (mintRes.toString().includes("user rejected transaction") || mintRes.toString().includes("UserDeclinedError")) {
-                contract.removeAllListeners("NFTUpdated")
+                if (!!receipt?.status) return true
                 return null
-            } else {
-                return await data
+            } catch (e) {
+                console.error("Provenance error: ", e)
+                return null
             }
         }
+        return null
     }
 
     const updateNFTPhoto = async (drawlData) => {
@@ -187,7 +145,6 @@ const useHandleWeb3 = () => {
         const contractData = await getContract();
 
         if (!contractData) {
-            // dispatch(setLoading(false));
             return;
         }
 
@@ -199,40 +156,22 @@ const useHandleWeb3 = () => {
         );
 
         if (address) {
-            const data = new Promise((resolve) => {
-                contract.on("NFTUpdated", async (from, tokenId) => {
-
-                    if (from.toLowerCase() === address.toLowerCase() && parseInt(tokenId._hex, 16) === parseInt(drawlData.tokenId, 16)) {
-                        contract.removeAllListeners("NFTUpdated")
-                        resolve(true)
-                    }
-                });
-            })
-
-            const mint = new Promise(async (resolve) => {
-                const res = contract.updateImage(parseInt(drawlData.tokenId, 16), {
+            try {
+                const mint = await contract.updateImage(parseInt(drawlData.tokenId, 16), {
                     gasLimit: 1100000,
                     value: Number(process.env.REACT_APP_UPDATE_IMAGE_PRICE) * (10 ** 18)
                 })
-                    .then((res) => {
-                        resolve(res)
-                    })
-                    .catch((err) => {
-                        resolve(err)
-                    })
+                const receipt = await mint.wait()
 
-                return res;
-            })
-
-            const mintRes = await mint;
-
-            if (mintRes.toString().includes("user rejected transaction") || mintRes.toString().includes("UserDeclinedError")) {
-                contract.removeAllListeners("Transfer")
+                if (!!receipt?.status) return true
                 return null
-            } else {
-                return await data
+            } catch (e){
+                console.error("Image error: ", e)
+                return null
             }
+
         }
+        return null
     }
 
     return {
