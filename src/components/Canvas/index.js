@@ -83,7 +83,7 @@ const Canvas = () => {
     const [isDrawing, setIsDrawing] = useState(null)
     const [isChangingSizeOpen, setIsChangingSizeOpen] = useState(false)
     const [sizeValue, setSizeValue] = useState(5)
-    const [canvasBgImage, setCanvasBgImage] = useState(WATERMARK)
+    const [canvasBgImage, setCanvasBgImage] = useState(null)
 
     useEffect(() => {
         if (modify) {
@@ -117,7 +117,11 @@ const Canvas = () => {
     }, [modify, selectedColor, selectedTool])
 
     useEffect(() => {
-        if (currentDrawl) setCanvasBgImage(currentDrawl.image)
+        if (currentDrawl) {
+            setCanvasBgImage(currentDrawl.image)
+        } else {
+            setCanvasBgImage(WATERMARK)
+        }
     }, [currentDrawl])
 
     const changeColor = color => {
@@ -199,20 +203,23 @@ const Canvas = () => {
                                 })
                             }
                         </div>
-                        <CanvasDraw
-                            ref={(container) => {
-                                setModify(container)
-                            }}
-                            imgSrc={canvasBgImage}
-                            hideGrid={true}
-                            canvasWidth={1200}
-                            canvasHeight={700}
-                            brushColor={selectedTool === "pencil" ? `${selectedColor.color}7f` : selectedColor.color}
-                            catenaryColor={selectedTool === "pencil" ? `${selectedColor.color}00` : selectedColor.color}
-                            lazyRadius={0}
-                            immediateLoading={false}
-                            brushRadius={sizeValue}
-                        />
+                        {
+                            canvasBgImage &&
+                            <CanvasDraw
+                                ref={(container) => {
+                                    setModify(container)
+                                }}
+                                imgSrc={canvasBgImage}
+                                hideGrid={true}
+                                canvasWidth={1200}
+                                canvasHeight={700}
+                                brushColor={selectedTool === "pencil" ? `${selectedColor.color}7f` : selectedColor.color}
+                                catenaryColor={selectedTool === "pencil" ? `${selectedColor.color}00` : selectedColor.color}
+                                lazyRadius={0}
+                                immediateLoading={false}
+                                brushRadius={sizeValue}
+                            />
+                        }
                     </div>
                     <div className={styles.canvas_bottom}>
                         <div className={styles.canvas_bottom_empty}/>
