@@ -33,6 +33,14 @@ const actions = {
                 payload: value,
             })
         },
+    [types.SET_CONTRACT_DATA]:
+        (dispatch) =>
+        (value = {}) => {
+            dispatch({
+                type: types.SET_CONTRACT_DATA,
+                payload: value,
+            })
+        },
 }
 
 export default actions;

@@ -7,7 +7,7 @@ import {Context} from "../../store";
 const PRICE = process.env.REACT_APP_PRICE;
 
 const useHandleWeb3 = () => {
-    const [{user}] = useContext(Context);
+    const [{user, contractData}] = useContext(Context);
 
     const loadWeb3 = async (accountsChangedCallback) => {
         if (window?.ethereum) {
@@ -64,7 +64,6 @@ const useHandleWeb3 = () => {
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const contractData = await getContract();
 
         if (!contractData) {
             return;
@@ -107,7 +106,6 @@ const useHandleWeb3 = () => {
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const contractData = await getContract();
 
         if (!contractData) {
             return;
@@ -142,7 +140,6 @@ const useHandleWeb3 = () => {
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const contractData = await getContract();
 
         if (!contractData) {
             return;

@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import dayjs from 'dayjs';
 import styles from './studio.module.scss'
-import ItemApi from "../../utils/api/ItemApi";
 import useHandleNft from "../../hooks/useHandleNFT";
 import {Context} from "../../store";
 import {Link, useNavigate} from "react-router-dom";
@@ -17,22 +16,12 @@ const Studio = () => {
 
     const handleNft = useHandleNft({})
 
-    const getAll = () => {
-        ACTION.SET_IS_LOADER(true);
-        new ItemApi().getAll()
-            .then(async (res) => {
-                if (res?.status) {
-                    const filtered = await handleNft.checkNFTsOwner(res?.data)
-                        .then(res => res)
-                        .catch(() => res?.data)
-                    setGalleryData(filtered)
-                }
-                ACTION.SET_IS_LOADER(false);
-            })
-    }
-
     useEffect(() => {
-        if (user) getAll()
+        const init = async () => {
+            if (user) setGalleryData(await handleNft.getAll())
+        }
+
+        init()
     }, [user])
 
     const goToCanvas = (item) => {
@@ -95,7 +84,7 @@ const Studio = () => {
             <ProvenanceModal
                 onRequestClose={() => setIsProvenanceOpen(false)}
                 isOpen={isProvenanceOpen}
-                callback={getAll}
+                callback={handleNft.getAll}
             />
         </div>
     );

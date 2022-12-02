@@ -24,4 +24,8 @@ export const reducers = {
         ...state,
         isLoader,
     }),
+    [types.SET_CONTRACT_DATA]: (state, contractData) => ({
+        ...state,
+        contractData,
+    }),
 };

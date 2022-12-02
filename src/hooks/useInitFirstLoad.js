@@ -3,11 +3,13 @@ import {Context} from "../store";
 import useHandleUser from "./user/useHandleUser";
 import useHandleWeb3 from "./web3/useHandleWeb3";
 import useAuth from "./auth/useAuth";
+import useHandleNft from "./useHandleNFT";
 
 const useInitFirstLoad = () => {
-    const [{ user }] = useContext(Context);
+    const [{ user }, ACTION] = useContext(Context);
     const handleUser = useHandleUser()
     const handleWeb3 = useHandleWeb3()
+    const handleNft = useHandleNft({})
     const auth = useAuth()
 
     const initUser = async () => {
@@ -20,7 +22,16 @@ const useInitFirstLoad = () => {
     }, [])
 
     useEffect( () => {
-        if (user) initWeb3()
+        const init = async () => {
+            if (user) {
+                await initWeb3()
+                const contractData = await handleWeb3.getContract()
+                ACTION.SET_CONTRACT_DATA(contractData)
+                await handleNft.getAll()
+            }
+        }
+
+        init()
     }, [user])
 
 

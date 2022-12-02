@@ -5,13 +5,27 @@ import {ethers} from "ethers";
 import {Context} from "../store";
 
 const useHandleNft = ({onRequestClose = () => {}, callback = () => {}, handleLoader = () => {}}) => {
-    const [{user}] = useContext(Context);
+    const [{user, contractData}, ACTION] = useContext(Context);
     const handleWeb3 = useHandleWeb3();
 
     const exit = () => {
         onRequestClose()
         handleLoader(false);
         setTimeout(callback(), 1000)
+    }
+
+    const getAll = () => {
+        ACTION.SET_IS_LOADER(true);
+        return new ItemApi()
+            .getAll()
+            .then(async (res) => {
+                if (res?.status) {
+                    return await checkNFTsOwner(res?.data)
+                        .then(res => res)
+                        .catch(() => res?.data)
+                        .finally(() => ACTION.SET_IS_LOADER(false))
+                }
+            })
     }
 
     const mintNFT = async (formData) => {
@@ -137,7 +151,6 @@ const useHandleNft = ({onRequestClose = () => {}, callback = () => {}, handleLoa
     }
 
     const checkNFTsOwner = async (tokens) => {
-        const contractData = await handleWeb3.getContract();
         const {signer} = await handleWeb3.getProviderData();
 
         const contract = new ethers.Contract(contractData?.address?.toLowerCase(), contractData?.abi, signer);
@@ -163,7 +176,7 @@ const useHandleNft = ({onRequestClose = () => {}, callback = () => {}, handleLoa
         new ItemApi().changeOwner({item, newOwner})
     }
 
-    return {mintNFT, updateNFTInfo, updateNFTPhoto, checkNFTsOwner};
+    return {mintNFT, updateNFTInfo, updateNFTPhoto, checkNFTsOwner, getAll};
 };
 
 export default useHandleNft;
