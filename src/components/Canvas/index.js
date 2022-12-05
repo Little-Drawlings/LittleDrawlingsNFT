@@ -83,7 +83,7 @@ const Canvas = () => {
     const [isDrawing, setIsDrawing] = useState(null)
     const [isChangingSizeOpen, setIsChangingSizeOpen] = useState(false)
     const [sizeValue, setSizeValue] = useState(5)
-    const [canvasBgImage, setCanvasBgImage] = useState(null)
+    const [canvasBgImage, setCanvasBgImage] = useState(WATERMARK)
 
     useEffect(() => {
         if (modify) {
@@ -124,8 +124,6 @@ const Canvas = () => {
                 const url = URL.createObjectURL(blob)
 
                 setCanvasBgImage(url)
-            } else {
-                setCanvasBgImage(WATERMARK)
             }
         }
 
