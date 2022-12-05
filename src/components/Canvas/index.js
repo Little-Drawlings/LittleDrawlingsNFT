@@ -119,11 +119,13 @@ const Canvas = () => {
     useEffect(() => {
         const init = async () => {
             if (currentDrawl) {
+                ACTION.SET_IS_LOADER(true);
                 const res = await fetch(currentDrawl?.image);
                 const blob = await res.blob();
                 const url = URL.createObjectURL(blob)
 
                 setCanvasBgImage(url)
+                ACTION.SET_IS_LOADER(false);
             }
         }
 
