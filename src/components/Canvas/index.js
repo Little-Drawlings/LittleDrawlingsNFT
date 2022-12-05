@@ -117,11 +117,19 @@ const Canvas = () => {
     }, [modify, selectedColor, selectedTool])
 
     useEffect(() => {
-        if (currentDrawl) {
-            setCanvasBgImage(currentDrawl.image)
-        } else {
-            setCanvasBgImage(WATERMARK)
+        const init = async () => {
+            if (currentDrawl) {
+                const res = await fetch(currentDrawl?.image);
+                const blob = await res.blob();
+                const url = URL.createObjectURL(blob)
+
+                setCanvasBgImage(url)
+            } else {
+                setCanvasBgImage(WATERMARK)
+            }
         }
+
+        init()
     }, [currentDrawl])
 
     const changeColor = color => {
