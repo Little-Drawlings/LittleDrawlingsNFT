@@ -4,7 +4,7 @@ import useHandleWeb3 from "./web3/useHandleWeb3";
 import {ethers} from "ethers";
 import {Context} from "../store";
 
-const useHandleNft = ({onRequestClose = () => {}, callback = () => {}, handleLoader = () => {}}) => {
+const useHandleNft = ({onRequestClose = () => {}, callback = () => {}, handleLoader = () => {}, handleUploadError = () => {}}) => {
     const [{user, contractData}, ACTION] = useContext(Context);
     const handleWeb3 = useHandleWeb3();
 
@@ -150,6 +150,34 @@ const useHandleNft = ({onRequestClose = () => {}, callback = () => {}, handleLoa
             })
     }
 
+    const loadNFT = async (tokenId) => {
+        if (isNaN(tokenId)) {
+            handleUploadError();
+            return
+        }
+        ACTION.SET_IS_LOADER(true);
+
+        const {signer, address} = await handleWeb3.getProviderData();
+
+        const contract = new ethers.Contract(contractData?.address?.toLowerCase(), contractData?.abi, signer);
+
+        try {
+            const ownerOf = await contract.ownerOf(tokenId);
+
+            if (ownerOf === address) {
+                new ItemApi()
+                    .loadItem({tokenId: ethers.utils.hexlify(tokenId), newOwner: ownerOf})
+                    .then(res => {
+                        res?.status ? callback() : onRequestClose()
+                    })
+            } else {
+                handleUploadError()
+            }
+        } catch (e) {
+            handleUploadError()
+        }
+    }
+
     const checkNFTsOwner = async (tokens) => {
         const {signer} = await handleWeb3.getProviderData();
 
@@ -176,7 +204,7 @@ const useHandleNft = ({onRequestClose = () => {}, callback = () => {}, handleLoa
         new ItemApi().changeOwner({item, newOwner})
     }
 
-    return {mintNFT, updateNFTInfo, updateNFTPhoto, checkNFTsOwner, getAll};
+    return {mintNFT, updateNFTInfo, updateNFTPhoto, checkNFTsOwner, getAll, loadNFT};
 };
 
 export default useHandleNft;

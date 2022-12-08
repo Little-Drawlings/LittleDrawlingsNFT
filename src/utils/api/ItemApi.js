@@ -55,4 +55,9 @@ export default class ItemApi extends Base {
         if (!super.getToken()) return null;
         return super.post("drawl/changeOwner", data);
     }
+
+    async loadItem(data) {
+        if (!super.getToken()) return null;
+        return super.post("drawl/loadItem", data);
+    }
 }

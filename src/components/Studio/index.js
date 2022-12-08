@@ -6,12 +6,14 @@ import {Context} from "../../store";
 import {Link, useNavigate} from "react-router-dom";
 import {pathList} from "../../routes/path";
 import ProvenanceModal from "../../common/modals/ProvenanceModal";
+import LoadNFTModal from "../../common/modals/LoadNFTModal";
 import {localStorageGet} from "../../utils/localStorage";
 
 const Studio = () => {
     const [{user}, ACTION] = useContext(Context);
     const [galleryData, setGalleryData] = useState(null)
     const [isProvenanceOpen, setIsProvenanceOpen] = useState(false)
+    const [isLoadNFTModalOpen, setIsLoadNFTModalOpen] = useState(false)
     const navigate = useNavigate()
 
     const handleNft = useHandleNft({})
@@ -24,6 +26,9 @@ const Studio = () => {
         init()
     }, [user])
 
+    const openLoadNFTModal = () => setIsLoadNFTModalOpen(true)
+    const closeLoadNFTModal = () => setIsLoadNFTModalOpen(false)
+
     const goToCanvas = (item) => {
         ACTION.SET_CURRENT_DRAWL(item)
         navigate(pathList.canvas.path)
@@ -32,6 +37,11 @@ const Studio = () => {
     const openProvenance = (item) => {
         ACTION.SET_CURRENT_DRAWL(item)
         setIsProvenanceOpen(true)
+    }
+
+    const onTokenLoaded = async () => {
+        setGalleryData(await handleNft.getAll())
+        closeLoadNFTModal()
     }
 
     useEffect(() => {
@@ -43,11 +53,16 @@ const Studio = () => {
     return (
         <div className={styles.studio}>
             <div className={styles.container}>
-                <Link
-                    to={pathList.canvas.path}
-                    className={styles.studio_mint_btn}
-                    onClick={() => ACTION.SET_CURRENT_DRAWL(null)}
-                >Mint New</Link>
+                <div className={styles.studio_buttons}>
+                    <div className={styles.studio_load_btn}
+                         onClick={openLoadNFTModal}
+                    >Load NFT</div>
+                    <Link
+                        to={pathList.canvas.path}
+                        className={styles.studio_mint_btn}
+                        onClick={() => ACTION.SET_CURRENT_DRAWL(null)}
+                    >Mint New</Link>
+                </div>
 
                 <div className={styles.studio_grid}>
                     {
@@ -85,6 +100,11 @@ const Studio = () => {
                 onRequestClose={() => setIsProvenanceOpen(false)}
                 isOpen={isProvenanceOpen}
                 callback={handleNft.getAll}
+            />
+            <LoadNFTModal
+                onRequestClose={closeLoadNFTModal}
+                isOpen={isLoadNFTModalOpen}
+                callback={onTokenLoaded}
             />
         </div>
     );

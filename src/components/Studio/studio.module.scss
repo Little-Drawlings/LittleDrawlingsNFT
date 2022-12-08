@@ -26,10 +26,26 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 5.78%, #FFFFFF 100%);
   }
 
+  &_buttons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 34px;
+  }
+
+  &_load_btn{
+    @include provenanceButton;
+
+    @media screen and (max-width: 767px){
+      width: 120px;
+      height: 40px;
+      font-size: 23px;
+    }
+  }
+
   &_mint_btn{
     @include paintButton;
-    margin-left: auto;
-    margin-bottom: 34px;
+    margin-left: 20px;
 
     @media screen and (max-width: 767px){
       width: 120px;
