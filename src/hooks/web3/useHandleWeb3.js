@@ -39,8 +39,9 @@ const useHandleWeb3 = () => {
     };
 
     const getContract = async () => {
+        const chainId = await getNetwork()
         return new ItemApi()
-            .getContract()
+            .getContract({chainId})
             .then(res => res?.status ? res?.data : null);
     }
 

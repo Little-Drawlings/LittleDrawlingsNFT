@@ -41,9 +41,9 @@ export default class ItemApi extends Base {
         return super.post("drawl/updatePhotoConfirm", data);
     }
 
-    async getContract() {
+    async getContract(data) {
         if (!super.getToken()) return null;
-        return super.get("drawl/getContractData");
+        return super.post("drawl/getContractData", data);
     }
 
     async getTokenContract(data) {
