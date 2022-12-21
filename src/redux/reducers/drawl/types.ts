@@ -1,9 +1,0 @@
-const GET_DRAWL = 'GET_DRAWL'
-const GET_ALL_DRAWLS = 'GET_ALL_DRAWLS'
-
-const DRAWL_TYPES = {
-	GET_DRAWL,
-	GET_ALL_DRAWLS
-};
-
-export default DRAWL_TYPES;

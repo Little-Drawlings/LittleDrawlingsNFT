@@ -1,0 +1,156 @@
+.header{
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+
+  background: rgba(255, 252, 254, 0.9);
+  opacity: 0.8;
+  box-shadow: 0 14px 20px rgba(115, 76, 0, 0.25);
+  backdrop-filter: blur(50px);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+
+  @media screen and (max-width: 767px){
+    padding: 4px 10px;
+  }
+
+  &_logo{
+    display: flex;
+    align-items: center;
+
+    @media screen and (max-width: 1000px){
+      display: none;
+    }
+
+    &_alpha{
+      margin-left: 16px;
+    }
+  }
+
+  &_nav{
+    margin-left: 90px;
+
+    @media screen and (max-width: 1100px){
+      margin-left: 40px;
+    }
+
+    @media screen and (max-width: 1000px){
+      margin-left: 0;
+    }
+
+    @media screen and (max-width: 767px){
+      display: flex;
+    }
+
+    a{
+      padding: 10px;
+      color: #A6A9D1;
+      transition: .3s;
+
+      @media screen and (max-width: 767px){
+        padding: 5px;
+        font-size: 12px;
+        display: block;
+      }
+      
+      &.active{
+        color: #3E3782;
+      }
+
+      &:hover{
+        color: #89d6f0;
+      }
+
+      & + &{
+        margin-left: 35px;
+      }
+    }
+  }
+
+  &_user{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    &_login_btn{
+      font-family: "LD Scribble", sans-serif;
+      width: 201px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      background-image: url(../../../assets/img/buttons/connect_btn.svg);
+      background-size: 100% 100%;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 26px;
+      color: #4E4B9A;
+      cursor: pointer;
+
+      @media screen and (max-width: 767px){
+        width: 98px;
+        height: 26px;
+        font-size: 12px;
+      }
+
+      &:hover{
+        background-image: url(../../../assets/img/buttons/connect_btn_hover.svg);
+      }
+    }
+
+    &_balance{
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: #221856;
+      margin-right: 12px;
+
+      @media screen and (max-width: 767px){
+        font-size: 10px;
+        margin-right: 5px;
+      }
+    }
+
+    &_account{
+      width: 189px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url(../../../assets/img/address_border.svg);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      color: #221856;
+      cursor: pointer;
+
+      span{
+        margin-left: 4px;
+      }
+
+      @media screen and (max-width: 767px){
+        width: 110px;
+        height: 26px;
+        font-size: 12px;
+        background-size: 100% 100%;
+
+        span{
+          display: none;
+        }
+      }
+
+      img{
+        margin-right: 8px;
+
+        @media screen and (max-width: 767px){
+          width: 20px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
