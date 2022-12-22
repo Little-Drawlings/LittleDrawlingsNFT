@@ -74,12 +74,8 @@ const Studio = () => {
                                     </div>
                                     <div className={styles.studio_grid_item_info}>
                                         <div className={styles.studio_grid_item_info_row}>
-                                            <span>Drawl #{parseInt(item.tokenId, 16)}</span>
-                                            <span>16:9</span>
-                                        </div>
-                                        <div className={styles.studio_grid_item_info_row}>
-                                            <span>Edited {dayjs(item.updatedAt).format('MM-DD HH:mm')}</span>
-                                            <span>0 min</span>
+                                            <span>Drawl #{parseInt(item?.tokenId, 16)}</span>
+                                            <span>Edited {dayjs(item?.updatedAt).format('MM-DD HH:mm')}</span>
                                         </div>
                                     </div>
                                     <div className={styles.studio_grid_item_buttons}>
