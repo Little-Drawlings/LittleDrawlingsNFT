@@ -26,7 +26,7 @@ const useInitFirstLoad = () => {
             if (user) {
                 await initWeb3()
                 const contractData = await handleWeb3.getContract()
-                ACTION.SET_CONTRACT_DATA(contractData)
+                ACTION.SET_CONTRACT_DATA({...contractData, address: contractData?.address?.toLowerCase()})
                 await handleNft.getAll()
             }
         }
